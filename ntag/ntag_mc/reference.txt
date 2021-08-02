@@ -1,0 +1,106 @@
+#########################
+##                     ##
+##        N-Tag        ##
+##                     ##
+#########################
+First index : Input from LENtuple(.root)
+Second index: Output from N-Tag(.root)
+Third index : Vertex shift(OFF/IN/OUT)
+
+####################
+##   Structure    ##
+####################
+   LENTuple
+==============
+ Input(.root)
+==============
+      |
+      ---->  itree ----- Branch ------ int   nscndprt (number of secondary particles)  -----------|
+            (TTree)                    int   iprtscnd[500] (PID of secondary particle[number of secondary particle]) ------| 
+               |                       int   lmscscnd[500] ()  ------|
+               | copy                  float pscnd[500][3] (momentum of secondary particle[number of secondary particle][x,y,z]) ------|
+               |                       int   iprnttrk[500] () ------|
+             otree                     int   iorgprt[500] () -------|
+            (TTree)                                               |--- fill_neutrondegree() ---> 
+                                       int neutrondegree[500] () ---|                    
+
+
+
+
+
+            
+                                         -- signal --> n_sig + [output file name].root
+                                         |               |
+==============                           |               | FeatureVector fv
+ Output(.root) --- ntag_fname_maker() ---|               |
+==============                           |               -- createNTagTree() --> nsigtree
+                                         |                                        (TTree)
+                                         ---- BKG ---> n_bkg + [output file name].root
+                                                         |
+                                                         | FeatureVector fv
+                                                         |
+                                                         -- createNTagTree() --> nbkgtree
+                                                                                  (TTree)
+
+
+
+####################
+##   Functions    ##
+####################
+=================================================
+  ntag_fname_maker(string fname, string prefix)
+ -----------------------------------------------
+ First index : specified output file name from
+               command line
+ Second index: prefix which shows signal or BKG
+
+ Give names of output files of signal and BKG.
+ If output name does not have / in it, add nsig_
+ (n_bkg) into the head of output name as signal
+ (BKG) outputs.
+ If output file name has / in it, add nsig_
+ (n_bkg) into the next of / as signal(BKG) 
+ outputs.
+=================================================
+
+
+=================================================
+ apply_vtxshift_worstcase(float *x, float inout)
+ -----------------------------------------------
+ First index : vertex position(x,y,z)
+ Second index: scaling size
+
+ Consider polar coordiante and construct radius
+ and polar angle of vertex position vector:
+   radius = sqrt(x*x + y*y + z*z)
+   angle  = atan(y/x)
+ Do scaling of vertex position vector:
+   radius' = radius * (inout*10)
+   cos(angle) = x'/radius'
+   sin(angle) = y'/radius'
+   -> x' = radius' * cos(angle)
+      y' = radius' * sin(angle)
+   z' = z +/- (inout*5) (+ for z>0, - for z<0)
+ Return (x', y', z').
+=================================================
+
+
+=================================================
+ fill_neutrondegree(int nscndprt, 
+                    int *iprtscnd, 
+                    int*lmecscnd, 
+                    float pscnd[][3], 
+                    int *iprnttrk, 
+                    int *iorgprt, 
+                    int *neutrondegree)
+ -----------------------------------------------
+ First index  : number of secondary particles
+ Second index : 
+ Third index  :
+ Fourth index :
+ Fifth index  :
+ Sixth index  :
+ Seventh index: 
+
+
+=================================================

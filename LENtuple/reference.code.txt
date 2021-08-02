@@ -1,0 +1,10 @@
+#########################
+##                     ##
+##      LENtuple       ##
+##                     ##
+#########################
+
+### Path of codes (shared by Fabio(and Pruthvi))
+/disk02/usr6/fiacob/ncneut/tq_lentuple
+or
+/disk02/usr6/pmehta/ncgamma/tq_lentuple

@@ -1,0 +1,12 @@
+g++ -c prm.cpp -std=c++11 \
+\
+-Wall -Wno-unused -fpic  -I/home/skofl/sklib_gcc4.8.5/cern/2005/include -I/home/skofl/sklib_gcc4.8.5/cern/2005/include/cfortran -pthread -m64 -I/usr/local/sklib_gcc4.8.5/root_v5.28.00h/include  -I. -I/home/skofl/sklib_gcc4.8.5/skofl_19a/include/ -I/home/skofl/sklib_gcc4.8.5/skofl_19a/include//skonl -I/home/skofl/sklib_gcc4.8.5/skofl_19a/include//lowe -I/home/skofl/sklib_gcc4.8.5/atmpd_19a/include/  -Dlinux -D__linux__ -DgFortran -Df2cFortran  -DSITE_HAS_RFA \
+\
+zbsinit.o \
+trginfo.o \
+/disk02/usr6/pmehta/prm/swarm/Swarm.cpp \
+/disk02/usr6/pmehta/prm/steepdesc_min/SteepestDescent.cpp \
+\
+-L/home/skofl/sklib_gcc4.8.5/skofl_19a/lib/ -L/home/skofl/sklib_gcc4.8.5/atmpd_19a/lib/ -Wl,-z -Wl,muldefs   -lskroot -lDataDefinition -lRoot2zbs -ltqrealroot -lloweroot -latmpdroot -lmcinfo -lsofttrgroot -lmufitpe -lskrd -lgeom -lsklib -llibrary -lmon -lastro -liolib -lzbs -lsklib -lsofttrg -lm -lstdc++ -lskroot -lDataDefinition -lRoot2zbs -ltqrealroot -lloweroot -latmpdroot -lmcinfo -lsofttrgroot -lmufitpe -lskrd -lgeom -lsklib -llibrary -lmon -lastro -liolib -lzbs -lsklib -lsofttrg -lm -lstdc++ `cernlib graflib grafX11 packlib mathlib kernlib lapack3 blas` -L/usr/local/sklib_gcc4.8.5/root_v5.28.00h/lib -lCore -lCint -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lTree -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -lGui -pthread -lm -ldl -rdynamic -lTreePlayer -lrfa  -lnsl -lm -L/usr/lib/gcc/x86_64-redhat-linux/4.8.5 -L/usr/lib/gcc/x86_64-redhat-linux/4.8.5/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/4.8.5/../../.. -lgfortran -lm -lquadmath
+
+ar -rvs lib/libprm.a prm.o Swarm.o SteepestDescent.o

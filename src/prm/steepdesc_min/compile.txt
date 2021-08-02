@@ -1,0 +1,1 @@
+g++ test.cpp SteepestDescent.cpp -o test

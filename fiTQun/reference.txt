@@ -1,0 +1,11 @@
+#########################
+##                     ##
+##       fiTQun        ##
+##                     ##
+#########################
+
+1. Various parameters in reconstruction are set in table file
+   /home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC/fiTQun/fiTQun.parameters.dat
+
+2. Source sourceme.csh
+   /home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC/sourceme.csh

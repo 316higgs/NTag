@@ -1,0 +1,16 @@
+###############################
+##                           ##
+##         LENtuple          ##
+##                           ##
+###############################
+
+       ==========                          =========== 
+         BONSAI                              LENtuple
+       ==========                          ===========
+    double bonsai_vertex[3]  -------------->  pos
+    double bonsai_dir[3]  ----------------->  bdir
+    int    bsn50  ------------------------->  n50
+    double bsgoodness  -------------------->  goodness
+                         |--->  bsovaq  --->  ovaq
+    double bsdirks  ------
+    double bsenergy  ---------------------->  erec

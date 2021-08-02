@@ -1,0 +1,45 @@
+#########################
+##                     ##
+##      SKDETSIM       ##
+##                     ##
+#########################
+
+=== Note ===
+
+1. Configurations of detector simulation is set by sample card
+   /home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC/SKDETSIM/sample.card
+
+   line.93: SKCNTL-GDCONC 0.026
+   -> Gd concentration
+   line.131: VECT-NEVT 20
+   -> Simulate event number
+
+2. Source codes and exe file are in the following path
+   /disk02/usr6/pmehta/ncgamma/mc/skdetsim-skgd
+
+3. NEUTvector files are stroed in the following directory
+   /disk02/usr6/sedi/NEUTvect
+
+
+=== How to run ===
+
+Current directory: /home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC
+
+/disk02/usr6/sedi/NEUTvect ------
+  (Input file of SKDETSIM)      |
+                                |
+SKGd_MC/SKDETSIM/sample.card ----
+  (Configuration of detector    |
+   simulation)                  |
+                                |
+SKGd_MC/run_skdetsim.sh ---------
+  (Original script)             |
+                                |
+            qsub_skdetsim.sh    ---> NQS_SKDETSIM/run_skdetsim.CountX.sh ---> /disk02/usr6/sedi/SKDETSIM/output
+         (dupricate scripts and       (execute SKDETSIM)                 |      (Outputs of SKDETSIM)
+          submit jobs to NSQ)         (Submitted by qsub_skdetsim.py)    |
+                                                                         ---> /disk02/usr6/sedi/SKDETSIM/Log
+                                                                         |      (Log of each detail SKDETSIM run)
+                                                                         |
+                                                                         ---> SKGd_MC/SKDETSIM/Log
+                                                                                (Log of NSQ run (display only input and output file names))

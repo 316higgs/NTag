@@ -1,0 +1,14 @@
+#########################
+##                     ##
+##     Ntuplecheck     ##
+##                     ##
+#########################
+
+1. Run Ntuplecheck/example_fillnt.sh
+   Input file from fiTQun is supecified at line:10-11
+   Output file of this script is supecified at line:19
+   In this script, fiTQun output(zbs) is converted into hbook file, and it is converted in root file.
+
+2. Run Ntuplecheck/checker.C
+   Above output file is inserted in line:5
+   This macro shows vertex positions in fiTQun output file.

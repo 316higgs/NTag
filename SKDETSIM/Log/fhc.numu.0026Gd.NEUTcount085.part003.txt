@@ -1,0 +1,73 @@
+ The card file you read is /home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC/SKDETSIM/sample.card                                                               
+
+ MZSTOR.  ZEBRA table base TAB(0) in /MZCC/ at adr   219553143     D161D77 HEX
+
+ MZSTOR.  Initialize Store  0  in /GCBANK/
+          with Store/Table at absolute adrs   159493093   219553143
+                                        HEX     981ABE5     D161D77
+                                        HEX    FC6B8CA2           0
+                              relative adrs   -60060510           0
+          with     1 Str. in     2 Links in   5300 Low words in 2999970 words.
+          This store has a fence of   16 words.
+
+ MZLOGL.  Set Log Level 0 for store  0
+
+ MZSTOR.  Initialize Store  1  in /ZBS/   
+          with Store/Table at absolute adrs   181770845   182770424
+                                        HEX     AD59A5D     AE4DAF8
+                                        HEX    FDBF7B1A    FDCEBD81
+                              relative adrs   -37782758   -36782719
+          with  1000 Str. in  1100 Links in  10000 Low words in  999978 words.
+          This store has a fence of    1 words.
+
+ MZDIV.   Initialize Division  SYSTEM    in Store  1
+          NW/NWMAX=   2000  10000,  MODE/KIND=  0  2
+          Division 20 initialized.
+1*****  GEANT Version  3.21/14 Released on 19032002
+0*****  Correction Cradle Version  0.1400
+ 
+################################################################################
+#################### SKDETSIM environment:
+################################################################################
+LOGNAME: sedi
+User ID:  22566
+Executable program: /disk02/usr6/pmehta/ncgamma/mc/skdetsim-skgd/skdetsim
+Argument   1: /home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC/SKDETSIM/sample.card
+Argument   2: /home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC/SKDETSIM/output/fhc.numu.skdetsim.0026Gd.NEUTcount085.part003.zbs
+Argument   3: /home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC/NEUTvect/fhc.num.VECTcount085.part003.dat
+Working directory: /home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC
+CERN_ROOT: /usr/local/sklib_gcc4.8.5/cern/2005
+NEUT_ROOT: /disk02/usr6/pmehta/ncgamma/mc/neut/neut_5.3.3_Eb_patch
+APDETSIM_VERSION     9.000
+SKDETSIM_VERSION    13.900
+SVN VERSION NUMBER = Unversioned dire
+################################################################################
+ 
+ ***********************************************
+ * Tracking method will automatically switched *
+ * to 4 for over 1TeV neutrinos.               *
+ ***********************************************
+ **************************************************
+ ***  skdetsim fundamental control parameters  ****
+ **************************************************
+ Detector Geometry version (1:SK I 2:SK II 3: SK III 4: SK IV 5: SK V):    5
+ Photon tracking (-1: no tracking 1:all 2:QE multiplied 3: QE/Abs. multiplied 4:QE/Abs. SAVE_MEMORY):   3
+ Water tuning (1: low E  2: ATMPD  3: UNI mode) :    3
+ Reflection tuning (1: low E  2: ATMPD  3: UNI mode) :    3
+ DS tuning (1: low E  2: ATMPD  3: UNI_TUNE)   3
+ ZBS output   : ON 
+ For ATMPD
+ HBOOK output : OFF 
+ SCATTABLE output : OFF 
+ TEXT output  : OFF 
+ Validation output  : OFF 
+ ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+ Initalizing random number seeds:
+      780811      200004           0           0           0
+ grndmq call type 1
+ sgcard: random seeds initialized:       780811      200004           0           0           0
+ ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+ 
+ * read VECTOR from ZBS file
+ * the number of generated event was set to         1000
+ 

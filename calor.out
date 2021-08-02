@@ -1,0 +1,28 @@
+
+                  GEANT-CALOR INTERFACE V 1.04/08 Output File
+                  ===========================================
+
+        GEANT Material Parameters                MICAP Material Parameters
+        -------------------------                -------------------------
+ Material                No/Iso    A     Z  |    A     Z   Density   Coll.Len
+--------------------------------------------+---------------------------------
+ WATER...............    17/ 1    1.0    1  |   1.0    1  0.6684E-01 0.345E+01
+                         17/ 2   16.0    8  |  16.0    8  0.3342E-01 0.364E+01
+ ACRYL...............    18/ 1    1.0    1  |   1.0    1  0.5729E-01 0.403E+01
+                         18/ 2   16.0    8  |  16.0    8  0.1432E-01 0.850E+01
+                         18/ 3   12.0    6  |  12.0    6  0.3580E-01 0.107E+02
+------------------------------------------------------------------------------
+                                                Density in (Atoms/barn/cm)
+                                    Collision Length for 1 MeV neutron in (cm)
+
+
+                    USED NEUTRON CROSS-SECTION FILES
+                    --------------------------------
+
+ File      : /usr/local/sklib_gcc4.8.5/skofl_19b/const/xsneut95.dat            
+ Generated : Wed Nov  2 13:53:35 1994
+ Comment   : MICAP neutron cross-section file. TOL=2.0% ANG=2.0%   C.Zeitnitz  
+
+
+ MICAP :     60818 words used in GCBANK for neutron x-section tables
+

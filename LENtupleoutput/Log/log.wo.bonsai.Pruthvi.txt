@@ -1,0 +1,1072 @@
+here is skenv_py.sh echo
+/usr/local/sklib_gcc4.8.5/skofl_19a/src/root2zbs:/usr/local/geant4.10/geant4.10.03.p02/share/Geant4-10.3.2/geant4make/config:/usr/local/geant4.10/geant4.10.03.p02/lib64:/disk02/usr6/pmehta/ncgamma/mc/skdetsim-skgd/geant4_work/tmp/Linux-g++/gtneut:/disk02/usr6/pmehta/ncgamma/mc/neut/neut_5.3.3_Eb_patch/lib/Linux_pc:/usr/local/sklib_gcc4.8.5/root_v5.28.00h/lib:/usr/local/sklib_gcc4.8.5/skofl_19b/lib:/home/skofl/sklib_gcc4.8.5/skofl_21a/lib:/home/skofl/sklib_gcc4.8.5/root_v5.28.00h/lib:/home/skofl/sklib_gcc4.8.5/skofl_21a/lib:/usr/local/sklib_gcc4.8.5/root_v5.28.00h/lib:/usr/local/lib:/home/skofl/sklib_gcc4.8.5/skofl_16c/lib:/home/skofl/sklib_gcc4.8.5/root_v5.28.00h/lib:/usr/local/lib:/usr/local/lib:/home/sedi/neutrontag/t2ksk-neutronh/anat2ksk/lib
+infile     = /disk02/usr6/pmehta/lemc_Gd/flux.13anom.run1to9.fhc_neut.533.modified_skdetsim.dwallm50.gcalor_Gd/detsim/detsim_numu.ncgamma_flux13a_neut533.000.zbs
+outfile    = /home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC/LENtupleoutput/test_lentuple.wo.bonsai.mccomb.root
+ambepos    = ambe_top
+Reading in mc from /disk02/usr6/pmehta/lemc_Gd/flux.13anom.run1to9.fhc_neut.533.modified_skdetsim.dwallm50.gcalor_Gd/detsim/detsim_numu.ncgamma_flux13a_neut533.000.zbs
+Writing to /home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC/LENtupleoutput/test_lentuple.wo.bonsai.mccomb.root
+ambepos = ambe_top
+AMBE TOP MC 35.3 -70.7 1500
+*** GOING TO READ EVENT 0
+*** event numbering from 0
+runsumsize = 14544
+sktqz_.nqiskz = 3574
+ncg.nqiskz = 3170
+sktqz_.nqiskz - ncg.nqiskz = 404
+ncg.tbgn = -3941.17
+ncg.tend = 254616
+ncg.tdur = 258557
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!! No Bonsai information !!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
+***** FIT IS VALID? ***** = 1
+***** FIT IS VALID? ***** = 1
+Error retreive secondary gamma information
+ncg.Neutmode = 22
+ncg.Npne = 5
+ncg.Ipne[i] = 14
+ncg.Abspne[i] = 1.75881
+ncg.Pvecne[i][j] = 1.17799
+ncg.Pvecne[i][j] = -1.30535
+ncg.Pvecne[i][j] = 0.0426033
+ncg.Ipne[i] = 2112
+ncg.Abspne[i] = 0.221616
+ncg.Pvecne[i][j] = 0.0118903
+ncg.Pvecne[i][j] = -0.139867
+ncg.Pvecne[i][j] = 0.171491
+ncg.Ipne[i] = 13
+ncg.Abspne[i] = 0.223613
+ncg.Pvecne[i][j] = -0.0441424
+ncg.Pvecne[i][j] = -0.198714
+ncg.Pvecne[i][j] = 0.0925574
+ncg.Ipne[i] = 2212
+ncg.Abspne[i] = 1.38384
+ncg.Pvecne[i][j] = 1.02643
+ncg.Pvecne[i][j] = -0.809279
+ncg.Pvecne[i][j] = 0.454451
+ncg.Ipne[i] = 221
+ncg.Abspne[i] = 0.587446
+ncg.Pvecne[i][j] = 0.207592
+ncg.Pvecne[i][j] = -0.437226
+ncg.Pvecne[i][j] = -0.332913
+*** GOING TO READ EVENT 1
+*** event numbering from 0
+NORMAL BYTE FILL = 46344
+sktqz_.nqiskz = 2284
+ncg.nqiskz = 1516
+sktqz_.nqiskz - ncg.nqiskz = 768
+ncg.tbgn = -3945.34
+ncg.tend = 28559.7
+ncg.tdur = 32505
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!! No Bonsai information !!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+***** FIT IS VALID? ***** = 1
+***** FIT IS VALID? ***** = 1
+Error retreive secondary gamma information
+ncg.Neutmode = 1
+ncg.Npne = 4
+ncg.Ipne[i] = 14
+ncg.Abspne[i] = 0.673793
+ncg.Pvecne[i][j] = 0.451282
+ncg.Pvecne[i][j] = -0.500075
+ncg.Pvecne[i][j] = 0.0163212
+ncg.Ipne[i] = 2112
+ncg.Abspne[i] = 0.109853
+ncg.Pvecne[i][j] = 0.0163894
+ncg.Pvecne[i][j] = 0.0136262
+ncg.Pvecne[i][j] = -0.107765
+ncg.Ipne[i] = 13
+ncg.Abspne[i] = 0.300236
+ncg.Pvecne[i][j] = 0.0902128
+ncg.Pvecne[i][j] = 0.285989
+ncg.Pvecne[i][j] = -0.0146042
+ncg.Ipne[i] = 2212
+ncg.Abspne[i] = 0.863157
+ncg.Pvecne[i][j] = 0.377459
+ncg.Pvecne[i][j] = -0.772438
+ncg.Pvecne[i][j] = -0.0768399
+*** GOING TO READ EVENT 2
+*** event numbering from 0
+NORMAL BYTE FILL = 19592
+sktqz_.nqiskz = 2186
+ncg.nqiskz = 1886
+sktqz_.nqiskz - ncg.nqiskz = 300
+ncg.tbgn = -3983.78
+ncg.tend = 368174
+ncg.tdur = 372158
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!! No Bonsai information !!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+***** FIT IS VALID? ***** = 1
+***** FIT IS VALID? ***** = 1
+Error retreive secondary gamma information
+ncg.Neutmode = 1
+ncg.Npne = 4
+ncg.Ipne[i] = 14
+ncg.Abspne[i] = 0.645694
+ncg.Pvecne[i][j] = 0.432462
+ncg.Pvecne[i][j] = -0.479221
+ncg.Pvecne[i][j] = 0.0156405
+ncg.Ipne[i] = 2112
+ncg.Abspne[i] = 0.20778
+ncg.Pvecne[i][j] = -0.199688
+ncg.Pvecne[i][j] = 0.0275292
+ncg.Pvecne[i][j] = 0.0503902
+ncg.Ipne[i] = 13
+ncg.Abspne[i] = 0.36159
+ncg.Pvecne[i][j] = 0.162171
+ncg.Pvecne[i][j] = 0.250271
+ncg.Pvecne[i][j] = -0.20448
+ncg.Ipne[i] = 2212
+ncg.Abspne[i] = 0.755587
+ncg.Pvecne[i][j] = 0.0706035
+ncg.Pvecne[i][j] = -0.701962
+ncg.Pvecne[i][j] = 0.270511
+*** GOING TO READ EVENT 3
+*** event numbering from 0
+NORMAL BYTE FILL = 24808
+sktqz_.nqiskz = 1912
+ncg.nqiskz = 1127
+sktqz_.nqiskz - ncg.nqiskz = 785
+ncg.tbgn = -3974.05
+ncg.tend = 81001.9
+ncg.tdur = 84975.9
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!! No Bonsai information !!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+***** FIT IS VALID? ***** = 1
+***** FIT IS VALID? ***** = 1
+Error retreive secondary gamma information
+ncg.Neutmode = 52
+ncg.Npne = 4
+ncg.Ipne[i] = 14
+ncg.Abspne[i] = 0.528249
+ncg.Pvecne[i][j] = 0.353802
+ncg.Pvecne[i][j] = -0.392055
+ncg.Pvecne[i][j] = 0.0127957
+ncg.Ipne[i] = 2112
+ncg.Abspne[i] = 0.224271
+ncg.Pvecne[i][j] = 0.113241
+ncg.Pvecne[i][j] = 0.193354
+ncg.Pvecne[i][j] = -0.00939395
+ncg.Ipne[i] = 14
+ncg.Abspne[i] = 0.281804
+ncg.Pvecne[i][j] = -0.163025
+ncg.Pvecne[i][j] = 0.0894815
+ncg.Pvecne[i][j] = 0.211729
+ncg.Ipne[i] = 2112
+ncg.Abspne[i] = 0.723488
+ncg.Pvecne[i][j] = 0.630068
+ncg.Pvecne[i][j] = -0.288182
+ncg.Pvecne[i][j] = -0.208328
+*** GOING TO READ EVENT 4
+*** event numbering from 0
+NORMAL BYTE FILL = 15520
+sktqz_.nqiskz = 1583
+ncg.nqiskz = 1120
+sktqz_.nqiskz - ncg.nqiskz = 463
+ncg.tbgn = -3997.48
+ncg.tend = 207589
+ncg.tdur = 211587
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!! No Bonsai information !!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+***** FIT IS VALID? ***** = 1
+***** FIT IS VALID? ***** = 1
+Error retreive secondary gamma information
+ncg.Neutmode = 31
+ncg.Npne = 5
+ncg.Ipne[i] = 14
+ncg.Abspne[i] = 0.657789
+ncg.Pvecne[i][j] = 0.440563
+ncg.Pvecne[i][j] = -0.488197
+ncg.Pvecne[i][j] = 0.0159335
+ncg.Ipne[i] = 2112
+ncg.Abspne[i] = 0.188098
+ncg.Pvecne[i][j] = -0.00533728
+ncg.Pvecne[i][j] = -0.165697
+ncg.Pvecne[i][j] = 0.0888641
+ncg.Ipne[i] = 14
+ncg.Abspne[i] = 0.163716
+ncg.Pvecne[i][j] = -0.114082
+ncg.Pvecne[i][j] = -0.0851047
+ncg.Pvecne[i][j] = 0.0809023
+ncg.Ipne[i] = 2112
+ncg.Abspne[i] = 0.858062
+ncg.Pvecne[i][j] = 0.528102
+ncg.Pvecne[i][j] = -0.676197
+ncg.Pvecne[i][j] = -0.0116543
+ncg.Ipne[i] = 111
+ncg.Abspne[i] = 0.115108
+ncg.Pvecne[i][j] = 0.0212054
+ncg.Pvecne[i][j] = 0.107408
+ncg.Pvecne[i][j] = 0.0355498
+*** GOING TO READ EVENT 5
+*** event numbering from 0
+NORMAL BYTE FILL = 20196
+sktqz_.nqiskz = 2388
+ncg.nqiskz = 2127
+sktqz_.nqiskz - ncg.nqiskz = 261
+ncg.tbgn = -3995.12
+ncg.tend = 29080.6
+ncg.tdur = 33075.7
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!! No Bonsai information !!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+***** FIT IS VALID? ***** = 1
+***** FIT IS VALID? ***** = 1
+Error retreive secondary gamma information
+ncg.Neutmode = 11
+ncg.Npne = 5
+ncg.Ipne[i] = 14
+ncg.Abspne[i] = 0.733174
+ncg.Pvecne[i][j] = 0.491053
+ncg.Pvecne[i][j] = -0.544146
+ncg.Pvecne[i][j] = 0.0177595
+ncg.Ipne[i] = 2212
+ncg.Abspne[i] = 0
+ncg.Pvecne[i][j] = 0
+ncg.Pvecne[i][j] = -0
+ncg.Pvecne[i][j] = 0
+ncg.Ipne[i] = 13
+ncg.Abspne[i] = 0.268618
+ncg.Pvecne[i][j] = 0.232077
+ncg.Pvecne[i][j] = 0.0911942
+ncg.Pvecne[i][j] = 0.0998965
+ncg.Ipne[i] = 2212
+ncg.Abspne[i] = 0.522635
+ncg.Pvecne[i][j] = 0.0242726
+ncg.Pvecne[i][j] = -0.502377
+ncg.Pvecne[i][j] = -0.142042
+ncg.Ipne[i] = 211
+ncg.Abspne[i] = 0.276322
+ncg.Pvecne[i][j] = 0.234703
+ncg.Pvecne[i][j] = -0.132964
+ncg.Pvecne[i][j] = 0.0599051
+*** GOING TO READ EVENT 6
+*** event numbering from 0
+NORMAL BYTE FILL = 27524
+sktqz_.nqiskz = 1680
+ncg.nqiskz = 1121
+sktqz_.nqiskz - ncg.nqiskz = 559
+ncg.tbgn = -3998.9
+ncg.tend = 30493.8
+ncg.tdur = 34492.7
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!! No Bonsai information !!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+***** FIT IS VALID? ***** = 1
+***** FIT IS VALID? ***** = 1
+Error retreive secondary gamma information
+ncg.Neutmode = 51
+ncg.Npne = 4
+ncg.Ipne[i] = 14
+ncg.Abspne[i] = 0.642067
+ncg.Pvecne[i][j] = 0.430033
+ncg.Pvecne[i][j] = -0.476529
+ncg.Pvecne[i][j] = 0.0155527
+ncg.Ipne[i] = 2212
+ncg.Abspne[i] = 0.0921923
+ncg.Pvecne[i][j] = -0.037626
+ncg.Pvecne[i][j] = -0.0820937
+ncg.Pvecne[i][j] = -0.0185563
+ncg.Ipne[i] = 14
+ncg.Abspne[i] = 0.514817
+ncg.Pvecne[i][j] = 0.0406944
+ncg.Pvecne[i][j] = -0.440588
+ncg.Pvecne[i][j] = 0.263178
+ncg.Ipne[i] = 2212
+ncg.Abspne[i] = 0.456604
+ncg.Pvecne[i][j] = 0.351713
+ncg.Pvecne[i][j] = -0.118035
+ncg.Pvecne[i][j] = -0.266182
+*** GOING TO READ EVENT 7
+*** event numbering from 0
+NORMAL BYTE FILL = 14712
+sktqz_.nqiskz = 2497
+ncg.nqiskz = 2174
+sktqz_.nqiskz - ncg.nqiskz = 323
+ncg.tbgn = -3983.6
+ncg.tend = 28514
+ncg.tdur = 32497.5
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!! No Bonsai information !!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+***** FIT IS VALID? ***** = 1
+***** FIT IS VALID? ***** = 1
+Error retreive secondary gamma information
+ncg.Neutmode = 1
+ncg.Npne = 4
+ncg.Ipne[i] = 14
+ncg.Abspne[i] = 0.618183
+ncg.Pvecne[i][j] = 0.414036
+ncg.Pvecne[i][j] = -0.458802
+ncg.Pvecne[i][j] = 0.0149741
+ncg.Ipne[i] = 2112
+ncg.Abspne[i] = 0.156607
+ncg.Pvecne[i][j] = 0.0307004
+ncg.Pvecne[i][j] = -0.0248265
+ncg.Pvecne[i][j] = -0.151548
+ncg.Ipne[i] = 13
+ncg.Abspne[i] = 0.393069
+ncg.Pvecne[i][j] = 0.102743
+ncg.Pvecne[i][j] = 0.0029669
+ncg.Pvecne[i][j] = -0.379392
+ncg.Ipne[i] = 2212
+ncg.Abspne[i] = 0.642414
+ncg.Pvecne[i][j] = 0.341994
+ncg.Pvecne[i][j] = -0.486596
+ncg.Pvecne[i][j] = 0.242818
+*** GOING TO READ EVENT 8
+*** event numbering from 0
+NORMAL BYTE FILL = 27488
+sktqz_.nqiskz = 1366
+ncg.nqiskz = 1238
+sktqz_.nqiskz - ncg.nqiskz = 128
+ncg.tbgn = -3989.3
+ncg.tend = 108387
+ncg.tdur = 112376
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!! No Bonsai information !!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+***** FIT IS VALID? ***** = 1
+***** FIT IS VALID? ***** = 1
+Error retreive secondary gamma information
+ncg.Neutmode = 1
+ncg.Npne = 4
+ncg.Ipne[i] = 14
+ncg.Abspne[i] = 0.449416
+ncg.Pvecne[i][j] = 0.301003
+ncg.Pvecne[i][j] = -0.333547
+ncg.Pvecne[i][j] = 0.0108861
+ncg.Ipne[i] = 2112
+ncg.Abspne[i] = 0.201659
+ncg.Pvecne[i][j] = 0.11393
+ncg.Pvecne[i][j] = -0.165744
+ncg.Pvecne[i][j] = 0.0146729
+ncg.Ipne[i] = 13
+ncg.Abspne[i] = 0.317356
+ncg.Pvecne[i][j] = 0.314706
+ncg.Pvecne[i][j] = -0.0408726
+ncg.Pvecne[i][j] = 0.00208536
+ncg.Ipne[i] = 2212
+ncg.Abspne[i] = 0.469834
+ncg.Pvecne[i][j] = 0.100227
+ncg.Pvecne[i][j] = -0.458419
+ncg.Pvecne[i][j] = 0.0234736
+*** GOING TO READ EVENT 9
+*** event numbering from 0
+NORMAL BYTE FILL = 17504
+sktqz_.nqiskz = 1277
+ncg.nqiskz = 1218
+sktqz_.nqiskz - ncg.nqiskz = 59
+ncg.tbgn = -3968.99
+ncg.tend = 110012
+ncg.tdur = 113981
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!! No Bonsai information !!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+***** FIT IS VALID? ***** = 1
+***** FIT IS VALID? ***** = 1
+Error retreive secondary gamma information
+ncg.Neutmode = 52
+ncg.Npne = 4
+ncg.Ipne[i] = 14
+ncg.Abspne[i] = 0.698507
+ncg.Pvecne[i][j] = 0.467835
+ncg.Pvecne[i][j] = -0.518417
+ncg.Pvecne[i][j] = 0.0169198
+ncg.Ipne[i] = 2112
+ncg.Abspne[i] = 0.221176
+ncg.Pvecne[i][j] = -0.182618
+ncg.Pvecne[i][j] = -0.0198111
+ncg.Pvecne[i][j] = 0.123195
+ncg.Ipne[i] = 14
+ncg.Abspne[i] = 0.499248
+ncg.Pvecne[i][j] = 0.250292
+ncg.Pvecne[i][j] = 0.0331452
+ncg.Pvecne[i][j] = 0.430701
+ncg.Ipne[i] = 2112
+ncg.Abspne[i] = 0.641972
+ncg.Pvecne[i][j] = 0.0349247
+ncg.Pvecne[i][j] = -0.571374
+ncg.Pvecne[i][j] = -0.290587
+*** GOING TO READ EVENT 10
+*** event numbering from 0
+NORMAL BYTE FILL = 16292
+sktqz_.nqiskz = 2792
+ncg.nqiskz = 2767
+sktqz_.nqiskz - ncg.nqiskz = 25
+ncg.tbgn = -3917.51
+ncg.tend = 388766
+ncg.tdur = 392684
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!! No Bonsai information !!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+***** FIT IS VALID? ***** = 1
+***** FIT IS VALID? ***** = 1
+Error retreive secondary gamma information
+ncg.Neutmode = 33
+ncg.Npne = 5
+ncg.Ipne[i] = 14
+ncg.Abspne[i] = 1.59132
+ncg.Pvecne[i][j] = 1.06581
+ncg.Pvecne[i][j] = -1.18104
+ncg.Pvecne[i][j] = 0.0385461
+ncg.Ipne[i] = 2112
+ncg.Abspne[i] = 0.0954048
+ncg.Pvecne[i][j] = 0.072244
+ncg.Pvecne[i][j] = 0.0607143
+ncg.Pvecne[i][j] = -0.0140231
+ncg.Ipne[i] = 14
+ncg.Abspne[i] = 0.0663589
+ncg.Pvecne[i][j] = 0.0304136
+ncg.Pvecne[i][j] = 0.00901017
+ncg.Pvecne[i][j] = 0.0582866
+ncg.Ipne[i] = 2212
+ncg.Abspne[i] = 0.833403
+ncg.Pvecne[i][j] = 0.807568
+ncg.Pvecne[i][j] = 0.0255872
+ncg.Pvecne[i][j] = -0.204301
+ncg.Ipne[i] = -211
+ncg.Abspne[i] = 1.20539
+ncg.Pvecne[i][j] = 0.300067
+ncg.Pvecne[i][j] = -1.15493
+ncg.Pvecne[i][j] = 0.170537
+*** GOING TO READ EVENT 11
+*** event numbering from 0
+NORMAL BYTE FILL = 40276
+sktqz_.nqiskz = 3528
+ncg.nqiskz = 2781
+sktqz_.nqiskz - ncg.nqiskz = 747
+ncg.tbgn = -3961.67
+ncg.tend = 147138
+ncg.tdur = 151100
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!! No Bonsai information !!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+***** FIT IS VALID? ***** = 1
+***** FIT IS VALID? ***** = 1
+Error retreive secondary gamma information
+ncg.Neutmode = 13
+ncg.Npne = 5
+ncg.Ipne[i] = 14
+ncg.Abspne[i] = 0.961106
+ncg.Pvecne[i][j] = 0.643714
+ncg.Pvecne[i][j] = -0.713313
+ncg.Pvecne[i][j] = 0.0232807
+ncg.Ipne[i] = 2112
+ncg.Abspne[i] = 0.21649
+ncg.Pvecne[i][j] = 0.0297791
+ncg.Pvecne[i][j] = -0.213426
+ncg.Pvecne[i][j] = 0.0207475
+ncg.Ipne[i] = 13
+ncg.Abspne[i] = 0.393508
+ncg.Pvecne[i][j] = 0.303538
+ncg.Pvecne[i][j] = -0.225696
+ncg.Pvecne[i][j] = -0.10851
+ncg.Ipne[i] = 2112
+ncg.Abspne[i] = 0.554716
+ncg.Pvecne[i][j] = 0.00241938
+ncg.Pvecne[i][j] = -0.533951
+ncg.Pvecne[i][j] = 0.150334
+ncg.Ipne[i] = 211
+ncg.Abspne[i] = 0.403741
+ncg.Pvecne[i][j] = 0.367535
+ncg.Pvecne[i][j] = -0.167091
+ncg.Pvecne[i][j] = 0.00220378
+*** GOING TO READ EVENT 12
+*** event numbering from 0
+NORMAL BYTE FILL = 35976
+sktqz_.nqiskz = 1796
+ncg.nqiskz = 1087
+sktqz_.nqiskz - ncg.nqiskz = 709
+ncg.tbgn = -3992.35
+ncg.tend = 56767.7
+ncg.tdur = 60760
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!! No Bonsai information !!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Info in <Minuit2>: Minuit2Minimizer::Minimize : Minimization did NOT converge, Edm is above max
+Info in <Minuit2>: Minuit2Minimizer::Minimize : Minimization did NOT converge, Edm is above max
+***** FIT IS VALID? ***** = 1
+***** FIT IS VALID? ***** = 1
+Error retreive secondary gamma information
+ncg.Neutmode = 51
+ncg.Npne = 4
+ncg.Ipne[i] = 14
+ncg.Abspne[i] = 0.640941
+ncg.Pvecne[i][j] = 0.429279
+ncg.Pvecne[i][j] = -0.475693
+ncg.Pvecne[i][j] = 0.0155254
+ncg.Ipne[i] = 2212
+ncg.Abspne[i] = 0.0705068
+ncg.Pvecne[i][j] = -0.0472963
+ncg.Pvecne[i][j] = -0.0512822
+ncg.Pvecne[i][j] = 0.0102172
+ncg.Ipne[i] = 14
+ncg.Abspne[i] = 0.392379
+ncg.Pvecne[i][j] = 0.163893
+ncg.Pvecne[i][j] = 0.000600122
+ncg.Pvecne[i][j] = -0.35651
+ncg.Ipne[i] = 2212
+ncg.Abspne[i] = 0.687035
+ncg.Pvecne[i][j] = 0.218089
+ncg.Pvecne[i][j] = -0.527576
+ncg.Pvecne[i][j] = 0.382253
+*** GOING TO READ EVENT 13
+*** event numbering from 0
+NORMAL BYTE FILL = 14512
+sktqz_.nqiskz = 2822
+ncg.nqiskz = 2099
+sktqz_.nqiskz - ncg.nqiskz = 723
+ncg.tbgn = -3988.7
+ncg.tend = 422720
+ncg.tdur = 426709
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!! No Bonsai information !!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+***** FIT IS VALID? ***** = 1
+***** FIT IS VALID? ***** = 1
+Error retreive secondary gamma information
+ncg.Neutmode = 13
+ncg.Npne = 5
+ncg.Ipne[i] = 14
+ncg.Abspne[i] = 0.82253
+ncg.Pvecne[i][j] = 0.550901
+ncg.Pvecne[i][j] = -0.610465
+ncg.Pvecne[i][j] = 0.019924
+ncg.Ipne[i] = 2112
+ncg.Abspne[i] = 0.0791248
+ncg.Pvecne[i][j] = -0.0325486
+ncg.Pvecne[i][j] = -0.022314
+ncg.Pvecne[i][j] = 0.0685814
+ncg.Ipne[i] = 13
+ncg.Abspne[i] = 0.0804519
+ncg.Pvecne[i][j] = 0.0726722
+ncg.Pvecne[i][j] = 0.0343269
+ncg.Pvecne[i][j] = 0.00359382
+ncg.Ipne[i] = 2112
+ncg.Abspne[i] = 0.827214
+ncg.Pvecne[i][j] = 0.137049
+ncg.Pvecne[i][j] = -0.787922
+ncg.Pvecne[i][j] = 0.211376
+ncg.Ipne[i] = 211
+ncg.Abspne[i] = 0.354742
+ncg.Pvecne[i][j] = 0.30863
+ncg.Pvecne[i][j] = 0.120816
+ncg.Pvecne[i][j] = -0.126464
+*** GOING TO READ EVENT 14
+*** event numbering from 0
+NORMAL BYTE FILL = 29248
+sktqz_.nqiskz = 1152
+ncg.nqiskz = 1152
+sktqz_.nqiskz - ncg.nqiskz = 0
+ncg.tbgn = -3998.46
+ncg.tend = 26904.2
+ncg.tdur = 30902.7
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!! No Bonsai information !!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+***** FIT IS VALID? ***** = 1
+***** FIT IS VALID? ***** = 1
+Error retreive secondary gamma information
+ncg.Neutmode = 32
+ncg.Npne = 5
+ncg.Ipne[i] = 14
+ncg.Abspne[i] = 0.607514
+ncg.Pvecne[i][j] = 0.406891
+ncg.Pvecne[i][j] = -0.450884
+ncg.Pvecne[i][j] = 0.0147157
+ncg.Ipne[i] = 2212
+ncg.Abspne[i] = 0.219119
+ncg.Pvecne[i][j] = -0.137422
+ncg.Pvecne[i][j] = 0.169642
+ncg.Pvecne[i][j] = 0.018708
+ncg.Ipne[i] = 14
+ncg.Abspne[i] = 0.324361
+ncg.Pvecne[i][j] = 0.172058
+ncg.Pvecne[i][j] = -0.107062
+ncg.Pvecne[i][j] = 0.253266
+ncg.Ipne[i] = 2212
+ncg.Abspne[i] = 0.108451
+ncg.Pvecne[i][j] = -0.035827
+ncg.Pvecne[i][j] = -0.102336
+ncg.Pvecne[i][j] = 0.0023153
+ncg.Ipne[i] = 111
+ncg.Abspne[i] = 0.268822
+ncg.Pvecne[i][j] = 0.133233
+ncg.Pvecne[i][j] = -0.0718371
+ncg.Pvecne[i][j] = -0.222157
+*** GOING TO READ EVENT 15
+*** event numbering from 0
+NORMAL BYTE FILL = 15124
+sktqz_.nqiskz = 2223
+ncg.nqiskz = 2023
+sktqz_.nqiskz - ncg.nqiskz = 200
+ncg.tbgn = -3989.87
+ncg.tend = 20548.6
+ncg.tdur = 24538.5
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!! No Bonsai information !!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+***** FIT IS VALID? ***** = 1
+***** FIT IS VALID? ***** = 1
+Error retreive secondary gamma information
+ncg.Neutmode = 11
+ncg.Npne = 5
+ncg.Ipne[i] = 14
+ncg.Abspne[i] = 0.70261
+ncg.Pvecne[i][j] = 0.470583
+ncg.Pvecne[i][j] = -0.521463
+ncg.Pvecne[i][j] = 0.0170192
+ncg.Ipne[i] = 2212
+ncg.Abspne[i] = 0.0892858
+ncg.Pvecne[i][j] = -0.00714356
+ncg.Pvecne[i][j] = 0.0878343
+ncg.Pvecne[i][j] = -0.0143548
+ncg.Ipne[i] = 13
+ncg.Abspne[i] = 0.352243
+ncg.Pvecne[i][j] = 0.0524731
+ncg.Pvecne[i][j] = -0.336917
+ncg.Pvecne[i][j] = -0.0883648
+ncg.Ipne[i] = 2212
+ncg.Abspne[i] = 0.492904
+ncg.Pvecne[i][j] = 0.487598
+ncg.Pvecne[i][j] = -0.0505608
+ncg.Pvecne[i][j] = -0.0514376
+ncg.Ipne[i] = 211
+ncg.Abspne[i] = 0.168223
+ncg.Pvecne[i][j] = -0.0766316
+ncg.Pvecne[i][j] = -0.0461502
+ncg.Pvecne[i][j] = 0.142467
+*** GOING TO READ EVENT 16
+*** event numbering from 0
+NORMAL BYTE FILL = 25976
+sktqz_.nqiskz = 1739
+ncg.nqiskz = 1091
+sktqz_.nqiskz - ncg.nqiskz = 648
+ncg.tbgn = -3997.32
+ncg.tend = 28792.6
+ncg.tdur = 32789.9
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!! No Bonsai information !!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Info in <Minuit2>: Minuit2Minimizer::Minimize : Minimization did NOT converge, Edm is above max
+Info in <Minuit2>: Minuit2Minimizer::Minimize : Minimization did NOT converge, Edm is above max
+***** FIT IS VALID? ***** = 1
+***** FIT IS VALID? ***** = 1
+Error retreive secondary gamma information
+ncg.Neutmode = 51
+ncg.Npne = 4
+ncg.Ipne[i] = 14
+ncg.Abspne[i] = 0.496842
+ncg.Pvecne[i][j] = 0.332766
+ncg.Pvecne[i][j] = -0.368745
+ncg.Pvecne[i][j] = 0.0120349
+ncg.Ipne[i] = 2212
+ncg.Abspne[i] = 0.142304
+ncg.Pvecne[i][j] = 0.051492
+ncg.Pvecne[i][j] = -0.113151
+ncg.Pvecne[i][j] = 0.0692521
+ncg.Ipne[i] = 14
+ncg.Abspne[i] = 0.410705
+ncg.Pvecne[i][j] = 0.11811
+ncg.Pvecne[i][j] = -0.364696
+ncg.Pvecne[i][j] = -0.147396
+ncg.Ipne[i] = 2212
+ncg.Abspne[i] = 0.369955
+ncg.Pvecne[i][j] = 0.266149
+ncg.Pvecne[i][j] = -0.117201
+ncg.Pvecne[i][j] = 0.228683
+*** GOING TO READ EVENT 17
+*** event numbering from 0
+NORMAL BYTE FILL = 14352
+sktqz_.nqiskz = 1591
+ncg.nqiskz = 1397
+sktqz_.nqiskz - ncg.nqiskz = 194
+ncg.tbgn = -3994.12
+ncg.tend = 317874
+ncg.tdur = 321869
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!! No Bonsai information !!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+***** FIT IS VALID? ***** = 1
+***** FIT IS VALID? ***** = 1
+Error retreive secondary gamma information
+ncg.Neutmode = 1
+ncg.Npne = 4
+ncg.Ipne[i] = 14
+ncg.Abspne[i] = 0.489105
+ncg.Pvecne[i][j] = 0.327585
+ncg.Pvecne[i][j] = -0.363003
+ncg.Pvecne[i][j] = 0.0118475
+ncg.Ipne[i] = 2112
+ncg.Abspne[i] = 0.000705284
+ncg.Pvecne[i][j] = -0.000314333
+ncg.Pvecne[i][j] = 0.000262718
+ncg.Pvecne[i][j] = -0.000574108
+ncg.Ipne[i] = 13
+ncg.Abspne[i] = 0.227382
+ncg.Pvecne[i][j] = 0.017998
+ncg.Pvecne[i][j] = 0.225737
+ncg.Pvecne[i][j] = -0.0205256
+ncg.Ipne[i] = 2212
+ncg.Abspne[i] = 0.665558
+ncg.Pvecne[i][j] = 0.309272
+ncg.Pvecne[i][j] = -0.588478
+ncg.Pvecne[i][j] = 0.031799
+*** GOING TO READ EVENT 18
+*** event numbering from 0
+NORMAL BYTE FILL = 19580
+sktqz_.nqiskz = 2709
+ncg.nqiskz = 2204
+sktqz_.nqiskz - ncg.nqiskz = 505
+ncg.tbgn = -3977.63
+ncg.tend = 91119.1
+ncg.tdur = 95096.7
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!! No Bonsai information !!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+***** FIT IS VALID? ***** = 1
+***** FIT IS VALID? ***** = 1
+Error retreive secondary gamma information
+ncg.Neutmode = 13
+ncg.Npne = 5
+ncg.Ipne[i] = 14
+ncg.Abspne[i] = 0.640703
+ncg.Pvecne[i][j] = 0.429119
+ncg.Pvecne[i][j] = -0.475516
+ncg.Pvecne[i][j] = 0.0155196
+ncg.Ipne[i] = 2112
+ncg.Abspne[i] = 0.216141
+ncg.Pvecne[i][j] = -0.189469
+ncg.Pvecne[i][j] = 0.0861527
+ncg.Pvecne[i][j] = -0.0582752
+ncg.Ipne[i] = 13
+ncg.Abspne[i] = 0.335781
+ncg.Pvecne[i][j] = -0.162713
+ncg.Pvecne[i][j] = -0.251148
+ncg.Pvecne[i][j] = 0.152308
+ncg.Ipne[i] = 2112
+ncg.Abspne[i] = 0.343698
+ncg.Pvecne[i][j] = 0.21779
+ncg.Pvecne[i][j] = -0.0581691
+ncg.Pvecne[i][j] = -0.259445
+ncg.Ipne[i] = 211
+ncg.Abspne[i] = 0.211234
+ncg.Pvecne[i][j] = 0.184573
+ncg.Pvecne[i][j] = -0.0800463
+ncg.Pvecne[i][j] = 0.0643815
+*** GOING TO READ EVENT 19
+*** event numbering from 0
+NORMAL BYTE FILL = 29228
+sktqz_.nqiskz = 3641
+ncg.nqiskz = 3227
+sktqz_.nqiskz - ncg.nqiskz = 414
+ncg.tbgn = -3995.94
+ncg.tend = 335381
+ncg.tdur = 339377
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!! No Bonsai information !!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+***** FIT IS VALID? ***** = 1
+***** FIT IS VALID? ***** = 1
+Error retreive secondary gamma information
+ncg.Neutmode = 13
+ncg.Npne = 5
+ncg.Ipne[i] = 14
+ncg.Abspne[i] = 1.17303
+ncg.Pvecne[i][j] = 0.78565
+ncg.Pvecne[i][j] = -0.870596
+ncg.Pvecne[i][j] = 0.028414
+ncg.Ipne[i] = 2112
+ncg.Abspne[i] = 0.182394
+ncg.Pvecne[i][j] = 0.11595
+ncg.Pvecne[i][j] = 0.0998627
+ncg.Pvecne[i][j] = -0.0992502
+ncg.Ipne[i] = 13
+ncg.Abspne[i] = 0.271668
+ncg.Pvecne[i][j] = 0.0659526
+ncg.Pvecne[i][j] = -0.144475
+ncg.Pvecne[i][j] = 0.22041
+ncg.Ipne[i] = 2112
+ncg.Abspne[i] = 1.12152
+ncg.Pvecne[i][j] = 1.0032
+ncg.Pvecne[i][j] = -0.331939
+ncg.Pvecne[i][j] = -0.375771
+ncg.Ipne[i] = 211
+ncg.Abspne[i] = 0.349058
+ncg.Pvecne[i][j] = -0.167553
+ncg.Pvecne[i][j] = -0.294319
+ncg.Pvecne[i][j] = 0.0845236
+*** GOING TO READ EVENT 20
+*** event numbering from 0
+NORMAL BYTE FILL = 43996
+sktqz_.nqiskz = 1888
+ncg.nqiskz = 1295
+sktqz_.nqiskz - ncg.nqiskz = 593
+ncg.tbgn = -3992.76
+ncg.tend = 33305.8
+ncg.tdur = 37298.6
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!! No Bonsai information !!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+***** FIT IS VALID? ***** = 1
+***** FIT IS VALID? ***** = 1
+Error retreive secondary gamma information
+ncg.Neutmode = 1
+ncg.Npne = 4
+ncg.Ipne[i] = 14
+ncg.Abspne[i] = 0.373235
+ncg.Pvecne[i][j] = 0.249979
+ncg.Pvecne[i][j] = -0.277007
+ncg.Pvecne[i][j] = 0.00904079
+ncg.Ipne[i] = 2112
+ncg.Abspne[i] = 0.196498
+ncg.Pvecne[i][j] = -0.0187321
+ncg.Pvecne[i][j] = -0.158175
+ncg.Pvecne[i][j] = 0.11507
+ncg.Ipne[i] = 13
+ncg.Abspne[i] = 0.169797
+ncg.Pvecne[i][j] = 0.117041
+ncg.Pvecne[i][j] = 0.116458
+ncg.Pvecne[i][j] = -0.0396222
+ncg.Ipne[i] = 2212
+ncg.Abspne[i] = 0.58665
+ncg.Pvecne[i][j] = 0.114206
+ncg.Pvecne[i][j] = -0.55164
+ncg.Pvecne[i][j] = 0.163733
+*** GOING TO READ EVENT 21
+*** event numbering from 0
+NORMAL BYTE FILL = 16940
+sktqz_.nqiskz = 1852
+ncg.nqiskz = 1369
+sktqz_.nqiskz - ncg.nqiskz = 483
+ncg.tbgn = -3986.6
+ncg.tend = 261085
+ncg.tdur = 265071
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!! No Bonsai information !!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+***** FIT IS VALID? ***** = 1
+***** FIT IS VALID? ***** = 1
+Error retreive secondary gamma information
+ncg.Neutmode = 34
+ncg.Npne = 5
+ncg.Ipne[i] = 14
+ncg.Abspne[i] = 2.24231
+ncg.Pvecne[i][j] = 1.50182
+ncg.Pvecne[i][j] = -1.66419
+ncg.Pvecne[i][j] = 0.054315
+ncg.Ipne[i] = 2212
+ncg.Abspne[i] = 0.158122
+ncg.Pvecne[i][j] = -0.0970761
+ncg.Pvecne[i][j] = -0.0357597
+ncg.Pvecne[i][j] = 0.119583
+ncg.Ipne[i] = 14
+ncg.Abspne[i] = 1.51248
+ncg.Pvecne[i][j] = 0.686746
+ncg.Pvecne[i][j] = -1.2997
+ncg.Pvecne[i][j] = -0.356006
+ncg.Ipne[i] = 2112
+ncg.Abspne[i] = 1.01201
+ncg.Pvecne[i][j] = 0.656743
+ncg.Pvecne[i][j] = -0.236207
+ncg.Pvecne[i][j] = 0.732849
+ncg.Ipne[i] = 211
+ncg.Abspne[i] = 0.268047
+ncg.Pvecne[i][j] = 0.0612519
+ncg.Pvecne[i][j] = -0.164044
+ncg.Pvecne[i][j] = -0.202945
+*** GOING TO READ EVENT 22
+*** event numbering from 0
+NORMAL BYTE FILL = 20224
+sktqz_.nqiskz = 4550
+ncg.nqiskz = 4472
+sktqz_.nqiskz - ncg.nqiskz = 78
+ncg.tbgn = -3999.94
+ncg.tend = 153763
+ncg.tdur = 157763
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!! No Bonsai information !!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+***** FIT IS VALID? ***** = 1
+***** FIT IS VALID? ***** = 1
+Error retreive secondary gamma information
+ncg.Neutmode = 26
+ncg.Npne = 6
+ncg.Ipne[i] = 14
+ncg.Abspne[i] = 2.53541
+ncg.Pvecne[i][j] = 1.69813
+ncg.Pvecne[i][j] = -1.88173
+ncg.Pvecne[i][j] = 0.0614147
+ncg.Ipne[i] = 2112
+ncg.Abspne[i] = 0.0457656
+ncg.Pvecne[i][j] = -0.0402717
+ncg.Pvecne[i][j] = 0.020686
+ncg.Pvecne[i][j] = -0.00669083
+ncg.Ipne[i] = 13
+ncg.Abspne[i] = 0.202022
+ncg.Pvecne[i][j] = -0.0468503
+ncg.Pvecne[i][j] = -0.136607
+ncg.Pvecne[i][j] = 0.141267
+ncg.Ipne[i] = 2112
+ncg.Abspne[i] = 0.260787
+ncg.Pvecne[i][j] = 0.227734
+ncg.Pvecne[i][j] = -0.102149
+ncg.Pvecne[i][j] = 0.0755794
+ncg.Ipne[i] = 211
+ncg.Abspne[i] = 1.86325
+ncg.Pvecne[i][j] = 1.12934
+ncg.Pvecne[i][j] = -1.46906
+ncg.Pvecne[i][j] = -0.195273
+ncg.Ipne[i] = 111
+ncg.Abspne[i] = 0.381342
+ncg.Pvecne[i][j] = 0.347628
+ncg.Pvecne[i][j] = -0.153225
+ncg.Pvecne[i][j] = 0.0331505
+*** GOING TO READ EVENT 23
+*** event numbering from 0
+NORMAL BYTE FILL = 62404
+sktqz_.nqiskz = 2003
+ncg.nqiskz = 1795
+sktqz_.nqiskz - ncg.nqiskz = 208
+ncg.tbgn = -3972.56
+ncg.tend = 144911
+ncg.tdur = 148883
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!! No Bonsai information !!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+***** FIT IS VALID? ***** = 1
+***** FIT IS VALID? ***** = 1
+Error retreive secondary gamma information
+ncg.Neutmode = 11
+ncg.Npne = 5
+ncg.Ipne[i] = 14
+ncg.Abspne[i] = 0.730385
+ncg.Pvecne[i][j] = 0.489185
+ncg.Pvecne[i][j] = -0.542077
+ncg.Pvecne[i][j] = 0.017692
+ncg.Ipne[i] = 2212
+ncg.Abspne[i] = 0.216464
+ncg.Pvecne[i][j] = 0.139061
+ncg.Pvecne[i][j] = -0.140179
+ncg.Pvecne[i][j] = -0.0887026
+ncg.Ipne[i] = 13
+ncg.Abspne[i] = 0.0380165
+ncg.Pvecne[i][j] = -0.0172513
+ncg.Pvecne[i][j] = -0.031383
+ncg.Pvecne[i][j] = 0.0127577
+ncg.Ipne[i] = 2212
+ncg.Abspne[i] = 0.96809
+ncg.Pvecne[i][j] = 0.535036
+ncg.Pvecne[i][j] = -0.802697
+ncg.Pvecne[i][j] = -0.0813145
+ncg.Ipne[i] = 211
+ncg.Abspne[i] = 0.18777
+ncg.Pvecne[i][j] = 0.11046
+ncg.Pvecne[i][j] = 0.151822
+ncg.Pvecne[i][j] = -0.00245258
+*** GOING TO READ EVENT 24
+*** event numbering from 0
+NORMAL BYTE FILL = 23784
+sktqz_.nqiskz = 39
+ncg.nqiskz = 39
+sktqz_.nqiskz - ncg.nqiskz = 0
+ncg.tbgn = 960.045
+ncg.tend = 1165.55
+ncg.tdur = 205.504
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!! No Bonsai information !!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+***** FIT IS VALID? ***** = 1
+***** FIT IS VALID? ***** = 1
+Error retreive secondary gamma information
+ncg.Neutmode = 32
+ncg.Npne = 5
+ncg.Ipne[i] = 14
+ncg.Abspne[i] = 0.67112
+ncg.Pvecne[i][j] = 0.449491
+ncg.Pvecne[i][j] = -0.498091
+ncg.Pvecne[i][j] = 0.0162564
+ncg.Ipne[i] = 2212
+ncg.Abspne[i] = 0.203073
+ncg.Pvecne[i][j] = -0.0477444
+ncg.Pvecne[i][j] = 0.0822677
+ncg.Pvecne[i][j] = -0.179419
+ncg.Ipne[i] = 14
+ncg.Abspne[i] = 0.330167
+ncg.Pvecne[i][j] = 0.143278
+ncg.Pvecne[i][j] = -0.141073
+ncg.Pvecne[i][j] = -0.261878
+ncg.Ipne[i] = 2212
+ncg.Abspne[i] = 0.467209
+ncg.Pvecne[i][j] = 0.127389
+ncg.Pvecne[i][j] = -0.440839
+ncg.Pvecne[i][j] = 0.0878473
+ncg.Ipne[i] = 111
+ncg.Abspne[i] = 0.211862
+ncg.Pvecne[i][j] = 0.13108
+ncg.Pvecne[i][j] = 0.166089
+ncg.Pvecne[i][j] = 0.0108685
+*** GOING TO READ EVENT 25
+*** event numbering from 0
+NORMAL BYTE FILL = 2576
+sktqz_.nqiskz = 1994
+ncg.nqiskz = 1409
+sktqz_.nqiskz - ncg.nqiskz = 585
+ncg.tbgn = -3955.69
+ncg.tend = 128401
+ncg.tdur = 132356
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!! No Bonsai information !!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+***** FIT IS VALID? ***** = 1
+***** FIT IS VALID? ***** = 1
+Error retreive secondary gamma information
+ncg.Neutmode = 33
+ncg.Npne = 5
+ncg.Ipne[i] = 14
+ncg.Abspne[i] = 0.788235
+ncg.Pvecne[i][j] = 0.527931
+ncg.Pvecne[i][j] = -0.585011
+ncg.Pvecne[i][j] = 0.0190933
+ncg.Ipne[i] = 2112
+ncg.Abspne[i] = 0.191727
+ncg.Pvecne[i][j] = 0.0201194
+ncg.Pvecne[i][j] = -0.106106
+ncg.Pvecne[i][j] = -0.158417
+ncg.Ipne[i] = 14
+ncg.Abspne[i] = 0.311757
+ncg.Pvecne[i][j] = 0.124656
+ncg.Pvecne[i][j] = -0.244133
+ncg.Pvecne[i][j] = 0.1485
+ncg.Ipne[i] = 2212
+ncg.Abspne[i] = 0.336202
+ncg.Pvecne[i][j] = 0.0670314
+ncg.Pvecne[i][j] = -0.301857
+ncg.Pvecne[i][j] = -0.13199
+ncg.Ipne[i] = -211
+ncg.Abspne[i] = 0.415139
+ncg.Pvecne[i][j] = 0.356363
+ncg.Pvecne[i][j] = -0.145127
+ncg.Pvecne[i][j] = -0.155834
+*** GOING TO READ EVENT 26
+*** event numbering from 0
+NORMAL BYTE FILL = 21484
+sktqz_.nqiskz = 7320
+ncg.nqiskz = 7139
+sktqz_.nqiskz - ncg.nqiskz = 181
+ncg.tbgn = -3939.94
+ncg.tend = 30345
+ncg.tdur = 34285
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!! No Bonsai information !!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+terminate called after throwing an instance of 'std::bad_alloc'
+  what():  std::bad_alloc
+***** FIT IS VALID? ***** = 1
+./run_lentuple.sh: line 46: 14528 Aborted                 (core dumped) $SOURCE -i $INPUT -o $OUTPUT -a ambe_top

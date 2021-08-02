@@ -1,0 +1,2201 @@
+#include <cmath>
+#include <set>
+#include "prm.h"
+#include <string>
+#include "TMath.h"
+#include "/disk02/usr6/fiacob/ntag/swarm/Swarm.h"
+
+#define watch( x ) std::cerr << (#x) << " = " << x << '\n'
+#define dump( x ) std::cerr << x << '\n'
+#define dbg( x ) std::cerr << "DBG " << x << '\n'
+
+using namespace std;
+
+
+extern "C" void trginfo_(float*);
+
+const float TANKR = 1690.;
+const float TANKZ = 1810.;
+
+bool compare_cable( const CableTimeHit &x, const CableTimeHit &y ) {
+    return x.icabiz < y.icabiz;
+}
+
+
+
+bool compare_time( const CableTimeHit &x, const CableTimeHit &y ) {
+    return x.tiskz < y.tiskz;
+}
+
+
+
+bool compare_tau( const CableTimeHit &x, const CableTimeHit &y ) {
+    return x.tau < y.tau;
+}
+
+
+
+bool is_negative_cable( const CableTimeHit &x ) {
+    return x.icabiz < 0;
+}
+
+
+
+void fill_ct( const sktqz_common &insktqz, char *sbvec, CableTimeHit *ct, int &ctsize ) {
+     for ( int i = 0; i < insktqz.nqiskz; ++i ) {
+        ct[i].icabiz = insktqz.icabiz[i];
+        ct[i].tiskz  = insktqz.tiskz[i];
+        ct[i].sb     = sbvec[i];
+        ct[i].flag_bonsvtx = 0;
+    }
+    ctsize = insktqz.nqiskz;
+}
+
+
+
+void fill_ct_nosbi( const sktqz_common &insktqz, CableTimeHit *ct, int &ctsize ) {
+     for ( int i = 0; i < insktqz.nqiskz; ++i ) {
+        ct[i].icabiz = insktqz.icabiz[i];
+        ct[i].tiskz  = insktqz.tiskz[i];
+        ct[i].sb     = 'b';
+        ct[i].flag_bonsvtx = 0;
+    }
+    ctsize = insktqz.nqiskz;
+}
+
+
+
+/*
+ * RBN = Repetitive Burst Noise
+ * Considering one PMT, if two consecutive hits
+ * have time difference < RBN_TIME_WIDTH
+ * then are considered RBN, and are cut
+ *
+ * Above behaviour checked step-by-step at 7th July 2019
+*/
+const float RBN_TIME_WIDTH = 3000.;
+void cut_RBN( CableTimeHit *ct, int &ctsize ) {
+    // Sort PMT hits in increasing order of cable number
+    sort( ct, ct + ctsize, compare_cable );
+
+    // DBG
+    //for ( int i = 0; i < ctsize; ++i ) {
+    //    printf( "%d  %f\n", ct[i].icabiz, ct[i].tiskz );
+    //}
+
+    // Loop through each PMTs' hits and mark RBN hits
+    // RBN hits marked with negative icabiz
+    CableTimeHit *bound[2];
+    bound[0] = bound[1] = ct;
+    do {
+        // Find next PMT range
+        bound[0] = bound[1];
+        bound[1] = upper_bound( bound[1], ct+ctsize, *bound[1], compare_cable );
+        // DBG
+        //printf( "%d   %d\n", int(bound[0]-ct), int(bound[1]-ct) );
+
+        // Sort PMT range in time
+        sort( bound[0], bound[1], compare_time );
+
+        // DBG
+        //CableTimeHit *it;
+        //it = bound[0];
+        //while ( it != bound[1] ) {
+        //    printf( "%d %f\n", it->icabiz, it->tiskz );
+        //    ++it;
+        //}
+
+        // Mark RBN
+        // Loop in PMT range
+        while ( bound[0] < bound[1]-1 ) {
+            // If RBN mark icabiz as negative
+            if ( (bound[0]+1)->tiskz - bound[0]->tiskz < RBN_TIME_WIDTH ) {
+                (bound[0]+1)->icabiz = (bound[0]+1)->icabiz < 0 ? (bound[0]+1)->icabiz : -(bound[0]+1)->icabiz;
+                bound[0]->icabiz = bound[0]->icabiz < 0 ? bound[0]->icabiz : -bound[0]->icabiz;
+            }
+            ++bound[0];
+        }
+    }
+    while ( bound[1] != ct + ctsize );
+
+    // DBG
+    //for ( int i = 0; i < ctsize; ++i ) {
+    //    printf( "%d  %f\n", ct[i].icabiz, ct[i].tiskz );
+    //}
+
+    // Remove element from range
+    CableTimeHit *ctbgn = ct;
+    CableTimeHit *ctend = ct + ctsize;
+    ctend = remove_if( ctbgn, ctend, is_negative_cable );
+    ctsize = (int)(ctend - ctbgn);
+
+    // DBG
+    //for ( int i = 0; i < ctsize; ++i ) {
+    //    printf( "%d  %d  %f\n", i, ct[i].icabiz, ct[i].tiskz );
+    //}
+    
+    // Re-sort in increasing time
+    sort( ct, ct+ctsize, compare_time );
+
+    // DBG
+    //for ( int i = 0; i < ctsize; ++i ) printf( "%d  %d  %f\n", i, ct[i].icabiz, ct[i].tiskz );
+}
+
+
+
+// Verified behaviour at 7th July 2019
+const float CWATER = 299792458. * 1e-7 / 1.33;
+void fill_sort_tau( CableTimeHit *ct, int ctsize, float *vtx ) {
+    int cable;
+    float tof;
+    for ( int i = 0; i < ctsize; ++i ) {
+        tof = 0.;
+        cable = ct[i].icabiz;
+        for ( int j = 0; j < 3; ++j ) 
+            tof += ( vtx[j] - geopmt_.xyzpm[cable-1][j] )*( vtx[j] - geopmt_.xyzpm[cable-1][j] );
+        tof = sqrt( tof ) / CWATER;
+
+        ct[i].tau = ct[i].tiskz - tof;
+    }
+
+    // DBG
+    //for ( int i = 0; i < ctsize; ++i )
+    //    printf( "%d  %d  %f  %f\n", i, ct[i].icabiz, ct[i].tiskz, ct[i].tau );
+
+    // Sort tau in increasing order
+    sort( ct, ct + ctsize, compare_tau );
+
+    // DBG
+    //for ( int i = 0; i < ctsize; ++i )
+    //    printf( "%d  %d  %f  %f\n", i, ct[i].icabiz, ct[i].tiskz, ct[i].tau );
+}
+
+
+
+
+CableTimeHit* find_n10_end( CableTimeHit *first, CableTimeHit *last ) {
+    CableTimeHit *it = first;
+    while ( it != last && it->tau - first->tau < 10. ) ++it;
+
+    return it;
+}
+
+
+/*
+ * Find all n10 window bounds
+ * Checked behaviour at 8th July 2019
+*/ 
+const int N10_LO_CUT = 7;
+const int N10_HI_CUT = 50;
+const CableTimeHit TAU_BGN_NTAG = {
+    0,
+    0,
+    18000.
+};
+
+
+
+void find_n10( CableTimeHit *ct, int ctsize, WindowBounds *wndbnd, int &wbsize ) {
+    // Reset number of windows
+    wbsize = 0;
+
+    // Loop through event
+    CableTimeHit *eventbgn = ct;
+    CableTimeHit *eventend = ct + ctsize;
+    CableTimeHit *eventbgn_ntag = upper_bound( eventbgn, eventend, TAU_BGN_NTAG, compare_tau ); 
+    CableTimeHit *bound[2] = { eventbgn_ntag, eventbgn_ntag };
+    int n10;
+    do {
+        // Find 10 nsec window [bound0, bound1[
+        bound[1] = find_n10_end( bound[0], eventend );
+
+        // Save if necessary
+        n10 = (int)(bound[1] - bound[0]);
+        if ( N10_LO_CUT <= n10 && n10 <= N10_HI_CUT ) {
+            wndbnd[wbsize].bgn = bound[0];
+            wndbnd[wbsize].end = bound[1];
+            ++wbsize;
+        }
+
+        // DBG
+        //printf( "n10 = %d\n", n10 );
+        //for ( int i = 0; i < n10; ++i ) {
+        //    printf( "%d  %d  %f\n", i, (bound[0]+i)->icabiz, (bound[0]+i)->tau );
+        //}
+
+        // Consider next hit
+        ++bound[0];
+    }
+    while ( bound[1] != eventend );
+}
+
+
+
+WindowBounds find_n200bound( CableTimeHit *center, CableTimeHit *first, CableTimeHit *last ) { 
+    WindowBounds n200bound;
+    CableTimeHit *it;
+    
+    // Open 100 nsec to the right of t0
+    it = center;
+    while ( it != last && it->tau - center->tau < 100. ) ++it;
+    n200bound.end = it;
+
+    // Open 100 nsec to the left of t0
+    it = center;
+    while ( it != first-1 && center->tau - it->tau < 100. ) --it;
+    ++it;
+    n200bound.bgn = it;
+
+    return n200bound;
+}
+
+
+bool is_bgnend_same( const WindowBounds &x ) {
+    return x.bgn == x.end;
+}
+
+
+/*
+ * Cut the n10 windows, whose surrounding n200 window exceeds 200 hits
+ * Checked behaviour on 8th July 2019
+*/
+const int N200_CUT = 200;
+void cut_n200( CableTimeHit *ct, int ctsize, WindowBounds *wndbnd, int &wbsize ) {
+    CableTimeHit *eventbgn = ct;
+    CableTimeHit *eventend = ct + ctsize;
+    CableTimeHit *eventbgn_ntag = upper_bound( eventbgn, eventend, TAU_BGN_NTAG, compare_tau );
+    WindowBounds n200bound;
+    int n200;
+
+    // Loop on considered windows
+    for ( int iwnd = 0; iwnd < wbsize; ++iwnd ) {
+        // Find n200 window
+        n200bound = find_n200bound( wndbnd[iwnd].bgn, eventbgn_ntag, eventend );
+
+        // Compute n200
+        n200 = (int)(n200bound.end - n200bound.bgn);
+
+        // Mark n10 windows as bad if necessary (BAD ---> bgn == end)
+        if ( n200 > N200_CUT ) {
+            wndbnd[iwnd].end = wndbnd[iwnd].bgn;
+        }
+
+        // DBG
+        //printf( "n10 window number %d, the n200 window has %d hits\n", iwnd, n200 );
+        //for ( int j = 0; j < n200; ++j ) {
+        //    printf( "%d  %d  %f\n", j, (n200bound.bgn+j)->icabiz, (n200bound.bgn+j)->tau );
+        //}
+    }
+    
+    // Remove element from range
+    WindowBounds *wbbgn = wndbnd;
+    WindowBounds *wbend = wndbnd + wbsize;
+    wbend = remove_if( wbbgn, wbend, is_bgnend_same );
+    wbsize = (int)(wbend - wbbgn);
+}
+
+
+
+
+
+
+bool compare_window_hit( const WindowBounds &x, const WindowBounds &y ) {
+    int nx = (int)( x.end - x.bgn );
+    int ny = (int)( y.end - y.bgn );
+    return nx < ny;
+}
+
+
+
+/*
+ * Daisy chains n10 windows as close as 20 nsec in t0
+ * and chooses the one with highest number of hits
+ *
+ * Checked behaviour on 9th July 2019
+*/
+const float TAU_CHAINED_WIDTH = 20.;
+void cut_doublet( CableTimeHit *ct, int ctsize, WindowBounds *wndbnd, int &wbsize ) {
+    // Find those daisy-chained within 20 nsec
+    // Loop on the n10 windows
+    WindowBounds *wbbgn = wndbnd;
+    WindowBounds *wbend = wndbnd + wbsize;
+    WindowBounds *wbit[2] = { wbbgn, wbbgn };
+    WindowBounds *wbsave;
+    WindowBounds *wbdummy;
+    WindowBounds *wbdbg;  // DBG
+    while( wbit[1] != wbend ) {
+        // Find all those chained, they will stay in range [wbit0, wbit1[
+        while ( wbit[1] + 1 != wbend && (wbit[1]+1)->bgn->tau - wbit[1]->bgn->tau < TAU_CHAINED_WIDTH ) ++wbit[1];
+        ++wbit[1];
+
+        // DBG
+        //printf( "CHAIN\n" );
+        //wbdbg = wbit[0];
+        //while ( wbdbg != wbit[1] ) {
+        //    for ( int idbg = 0; idbg < (int)(wbdbg->end-wbdbg->bgn); ++idbg )
+        //        printf( "%f  ", ((wbdbg->bgn)+idbg)->tau );
+        //    printf( "\n" );
+        //    ++wbdbg;
+        //}
+
+
+        // Find the best among the chained
+        wbsave = max_element( wbit[0], wbit[1], compare_window_hit );
+
+        // DBG
+        //printf( "BEST IS NUMBER = %d\n", (int)(wbsave-wbit[0]) );
+        
+        // Mark the others
+        wbdummy = wbit[0];
+        while ( wbdummy != wbit[1] ) {
+            if ( wbdummy != wbsave ) wbdummy->end = wbdummy->bgn;
+            ++wbdummy;
+        }
+        
+        // Move on to the next possible chain
+        wbit[0] = wbit[1];
+    }
+
+    // Remove the marked ones
+    // Remove element from range
+    wbbgn = wndbnd;
+    wbend = wndbnd + wbsize;
+    wbend = remove_if( wbbgn, wbend, is_bgnend_same );
+    wbsize = (int)(wbend - wbbgn);
+}
+
+
+
+
+//=========================
+//
+// GLOBAL TAURMS FUNCTION
+//
+//=========================
+namespace rms {
+int nhit;
+int cable[100];
+float t[100];
+float tau[100];
+
+float taurms( float *x ) {
+    float tof;
+    for ( int i = 0; i < nhit; ++i ) {
+        tof = 
+        (geopmt_.xyzpm[cable[i]-1][0]-x[0]) * (geopmt_.xyzpm[cable[i]-1][0]-x[0]) +
+        (geopmt_.xyzpm[cable[i]-1][1]-x[1]) * (geopmt_.xyzpm[cable[i]-1][1]-x[1]) +
+        (geopmt_.xyzpm[cable[i]-1][2]-x[2]) * (geopmt_.xyzpm[cable[i]-1][2]-x[2]);
+        tof = sqrt( tof ) / CWATER;
+        tau[i] = t[i] - tof;
+    }
+
+    // Compute mean value
+    float taumean = 0.;
+    for ( int i = 0; i < nhit; ++i ) taumean += tau[i];
+    taumean /= (float) nhit;
+
+    // Compute RMS
+    float taurms = 0.;
+    for ( int i = 0; i < nhit; ++i ) taurms += ( tau[i] - taumean ) * ( tau[i] - taumean );
+    taurms /= (float) nhit;
+    taurms = sqrt( taurms );
+
+    // DBG
+    //for ( int i = 0; i < nhit; ++i ) printf( "%d  %f\n", i, tau[i] );
+    //printf( "%s  %f\n", "mean", taumean );
+    //printf( "%s  %f\n", "trms", taurms );
+
+    return taurms;
+}
+
+}
+
+// END OF RMS NAMESPACE
+
+
+
+
+void cart2sphe( float *u ) {
+    u[3] = sqrt( u[0]*u[0] + u[1]*u[1] + u[2]*u[2] );
+    u[4] = atan2( sqrt( u[0]*u[0] + u[1]*u[1] ), u[2] );
+    u[5] = atan2( u[1], u[0] );
+}
+
+float computedist( float *u, float *v ) {
+    float num = u[0]*v[0] + u[1]*v[1] + u[2]*v[2];
+    float den = ( u[0]*u[0] + u[1]*u[1] + u[2]*u[2] ) * ( v[0]*v[0] + v[1]*v[1] + v[2]*v[2] );
+    den = sqrt( den );
+    float wannacos = num / den;
+    if ( 1. < abs( wannacos ) && abs( wannacos ) < 1.1 ) {
+        wannacos = wannacos > 0 ? 1. : -1.;
+    }
+
+    return acos( wannacos );
+}
+
+bool spheremean_dist_compare( const Hit &a, const Hit &b ) { return a.spheremean_dist < b.spheremean_dist; }
+
+
+
+void Window::init( CableTimeHit *first, CableTimeHit *last, float *_vtx ) {
+    // Save vertex
+    vtx[0] = _vtx[0];
+    vtx[1] = _vtx[1];
+    vtx[2] = _vtx[2];
+
+    // General purpose info
+    nhit = last - first;
+    tauwidth = (first + nhit - 1)->tau - first->tau;
+
+    // Loop through hits
+    int cable;
+    //printf( "*** WINDOW DBG ***\n" );
+    //printf( "vtx[0-2] = %f  %f  %f\n", vtx[0], vtx[1], vtx[2] );
+    for ( int i = 0; i < nhit; ++i ) {
+        // Cable
+        cable = first[i].icabiz;
+        hit[i].cable = cable;
+
+        // Time
+        hit[i].t = first[i].tiskz;
+
+        // Coordinate
+        hit[i].co[0] = geopmt_.xyzpm[cable-1][0];
+        hit[i].co[1] = geopmt_.xyzpm[cable-1][1];
+        hit[i].co[2] = geopmt_.xyzpm[cable-1][2];
+        cart2sphe( hit[i].co );
+
+        // Vertex-subtracted coordinates
+        hit[i].vco[0] = hit[i].co[0] - vtx[0];
+        hit[i].vco[1] = hit[i].co[1] - vtx[1];
+        hit[i].vco[2] = hit[i].co[2] - vtx[2];
+        cart2sphe( hit[i].vco );
+
+        // Vertex-subtracted normalized coordinates
+        hit[i].nvco[0] = hit[i].vco[0] / hit[i].vco[3];
+        hit[i].nvco[1] = hit[i].vco[1] / hit[i].vco[3];
+        hit[i].nvco[2] = hit[i].vco[2] / hit[i].vco[3];
+        hit[i].nvco[3] = hit[i].vco[3] / hit[i].vco[3];
+        hit[i].nvco[4] = hit[i].vco[4];
+        hit[i].nvco[5] = hit[i].vco[5];
+        
+        // DBG
+        // hit[i].nvco[4] = hit[i].vco[4];
+        // hit[i].nvco[5] = hit[i].vco[5];
+        //printf( "co[0-5] = %f  %f  %f  %f  %f  %f\n", hit[i].co[0], hit[i].co[1], hit[i].co[2], hit[i].co[3], hit[i].co[4], hit[i].co[5] );
+        //printf( "vco[0-5] = %f  %f  %f  %f  %f  %f\n", hit[i].vco[0], hit[i].vco[1], hit[i].vco[2], hit[i].vco[3], hit[i].vco[4], hit[i].vco[5] );
+
+        // Tdelta
+        if ( i < nhit - 1 )
+            hit[i].tdelta = first[i+1].tau - first[i].tau;
+
+        // Stau
+        hit[i].stau = first[i].tau - first[0].tau;
+
+        // Signal / Background info
+        hit[i].sb = first[i].sb;
+
+
+        // DBG
+        //printf( "%d  %d  %f  %f  %f  %f  %f  %f  %f  %f\n", i, hit[i].cable, hit[i].t, hit[i].co[0], hit[i].co[1], hit[i].co[2], hit[i].vco[0], hit[i].vco[1], hit[i].vco[2], hit[i].stau );
+    }
+}
+
+
+
+/*
+ * Return value:
+ *   true = ok
+ *   flase = spheremean norm is zero
+ *
+ * Computed value:
+ *   normspheremean
+ *   spheremean on vertex-subtracted sphere
+*/
+void Window::init_spheremean() {
+    // Compute un-normalized spheremean
+    for ( int i = 0; i < 3; ++i ) {
+        spheremean[i] = 0.;
+        for ( int ihit = 0; ihit < nhit; ++ihit ) {
+            spheremean[i] += hit[ihit].vco[i] / hit[ihit].vco[3];
+        }
+    }
+
+    // Compute norm of spheremean
+    spheremean[3] = 0.;
+    for ( int i = 0; i < 3; ++i ) spheremean[3] += spheremean[i]*spheremean[i];
+    spheremean[3] = sqrt( spheremean[3] );
+    
+    // Return false (error state) in case norm of spheremean is zero
+    if ( spheremean[3] == 0. ) {
+        spheremeanflag = false;
+        return;
+    }
+
+    // Compute spheremean if possible
+    for ( int i = 0; i < 3; ++i ) spheremean[i] /= spheremean[3];
+    for ( int i = 0; i < 3; ++i ) {
+        spheremean[4] = atan2( sqrt( spheremean[0]*spheremean[0] + spheremean[1]*spheremean[1] ), spheremean[2] );
+        spheremean[5] = atan2( spheremean[1], spheremean[0] );
+    }
+
+    // Return true (ok state) in case spheremean is computed successfully
+    spheremeanflag = true;
+    return;
+}
+
+
+
+void Window::init_distancevector() {
+    // Compute distance from spheremean
+    // Ordering is still in tau ( as always... )
+    for ( int i = 0; i < nhit; ++i ) {
+        hit[i].spheremean_dist = computedist( spheremean, hit[i].vco );
+    }
+}
+
+
+/*
+void Fitter::init_vtx( const Window &w, float *vtx ) {
+    nhit = w.nhit;
+    for ( int i = 0; i < nhit; ++i ) guesst[i] = w.hit[i].t;
+    for ( int i = 0; i < 3; ++i ) guessvtx[i] = vtx[i];
+}
+*/
+
+void cube_sampler( float *side, float *x ) {
+    float u;
+    u = gRandom->Rndm(); // [0, 1]
+    x[0] = u * ( side[1] - side[0] ) + side[0];  // [side[0], side[1]]
+    
+    u = gRandom->Rndm(); // [0, 1]
+    x[1] = u * ( side[3] - side[2] ) + side[2];  // [side[2], side[3]]
+    
+    u = gRandom->Rndm(); // [0, 1]
+    x[2] = u * ( side[5] - side[4] ) + side[4];  // [side[4], side[5]] 
+}
+
+void cylinder_sampler( const float radius, const float semiheight, float *x ) {
+    float u;
+    do {
+       u = gRandom->Rndm();
+       x[0] = (2.*u - 1.) * radius;
+       u = gRandom->Rndm();
+       x[1] = (2.*u - 1.) * radius;
+    }
+    while( x[0]*x[0] + x[1]*x[1] > radius*radius );
+
+    u = gRandom->Rndm();
+    x[2] = (2.*u - 1.) * semiheight;
+}
+
+bool is_inside_sk( const float *x ) {
+    const float R = 1690.;
+    const float H2 = 1810.;
+    return ( x[0]*x[0]+x[1]*x[1] < R*R && abs( x[2] ) < H2 );
+}
+void sk_sampler( float *x ) {
+    const float radius = 1690.;
+    const float semiheight = 1810.;
+    float u;
+    do {
+       u = gRandom->Rndm();
+       x[0] = (2.*u - 1.) * radius;
+       u = gRandom->Rndm();
+       x[1] = (2.*u - 1.) * radius;
+    }
+    while( x[0]*x[0] + x[1]*x[1] > radius*radius );
+
+    u = gRandom->Rndm();
+    x[2] = (2.*u - 1.) * semiheight;
+}
+
+
+
+// vtx in centimeter, tau NOT sorted
+float Fitter::compute_taurms( const Window &w, float *vtx ) {
+    int cable;
+    float tof;
+    float tau[100];
+    for ( int i = 0; i < w.nhit; ++i ) {
+        cable = w.hit[i].cable;
+        tof = 
+        (geopmt_.xyzpm[cable-1][0]-vtx[0]) * (geopmt_.xyzpm[cable-1][0]-vtx[0]) +
+        (geopmt_.xyzpm[cable-1][1]-vtx[1]) * (geopmt_.xyzpm[cable-1][1]-vtx[1]) +
+        (geopmt_.xyzpm[cable-1][2]-vtx[2]) * (geopmt_.xyzpm[cable-1][2]-vtx[2]);
+        tof = sqrt( tof ) / CWATER;
+        tau[i] = w.hit[i].t - tof;
+    }
+
+    // Compute mean value
+    float taumean = 0.;
+    for ( int i = 0; i < w.nhit; ++i ) taumean += tau[i];
+    taumean /= (float) w.nhit;
+
+    // Compute RMS
+    float taurms = 0.;
+    for ( int i = 0; i < w.nhit; ++i ) taurms += ( tau[i] - taumean ) * ( tau[i] - taumean );
+    taurms /= (float) w.nhit;
+    taurms = sqrt( taurms );
+
+    // DBG
+    //for ( int i = 0; i < nhit; ++i ) printf( "%d  %f\n", i, tau[i] );
+    //printf( "%s  %f\n", "mean", taumean );
+    //printf( "%s  %f\n", "trms", taurms );
+
+    return taurms;
+}
+
+
+
+void Fitter::sample_taurms( const Window &w, const float radius, const float semiheight, int nsample, float *stat ) {
+    float vtx[3];
+    float taurms[10000];
+    TH1D htaurms( "htaurms", "htaurms", 100, 0, 100 );
+
+    float taurms_min[4] = { 9999, 9999, 9999, 9999 };
+
+    // DBG
+    //TFile *frms = new TFile( "frms.root", "RECREATE" );
+    //TTree *trms = new TTree( "trms", "trms" );
+    //TBranch *brrms = trms->Branch( "brrms", &bufrms, "vtx0/F:vtx1:vtx2:val" );
+
+    // Sample in the cylinder
+    for ( int i = 0; i < nsample; ++i ) {
+        cylinder_sampler( radius, semiheight, vtx );
+        taurms[i] = compute_taurms( w, vtx );
+
+        //DBG
+        //printf( "%f %f %f %f\n", vtx[0], vtx[1], vtx[2], taurms[i] );
+
+        if ( taurms[i] < taurms_min[3] ) {
+            taurms_min[0] = vtx[0];
+            taurms_min[1] = vtx[1];
+            taurms_min[2] = vtx[2];
+            taurms_min[3] = taurms[i];
+        }
+
+        htaurms.Fill( taurms[i] );
+
+        // DBG
+        //bufrms.vtx0 = vtx[0];
+        //bufrms.vtx1 = vtx[1];
+        //bufrms.vtx2 = vtx[2];
+        //bufrms.val = taurms;
+
+        //trms->Fill();
+    }
+
+    //sample_mean_stddev( taurms, nsample, stat );
+
+    stat[0] = htaurms.GetMean();
+    stat[1] = htaurms.GetRMS();
+    stat[2] = htaurms.GetSkewness();
+    stat[3] = htaurms.GetKurtosis();
+    double quantile[3];
+    double probsum[3] = { 0.25, 0.50, 0.75 };
+    //probsum[0] = 0.25; probsum[1] = 0.50; probsum[2] = 0.75;
+    htaurms.GetQuantiles( 3, quantile, probsum );
+    stat[4] = quantile[0];  // first quartile
+    stat[5] = quantile[1];  // median
+    stat[6] = quantile[2];  // thrid quartile
+    stat[7] = quantile[2] - quantile[0];  // inter-quartile range
+
+    stat[8] = taurms_min[0];  // minx
+    stat[9] = taurms_min[1];  // miny
+    stat[10] = taurms_min[2];  // minz
+    stat[11] = taurms_min[3];  // min val taurms
+    //trms->Write();
+    //frms->Close();
+    //cerr << "frms written" << '\n';
+}
+
+
+bool ccf_is_bad_vtx( const Fitter::FuncPoint &x ) {
+    if ( !is_inside_sk( x.vtx ) ) return true;
+    if ( !isfinite( x.val ) ) return true;
+    return false;
+}
+
+
+
+bool ccf_comp_val( const Fitter::FuncPoint &x, const Fitter::FuncPoint &y ) { return x.val < y.val; }
+
+
+
+void Fitter::concentric_cube_fitter( const Window &w, const float *inivtx, const float iniside, int ncycle, float cyclefactor ) {
+    // Check cyclefactor to be < 1.0
+    if ( cyclefactor >= 1. ) {
+        printf( " ---> ERROR: in Fitter::concentric_cube_fitter cyclefactor must be < 1.0\n" );
+        flag = -1;
+        return;
+    }
+
+    // Variables
+    float side;
+    float extr[6];
+    const int NSAMPLE = 1000;
+    struct FuncPoint guess; 
+    struct FuncPoint buf[NSAMPLE];
+    struct FuncPoint *bufend;
+    struct FuncPoint checkmin;
+
+    // Initial guess
+    guess.vtx[0] = inivtx[0];
+    guess.vtx[1] = inivtx[1];
+    guess.vtx[2] = inivtx[2];
+    guess.val = compute_taurms( w, guess.vtx );
+    
+    // Initial side
+    side = iniside;
+
+    //-----------------
+    // Loop on cycles
+    //-----------------
+    
+    // FILE *pdbg = fopen( "dbg.txt", "w" ); // DBG
+
+    for ( int icycle = 0; icycle < ncycle; ++icycle ) {
+        // Flag is cycle
+        flag = icycle;
+
+        // Compute extremes
+        extr[0] = guess.vtx[0] - side / 2.;
+        extr[1] = guess.vtx[0] + side / 2.;
+        extr[2] = guess.vtx[1] - side / 2.;
+        extr[3] = guess.vtx[1] + side / 2.;
+        extr[4] = guess.vtx[2] - side / 2.;
+        extr[5] = guess.vtx[2] + side / 2.;
+        //watch( extr[0] ); watch( extr[1] ); watch( extr[2] ); watch( extr[3] ); watch( extr[4] ); watch( extr[5] );  // DBG
+
+        // Sample in cube
+        for ( int isample = 0; isample < NSAMPLE; ++isample ) {
+            cube_sampler( extr, buf[isample].vtx );
+            buf[isample].val = compute_taurms( w, buf[isample].vtx ); 
+            // fprintf( pdbg, "%f %f %f %f\n", buf[isample].vtx[0], buf[isample].vtx[1], buf[isample].vtx[2], buf[isample].val );  // DBG
+        }
+
+        // Remove out-of-SK, infinite, and nan values
+        bufend = remove_if( buf, buf + NSAMPLE, ccf_is_bad_vtx );
+
+        // Totally bad sample case
+        if ( bufend - buf == 0 ) {
+            minimum = guess;
+            return;
+        }
+
+        // Update best guess
+        checkmin = *min_element( buf, bufend, ccf_comp_val );
+        if ( checkmin.val < guess.val ) {
+            guess = checkmin;
+        }
+
+        // Update for next step
+        side *= cyclefactor; 
+
+        //printf( "( icycle, guess ) = %d %f %f %f %f\n", icycle, guess.vtx[0], guess.vtx[1], guess.vtx[2], guess.val ); // DBG
+    }
+
+    // fclose( pdbg ); // DBG
+
+    // Save minimum
+    minimum = guess;
+}
+
+
+bool is_bonsvtx_marked( const CableTimeHit &x ) { return x.flag_bonsvtx == 1; }
+
+CableTimeHit* bwd_taufind( CableTimeHit *ct, int ctsize, CableTimeHit *start, float width ) {
+    CableTimeHit *it = start;
+    CableTimeHit *ctendr = ct - 1;
+    while ( it != ctendr && start->tau - it->tau < width ) --it;
+    ++it;
+
+    return it;
+}
+
+CableTimeHit *fwd_taufind( CableTimeHit *ct, int ctsize, CableTimeHit *start, float width ) {
+    CableTimeHit *it = start;
+    CableTimeHit *ctend = ct + ctsize;
+    while ( it != ctend && it->tau - start->tau < width ) {
+        //printf( "%s  %d  %f\n", __func__, (int)(it - start), it->tau );  // DBG
+        ++it;
+    }
+
+    return it;
+}
+
+void surround_n10bonsvtx( CableTimeHit *ct_bonsvtx, int ctbsize, WindowBounds n10bvx, CableTimeHit *surround, int &surroundsize ) {
+    // Find 1.3 usec window centered in n10bvx
+    const float SURROUND_WIDTH_BVX = 1300.;  // Typically surround window has about 70 hits
+    WindowBounds surbnd;  // surround bounds
+    surbnd.bgn = bwd_taufind( ct_bonsvtx, ctbsize, n10bvx.bgn, SURROUND_WIDTH_BVX / 2. );
+    surbnd.end = fwd_taufind( ct_bonsvtx, ctbsize, n10bvx.bgn, SURROUND_WIDTH_BVX / 2. );
+    
+    // Copy 1.3 usec window
+    surroundsize = surbnd.end - surbnd.bgn;
+    for ( int i = 0; i < surroundsize; ++i ) surround[i] = surbnd.bgn[i];
+
+    // Mark n10bvx in surround window
+    int n10size = n10bvx.end - n10bvx.bgn;
+    int n10offset = n10bvx.bgn - surbnd.bgn;
+    for ( int i = 0; i < n10size; ++i ) {
+        surround[i + n10offset].flag_bonsvtx = 1; 
+    }
+}
+
+
+
+CableTimeHit* find_medoid( CableTimeHit *first, CableTimeHit *last ) {
+    int size = last - first;
+    int idx = ( size - 1 ) / 2;
+    return first + idx;
+}
+
+
+
+void surround_n10ntagvtx( CableTimeHit *ct_ntagvtx, int ctnsize, int n10nvx_size, CableTimeHit *surround, int &surroundsize ) {
+    // Find first and last marked
+    CableTimeHit *ctend = ct_ntagvtx + ctnsize;
+    CableTimeHit *bgnmark = find_if( ct_ntagvtx, ctend, is_bonsvtx_marked );
+    CableTimeHit *endmark = bgnmark;
+    for ( int i = 1; i < n10nvx_size; ++i ) endmark = find_if( endmark, ctend, is_bonsvtx_marked );
+
+    // Find medoid
+    CableTimeHit *medoid = find_medoid( bgnmark, endmark );
+
+    // Find bwd fwd
+    WindowBounds surbnd;
+    const float SURROUND_WIDTH_NVX = 220.;
+    surbnd.end = fwd_taufind( ct_ntagvtx, ctnsize, medoid, SURROUND_WIDTH_NVX / 2. ); 
+    surbnd.bgn = bwd_taufind( ct_ntagvtx, ctnsize, medoid, SURROUND_WIDTH_NVX / 2. );
+    
+    // Copy 220 nsec window
+    surroundsize = surbnd.end - surbnd.bgn;
+    for ( int i = 0; i < surroundsize; ++i ) surround[i] = surbnd.bgn[i];
+}
+
+
+
+void dryfind_n10( CableTimeHit *ct, int ctsize, WindowBounds *wndbnd, int &wbsize ) {
+    // Reset number of windows
+    wbsize = 0;
+
+    // Loop through event
+    CableTimeHit *eventbgn = ct;
+    CableTimeHit *eventend = ct + ctsize;
+    CableTimeHit *eventbgn_ntag = upper_bound( eventbgn, eventend, TAU_BGN_NTAG, compare_tau ); 
+    CableTimeHit *bound[2] = { eventbgn_ntag, eventbgn_ntag };
+    int n10;
+    do {
+        // Find 10 nsec window [bound0, bound1[
+        bound[1] = find_n10_end( bound[0], eventend );
+
+        // Save if necessary
+        n10 = (int)(bound[1] - bound[0]);
+        if ( N10_LO_CUT <= n10 && n10 <= N10_HI_CUT ) {
+            wndbnd[wbsize].bgn = bound[0];
+            wndbnd[wbsize].end = bound[1];
+            ++wbsize;
+        }
+
+        // DBG
+        //printf( "n10 = %d\n", n10 );
+        //for ( int i = 0; i < n10; ++i ) {
+            //printf( "%d  %d  %f\n", i, (bound[0]+i)->icabiz, (bound[0]+i)->tau );
+        //}
+
+        // Consider next hit
+        ++bound[0];
+    }
+    while ( bound[1] != eventend );
+}
+
+
+
+WindowBounds select_n10ntagvtx( CableTimeHit *ct, int ctsize, WindowBounds *wb, int wbsize ) {
+    float density[1000];
+    int nhit;
+    float time;
+    for ( int i = 0; i < wbsize; ++i ) {
+        nhit = wb[i].end - wb[i].bgn;
+        time = wb[i].bgn[nhit-1].tau - wb[i].bgn[0].tau;
+        density[i] = (float) nhit / time;
+
+        // DBG
+        //printf( "*** CAND %d ***\n", i );
+        //watch( nhit );
+        //watch( time );
+        //watch( wb[i].bgn[nhit-1].tau );
+        //watch( wb[i].bgn[0].tau );
+        //watch( density[i] );
+        //for ( int j = 0; j < wb[i].end - wb[i].bgn; ++j ) {
+        //    printf( "%d %f %c %d\n", j, wb[i].bgn[j].tau, wb[i].bgn[j].sb, wb[i].bgn[j].flag_bonsvtx );
+        //}
+    }
+
+    int idx = max_element( density, density + wbsize ) - density;
+
+    //watch( idx );  // DBG
+    return wb[idx];
+}
+
+
+
+void fvfill_N10nvx( const Window &w, int &N10nvx ) {
+    N10nvx = w.nhit;
+}
+
+
+
+void fvfill_N300nvx( CableTimeHit *ct, int ctsize, const WindowBounds &wb, int &N300nvx ) {
+    // Find N300 window
+    const float N300_TAUWIDTH = 300.;  // Typically surround window has about 70 hits
+    CableTimeHit *wb_medoid = find_medoid( wb.bgn, wb.end );  // Medoid in wb range, not in ct range
+    CableTimeHit *medoid = ct;
+    while ( abs( medoid->tau - wb_medoid->tau ) > 0.1 ) ++medoid;  // Medoid in ct range
+    WindowBounds bnd;  // surround bounds
+    bnd.bgn = bwd_taufind( ct, ctsize, medoid, N300_TAUWIDTH / 2. );
+    bnd.end = fwd_taufind( ct, ctsize, medoid, N300_TAUWIDTH / 2. );
+
+    // Computation of N300
+    N300nvx = bnd.end - bnd.bgn; 
+}
+
+
+
+void diagnose_N200nvx( CableTimeHit *ct, int ctsize, const WindowBounds &wb, int &N200nvx ) {
+    // Find N200 window
+    const float N200_TAUWIDTH = 200.;
+    CableTimeHit *wb_medoid = find_medoid( wb.bgn, wb.end );  // Medoid in wb range
+    CableTimeHit *medoid = ct;
+    while ( abs( medoid->tau - wb_medoid->tau ) > 0.1 ) ++medoid;  // Medoid in ct range
+    WindowBounds bnd;
+    bnd.bgn = bwd_taufind( ct, ctsize, medoid, N200_TAUWIDTH / 2. );
+    bnd.end = fwd_taufind( ct, ctsize, medoid, N200_TAUWIDTH / 2. );
+
+    // Computation of N200
+    N200nvx = bnd.end - bnd.bgn;
+}
+
+
+
+//---------------------------------------
+// Auxiliary functions for fvfill_Nclus
+//---------------------------------------
+float compute_angular_distance( const Hit &x, const Hit &y ) {
+    float dist = 0.;
+    for ( int i = 0; i < 3; ++i ) dist += x.nvco[i] * y.nvco[i];
+    dist = acos( dist );
+
+    return dist;
+}
+
+
+
+void Window::init_distancematrix() {
+    // Upper right part of matrix
+    for ( int i = 0; i < nhit; ++i ) {
+        for ( int j = i+1; j < nhit; ++j ) {
+            dmtx[i][j] = compute_angular_distance( hit[i], hit[j] );
+        }
+    }
+
+    // Lower left part of matrix
+    for ( int i = 0; i < nhit; ++i ) {
+        for ( int j = 0; j < i; ++j ) {
+            dmtx[i][j] = dmtx[j][i];
+        }
+    }
+
+    // Diagonal
+    for ( int i = 0; i < nhit; ++i ) {
+        dmtx[i][i] = 0.;
+    }
+}
+
+
+
+void fill_adjacency_matrix( Window &w, float thr ) {
+    // Fill all
+    for ( int i = 0; i < w.nhit; ++i ) {
+        for ( int j = 0; j < w.nhit; ++j ) {
+            if ( w.dmtx[i][j] < thr ) w.amtx[i][j] = 1;
+            else w.amtx[i][j] = 0;
+        }
+    }
+
+    // Set diagonal to 0
+    for ( int i = 0; i < w.nhit; ++i ) w.amtx[i][i] = 0;
+
+    // DBG
+    /*
+    printf( "*** DISTANCE MATRIX ***\n" );
+    for ( int i = 0; i < w.nhit; ++i ) {
+        for ( int j = 0; j < w.nhit; ++j ) {
+            printf( "%4.3f  ", w.dmtx[i][j] );
+        }
+        printf( "\n" );
+    }
+    
+    printf( "*** ADJACENCY MATRIX ***\n" );
+    for ( int i = 0; i < w.nhit; ++i ) {
+        for ( int j = 0; j < w.nhit; ++j ) {
+            printf( "%d  ", w.amtx[i][j] );
+        }
+        printf( "\n" );
+    }
+    */
+
+}
+
+
+
+void BK_report_maxclique( vector<int> R, vector< vector<int> > &maxclique ) {
+    sort( R.begin(), R.end() );
+    vector< vector<int> >::iterator it;
+    it = find( maxclique.begin(), maxclique.end(), R );
+    if ( it == maxclique.end() ) maxclique.push_back( R );
+
+    // DBG
+    //printf( "BK_report_maxclique\n" );
+    //int size = R.size();
+    //for ( int i = 0; i < size; ++i ) printf( "%d  ", R[i] );
+    //printf( "\n" );
+}
+
+
+
+void BK_set_neighbour( Window &w, int v, vector<int> &N ) {
+    N.resize( 0 );
+    for ( int i = 0; i < w.nhit; ++i ) {
+        if ( w.amtx[v][i] == 1 ) N.push_back( i );
+    }
+}
+
+
+
+void BK_prepare_R2( const vector<int> &R, int v, vector<int> &R2 ) {
+    R2 = R;
+    R2.push_back( v );
+    sort( R2.begin(), R2.end() );
+}
+
+
+
+void BK_prepare_P2( const vector<int> &P, const vector<int> &N, vector<int> &P2 ) {
+    vector<int>::iterator it;
+    P2.resize( min( P.size(), N.size() ) );
+    it = set_intersection( P.begin(), P.end(), N.begin(), N.end(), P2.begin() );
+    P2.resize( it - P2.begin() );
+}
+
+
+
+void BK_prepare_X2( const vector<int> &X, const vector<int> &N, vector<int> &X2 ) {
+    vector<int>::iterator it;
+    X2.resize( min( X.size(), N.size() ) );
+    it = set_intersection( X.begin(), X.end(), N.begin(), N.end(), X2.begin() );
+    X2.resize( it - X2.begin() );
+}
+
+
+
+void print_vector( const vector<int> &x ) {
+    int size = x.size();
+    for ( int i = 0; i < size; ++i ) printf( "%d  ", x[i] );
+    printf( "\n" );
+}
+
+
+
+void BronKerbosch( Window &w, vector<int> R, vector<int> P, vector<int> X, vector< vector<int> > &maxclique ) {
+    //printf( "BronKerbosch\n" );  // DBG
+    if ( P.empty() && X.empty() ) {
+        BK_report_maxclique( R, maxclique );
+        return;
+    }
+    
+    int Psize = P.size();
+    int v;
+    vector<int> N, R2, P2, X2;
+    for ( int i = Psize-1; i >= 0; --i ) {
+        v = P.back();
+        //watch( v );
+        BK_set_neighbour( w, v, N );
+
+        BK_prepare_R2( R, v, R2 );
+        BK_prepare_P2( P, N, P2 ); 
+        BK_prepare_X2( X, N, X2 );
+        BronKerbosch( w, R2, P2, X2, maxclique );
+
+        P.pop_back();
+        X.push_back( v );
+        sort( X.begin(), X.end() );
+    }
+}
+
+
+
+// Returns value of Binomial Coefficient C(n, k)  
+int binomial_coefficient( int n, int k ) {  
+    int res = 1;  
+     
+    // Since C(n, k) = C(n, n-k)  
+    if ( k > n - k )  
+        k = n - k;  
+                        
+    // Calculate value of  
+    // [n * (n-1) *---* (n-k+1)] / [k * (k-1) *----* 1]  
+    for ( int i = 0; i < k; ++i ) {  
+        res *= (n - i);  
+        res /= (i + 1);  
+    }  
+                                                               
+    return res;  
+}  
+
+
+
+// Nclus = number of cliques having cluster_verteces verteces
+// Adjacency matrix filled with relation (distance[i][j] <= angular_threshold)
+void fvfill_Nclus( Window &w, float angular_threshold, int cliqueminsize, int &Nclus ) {
+    watch( __func__ );
+    watch( w.nhit );
+    // Fill adjacency matrix
+    int amtx[100][100];
+    fill_adjacency_matrix( w, angular_threshold );
+
+    // Preapre sets of vertices for BronKerbosch algorithm
+    vector<int> R, X;
+    vector<int> P( w.nhit );
+    for ( int i = 0; i < w.nhit; ++i ) P[i] = i;
+    
+    // Run BronKerbosch algorithm (find all maximal cliques)
+    vector< vector<int> > maxclique;
+    BronKerbosch( w, R, P, X, maxclique );
+    
+    // Compute number of hits involved in cliques having at least cliqueminsize vertices
+    int nmaxclique = maxclique.size();
+    int cliquesize;
+    set<int> bufset;
+    Nclus = 0;
+    for ( int i = 0; i < nmaxclique; ++i ) {
+        cliquesize = maxclique[i].size();
+        if ( cliquesize >= cliqueminsize ) {
+            bufset.insert( maxclique[i].begin(), maxclique[i].end() );
+        }
+
+        // DBG
+        //printf( "CLIQUE NUMBER %d:   ", i );
+        //for ( int j = 0; j < cliquesize; ++j ) printf ( "%d  ", maxclique[i][j] );
+        //printf( "\n" );
+        //watch( bufset.size() );
+    }
+
+    Nclus = bufset.size();
+}
+
+
+
+void fvfill_Nclus_3clique( Window &w, float angular_threshold, int &Nclus ) {
+    // Fill adjacency matrix
+    fill_adjacency_matrix( w, angular_threshold );
+
+    // Take all combinations
+    set<int> bufset;
+    Nclus = 0;
+    for ( int i = 0; i < w.nhit-2; ++i ) {
+        for ( int j = i+1; j < w.nhit-1; ++j ) {
+            for ( int k = j+1; k < w.nhit; ++k ) {
+                if ( w.amtx[i][j] == 1 && w.amtx[j][k] == 1 && w.amtx[i][k] == 1 ) {  // is clique!!
+                    bufset.insert( i );
+                    bufset.insert( j );
+                    bufset.insert( k );
+                }
+            }
+        }
+    }
+
+    Nclus = bufset.size();
+}
+
+
+
+Int_t Feature2p2Gamma::computeNClusters(const vector<TVector3>& hv,
+                             	   		Int_t N10n,
+							 	   		Int_t ncth,
+							 	   		Float_t thr)
+void fvfill_Nclus_akutsu( const Window &w, int ncth, float thr ) {
+    // Search cluster.
+    int   index[w.nhit],
+		  flag[w.nhit],
+    	  nc,
+		  nc_m,
+		  ncut	=0;
+
+	for ( int i = 0; i < w.nhit; ++i ) flag[i] = 0;
+	float v1[3], v2[3];
+    for ( int i = 0; i < w.nhit; ++i ) {
+        if( flag[i] != 0 ) continue;  // skip hits that are already in clusters 
+        for( int j = 0; j < w.nhit; ++j ) index[j] = 0;
+
+        index[i] = 1; // first hit in a cluster
+        nc_m=0;
+        while( 1 ) {
+            for( int j = 0; j < w.nhit; ++j ) {
+                v1[0] = w.hit[j].co[0];
+                v1[1] = w.hit[j].co[1];
+                v1[2] = w.hit[j].co[2];
+                v1[1] = v1[2] = 0.;
+				v1=hv[j];
+                if( flag[j]!=0 ) continue; // skip hits that are already in clusters 
+                // scan index
+                for(Int_t k=0; k<N10n; k++)
+				{
+                    if( k==j )			continue;       // do not compute angle to itself
+                    if( index[k]==0 ) 	continue;		// skip non-candidate hit
+
+					v2.SetXYZ(0.,0.,0.);
+					v2=hv[k];	
+                    Float_t dalpha=0.;
+					dalpha=v1.Dot( v2 );
+                    if ( dalpha>thr ) index[j] = 1;
+                }
+            }
+
+            // count hits in cluster
+            nc=0;
+            for(Int_t j=0; j<N10n; j++)
+			{
+                if( index[j]==1 ) nc++;
+            }
+            if( nc>nc_m ) nc_m=nc;
+            else break; // no more hits belong to this cluster, stop
+        }
+
+		// this is a cluster
+        if( nc_m>=ncth )
+		{ 
+            for(Int_t j=0; j<N10n; j++)
+			{
+                if( index[j]==1 )
+				{
+                    ncut ++;
+                    flag[j]=ncut;
+                }
+            }
+        }
+    }
+    return ncut;
+}
+
+
+
+//-------------------------------------------
+// Auxiliary functions for fvfill_cang_stat
+//-------------------------------------------
+TH1F* llrca_pdf[2][10];
+
+float compute_cang_3points( const Hit &A, const Hit &B, const Hit &C ) {
+    // Compute distances among hits
+    double a2, b2, c2;
+    a2 = b2 = c2 = 0.;
+    for ( int i = 0; i < 3; ++i ) {
+        a2 += ( C.nvco[i] - B.nvco[i] ) * ( C.nvco[i] - B.nvco[i] );
+        b2 += ( A.nvco[i] - C.nvco[i] ) * ( A.nvco[i] - C.nvco[i] );
+        c2 += ( B.nvco[i] - A.nvco[i] ) * ( B.nvco[i] - A.nvco[i] );
+    }
+
+    // Compute radius of the circumcenter of the triangle
+    double num, den, radius;
+    num = den = radius = 0.;
+    num = sqrt(a2)*sqrt(b2)*sqrt(c2);
+    den += 2.*a2*b2 + 2.*a2*c2 + 2.*b2*c2;
+    den -= a2*a2 + b2*b2 + c2*c2;
+    den = sqrt( den );
+    radius = num / den;
+
+    // Compute cherenkov angle
+    if ( radius <= -1.1 || radius >= 1.1 ) {
+        cerr << " ---> ERROR in function " << __func__ << ", radius out of range" << '\n';
+        exit( EXIT_FAILURE );
+    }
+    else if ( -1.1 < radius && radius < -1. ) radius = -1.;  // Small truncations supposed, correct
+    else if ( 1. < radius && radius < 1.1 ) radius = +1.;  // Small truncation supposed, correct
+    double cang = asin( radius );
+    const double RAD2DEG = 180. / TMath::Pi();
+
+    return (float) (cang * RAD2DEG);
+}
+
+
+
+void fvfill_llrca( const Window &w, float &llrca, float &nllrca ) {
+    // Fill Cherenkov angle array
+    float cang[19600];
+    float wannabe_cang;
+    int cntgood = 0, cntnan = 0;
+    for ( int i = 0; i < w.nhit-2; ++i ) {
+        for ( int j = i+1; j < w.nhit-1; ++j ) {
+            for ( int k = j+1; k < w.nhit; ++k ) {
+                wannabe_cang = compute_cang_3points( w.hit[i], w.hit[j], w.hit[k] );
+                //watch( wannabe_cang );
+                if ( isfinite( wannabe_cang ) ) {
+                    cang[cntgood] = wannabe_cang;
+                    ++cntgood;
+                }
+                else {
+                    ++cntnan;
+                }
+            }
+        }
+    }
+    //watch( cntgood );
+    //watch( cntnan );
+
+    // Compute llrca
+    int type;
+    type = w.nhit - 7;
+    if ( type < 0 ) type = 0;
+    if ( type > 9 ) type = 9;
+
+    int bkgbin, sigbin;
+    long double bkgprob, sigprob, bkgloglik, sigloglik;
+    bkgloglik = sigloglik = 0.;
+    for ( int i = 0; i < cntgood; ++i ) {
+        bkgbin = llrca_pdf[0][type]->GetXaxis()->FindBin( cang[i] );
+        sigbin = llrca_pdf[1][type]->GetXaxis()->FindBin( cang[i] );
+        bkgprob = llrca_pdf[0][type]->GetBinContent( bkgbin );
+        sigprob = llrca_pdf[1][type]->GetBinContent( sigbin );
+        bkgloglik += log( bkgprob );
+        sigloglik += log( sigprob );
+    }
+    llrca = bkgloglik - sigloglik;
+    nllrca = ( bkgloglik - sigloglik ) / ( bkgloglik + sigloglik );
+    
+    // DBG
+    //watch( __func__ );
+    //watch( w.nhit );
+    //watch( type );
+    //watch( llrca );
+}
+
+
+
+void fvfill_cang_stat( const Window &w, float &cangmean, float &cangstddev, float &cangskew, float &cangkurt, int &cangcntnan ) {
+    // Fill Cherenkov angle array
+    float cang[19600];
+    float wannabe_cang;
+    int cntgood = 0, cntnan = 0;
+    for ( int i = 0; i < w.nhit-2; ++i ) {
+        for ( int j = i+1; j < w.nhit-1; ++j ) {
+            for ( int k = j+1; k < w.nhit; ++k ) {
+                wannabe_cang = compute_cang_3points( w.hit[i], w.hit[j], w.hit[k] );
+                //watch( wannabe_cang );
+                if ( isfinite( wannabe_cang ) ) {
+                    cang[cntgood] = wannabe_cang;
+                    ++cntgood;
+                }
+                else {
+                    ++cntnan;
+                }
+            }
+        }
+    }
+    //watch( cntgood );
+    //watch( cntnan );
+
+    // Compute mean, standard deviation, skewness, and kurtosis
+    cangmean = 0.;
+    for ( int i = 0; i < cntgood; ++i ) {
+        cangmean += cang[i] / (float) cntgood;
+    }
+
+    cangstddev = 0.;
+    for ( int i = 0; i < cntgood; ++i ) {
+        cangstddev += ( cang[i] - cangmean ) * ( cang[i] - cangmean ) / (float) cntgood;
+    }
+    cangstddev = sqrt( cangstddev );
+
+    float residue;
+    cangskew = 0.;
+    cangkurt = 0.;
+    for ( int i = 0; i < cntgood; ++i ) {
+        residue = ( cang[i] - cangmean ) / cangstddev;
+        cangskew += residue*residue*residue;
+        cangkurt += residue*residue*residue*residue;
+    }
+    cangskew /= (float) cntgood;
+    cangkurt /= (float) cntgood;
+}
+
+
+
+//--------------------------------------
+// Auxiliary functions for fvfill_beta
+//--------------------------------------
+TF1 *legendre1, *legendre2, *legendre3, *legendre4, *legendre5;
+
+float beta_compute_cos( const Hit &A, const Hit &B ) {
+    float res = 0.;
+    for ( int i = 0; i < 3; ++i ) {
+        res += A.nvco[i] * B.nvco[i];
+    }
+
+    if ( res <= -1.1 || res >= 1.1 ) {
+        cerr << " ---> ERROR in function " << __func__ << ", cosine out of range" << '\n';
+        exit( EXIT_FAILURE );
+    }
+    else if ( -1.1 < res && res < -1. ) res = -1.;  // Correct for truncations
+    else if ( 1. < res && res < 1.1 ) res = 1.;  // Correct for truncations
+
+    return res;
+}
+
+
+
+void fvfill_beta( const Window &w, float *beta ) {
+    // Compute array of cosines
+    int cnt = 0;
+    float cosvec[1225];
+    for ( int i = 0; i < w.nhit-1; ++i ) {
+        for ( int j = i+1; j < w.nhit; ++j ) {
+            cosvec[cnt] = beta_compute_cos( w.hit[i], w.hit[j] ); 
+            //watch( cosvec[cnt] );
+            ++cnt;
+        }
+    }
+    //watch( cnt );
+
+    // Compute un-normalized betas
+    beta[0] = beta[1] = beta[2] = beta[3] = beta[4] = 0.;
+    for ( int i = 0; i < cnt; ++i ) {
+        beta[0] += legendre1->Eval( cosvec[i] ); 
+        beta[1] += legendre2->Eval( cosvec[i] );
+        beta[2] += legendre3->Eval( cosvec[i] );
+        beta[3] += legendre4->Eval( cosvec[i] );
+        beta[4] += legendre5->Eval( cosvec[i] );
+    }
+   
+    // Normalize betas
+    float norm = 2.;
+    norm /= (float)w.nhit * ( (float)w.nhit - 1. ); 
+    for ( int b = 0; b < 5; ++b ) beta[b] *= norm;
+    
+    // DBG
+    //watch( beta[0] );
+    //watch( beta[1] );
+    //watch( beta[2] );
+    //watch( beta[3] );
+    //watch( beta[4] );
+}
+
+
+
+//-------------------------------------------
+// Auxiliary functions for fvfill_accepave
+//-------------------------------------------
+long double get_effcos( long double costh ) {
+    // Cal effective cos theta 
+    // See also: /skofl/src/sklib/coseffsk.F
+    long double effc=0.;
+    effc    +=0.205349;
+    effc    +=0.523981*costh;
+    effc    +=0.389951*costh*costh;
+    effc    -=0.131959*costh*costh*costh;
+
+    return effc;
+}
+
+
+
+float compute_acptweight_akutsu( const float *vtx, const float *pmt ) {
+    //-----------------
+    // Akutsu version
+    //-----------------
+    float R = 0.;
+    for ( int i = 0; i < 3; ++i ) R += ( pmt[i] - vtx[i] ) * ( pmt[i] - vtx[i] );
+    R = sqrt( R );
+    if ( R == 0. ) R = 0.1;
+    
+    // Barrel
+    float costh = 0.;
+    float rho = 0.;
+    if ( pmt[2] > -1800. && pmt[2] < 1800. ) {
+        costh += pmt[0] * ( pmt[0] - vtx[0] );
+        costh += pmt[1] * ( pmt[1] - vtx[1] );
+        rho = 0.;
+        rho += pmt[0] * pmt[0];
+        rho += pmt[1] * pmt[1];
+        rho = sqrt( rho );
+        costh /= rho;
+        costh /= R;
+    }
+
+    // Top / Bottom
+    else {
+        costh = pmt[2] - vtx[2];
+        costh /= R;
+    }
+    
+    // Top / Barrel / Bottom
+    costh = abs( costh );
+    
+    return costh;
+}
+
+
+
+long double compute_acptweight( const float *vtx_, const float *pmt_ ) {
+    //----------------
+    // Fabio version
+    //----------------
+    long double vtx[3];
+    long double pmt[3];
+    vtx[0] = vtx_[0];
+    vtx[1] = vtx_[1];
+    vtx[2] = vtx_[2];
+    pmt[0] = pmt_[0];
+    pmt[1] = pmt_[1];
+    pmt[2] = pmt_[2];
+    
+    // Photon vector seen by PMT
+    long double vec[3];
+    for ( int i = 0; i < 3; ++i ) vec[i] = vtx[i] - pmt[i];
+    long double vecnorm = sqrt( vec[0]*vec[0] + vec[1]*vec[1] + vec[2]*vec[2] );
+    if ( vecnorm == 0.  ) {
+        cerr << " ---> ERROR in function " << __func__ << ": vecnorm is 0!!! EXITING PROGRAM" << endl;
+        exit( EXIT_FAILURE );
+    }
+
+    // Vector orthogonal to PMT
+    long double orthpmt[3];
+    if ( pmt[2] < 1800. && pmt[2] > -1800. ) {  // Barrel
+        orthpmt[0] = -pmt[0];
+        orthpmt[1] = -pmt[1];
+        orthpmt[2] = 0.;
+    }
+    else {  // Top or Bottom
+        orthpmt[0] = 0.;
+        orthpmt[1] = 0.;
+        orthpmt[2] = -pmt[2];
+    }
+    long double orthpmtnorm = sqrt( orthpmt[0]*orthpmt[0] + orthpmt[1]*orthpmt[1] + orthpmt[2]*orthpmt[2] );
+
+    // Cosine of photon incidence angle
+    long double costh = ( vec[0]*orthpmt[0] + vec[1]*orthpmt[1] + vec[2]*orthpmt[2] ) / ( orthpmtnorm * vecnorm );
+    if ( 0. <= costh && costh <= 1. ) {}  // Do nothing: cosine is fine
+    else if ( -0.1 < costh && costh < 0. ) costh = 0.;  // Round error supposed: correct
+    else if ( costh <= -0.1 ) {
+        cerr << " ---> ERROR in function " << __func__ << " strange cosine, EXITING PROGRAM" << endl;
+        exit( EXIT_FAILURE );
+    }
+    else if ( 1. < costh && costh < 1.1 ) costh = 1.;  // Round error supposed: correct
+    else if ( 1.1 <= costh ) {
+        cerr << " ---> ERROR in function " << __func__ << " strange cosine, EXITING PROGRAM" << endl;
+        exit( EXIT_FAILURE );
+    }
+
+    // Efficient cosine
+    long double effc = get_effcos( costh );
+
+    // Weight
+    const long double WT_ATT_LEN = 13757.; 
+    long double weight = effc * exp( -vecnorm / WT_ATT_LEN ) / vecnorm / vecnorm;
+
+    // DBG BGN
+    if ( weight == INFINITY ) {
+        watch( costh );
+        watch( effc );
+        watch( weight );
+
+        exit( 1 );
+    }
+    // DBG END
+    if ( weight < 1e-100 ) weight = 1e-100;
+    return weight;
+}
+
+
+
+void fvfill_accepave( const Window &w, float &accepave ) {
+    // Fill weights
+    // Remember geopmt_.xyzpm[0-11145] refers to PMT with cable number [1-11146]
+    long double weight[MAXPM];
+    for ( int icab = 0; icab < MAXPM; ++icab ) {
+        weight[icab] = compute_acptweight( w.vtx, geopmt_.xyzpm[icab] );
+    }
+
+    // Normalize weights by dividing for biggest weight
+    long double maxweight = *max_element( weight, weight + MAXPM );
+    for ( int i = 0; i < MAXPM; ++i ) weight[i] /= maxweight;
+
+    // Find sum of weights
+    long double sumweight = 0.;
+    for ( int i = 0; i < MAXPM; ++i ) sumweight += weight[i];
+
+    // Acceptance
+    long double acpa = 0.;
+    int icab;
+    for ( int i = 0; i < w.nhit; ++i ) {
+        icab = w.hit[i].cable - 1;
+        acpa -= log10( weight[icab] / sumweight );
+    }
+
+    acpa /= (long double) w.nhit;
+    accepave = acpa;
+    //watch( accepave );
+     
+    //if ( fpclassify( accepave ) == FP_NAN || fpclassify( accepave ) == FP_INFINITE ) {
+    /*if ( 1 ) {
+        watch( w.nhit );
+        watch( accepave );
+        watch( sumweight );
+        watch( maxweight );
+
+        watch( w.vtx[0] );
+        watch( w.vtx[1] );
+        watch( w.vtx[2] );
+
+        for ( int i = 0; i < w.nhit; ++i ) {
+            watch( w.hit[i].cable-1 );
+            watch( weight[w.hit[i].cable-1] );
+            watch( weight[w.hit[i].cable-1] / sumweight );
+            watch( log10( weight[w.hit[i].cable-1] / sumweight ) );
+        }
+        //exit(1);
+    }
+    */
+}
+
+
+
+void fvfill_mintaurms6( const Window &w, float &mintaurms6 ) {
+    //watch( w.nhit );  // DBG
+    float mean, rms;
+    int idx[6];
+    mintaurms6 = +9999.;
+    // Loop over combinations
+    for ( int i = 0; i < w.nhit-5; ++i ) {
+        idx[0] = i;
+        for ( int j = i+1; j < w.nhit-4; ++j ) {
+            idx[1] = j;
+            for ( int k = j+1; k < w.nhit-3; ++k ) {
+                idx[2] = k;
+                for ( int l = k+1; l < w.nhit-2; ++l ) {
+                    idx[3] = l;
+                    for ( int m = l+1; m < w.nhit-1; ++m ) {
+                        idx[4] = m;
+                        for ( int n = m+1; n < w.nhit; ++n ) {
+                            idx[5] = n;
+                            mean = 0.;
+                            for ( int t = 0; t < 6; ++t ) {
+                                //printf( "%2d  ", idx[t] );  // DBG
+                                //watch( w.hit[idx[t]].stau );  // DBG
+                                mean += w.hit[idx[t]].stau;
+                            }
+                            //printf( "\n" );  // DBG
+                            mean /= 6.;
+                            
+                            rms = 0.;
+                            for ( int t = 0; t < 6; ++t ) {
+                                rms += ( w.hit[idx[t]].stau - mean ) * ( w.hit[idx[t]].stau - mean );
+                            }
+                            rms = sqrt( rms / 6. );
+                            //watch( rms );  // DBG
+                            
+                            if ( rms < mintaurms6 ) mintaurms6 = rms;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    //watch( mintaurms6 );
+}
+
+
+
+void fvfill_ndwall( const Window &w, float &ndwall ) {
+    float rho = sqrt( w.vtx[0]*w.vtx[0] + w.vtx[1]*w.vtx[1] );
+    float dR = TANKR - rho;
+    float dZ = TANKZ - abs( w.vtx[2] );
+
+    ndwall = min( dR, dZ );
+}
+
+
+
+//-----------------------------------------
+// Auxiliary functions for fvfill_ntowall
+//-----------------------------------------
+
+// par[2]*x*x + par[1]*x + par[0] = 0
+// + = sol[0],   - = sol[1]
+void secondgradeeq_solver( float *par, float *sol ) {
+    float discr = sqrt( par[1]*par[1] - 4.*par[2]*par[0] );
+    sol[0] = ( -par[1] + discr ) / ( 2.*par[2] );
+    sol[1] = ( -par[1] - discr ) / ( 2.*par[2] );
+}
+
+
+// DIR must be already normalized
+float elementary_towall( const float *vtx, const float *dir ) {
+    // Compute time to reach cylinder radially
+    float tR, par[3], sol[2];
+    if ( dir[0] == 0. && dir[1] == 0. ) tR = INFINITY;  // Purely longitudinal
+    else {
+        par[0] = vtx[0]*vtx[0] + vtx[1]*vtx[1] - TANKR*TANKR;
+        par[1] = 2.*vtx[0]*dir[0] + 2.*vtx[1]*dir[1];
+        par[2] = dir[0]*dir[0] + dir[1]*dir[1];
+        secondgradeeq_solver( par, sol );
+        tR = sol[0];  // VERIFIED to be > 0, which is what I want
+    }
+
+    // Compute time to reach cylinder longitudinally
+    float tZ, signZ;
+    if ( dir[2] == 0. ) tZ = INFINITY;  // Purely radial
+    else {
+        signZ = dir[2] / abs( dir[2] );
+        tZ = ( signZ*TANKZ - vtx[2] ) / dir[2];
+    }
+
+    // Choose shortest time
+    return min( tR, tZ );
+}
+
+
+
+void fvfill_ntowall( const Window &w, float &ntowall ) {
+    ntowall = elementary_towall( w.vtx, w.spheremean );
+}
+
+
+
+void fvfill_distancevector( const Window &w, float *distancevector ) {
+    // Take distances from spheremean for all hits
+    float buf[100];
+    for ( int i = 0; i < w.nhit; ++i ) {
+        buf[i] = w.hit[i].spheremean_dist;
+    }
+
+    // Sort in increasing order in distances
+    sort( buf, buf + w.nhit );
+
+    // Fill the distance vector
+    for ( int i = 0; i < 7; ++i ) {
+        distancevector[i] = buf[i];
+    }
+}
+
+
+
+void fvfill_distance_stat( const Window &w, float &dmean, float &drms, float &ddiff ) {
+    //for ( int i = 0; i < w.nhit; ++i ) printf( "%d  %f\n", i, w.hit[i].spheremean_dist );  // DBG
+
+    dmean = 0.;
+    for ( int i = 0; i < w.nhit; ++i ) dmean += w.hit[i].spheremean_dist;
+    dmean /= (float) w.nhit;
+
+    drms = 0.;
+    for ( int i = 0; i < w.nhit; ++i ) drms += ( w.hit[i].spheremean_dist - dmean ) * ( w.hit[i].spheremean_dist - dmean );
+    drms /= (float) w.nhit;
+    drms = sqrt( drms );
+    
+    float dmax = max_element( w.hit, w.hit + w.nhit, spheremean_dist_compare )->spheremean_dist;
+    float dmin = min_element( w.hit, w.hit + w.nhit, spheremean_dist_compare )->spheremean_dist;
+    ddiff = dmax - dmin;
+
+    // DBG
+    //watch( dmean );
+    //watch( drms );
+    //watch( ddiff );
+    //watch( dmax );
+    //watch( dmin );
+}
+
+
+
+void fvfill_stau( const Window &w, float *stau ) {
+    for ( int i = 0; i < 7; ++i ) {
+        stau[i] = w.hit[i].stau;
+    }
+}
+
+
+
+void fvfill_staugeom( const Window &w, float *staugeom ) {
+    Hit buf[100];
+    for ( int i = 0; i < w.nhit; ++i ) buf[i] = w.hit[i]; 
+    sort( buf, buf + w.nhit, spheremean_dist_compare );
+
+    for ( int i = 0; i < 7; ++i ) staugeom[i] = buf[i].stau;
+}
+
+
+
+void fvfill_init() {
+    // For betas
+    gSystem->Load( "libMathMore" );
+
+    legendre1 = new TF1( "legendre1", "ROOT::Math::legendre([0],x)", -1., 1. );
+    legendre2 = new TF1( "legendre2", "ROOT::Math::legendre([0],x)", -1., 1. );
+    legendre3 = new TF1( "legendre3", "ROOT::Math::legendre([0],x)", -1., 1. );
+    legendre4 = new TF1( "legendre4", "ROOT::Math::legendre([0],x)", -1., 1. );
+    legendre5 = new TF1( "legendre5", "ROOT::Math::legendre([0],x)", -1., 1. );
+    
+    legendre1->SetParameters( 1, 0.0 );
+    legendre2->SetParameters( 2, 0.0 );
+    legendre3->SetParameters( 3, 0.0 );
+    legendre4->SetParameters( 4, 0.0 );
+    legendre5->SetParameters( 5, 0.0 );
+
+    // For llrca
+    TFile *ifile = new TFile( "/disk02/usr6/fiacob/ntag/prm/cangpdf/pdf/cangpdf.hntagRBNR_6us.root" );
+    if ( ifile->IsZombie() ) {
+        cerr << " ---> ERROR in function " << __func__ << ": " << ifile << " not found" << endl;
+        exit( EXIT_FAILURE );
+    }
+
+    string hname[2][10];
+    hname[0][0] = "hcangPDF_bkg_n10nle07"; hname[1][0] = "hcangPDF_mcn_n10nle07";
+    hname[0][1] = "hcangPDF_bkg_n10neq08"; hname[1][1] = "hcangPDF_mcn_n10neq08";
+    hname[0][2] = "hcangPDF_bkg_n10neq09"; hname[1][2] = "hcangPDF_mcn_n10neq09";
+    hname[0][3] = "hcangPDF_bkg_n10neq10"; hname[1][3] = "hcangPDF_mcn_n10neq10";
+    hname[0][4] = "hcangPDF_bkg_n10neq11"; hname[1][4] = "hcangPDF_mcn_n10neq11";
+    hname[0][5] = "hcangPDF_bkg_n10neq12"; hname[1][5] = "hcangPDF_mcn_n10neq12";
+    hname[0][6] = "hcangPDF_bkg_n10neq13"; hname[1][6] = "hcangPDF_mcn_n10neq13";
+    hname[0][7] = "hcangPDF_bkg_n10neq14"; hname[1][7] = "hcangPDF_mcn_n10neq14";
+    hname[0][8] = "hcangPDF_bkg_n10neq15"; hname[1][8] = "hcangPDF_mcn_n10neq15";
+    hname[0][9] = "hcangPDF_bkg_n10nge16"; hname[1][9] = "hcangPDF_mcn_n10nge16";
+    TH1F *bufb, *bufs;
+    for ( int i = 0; i < 10; ++i ) {
+        ifile->GetObject( hname[0][i].c_str(), bufb );
+        ifile->GetObject( hname[1][i].c_str(), bufs );
+        llrca_pdf[0][i] = new TH1F( *bufb );
+        llrca_pdf[1][i] = new TH1F( *bufs );
+        llrca_pdf[0][i]->SetDirectory( 0 );
+        llrca_pdf[1][i]->SetDirectory( 0 );
+        cout << llrca_pdf[0][i]->GetName() << " loaded correctly" << endl;
+        cout << llrca_pdf[1][i]->GetName() << " loaded correctly" << endl;
+    }
+
+    ifile->Close();
+    delete ifile;
+}
+
+
+
+void fvfill_end() {
+    delete legendre1;
+    delete legendre2;
+    delete legendre3;
+    delete legendre4;
+    delete legendre5;
+    
+    for ( int i = 0; i < 2; ++i ) {
+        for ( int j = 0; j < 10; ++j ) {
+            delete llrca_pdf[i][j];
+        }
+    }
+}
+
+
+
+void fvfill_sbvec( const Window &w, char *sbvec, int &nsig, int &nbkg ) {
+    nsig = 0;
+    nbkg = 0;
+    for ( int i = 0; i < w.nhit; ++i ) {
+        if ( w.hit[i].sb == 's' ) {
+            ++nsig;
+            sbvec[i] = 's';
+        }
+        else if ( w.hit[i].sb == 'b' ) {
+            ++nbkg;
+            sbvec[i] = 'b';
+        }
+        /*
+         * SBI 8jul2019
+        else if ( w.hit[i].sb == 'S' || w.hit[i].sb == 'B' ) {
+            cout << " ---> ERROR in function " << __func__ << ": unmasked hit found" << endl;
+            exit( EXIT_FAILURE );
+        }
+        else {
+            cout << " ---> ERROR in function " << __func__ << ": non-sense hit found" << endl; 
+            exit( EXIT_FAILURE );
+        }
+        */
+    } 
+}
+
+
+void strong_number_check( float x, string varname ) {
+    // Associate word in any case
+    int sw = fpclassify( x );
+    string wrd;
+    switch( sw ) {
+        case FP_INFINITE : wrd = "FP_INFINITE" ; break;
+        case FP_NAN      : wrd = "FP_NAN"      ; break;
+        case FP_ZERO     : wrd = "FP_ZERO"     ; break;
+        case FP_SUBNORMAL: wrd = "FP_SUBNORMAL"; break;
+        default          : wrd = "OK"          ; break;
+    }
+
+    // Exit only if necessary
+    if ( sw == FP_INFINITE || sw == FP_NAN || sw == FP_SUBNORMAL ) {
+        cout << " ---> ERROR in function " << __func__ << endl;
+        cout << " ---> Variable " << varname << " has value " << x << " which is classified as " << wrd << endl;
+        cout << " ---> EXITING PROGRAM" << endl;
+        exit( EXIT_FAILURE );
+    }
+}
+
+
+
+bool fvcheck_pmtcable( const Window &w ) {
+    for ( int i = 0; i < w.nhit; ++i ) {
+        if ( w.hit[i].cable < 1 || 11146 < w.hit[i].cable ) return true;
+    }
+
+    return false; 
+}
+
+
+
+// Return value:
+// 0 == Processed normally, feature vector filled correctly
+// 1 == Process stopped, report a false positive to NtupleMaker
+int fill_feature_vector( CableTimeHit *ct_bonsvtx, int ctsize, WindowBounds wb, float *bonsvtx, FeatureVector &fv ) {
+    // Fill the window structure
+    Window wnd;
+    wnd.init( wb.bgn, wb.end, bonsvtx );
+    if ( fvcheck_pmtcable( wnd ) ) return 1;
+
+
+    // Fill sbvec_bonsvtx and counters
+    fvfill_sbvec( wnd, fv.sbvec_bonsvtx, fv.nsig_bonsvtx, fv.nbkg_bonsvtx );
+
+    // Fitter
+    float taurms_stat[12];
+    Fitter fitter;
+    //fitter.init_vtx( wnd, vtx );  // 16 Aug 2019: Possibly useless!
+    fitter.sample_taurms( wnd, TANKR, TANKZ, 1000, taurms_stat );
+
+    // Try the swarm
+    //Swarm swarm( is_inside_sk, sk_sampler );
+    //rms::nhit = wnd.nhit;
+    //for ( int i = 0; i < wnd.nhit; ++i ) {
+    //    rms::cable[i] = wnd.hit[i].cable;
+    //    rms::t[i] = wnd.hit[i].t;
+    //}
+
+    // Steepest descent for minimization
+    //SteepestDescent sd;
+    //sd.init_dimension( 3 );
+    //sd.init_func_constr( rms::taurms, is_inside_sk );
+    //float guess_vtx[3];
+    //guess_vtx[0] = taurms_stat[8]; guess_vtx[1] = taurms_stat[9]; guess_vtx[2] = taurms_stat[10];
+    //sd.extremalize_lim( guess_vtx, 0.2, -1, 24765 );  // limit on number of step given by diagonalSK / step
+
+    // Concentric cubic fitter for minimization
+    float guess_vtx[3];
+    guess_vtx[0] = taurms_stat[8]; guess_vtx[1] = taurms_stat[9]; guess_vtx[2] = taurms_stat[10];
+    float ccf_cyclefactor = 0.5;
+    int ccf_ncycle = 4;
+    fitter.concentric_cube_fitter( wnd, guess_vtx, TANKZ * ccf_cyclefactor, ccf_ncycle, ccf_cyclefactor );
+    //fprintf( stderr, "bonsvtx = %f %f %f %f\n", bonsvtx[0], bonsvtx[1], bonsvtx[2], fitter.compute_taurms( wnd, bonsvtx ) );
+    //fprintf( stderr, "minimum = %f %f %f %f\n", fitter.minimum.vtx[0], fitter.minimum.vtx[1], fitter.minimum.vtx[2], fitter.minimum.val );  // DBG
+    //fprintf( stderr, "distance = %f\n", sqrt((fitter.minimum.vtx[0]-bonsvtx[0])*(fitter.minimum.vtx[0]-bonsvtx[0]) + (fitter.minimum.vtx[1]-bonsvtx[1])*(fitter.minimum.vtx[1]-bonsvtx[1]) + (fitter.minimum.vtx[2]-bonsvtx[2])*(fitter.minimum.vtx[2]-bonsvtx[2])) );
+
+    // ALTERNATIVE APPROACH START
+    CableTimeHit surround_bvx[MAXPM];
+    CableTimeHit surround_nvx[MAXPM];
+    int surroundsize_bvx = -1;
+    int surroundsize_nvx = -1;
+    WindowBounds candidate_wndbnd_nvx[1000];
+    int candidate_size_nvx = -1;
+    surround_n10bonsvtx( ct_bonsvtx, ctsize, wb, surround_bvx, surroundsize_bvx ); 
+    fill_sort_tau( surround_bvx, surroundsize_bvx, fitter.minimum.vtx );
+    surround_n10ntagvtx( surround_bvx, surroundsize_bvx, wb.end - wb.bgn, surround_nvx, surroundsize_nvx ); 
+    dryfind_n10( surround_nvx, surroundsize_nvx, candidate_wndbnd_nvx, candidate_size_nvx );
+    cut_n200( surround_nvx, surroundsize_nvx, candidate_wndbnd_nvx, candidate_size_nvx );
+    WindowBounds selected_wndbnd_nvx = select_n10ntagvtx( surround_nvx, surroundsize_nvx, candidate_wndbnd_nvx, candidate_size_nvx );
+
+    if ( candidate_size_nvx == 0 ) {
+        // Considered a negative, no process further
+        // Report to NtupleMaker
+        return 2;
+    }
+
+    //printf( "\n\n*** N10 WINDOW ***\n" );
+    //for ( int i = 0; i < wb.end - wb.bgn; ++i ) printf( "%d %f %c\n", i, wb.bgn[i].tau, wb.bgn[i].sb ); // DBG
+    //printf( "\n*** SURROUND_BVX WINDOW ***\n" );
+    //for ( int i = 0; i < surroundsize_bvx; ++i ) printf( "%d %f %c %d\n", i, surround_bvx[i].tau, surround_bvx[i].sb, surround_bvx[i].flag_bonsvtx );
+    //printf( "\n*** SURROUND_NVX WINDOW ***\n" );
+    //for ( int i = 0; i < surroundsize_nvx; ++i ) printf( "%d %f %c %d\n", i, surround_nvx[i].tau, surround_nvx[i].sb, surround_nvx[i].flag_bonsvtx );
+    //watch( selected_wndbnd_nvx.bgn->tau );
+    //watch( selected_wndbnd_nvx.end->tau ); 
+    //watch( selected_wndbnd_nvx.end - selected_wndbnd_nvx.bgn );
+    // ALTERNATIVE APPROACH END
+    
+    Window wndneut;
+    wndneut.init( selected_wndbnd_nvx.bgn, selected_wndbnd_nvx.end, fitter.minimum.vtx );
+    if ( fvcheck_pmtcable( wndneut ) ) return 1;
+    wndneut.init_spheremean();
+    if ( wndneut.spheremean[3] == 0. ) {
+        // Considered a negative, no process further
+        // Report to NtupleMaker
+        return 1;
+    }
+    wndneut.init_distancevector();
+    wndneut.init_distancematrix();
+    //watch( selected_wndbnd_nvx.bgn->tau );
+    //watch( selected_wndbnd_nvx.end->tau );
+    //watch( selected_wndbnd_nvx.end - selected_wndbnd_nvx.bgn );
+
+
+    //----------------------
+    // Classifer variables
+    //----------------------
+
+    // Akutsu-san (almost) variables
+    fvfill_N10nvx( wndneut, fv.N10nvx );
+    fvfill_N300nvx( surround_bvx, surroundsize_bvx, selected_wndbnd_nvx, fv.N300nvx ); 
+    float angular_threshold = 0.97;
+    int cluster_threshold = 3;
+    //fvfill_Nclus( wndneut, angular_threshold, cluster_threshold, fv.Nclus );  // Not sure is like Akutsu-san
+    fvfill_Nclus_3clique( wndneut, angular_threshold, fv.Nclus );
+    //fvfill_cang_stat( wndneut, fv.cangmean, fv.cangstddev, fv.cangskew, fv.cangkurt, fv.cangcntnan );  // Akutsu takes lig-likelihood...
+    fvfill_llrca( wndneut, fv.llrca, fv.nllrca );
+    watch( fv.llrca );
+    watch( fv.nllrca );
+    fvfill_beta( wndneut, fv.beta );
+    fvfill_accepave( wndneut, fv.accepave );
+    fv.taurms = fitter.minimum.val;
+    fvfill_mintaurms6( wndneut, fv.mintaurms6 );
+    fvfill_ndwall( wndneut, fv.ndwall );
+    fvfill_ntowall( wndneut, fv.ntowall );
+
+    // Fabio variables
+    fvfill_distancevector( wndneut, fv.d );
+    fvfill_distance_stat( wndneut, fv.dmean, fv.drms, fv.ddiff );
+    fv.spheremeannorm = wndneut.spheremean[3];
+    fv.tauwidth = wndneut.tauwidth;
+    fvfill_stau( wndneut, fv.stau );
+    fvfill_staugeom( wndneut, fv.staugeom );
+    for ( int i = 0; i < 12; ++i ) fv.taurms_stat[i] = taurms_stat[i];
+
+    // Strong number check on floating point numbers of classifier variables
+    strong_number_check( fv.llrca, "llrca" );
+    strong_number_check( fv.nllrca, "nllrca" );
+    //strong_number_check( fv.cangmean, "cangmean" );
+    //strong_number_check( fv.cangstddev, "cangstddev" );
+    //strong_number_check( fv.cangskew, "cangskew" );
+    //strong_number_check( fv.cangkurt, "cangkurt" );
+    for ( int i = 0; i < 5; ++i ) strong_number_check( fv.beta[i], "beta[" + to_string(i) + "]" );
+    strong_number_check( fv.accepave, "accepave" );
+    strong_number_check( fv.taurms, "taurms" );
+    strong_number_check( fv.mintaurms6, "mintaurms6" );
+    strong_number_check( fv.ndwall, "ndwall" );
+    strong_number_check( fv.ntowall, "ntowall" );
+    for ( int i = 0; i < 7; ++i ) strong_number_check( fv.d[i], "d[" + to_string(i) + "]" );
+    strong_number_check( fv.dmean, "dmean" );
+    strong_number_check( fv.drms, "drms" );
+    strong_number_check( fv.ddiff, "ddiff" );
+    strong_number_check( fv.spheremeannorm, "spheremeannorm" );
+    for ( int i = 0; i < 7; ++i ) strong_number_check( fv.stau[i], "stau[" + to_string(i) + "]" );
+    for ( int i = 0; i < 7; ++i ) strong_number_check( fv.staugeom[i], "staugeom[" + to_string(i) + "]" );
+    for ( int i = 0; i < 12; ++i ) strong_number_check( fv.taurms_stat[i], "taurms_stat[" + to_string(i) + "]" );
+
+
+    //----------------------
+    // Spectator variables
+    //----------------------
+    
+    // Fill ntag vertex info
+    fv.ntagvtx[0] = fitter.minimum.vtx[0];  // sd.xmin[0];
+    fv.ntagvtx[1] = fitter.minimum.vtx[1];  // sd.xmin[1];
+    fv.ntagvtx[2] = fitter.minimum.vtx[2];  // sd.xmin[2];
+    fv.ntagvtx_val = fitter.minimum.val;   // sd.funcmin;
+    fv.ntagvtx_flag = fitter.flag;
+
+    // Fill bonsai vertex info
+    for ( int i = 0; i < 3; ++i ) fv.bonsvtx[i] = bonsvtx[i];
+    fv.bonsvtx_val = fitter.compute_taurms( wnd, bonsvtx );
+
+    // Bonsai - Ntag vtx distance
+    fv.dist_bonsntagvtx = 0.;
+    for ( int i = 0; i < 3; ++i ) fv.dist_bonsntagvtx += ( fitter.minimum.vtx[i] - bonsvtx[i] )*( fitter.minimum.vtx[i] - bonsvtx[i] );
+    fv.dist_bonsntagvtx = sqrt( fv.dist_bonsntagvtx );
+    fv.diff_bonsntagvtx_val = fv.bonsvtx_val - fv.ntagvtx_val;
+
+    // Fill sbvec_ntagvtx
+    fvfill_sbvec( wndneut, fv.sbvec_ntagvtx, fv.nsig_ntagvtx, fv.nbkg_ntagvtx );
+
+    // Considered a positive
+    // Report to NtupleMaker a normally processed event
+    return 0;
+}
+
+
+
+/*
+ * Check whether a selected window is signal or background
+ * If signal returns index of secondary particle that matches (2.22 MeV gamma within 100 nsec)
+ * If background returns -1
+ *
+ * Also fills t0, trgofst, and tds, that are important times
+ * for sig / bkg decision
+*/
+int candidate_is_signal( T2KLowE &t2kle, WindowBounds wb, float &t0, float &trgofst, float &tds ) {
+    float secondary_pabs;
+    
+    // Fill trigger info
+    sort( wb.bgn, wb.end, compare_time );  // Sort by tiskz
+    t0 = wb.bgn->tiskz; 
+    trginfo_( &trgofst );
+    tds = t0 - 1000. + trgofst;
+    sort( wb.bgn, wb.end, compare_tau );  // Re-sort by tau
+    
+    // Loop on secondary particles
+    for ( int i = 0; i < t2kle.nscndprt; ++i ) {
+        
+        // Require 2.22 MeV gamma, with correct mechanism
+        secondary_pabs = (t2kle.pscnd[i][0]*t2kle.pscnd[i][0])+(t2kle.pscnd[i][1]*t2kle.pscnd[i][1])+(t2kle.pscnd[i][2]*t2kle.pscnd[i][2]);
+        secondary_pabs = sqrt( secondary_pabs );
+        if ( t2kle.iprtscnd[i] == 22 && t2kle.lmecscnd[i] == 18 && abs( secondary_pabs - 2.22 ) < 0.1 ) {
+            
+            // Require correct trigger
+           if ( abs( t2kle.tscnd[i] - tds ) < 100. ) return i;
+        }
+
+    }
+
+    return -1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
