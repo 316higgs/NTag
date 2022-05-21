@@ -247,7 +247,7 @@ int main(int argc, char **argv) {
       ntagana.GetTruthNeutrons(NTrueN, E->size(), Type, E, DWall);
 
       //need?
-      if (NTrueN==0) continue;
+      //if (NTrueN==0) continue;
 
       //Truth distance distribution
       for (UInt_t jentry=0; jentry<DistFromPV->size(); ++jentry) {

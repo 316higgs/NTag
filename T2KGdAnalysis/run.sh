@@ -23,12 +23,19 @@ NTAGDIR=/disk02/usr6/sedi/Ntag/output/w.mccomb/sk6/NNtraining
 # 7th index: -ETAG(fixed)
 # 8th index: decay-e-tagging ON/OFF
 ######
+#./analysis1Rmu.exe $FITQUNDIR/0026Gd.numu/fhc.numu.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
+#                   $NTAGDIR/noToFoption/fhc.numu.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
+#                   ./output/test.root\
+#                   ./result/test.txt\
+#                   -MCType Gd\
+#                   -ETAG OFF
+
 ./analysis1Rmu.exe $FITQUNDIR/0026Gd.numu/fhc.numu.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
-                   $NTAGDIR/noToFoption/fhc.numu.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
-                   ./output/test.root\
-                   ./result/test.txt\
+                   $NTAGDIR/tageoption/fhc.numu.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
+                   ./output/etagONtest.root\
+                   ./result/etagON.txt\
                    -MCType Gd\
-                   -ETAG OFF\
+                   -ETAG ON
 
 #./MeanMultiplicity.exe $FITQUNDIR/0026Gd.numu/fhc.numu.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
 #                       $NTAGDIR/noToFoption/fhc.numu.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
