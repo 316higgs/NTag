@@ -14,6 +14,9 @@ TH1F* h1_Enureso[INTERACTIONTYPE];
 TH1F* h1_AllEnutrue;
 TH1F* h1_AllEnureco;
 TH1F* h1_AllEnureso;
+TH1F* h1_EnuresoCCRES_deltap;
+TH1F* h1_EnuresoCCRES_deltapp;
+TH1F* h1_EnuresoCCRES_delta0;
 TH2F* h2_Reso_x_TrueEnu;
 
 //Reconstructed neutrino events as a funtion of neutrino energy

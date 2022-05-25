@@ -21,6 +21,9 @@ TH1F* h1_TotGammaE;
 //Neutrino energy resolution w/ tagged neutrons & w/o tagged neutrons
 TH1F* h1_Enureso_CCQE[2];
 TH1F* h1_Enureso_CCnonQE[2];
+TH1F* h1_Enureso_CCRES_deltap[2];
+TH1F* h1_Enureso_CCRES_deltapp[2];
+TH1F* h1_Enureso_CCRES_delta0[2];
 TH1F* h1_Enureso_NC[2];
 
 //Noise rate and efficiencies for window optimization
@@ -41,6 +44,9 @@ TGraphErrors* g_OverallHEff;
 TGraphErrors* g_OverallGdEff;
 
 TGraphErrors* g_Purity;
+
+int test1 = 0;
+int test2 = 0;
 
 int varwindowmax = 9999;
 
@@ -260,7 +266,8 @@ class NTagAnalysis {
                                 std::vector<float> *Label,
                                 bool etagmode,
                                 CC0PiNumu* numu,
-                                NeutrinoOscillation neuosc);
+                                NeutrinoOscillation neuosc,
+                                int NCUT);
 
   	bool DecayelikeChecker(bool etagmode, float NHits, float FitT);
 
@@ -278,7 +285,7 @@ class NTagAnalysis {
     //Noise rate and efficiencies for window optimization
     void SetNoiseRateGraph();
     void GetEfficiencyforWinOpt();
-    void SetEfficiencyGraph();
+    void SetEfficiencyGraph(int windowstep);
 
     //Integrated efficiencies as a function of TMVA threshold
     void GetPreEfficiency(int windowstep);

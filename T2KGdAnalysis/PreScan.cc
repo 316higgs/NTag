@@ -35,8 +35,17 @@ int main(int argc, char **argv) {
   TString MCType         = argv[6];
   TString ETAGKeyword    = argv[7];
   TString ETAG           = argv[8];
+  TString TWIDTHKeyword  = argv[9];
+  TString TWIDTH         = argv[10];
+  TString NHITSTHKeyword = argv[11];
+  TString NHITSTH        = argv[12];
+  TString WindowKeyword  = argv[13];
+  TString Window         = argv[14];
 
   CLTOptionETAG(ETAGKeyword, ETAG);
+  CLTOptionPrePara(TWIDTHKeyword, TWIDTH);
+  CLTOptionPrePara(NHITSTHKeyword, NHITSTH);
+  CLTOptionWindow(WindowKeyword, Window);
 
 
   //=========  fiTQun output (TTree: h1)  ============
@@ -198,9 +207,6 @@ int main(int argc, char **argv) {
   	//Progress meter
     if(ientry>100 && ientry%100==0) std::cout << "[### analysis1Rmu ###]  Progress: " << 100.*ientry/processmax << "%" << std::endl;
 
-    //All neutrino events
-    AllParentNeutrinos++;
-
     tchfQ       -> GetEntry(ientry);
     tchev       -> GetEntry(ientry);
     tchtaggable -> GetEntry(ientry);
@@ -226,28 +232,10 @@ int main(int argc, char **argv) {
     numu->applyfQ1RCC0PiNumuCut();
 
     const EvSelVar_t evsel = numu->getEvSelVar();
-    Sequencial1RmuonSelection(prmsel, evsel, numu, decayebox, eMode, eOsc, 20., 50., 400., false);
-
-    //Proto 1R muon selection
-    if (prmsel.ApplyProto1RmuonSelection(evsel)) {
-      GetProtoSelectedModeEvents(numu);
-    }
 
     //New 1R muon selection
     if (prmsel.Apply1RmuonSelection(evsel, numu, decayebox, eMode, eOsc, 20., 50., 400., true)) {
       GetSelectedModeEvents(numu);
-
-      //Neutrino energy distribution
-      neuosc.GetTrueEnu(numu);
-      neuosc.GetRecoEnu(numu);
-      neuosc.GetEnuResolution(numu);
-      neuosc.GetReso_x_TrueEnu(numu);
-
-      //Oscillation probability check
-      neuosc.OscProbCalculator(numu, true);
-      //Neutrino events as a funtion of reconstructed neutrino energy
-      neuosc.GetWgtNeutrino(numu);
-
 
       if (MCType=="Water" || MCType=="water") continue;
 
@@ -271,15 +259,6 @@ int main(int argc, char **argv) {
       //Check truth breakdown(H-n/Gd-n/Decay-e/Acc.Noise) of candidates in the time window
       ntagana.TruthBreakdowninWindow(TagClass, t, DWall, TagIndex, Label, FitT, TagDWall);
 
-      //Check tagged truth neutrons and mis-tagged decay-e and noise with respect to window and threshold.
-      ntagana.GetNlikeCandidatesinWindow(t, DWall, TagIndex, etagmode, NHits, FitT, TagOut, Label, TagDWall);
-
-      //Check tagged truth decay-e and mis-tagged neutrons and noise with respect to window and threshold.
-      ntagana.GetElikeCandidatesinWindow(t, TagIndex, etagmode, NHits, FitT, TagOut, Label);
-
-      //Check neutrino events with tagged neutrons
-      ntagana.GetNeutrinoEventswNTag(TagOut, TagIndex, NHits, FitT, Label, etagmode, numu, neuosc, 11);
-
 
       //Pre-selection
       for (UInt_t jentry=0; jentry<TagOut->size(); ++jentry) {
@@ -296,106 +275,25 @@ int main(int argc, char **argv) {
         }
       }
 
-
-      //Threshold scan
-      for (int ith=0; ith<CUTSTEP; ith++) {
-        
-        //Threshold
-        if (CUTSTEP==11) TMVATH[ith] = 0.1*ith;
-        if (CUTSTEP==21) TMVATH[ith] = 0.05*ith;
-
-        //Candidates loop
-        for (UInt_t jentry=0; jentry<TagOut->size(); ++jentry) {
-          //Truth Gd-n or H-n captures
-          if (Label->at(jentry)==2 || Label->at(jentry)==3) {
-
-            if (etagmode) {
-              //Focus on neutron-like candidates(e-tagging ON)
-              if (TagOut->at(jentry)>TMVATH[ith] && ntagana.DecayelikeChecker(etagmode, NHits->at(jentry), FitT->at(jentry))==false) {
-                //Fill corresponded truth distance
-                for (UInt_t kentry=0; kentry<DistFromPV->size(); ++kentry) {
-                  if (Type->at(kentry)==2 && DWall->at(kentry)>0.) {
-                    ndistance.GetOverallEffDistance(ith, TagIndex->at(jentry), kentry,
-                                                  tagvx->at(kentry), tagvy->at(kentry), tagvz->at(kentry),
-                                                  vecvx, vecvy, vecvz);
-                  }
-                }
-              }
-            }
-            else {
-              //Focus on neutron-like candidates(e-tagging OFF)
-              if (TagOut->at(jentry)>TMVATH[ith]) {
-                //Fill corresponded truth distance
-                for (UInt_t kentry=0; kentry<DistFromPV->size(); ++kentry) {
-                  if (Type->at(kentry)==2 && DWall->at(kentry)>0.) {
-                    ndistance.GetOverallEffDistance(ith, TagIndex->at(jentry), kentry,
-                                                  tagvx->at(kentry), tagvy->at(kentry), tagvz->at(kentry),
-                                                  vecvx, vecvy, vecvz);
-                  }
-                }
-              }
-            }
-          }
-        } //candidates loop
-
-      } //threshold scan
-
     } //New 1R muon selection
   }
 
-  std::cout << "No nlike: " << test1 << std::endl;
-  std::cout << "More than one nlike: " << test2 << std::endl;
 
-  std::fstream resultfile;
-  resultfile.open(ResultSummary, std::ios_base::out);
-  if (!resultfile.is_open()) {
-    std::cout << "Results can not be written in " << ResultSummary << std::endl;
-  }
-  else {
-    resultfile << "[fiTQun OUTPUT] " << fiTQunFileName << std::endl;
-    resultfile << "[NTag   OUTPUT] " << NtagFileName   << std::endl;
-    resultfile << " " << std::endl;
+  TString summaryname = ResultSummary + ".TWIDTH" + TWIDTH + ".NHITSTH" + NHITSTH + ".txt";
+  TString outputname  = OutputRootName + ".TWIDTH" + TWIDTH + ".NHITSTH" + NHITSTH + ".root";
 
-    resultfile << "[Neutrino] All Parent Neutrino Events: " << AllParentNeutrinos << std::endl;
-    for (int i=0; i<SELECTIONCUTS; i++) {
-      resultfile << "[Neutrino] C" << i << ": " << ProtoSelectedParentNeutrinos[i] << " -> " << SelectedParentNeutrinos[i] << std::endl;
-      h1_1RmuonEvents->fArray[i+1]      = (float)SelectedParentNeutrinos[i]/SelectedParentNeutrinos[0];
-      h1_Proto1RmuonEvents->fArray[i+1] = (float)ProtoSelectedParentNeutrinos[i]/ProtoSelectedParentNeutrinos[0];
-    }
-    resultfile << "[Neutrino] Selected CCQE events   : " << ProtoSelectedCCQEevents    << " -> " << SelectedCCQEevents    << std::endl;
-    resultfile << "[Neutrino] Selected CCnonQE events: " << ProtoSelectedCCnonQEevents << " -> " << SelectedCCnonQEevents << std::endl;
-    resultfile << "[Neutrino] Selected NC events     : " << ProtoSelectedNCevents      << " -> " << SelectedNCevents      << std::endl;
-    resultfile << " " << std::endl;
+  //ntagana.SummaryTruthInfoinSearch(3., ResultSummary);
+  ntagana.SummaryTruthInfoinSearch(3., summaryname);
 
-    TString outname = "./result/TruthInfo.txt";
-    ntagana.SummaryTruthInfoinSearch(3., outname);
-  }
-
-
-  TFile* fout = new TFile(OutputRootName, "RECREATE");
-  std::cout << "Output: " << OutputRootName << std::endl;
+  TFile* fout = new TFile(outputname, "RECREATE");
+  std::cout << "Output: " << outputname << std::endl;
   fout -> cd();
-  
-  decayebox.cdDecayeBox(fout);
-  decayebox.WritePlots();
-  gDirectory -> cd("..");
-
-  prmsel.cdGd1RmuonSelection(fout);
-  prmsel.WritePlots();
-  gDirectory -> cd("..");
-
-  neuosc.cdNeutrinoOscillation(fout);
-  neuosc.WritePlots();
-  gDirectory -> cd("..");
-
-  ndistance.cdDistanceViewer(fout);
-  ndistance.WritePlots();
-  gDirectory -> cd("..");
 
   //noise rate and efficiency for window optimization
+  int windowsize = atoi(Window);
   ntagana.SetNoiseRateGraph();
   ntagana.GetEfficiencyforWinOpt();
-  ntagana.SetEfficiencyGraph(0);
+  ntagana.SetEfficiencyGraph(windowsize);
 
   ntagana.cdNTagAnalysis(fout);
   ntagana.WritePlots();
