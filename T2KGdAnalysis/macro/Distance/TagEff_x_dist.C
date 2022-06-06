@@ -5,9 +5,9 @@
 #include "TText.h"
 
 void TagEff_x_dist() {
-  TFile* fin_o = new TFile("../../NTagEff/output/thresholdscan.original.root");
-  TFile* fin_n = new TFile("../../NTagEff/output/thresholdscan.train.root");
-  TFile* fin   = new TFile("../output/test.root");
+  TFile* fin_o = new TFile("../../../NTagEff/output/thresholdscan.original.root");
+  TFile* fin_n = new TFile("../../../NTagEff/output/thresholdscan.train.root");
+  TFile* fin   = new TFile("../../output/test.root");
 
   TH1D* h1_eff_x_dist_o    = (TH1D*)fin_o->Get("h1_tagging_eff_scan7");
   TH1D* h1_preeff_x_dist_o = (TH1D*)fin_o->Get("h1_pre_eff_scan7");

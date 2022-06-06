@@ -5,7 +5,7 @@
 #include "TText.h"
 
 void WindowOptimizeEff() {
-  TFile* fin = new TFile("../output/test.root");
+  TFile* fin = new TFile("../../output/test.root");
 
   TGraphErrors* g_NNEff   = (TGraphErrors*)fin->Get("NTagAnalysis/Graph;7");
   TGraphErrors* g_HNNEff  = (TGraphErrors*)fin->Get("NTagAnalysis/Graph;8");

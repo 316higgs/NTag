@@ -5,9 +5,12 @@ void DistanceViewer::SetHistoFrame() {
   h1_truedistance = new TH1F("h1_truedistance", "Truth Distance From PV; Truth distance[m]; Entries", 10, 0, 5);
   ((TGaxis*)h1_truedistance->GetYaxis())->SetMaxDigits(4);
 
-  h1_truedistance_CCQE    = new TH1F("h1_truedistance_CCQE", "Truth Distance From PV; Truth distance[m]; Entries", 10, 0, 5);
-  h1_truedistance_CCnonQE = new TH1F("h1_truedistance_CCnonQE", "Truth Distance From PV; Truth distance[m]; Entries", 10, 0, 5);
-  h1_truedistance_NC      = new TH1F("h1_truedistance_NC", "Truth Distance From PV; Truth distance[m]; Entries", 10, 0, 5);
+  h1_truedistance_CCQE    = new TH1F("h1_truedistance_CCQE", "Truth Distance From PV; Truth distance[m]; Number of Neutron Events", 10, 0, 5);
+  h1_truedistance_CCnonQE = new TH1F("h1_truedistance_CCnonQE", "Truth Distance From PV; Truth distance[m]; Number of Neutron Events", 10, 0, 5);
+  h1_truedistance_NC      = new TH1F("h1_truedistance_NC", "Truth Distance From PV; Truth distance[m]; Number of Neutron Events", 10, 0, 5);
+  h1_truedistance_CCRESdeltap  = new TH1F("h1_truedistance_CCRESdeltap", "Truth Distance From PV; Truth distance[m]; Number of Neutron Events", 10, 0, 5);
+  h1_truedistance_CCRESdeltapp = new TH1F("h1_truedistance_CCRESdeltapp", "Truth Distance From PV; Truth distance[m]; Number of Neutron Events", 10, 0, 5);
+  h1_truedistance_CCRESdelta0  = new TH1F("h1_truedistance_CCRESdelta0", "Truth Distance From PV; Truth distance[m]; Number of Neutron Events", 10, 0, 5);
 
   h1_Candidatetruedistance = new TH1F("h1_Candidatetruedistance", "Truth Distance From PV; Truth distance[m]; Entries", 10, 0, 5);
   ((TGaxis*)h1_Candidatetruedistance->GetYaxis())->SetMaxDigits(4);
@@ -51,6 +54,27 @@ void DistanceViewer::SetHistoFormat() {
   h1_truedistance_NC -> SetTitleSize(0.035, "Y");
   h1_truedistance_NC -> SetLabelSize(0.033, "Y");
 
+  h1_truedistance_CCRESdeltap -> SetLineWidth(2);
+  h1_truedistance_CCRESdeltap -> SetLineColor(kPink+1);
+  h1_truedistance_CCRESdeltap -> SetFillColor(kPink+1);
+  h1_truedistance_CCRESdeltap -> SetTitleOffset(1.4, "Y");
+  h1_truedistance_CCRESdeltap -> SetTitleSize(0.035, "Y");
+  h1_truedistance_CCRESdeltap -> SetLabelSize(0.033, "Y");
+
+  h1_truedistance_CCRESdeltapp -> SetLineWidth(2);
+  h1_truedistance_CCRESdeltapp -> SetLineColor(kPink-8);
+  h1_truedistance_CCRESdeltapp -> SetFillColor(kPink-8);
+  h1_truedistance_CCRESdeltapp -> SetTitleOffset(1.4, "Y");
+  h1_truedistance_CCRESdeltapp -> SetTitleSize(0.035, "Y");
+  h1_truedistance_CCRESdeltapp -> SetLabelSize(0.033, "Y");
+
+  h1_truedistance_CCRESdelta0 -> SetLineWidth(2);
+  h1_truedistance_CCRESdelta0 -> SetLineColor(kGray+1);
+  h1_truedistance_CCRESdelta0 -> SetFillColor(kGray+1);
+  h1_truedistance_CCRESdelta0 -> SetTitleOffset(1.4, "Y");
+  h1_truedistance_CCRESdelta0 -> SetTitleSize(0.035, "Y");
+  h1_truedistance_CCRESdelta0 -> SetLabelSize(0.033, "Y");
+
   for (int i=0; i<CUTSTEP; i++) {
     h1_NNEff_dist[i] -> SetLineWidth(2);
     h1_NNEff_dist[i] -> SetLineColor(kAzure-4);
@@ -84,9 +108,13 @@ float DistanceViewer::GetTruthDistance(CC0PiNumu *numu,
   float d   = std::sqrt(d_x*d_x + d_y*d_y + d_z*d_z);
   h1_truedistance -> Fill(d/100.);
 
-  if (mode==1) h1_truedistance_CCQE                -> Fill(d/100.);
-  if (mode>=2 && mode<=30) h1_truedistance_CCnonQE -> Fill(d/100.);
-  if (mode>=31) h1_truedistance_NC                 -> Fill(d/100.);
+  if (mode==1) h1_truedistance_CCQE          -> Fill(d/100.);
+  if ((mode>=2 && mode<=10) || (mode>=14 && mode<=30)) 
+                h1_truedistance_CCnonQE -> Fill(d/100.);
+  if (mode>=31) h1_truedistance_NC           -> Fill(d/100.);
+  if (mode==13) h1_truedistance_CCRESdeltap  -> Fill(d/100.);
+  if (mode==11) h1_truedistance_CCRESdeltapp -> Fill(d/100.);
+  if (mode==12) h1_truedistance_CCRESdelta0  -> Fill(d/100.);
   return d;
 }
 
@@ -148,6 +176,9 @@ void DistanceViewer::WritePlots() {
   h1_truedistance_CCQE    -> Write();
   h1_truedistance_CCnonQE -> Write();
   h1_truedistance_NC      -> Write();
+  h1_truedistance_CCRESdeltap -> Write();
+  h1_truedistance_CCRESdeltapp -> Write();
+  h1_truedistance_CCRESdelta0 -> Write();
 
   h1_PreEff_dist -> Sumw2();
   h1_PreEff_dist -> Divide(h1_truedistance);

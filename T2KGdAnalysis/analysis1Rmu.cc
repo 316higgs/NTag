@@ -247,11 +247,13 @@ int main(int argc, char **argv) {
       neuosc.OscProbCalculator(numu, true);
       //Neutrino events as a funtion of reconstructed neutrino energy
       neuosc.GetWgtNeutrino(numu);
+      neuosc.GetWgtNeutrino_wTrueN(numu, NTrueN);
 
 
       if (MCType=="Water" || MCType=="water") continue;
 
       ntagana.GetTruthNeutrons(NTrueN, E->size(), Type, E, DWall);
+      ntagana.GetResolutionwTrueN(numu, NTrueN);
 
       //need?
       //if (NTrueN==0) continue;

@@ -18,6 +18,14 @@
 TH1F* h1_NTrueN[TRUETYPE];
 TH1F* h1_TotGammaE;
 
+//Neutrino energy resolution w/ truth neutrons & w/o truth neutrons
+TH1F* h1_Enureso_CCQE_trueN[2];
+TH1F* h1_Enureso_CCnonQE_trueN[2];
+TH1F* h1_Enureso_CCRES_deltap_trueN[2];
+TH1F* h1_Enureso_CCRES_deltapp_trueN[2];
+TH1F* h1_Enureso_CCRES_delta0_trueN[2];
+TH1F* h1_Enureso_NC_trueN[2];
+
 //Neutrino energy resolution w/ tagged neutrons & w/o tagged neutrons
 TH1F* h1_Enureso_CCQE[2];
 TH1F* h1_Enureso_CCnonQE[2];
@@ -44,6 +52,7 @@ TGraphErrors* g_OverallHEff;
 TGraphErrors* g_OverallGdEff;
 
 TGraphErrors* g_Purity;
+TGraphErrors* g_FillNoiseRate;
 
 int test1 = 0;
 int test2 = 0;
@@ -202,6 +211,12 @@ class NTagAnalysis {
 
     float Purity[CUTSTEP];
     float ePurity[CUTSTEP];
+    float FillPurity[CUTSTEP-1];
+    float FillePurity[CUTSTEP-1];
+    float FillNoiseRate[CUTSTEP-1];
+    float FilleNoiseRate[CUTSTEP-1];
+    float FillTMVATH[CUTSTEP-1];
+    float FilleTMVATH[CUTSTEP-1];
 
     //Neutrino events with neutron information
     float NeutrinoEventswNoNlike[CUTSTEP];
@@ -268,6 +283,8 @@ class NTagAnalysis {
                                 CC0PiNumu* numu,
                                 NeutrinoOscillation neuosc,
                                 int NCUT);
+
+    void GetResolutionwTrueN(CC0PiNumu* numu, float NTrueN);
 
   	bool DecayelikeChecker(bool etagmode, float NHits, float FitT);
 

@@ -10,6 +10,9 @@ TH1F* h1_truedistance;
 TH1F* h1_truedistance_CCQE;
 TH1F* h1_truedistance_CCnonQE;
 TH1F* h1_truedistance_NC;
+TH1F* h1_truedistance_CCRESdeltap;
+TH1F* h1_truedistance_CCRESdeltapp;
+TH1F* h1_truedistance_CCRESdelta0;
 
 //Truth distance distribution of truth neutrons in candidates
 TH1F* h1_Candidatetruedistance;

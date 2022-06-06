@@ -5,7 +5,7 @@
 #include "TText.h"
 
 void Oscillation() {
-  TFile* fin = new TFile("../output/etagONtest.root");
+  TFile* fin = new TFile("../../output/etagONtest.root");
 
   TH1F* h1_AllEnureco   = (TH1F*)fin->Get("NeutrinoOscillation/h1_AllEnureco");
   TH1F* h1_AllProb      = (TH1F*)fin->Get("NeutrinoOscillation/h1_Allnumu_x_numu_OscProb");
@@ -18,6 +18,13 @@ void Oscillation() {
   TH1F* h1_CCnonQEProbRatio          = (TH1F*)fin->Get("NeutrinoOscillation/h1_numu_x_numu_OscProbRatio_mode1");
   TH1F* h1_CCnonQEProbRatiowNeutron  = (TH1F*)fin->Get("NeutrinoOscillation/h1_numu_x_numu_OscProbRatio_wNeutron_mode1");
   TH1F* h1_CCnonQEProbRatiowoNeutron = (TH1F*)fin->Get("NeutrinoOscillation/h1_numu_x_numu_OscProbRatio_woNeutron_mode1");
+
+  TH1F* h1_CCQEProb         = (TH1F*)fin->Get("NeutrinoOscillation/h1_numu_x_numu_OscProb_mode0");
+  TH1F* h1_CCnonQEProb      = (TH1F*)fin->Get("NeutrinoOscillation/h1_numu_x_numu_OscProb_mode1");
+  TH1F* h1_CCRESdeltapProb  = (TH1F*)fin->Get("NeutrinoOscillation/h1_numu_x_numu_OscProb_CCRESdeltap");
+  TH1F* h1_CCRESdeltappProb = (TH1F*)fin->Get("NeutrinoOscillation/h1_numu_x_numu_OscProb_CCRESdeltapp");
+  TH1F* h1_CCRESdelta0Prob  = (TH1F*)fin->Get("NeutrinoOscillation/h1_numu_x_numu_OscProb_CCRESdelta0");
+  TH1F* h1_NCProb           = (TH1F*)fin->Get("NeutrinoOscillation/h1_numu_x_numu_OscProb_mode2");
 
   h1_AllEnureco   -> SetLineWidth(2);
   h1_AllProb      -> SetLineWidth(2);
@@ -47,6 +54,13 @@ void Oscillation() {
   h1_CCnonQEProbRatiowNeutron -> SetLineStyle(7);
   h1_CCnonQEProbRatiowoNeutron -> SetLineStyle(3);
 
+  h1_CCQEProb    -> SetStats(0);
+  h1_CCnonQEProb -> SetStats(0);
+  h1_CCRESdeltapProb -> SetStats(0);
+  h1_CCRESdeltappProb -> SetStats(0);
+  h1_CCRESdelta0Prob -> SetStats(0);
+  h1_NCProb      -> SetStats(0);
+
   Double_t tot_AllEnureco = h1_AllEnureco->Integral();
   h1_AllEnureco -> Scale(1./tot_AllEnureco);
 
@@ -55,15 +69,23 @@ void Oscillation() {
 
   gROOT -> SetStyle("Plain");
 
-  TCanvas* c1 = new TCanvas("c1","c1",900,1200);
-  c1 -> Divide(1,2);
-  c1 -> cd(1);
+  /*TCanvas* c1 = new TCanvas("c1","c1",900,700);
+  //c1 -> Divide(1,2);
+  //c1 -> cd(1);
   h1_AllEnureco -> Draw();
-  h1_AllProb -> Draw("SAME");
-  c1 -> cd(2);
-  h1_AllProbRatio -> Draw("SAME");
+  h1_AllProb -> Draw("SAME");*/
+  //c1 -> cd(2);
+  //h1_AllProbRatio -> Draw("SAME");
 
   TCanvas* c2 = new TCanvas("c2", "c2", 900, 700);
+  h1_CCQEProb -> Draw();
+  h1_CCnonQEProb -> Draw("SAME");
+  h1_CCRESdeltappProb -> Draw("SAME");
+  h1_CCRESdelta0Prob -> Draw("SAME");
+  h1_CCRESdeltapProb -> Draw("SAME");
+  h1_NCProb -> Draw("SAME");
+
+  /*TCanvas* c2 = new TCanvas("c2", "c2", 900, 700);
   c2 -> cd();
   h1_CCQEProbRatio -> Draw();
   h1_CCQEProbRatiowNeutron -> Draw("SAME");
@@ -73,7 +95,7 @@ void Oscillation() {
   c3 -> cd();
   h1_CCnonQEProbRatio -> Draw();
   h1_CCnonQEProbRatiowNeutron -> Draw("SAME");
-  h1_CCnonQEProbRatiowoNeutron -> Draw("SAME");
+  h1_CCnonQEProbRatiowoNeutron -> Draw("SAME");*/
 
   /*TCanvas* c2 = new TCanvas("c2","w/ neutrons",900,700);
   c2 -> SetGrid();

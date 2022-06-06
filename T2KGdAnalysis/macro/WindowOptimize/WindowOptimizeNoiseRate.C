@@ -5,7 +5,7 @@
 #include "TText.h"
 
 void WindowOptimizeNoiseRate() {
-  TFile* fin = new TFile("../output/test.root");
+  TFile* fin = new TFile("../../output/test.root");
 
   TGraphErrors* g_win1 = (TGraphErrors*)fin->Get("NTagAnalysis/Graph;1");
   TGraphErrors* g_win2 = (TGraphErrors*)fin->Get("NTagAnalysis/Graph;2");
@@ -30,6 +30,6 @@ void WindowOptimizeNoiseRate() {
   g_win4 -> Draw("SAMEPL");
   g_win5 -> Draw("SAMEPL");
   g_win6 -> Draw("SAMEPL");
-  c -> SaveAs("../figure/WindowOptimize.NoiseRate.pdf");
+  //c -> SaveAs("../figure/WindowOptimize.NoiseRate.pdf");
 
 }

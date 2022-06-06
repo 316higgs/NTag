@@ -10,20 +10,34 @@ void NTagAnalysis::SetHistoFrame() {
   h1_TotGammaE   = new TH1F("h1_TotGammaE", "Truth Total Gamma Energy; E[MeV]; Entries", 20, 0, 10);
   for (int i=0; i<2; i++) {
     if (i==0) {
-      h1_Enureso_CCQE[i]          = new TH1F("h1_Enureso_CCQE_woNeutrons", "Neutrino Energy Resolution w/o Tagged Neutrons; E^{true}_{#nu}-E^{reco}_{#nu}[GeV]; Number of Neutrino Events", 60, -1, 1);
-      h1_Enureso_CCnonQE[i]       = new TH1F("h1_Enureso_CCnonQE_woNeutrons", "Neutrino Energy Resolution w/o Tagged Neutrons; E^{true}_{#nu}-E^{reco}_{#nu}[GeV]; Number of Neutrino Events", 60, -1, 1);
-      h1_Enureso_CCRES_deltap[i]  = new TH1F("h1_Enureso_CCRESdeltap_woNeutrons", "Neutrino Energy Resolution w/o Tagged Neutrons; E^{true}_{#nu}-E^{reco}_{#nu}[GeV]; Number of Neutrino Events", 60, -1, 1);
-      h1_Enureso_CCRES_deltapp[i] = new TH1F("h1_Enureso_CCRESdeltapp_woNeutrons", "Neutrino Energy Resolution w/o Tagged Neutrons; E^{true}_{#nu}-E^{reco}_{#nu}[GeV]; Number of Neutrino Events", 60, -1, 1);
-      h1_Enureso_CCRES_delta0[i]  = new TH1F("h1_Enureso_CCRESdelta0_woNeutrons", "Neutrino Energy Resolution w/o Tagged Neutrons; E^{true}_{#nu}-E^{reco}_{#nu}[GeV]; Number of Neutrino Events", 60, -1, 1);
-      h1_Enureso_NC[i]            = new TH1F("h1_Enureso_NC_woNeutrons", "Neutrino Energy Resolution w/o Tagged Neutrons; E^{true}_{#nu}-E^{reco}_{#nu}[GeV]; Number of Neutrino Events", 60, -1, 1);
+      h1_Enureso_CCQE[i]          = new TH1F("h1_Enureso_CCQE_woNeutrons", "Neutrino Energy Resolution w/o Tagged Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
+      h1_Enureso_CCnonQE[i]       = new TH1F("h1_Enureso_CCnonQE_woNeutrons", "Neutrino Energy Resolution w/o Tagged Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
+      h1_Enureso_CCRES_deltap[i]  = new TH1F("h1_Enureso_CCRESdeltap_woNeutrons", "Neutrino Energy Resolution w/o Tagged Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
+      h1_Enureso_CCRES_deltapp[i] = new TH1F("h1_Enureso_CCRESdeltapp_woNeutrons", "Neutrino Energy Resolution w/o Tagged Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
+      h1_Enureso_CCRES_delta0[i]  = new TH1F("h1_Enureso_CCRESdelta0_woNeutrons", "Neutrino Energy Resolution w/o Tagged Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
+      h1_Enureso_NC[i]            = new TH1F("h1_Enureso_NC_woNeutrons", "Neutrino Energy Resolution w/o Tagged Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
+
+      h1_Enureso_CCQE_trueN[i]          = new TH1F("h1_Enureso_CCQE_wotrueNeutrons", "Neutrino Energy Resolution w/o Truth Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
+      h1_Enureso_CCnonQE_trueN[i]       = new TH1F("h1_Enureso_CCnonQE_wotrueNeutrons", "Neutrino Energy Resolution w/o Truth Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
+      h1_Enureso_CCRES_deltap_trueN[i]  = new TH1F("h1_Enureso_CCRESdeltap_wotrueNeutrons", "Neutrino Energy Resolution w/o Truth Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
+      h1_Enureso_CCRES_deltapp_trueN[i] = new TH1F("h1_Enureso_CCRESdeltapp_wotrueNeutrons", "Neutrino Energy Resolution w/o Truth Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
+      h1_Enureso_CCRES_delta0_trueN[i]  = new TH1F("h1_Enureso_CCRESdelta0_wotrueNeutrons", "Neutrino Energy Resolution w/o Truth Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
+      h1_Enureso_NC_trueN[i]            = new TH1F("h1_Enureso_NC_wotrueNeutrons", "Neutrino Energy Resolution w/o Truth Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
     }
     if (i==1) {
-      h1_Enureso_CCQE[i]          = new TH1F("h1_Enureso_CCQE_wNeutrons", "Neutrino Energy Resolution w/ Tagged Neutrons; E^{true}_{#nu}-E^{reco}_{#nu}[GeV]; Number of Neutrino Events", 60, -1, 1);
-      h1_Enureso_CCnonQE[i]       = new TH1F("h1_Enureso_CCnonQE_wNeutrons", "Neutrino Energy Resolution w/ Tagged Neutrons; E^{true}_{#nu}-E^{reco}_{#nu}[GeV]; Number of Neutrino Events", 60, -1, 1);
-      h1_Enureso_CCRES_deltap[i]  = new TH1F("h1_Enureso_CCRESdeltap_wNeutrons", "Neutrino Energy Resolution w/ Tagged Neutrons; E^{true}_{#nu}-E^{reco}_{#nu}[GeV]; Number of Neutrino Events", 60, -1, 1);
-      h1_Enureso_CCRES_deltapp[i] = new TH1F("h1_Enureso_CCRESdeltapp_wNeutrons", "Neutrino Energy Resolution w/ Tagged Neutrons; E^{true}_{#nu}-E^{reco}_{#nu}[GeV]; Number of Neutrino Events", 60, -1, 1);
-      h1_Enureso_CCRES_delta0[i]  = new TH1F("h1_Enureso_CCRESdelta0_wNeutrons", "Neutrino Energy Resolution w/o Tagged Neutrons; E^{true}_{#nu}-E^{reco}_{#nu}[GeV]; Number of Neutrino Events", 60, -1, 1);
-      h1_Enureso_NC[i]            = new TH1F("h1_Enureso_NC_wNeutrons", "Neutrino Energy Resolution w/ Tagged Neutrons; E^{true}_{#nu}-E^{reco}_{#nu}[GeV]; Number of Neutrino Events", 60, -1, 1);
+      h1_Enureso_CCQE[i]          = new TH1F("h1_Enureso_CCQE_wNeutrons", "Neutrino Energy Resolution w/ Tagged Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
+      h1_Enureso_CCnonQE[i]       = new TH1F("h1_Enureso_CCnonQE_wNeutrons", "Neutrino Energy Resolution w/ Tagged Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
+      h1_Enureso_CCRES_deltap[i]  = new TH1F("h1_Enureso_CCRESdeltap_wNeutrons", "Neutrino Energy Resolution w/ Tagged Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
+      h1_Enureso_CCRES_deltapp[i] = new TH1F("h1_Enureso_CCRESdeltapp_wNeutrons", "Neutrino Energy Resolution w/ Tagged Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
+      h1_Enureso_CCRES_delta0[i]  = new TH1F("h1_Enureso_CCRESdelta0_wNeutrons", "Neutrino Energy Resolution w/o Tagged Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
+      h1_Enureso_NC[i]            = new TH1F("h1_Enureso_NC_wNeutrons", "Neutrino Energy Resolution w/ Tagged Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
+
+      h1_Enureso_CCQE_trueN[i]          = new TH1F("h1_Enureso_CCQE_wtrueNeutrons", "Neutrino Energy Resolution w/ Truth Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
+      h1_Enureso_CCnonQE_trueN[i]       = new TH1F("h1_Enureso_CCnonQE_wtrueNeutrons", "Neutrino Energy Resolution w/ Truth Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
+      h1_Enureso_CCRES_deltap_trueN[i]  = new TH1F("h1_Enureso_CCRESdeltap_wtrueNeutrons", "Neutrino Energy Resolution w/ Truth Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
+      h1_Enureso_CCRES_deltapp_trueN[i] = new TH1F("h1_Enureso_CCRESdeltapp_wtrueNeutrons", "Neutrino Energy Resolution w/ Truth Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
+      h1_Enureso_CCRES_delta0_trueN[i]  = new TH1F("h1_Enureso_CCRESdelta0_wtrueNeutrons", "Neutrino Energy Resolution w/ Truth Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
+      h1_Enureso_NC_trueN[i]            = new TH1F("h1_Enureso_NC_wtrueNeutrons", "Neutrino Energy Resolution w/ Truth Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
     }
   }
 }
@@ -59,6 +73,20 @@ void NTagAnalysis::SetHistoFormat() {
     h1_Enureso_CCRES_deltapp[i] -> SetLineColor(kPink-8);
     h1_Enureso_CCRES_delta0[i]  -> SetLineColor(kGray+1);
     h1_Enureso_NC[i]            -> SetLineColor(kTeal+9);
+
+    h1_Enureso_CCQE_trueN[i]          -> SetLineWidth(2);
+    h1_Enureso_CCnonQE_trueN[i]       -> SetLineWidth(2);
+    h1_Enureso_CCRES_deltap_trueN[i]  -> SetLineWidth(2);
+    h1_Enureso_CCRES_deltapp_trueN[i] -> SetLineWidth(2);
+    h1_Enureso_CCRES_delta0_trueN[i]  -> SetLineWidth(2);
+    h1_Enureso_NC_trueN[i]            -> SetLineWidth(2);
+
+    h1_Enureso_CCQE_trueN[i]          -> SetLineColor(kAzure-1);
+    h1_Enureso_CCnonQE_trueN[i]       -> SetLineColor(kOrange+8);
+    h1_Enureso_CCRES_deltap_trueN[i]  -> SetLineColor(kPink+1);
+    h1_Enureso_CCRES_deltapp_trueN[i] -> SetLineColor(kPink-8);
+    h1_Enureso_CCRES_delta0_trueN[i]  -> SetLineColor(kGray+1);
+    h1_Enureso_NC_trueN[i]            -> SetLineColor(kTeal+9);
   }
 }
 
@@ -173,6 +201,16 @@ void NTagAnalysis::InitNeutrons() {
 
     Purity[i]  = 0.;
     ePurity[i] = 0.;
+  }
+
+  for (int i=0; i<CUTSTEP-1; i++) {
+    FillPurity[i]     = 0.;
+    FillNoiseRate[i]  = 0.;
+    FillTMVATH[i]     = 0.;
+
+    FillePurity[i]    = 0.;
+    FilleNoiseRate[i] = 0.;
+    FilleTMVATH[i]    = 0.;
   }
 }
 
@@ -516,6 +554,17 @@ void NTagAnalysis::Set1RmuonSamplewNTag(bool NoNlike, CC0PiNumu* numu, int mode)
   float OscProb = numu->getOscWgt();
   float RecoEnu = numu->var<float>("erec");
 
+  if (NoNlike) {
+    h1_Allnumu_x_numu_NoOsc_woNeutron -> Fill(RecoEnu/1000.);
+    h1_Allnumu_x_numu_OscProb_woNeutron -> Fill(RecoEnu/1000., OscProb);
+    h1_Allnumu_x_numu_OscProbRatio_woNeutron -> Fill(RecoEnu/1000., OscProb);
+  }
+  else {
+    h1_Allnumu_x_numu_NoOsc_wNeutron -> Fill(RecoEnu/1000.);
+    h1_Allnumu_x_numu_OscProb_wNeutron -> Fill(RecoEnu/1000., OscProb);
+    h1_Allnumu_x_numu_OscProbRatio_wNeutron -> Fill(RecoEnu/1000., OscProb);
+  }
+
   //CCQE(1p1h)
   if (mode==1) {
     if (NoNlike) {
@@ -531,7 +580,7 @@ void NTagAnalysis::Set1RmuonSamplewNTag(bool NoNlike, CC0PiNumu* numu, int mode)
   }
 
   //CC non-QE
-  if (mode>=2 && mode<=30) {
+  if ((mode>=2 && mode<=10) || (mode>=14 && mode<=30)) {
     if (NoNlike) {
       h1_numu_x_numu_NoOsc_woNeutron[1]        -> Fill(RecoEnu/1000.);
       h1_numu_x_numu_OscProb_woNeutron[1]      -> Fill(RecoEnu/1000., OscProb);
@@ -557,6 +606,46 @@ void NTagAnalysis::Set1RmuonSamplewNTag(bool NoNlike, CC0PiNumu* numu, int mode)
       h1_numu_x_numu_OscProbRatio_wNeutron[2] -> Fill(RecoEnu/1000., OscProb);
     }
   }
+
+  //CC RES (Delta+)
+  if (mode==13) {
+    if (NoNlike) {
+      h1_numu_x_numu_NoOsc_woNeutron[3]        -> Fill(RecoEnu/1000.);
+      h1_numu_x_numu_OscProb_woNeutron[3]      -> Fill(RecoEnu/1000., OscProb);
+      h1_numu_x_numu_OscProbRatio_woNeutron[3] -> Fill(RecoEnu/1000., OscProb);
+    }
+    else {
+      h1_numu_x_numu_NoOsc_wNeutron[3]        -> Fill(RecoEnu/1000.);
+      h1_numu_x_numu_OscProb_wNeutron[3]      -> Fill(RecoEnu/1000., OscProb);
+      h1_numu_x_numu_OscProbRatio_wNeutron[3] -> Fill(RecoEnu/1000., OscProb);
+    }
+  }
+  //CC RES (Delta++)
+  if (mode==11) {
+    if (NoNlike) {
+      h1_numu_x_numu_NoOsc_woNeutron[4]        -> Fill(RecoEnu/1000.);
+      h1_numu_x_numu_OscProb_woNeutron[4]      -> Fill(RecoEnu/1000., OscProb);
+      h1_numu_x_numu_OscProbRatio_woNeutron[4] -> Fill(RecoEnu/1000., OscProb);
+    }
+    else {
+      h1_numu_x_numu_NoOsc_wNeutron[4]        -> Fill(RecoEnu/1000.);
+      h1_numu_x_numu_OscProb_wNeutron[4]      -> Fill(RecoEnu/1000., OscProb);
+      h1_numu_x_numu_OscProbRatio_wNeutron[4] -> Fill(RecoEnu/1000., OscProb);
+    }
+  }
+  //CC RES (Delta0)
+  if (mode==12) {
+    if (NoNlike) {
+      h1_numu_x_numu_NoOsc_woNeutron[5]        -> Fill(RecoEnu/1000.);
+      h1_numu_x_numu_OscProb_woNeutron[5]      -> Fill(RecoEnu/1000., OscProb);
+      h1_numu_x_numu_OscProbRatio_woNeutron[5] -> Fill(RecoEnu/1000., OscProb);
+    }
+    else {
+      h1_numu_x_numu_NoOsc_wNeutron[5]        -> Fill(RecoEnu/1000.);
+      h1_numu_x_numu_OscProb_wNeutron[5]      -> Fill(RecoEnu/1000., OscProb);
+      h1_numu_x_numu_OscProbRatio_wNeutron[5] -> Fill(RecoEnu/1000., OscProb);
+    }
+  }
 }
 
 
@@ -573,7 +662,8 @@ void NTagAnalysis::GetNeutrinoEventswNTag(std::vector<float> *TagOut,
   int mode = TMath::Abs(numu->var<int>("mode"));
   float TrueEnu = numu->var<float>("pnu", 0);
   float RecoEnu = numu->var<float>("erec");
-  float EnuReso = TrueEnu - RecoEnu/1000.;
+  //float EnuReso = TrueEnu - RecoEnu/1000.;
+  float EnuReso = (TrueEnu - RecoEnu/1000.)/TrueEnu;
 
   for (int ith=0; ith<CUTSTEP; ith++) {
 
@@ -620,29 +710,17 @@ void NTagAnalysis::GetNeutrinoEventswNTag(std::vector<float> *TagOut,
         //Neutrino energy resolution
         test1++;
         //CCQE(1p1h)
-        if (mode==1) {
-          h1_Enureso_CCQE[0] -> Fill(EnuReso);
-        }
+        if (mode==1) h1_Enureso_CCQE[0] -> Fill(EnuReso);
         //CC non-QE
-        if ((mode>=2 && mode<=10) || (mode>=14 && mode<=30)) {
-          h1_Enureso_CCnonQE[0] -> Fill(EnuReso);
-        }
+        if ((mode>=2 && mode<=10) || (mode>=14 && mode<=30)) h1_Enureso_CCnonQE[0] -> Fill(EnuReso);
         //CC RES(Delta++)
-        if (mode==11) {
-          h1_Enureso_CCRES_deltapp[0] -> Fill(EnuReso);
-        }
+        if (mode==11) h1_Enureso_CCRES_deltapp[0] -> Fill(EnuReso);
         //CC RES(Delta0)
-        if (mode==12) {
-          h1_Enureso_CCRES_delta0[0] -> Fill(EnuReso);
-        }
+        if (mode==12) h1_Enureso_CCRES_delta0[0] -> Fill(EnuReso);
         //CC RES(Delta+)
-        if (mode==13) {
-          h1_Enureso_CCRES_deltap[0] -> Fill(EnuReso);
-        }
+        if (mode==13) h1_Enureso_CCRES_deltap[0] -> Fill(EnuReso);
         //NC
-        if (mode>=31) {
-          h1_Enureso_NC[0] -> Fill(EnuReso);
-        }
+        if (mode>=31) h1_Enureso_NC[0] -> Fill(EnuReso);
       }
       
     }
@@ -660,29 +738,17 @@ void NTagAnalysis::GetNeutrinoEventswNTag(std::vector<float> *TagOut,
         //Neutrino energy resolution
         test2++;
         //CCQE(1p1h)
-        if (mode==1) {
-          h1_Enureso_CCQE[1] -> Fill(EnuReso);
-        }
+        if (mode==1) h1_Enureso_CCQE[1] -> Fill(EnuReso);
         //CC non-QE
-        if ((mode>=2 && mode<=10) || (mode>=14 && mode<=30)) {
-          h1_Enureso_CCnonQE[1] -> Fill(EnuReso);
-        }
+        if ((mode>=2 && mode<=10) || (mode>=14 && mode<=30)) h1_Enureso_CCnonQE[1] -> Fill(EnuReso);
         //CC RES(Delta++)
-        if (mode==11) {
-          h1_Enureso_CCRES_deltapp[1] -> Fill(EnuReso);
-        }
+        if (mode==11) h1_Enureso_CCRES_deltapp[1] -> Fill(EnuReso);
         //CC RES(Delta0)
-        if (mode==12) {
-          h1_Enureso_CCRES_delta0[1] -> Fill(EnuReso);
-        }
+        if (mode==12) h1_Enureso_CCRES_delta0[1] -> Fill(EnuReso);
         //CC RES(Delta+)
-        if (mode==13) {
-          h1_Enureso_CCRES_deltap[1] -> Fill(EnuReso);
-        }
+        if (mode==13) h1_Enureso_CCRES_deltap[1] -> Fill(EnuReso);
         //NC
-        if (mode>=31) {
-          h1_Enureso_NC[1] -> Fill(EnuReso);
-        }
+        if (mode>=31) h1_Enureso_NC[1] -> Fill(EnuReso);
       }
     }
 
@@ -700,6 +766,44 @@ void NTagAnalysis::GetNeutrinoEventswNTag(std::vector<float> *TagOut,
     //if (nonzeroTaggedNeutrons==true && NoNeutron==true) NeutrinoEventswNoTruthNeutrons[0][ith]++;
     //if (nonzeroTaggedNeutrons==true && NoNeutron==true) NeutrinoEventswNoTruthNeutrons[0][ith]+=neuosc.OscProbCalculator(numu, false);
     if (nonzeroTaggedNeutrons==true && NoNeutron==true) NeutrinoEventswNoTruthNeutrons[ith]+=neuosc.OscProbCalculator(numu, false);
+  }
+}
+
+
+void NTagAnalysis::GetResolutionwTrueN(CC0PiNumu* numu, float NTrueN) {
+
+  int mode = TMath::Abs(numu->var<int>("mode"));
+  float TrueEnu = numu->var<float>("pnu", 0);
+  float RecoEnu = numu->var<float>("erec");
+  float EnuReso = (TrueEnu - RecoEnu/1000.)/TrueEnu;
+
+  if (NTrueN==0) {
+    //CCQE
+    if (mode==1) h1_Enureso_CCQE_trueN[0] -> Fill(EnuReso);
+    //CC non-QE
+    if ((mode>=2 && mode<=10) || (mode>=14 && mode<=30)) h1_Enureso_CCnonQE_trueN[0] -> Fill(EnuReso);
+    //CC RES (Delta++)
+    if (mode==11) h1_Enureso_CCRES_deltapp_trueN[0] -> Fill(EnuReso);
+    //CC RES (Delta0)
+    if (mode==12) h1_Enureso_CCRES_delta0_trueN[0] -> Fill(EnuReso);
+    //CC RES (Delta+)
+    if (mode==13) h1_Enureso_CCRES_deltap_trueN[0] -> Fill(EnuReso);
+    //NC
+    if (mode>=31) h1_Enureso_NC_trueN[0] -> Fill(EnuReso);
+  }
+  else {
+    //CCQE
+    if (mode==1) h1_Enureso_CCQE_trueN[1] -> Fill(EnuReso);
+    //CC non-QE
+    if ((mode>=2 && mode<=10) || (mode>=14 && mode<=30)) h1_Enureso_CCnonQE_trueN[1] -> Fill(EnuReso);
+    //CC RES (Delta++)
+    if (mode==11) h1_Enureso_CCRES_deltapp_trueN[1] -> Fill(EnuReso);
+    //CC RES (Delta0)
+    if (mode==12) h1_Enureso_CCRES_delta0_trueN[1] -> Fill(EnuReso);
+    //CC RES (Delta+)
+    if (mode==13) h1_Enureso_CCRES_deltap_trueN[1] -> Fill(EnuReso);
+    //NC
+    if (mode>=31) h1_Enureso_NC_trueN[1] -> Fill(EnuReso);
   }
 }
 
@@ -991,7 +1095,7 @@ void NTagAnalysis::SetEfficiencyGraph(int windowstep) {
   g_OverallGdEffwin -> SetMarkerStyle(20);
   g_OverallGdEffwin -> SetMarkerSize(1.0);
 
-  //[3 us, 535 us]
+  //windowstep=0 for [3 us, 535 us]
   GetPreEfficiency(windowstep);
   GetNNEfficiency(windowstep);
   GetOverallEfficiency(windowstep);
@@ -1027,11 +1131,32 @@ void NTagAnalysis::SetEfficiencyGraph(int windowstep) {
   g_OverallGdEff -> SetMarkerStyle(20);
   g_OverallGdEff -> SetMarkerSize(1.0);
 
-  g_Purity = new TGraphErrors(CUTSTEP, TMVATH, Purity, eTMVATH, ePurity);
+  
+  //make 20-point(not 21-point) purity curve
+  for (int i=0; i<CUTSTEP-1; i++) {
+    FillPurity[i]  = Purity[i];
+
+    FillTMVATH[i]  = TMVATH[i];
+    FilleTMVATH[i] = eTMVATH[i];
+  }
+  g_Purity = new TGraphErrors(CUTSTEP-1, FillTMVATH, FillPurity, FilleTMVATH, FillePurity);
   g_Purity -> SetMarkerColor(kPink-5);
   g_Purity -> SetLineColor(kPink-5);
   g_Purity -> SetMarkerStyle(20);
   g_Purity -> SetMarkerSize(1.0);
+
+  //make 20-point(not 21-point) noise rate curve
+  for (int i=0; i<CUTSTEP-1; i++) {
+    FillNoiseRate[i] = NoiseRate[windowstep][i+1];
+
+    FillTMVATH[i]  = TMVATH[i+1];
+    FilleTMVATH[i] = eTMVATH[i+1];
+  }
+  g_FillNoiseRate = new TGraphErrors(CUTSTEP-1, FillTMVATH, FillNoiseRate, FilleTMVATH, FilleNoiseRate);
+  g_FillNoiseRate -> SetMarkerColor(kGray+3);
+  g_FillNoiseRate -> SetLineColor(kGray+3);
+  g_FillNoiseRate -> SetMarkerStyle(20);
+  g_FillNoiseRate -> SetMarkerSize(1.0);
 }
 
 
@@ -1085,6 +1210,13 @@ void NTagAnalysis::WritePlots() {
     h1_Enureso_CCRES_deltapp[i] -> Write();
     h1_Enureso_CCRES_delta0[i]  -> Write();
     h1_Enureso_NC[i]            -> Write();
+
+    h1_Enureso_CCQE_trueN[i]          -> Write();
+    h1_Enureso_CCnonQE_trueN[i]       -> Write();
+    h1_Enureso_CCRES_deltap_trueN[i]  -> Write();
+    h1_Enureso_CCRES_deltapp_trueN[i] -> Write();
+    h1_Enureso_CCRES_delta0_trueN[i]  -> Write();
+    h1_Enureso_NC_trueN[i]            -> Write();
   }
 
   for (int i=0; i<WINSTEP; i++) {
@@ -1097,12 +1229,13 @@ void NTagAnalysis::WritePlots() {
   g_OverallHEffwin  -> Write();
   g_OverallGdEffwin -> Write();
 
-  g_NNEff        -> Write();
-  g_NNHEff       -> Write();
-  g_NNGdEff      -> Write();
-  g_OverallEff   -> Write();
-  g_OverallHEff  -> Write();
-  g_OverallGdEff -> Write();
-  g_Purity       -> Write();
+  g_NNEff         -> Write();
+  g_NNHEff        -> Write();
+  g_NNGdEff       -> Write();
+  g_OverallEff    -> Write();
+  g_OverallHEff   -> Write();
+  g_OverallGdEff  -> Write();
+  g_Purity        -> Write();
+  g_FillNoiseRate -> Write();
 }
 

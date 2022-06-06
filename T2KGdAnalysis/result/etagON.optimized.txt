@@ -1,5 +1,5 @@
 [fiTQun OUTPUT] /disk02/usr6/sedi/fiTQun/converted_output/0026Gd.numu/fhc.numu.fiTQun.0026Gd.NEUTcount0*.part00*.skip*.root
-[NTag   OUTPUT] /disk02/usr6/sedi/Ntag/output/w.mccomb/sk6/NNtraining/noToFoption/fhc.numu.ntag.0026Gd.NEUTcount0*.part00*.skip*.root
+[NTag   OUTPUT] /disk02/usr6/sedi/Ntag/output/w.mccomb/sk6/NNtraining/PreOptimized/fhc.numu.ntag.0026Gd.NEUTcount0*.part00*.skip*.root
  
 [Neutrino] All Parent Neutrino Events: 299460
 [Neutrino] C0: 132655 -> 132655
