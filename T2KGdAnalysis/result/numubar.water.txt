@@ -1,0 +1,14 @@
+[fiTQun OUTPUT] /home/rakutsu/disk2/t2k/regene_mc/files/fcfq_fqmr_root/rhc/numubar_x_numubar/neut.rhc.numubar_x_numubar.0*.0*.t2kfcFQ.root
+[NTag   OUTPUT] /disk02/usr6/sedi/Ntag/output/w.mccomb/sk6/NNtraining/tageoption/fhc.numu.ntag.0026Gd.NEUTcount0*.part00*.skip*.root
+ 
+[Neutrino] All Parent Neutrino Events: 592717
+[Neutrino] C0: 424863 -> 424863
+[Neutrino] C1: 318054 -> 318054
+[Neutrino] C2: 309550 -> 309550
+[Neutrino] C3: 309431 -> 309431
+[Neutrino] C4: 304240 -> 307864
+[Neutrino] C5: 299048 -> 302617
+[Neutrino] Selected CCQE events   : 230665 -> 233093
+[Neutrino] Selected CCnonQE events: 66654 -> 67781
+[Neutrino] Selected NC events     : 1729 -> 1743
+ 

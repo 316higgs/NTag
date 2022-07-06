@@ -1,7 +1,10 @@
+#pragma once
+
 #include "../src/DecayeBox/inc/DecayeBox.h"
 #include "../src/Gd1RmuonSelection/inc/Gd1RmuonSelection.h"
 
 #define SELECTIONCUTS 6
+#define INTERACTIONTYPE 7
 
 int processmax = 0;
 
@@ -18,12 +21,70 @@ void ResetNeutrinoEvents() {
   }
 }
 
+//Selected neutrino events
 int ProtoSelectedCCQEevents    = 0;
 int ProtoSelectedCCnonQEevents = 0;
 int ProtoSelectedNCevents      = 0;
 int SelectedCCQEevents    = 0;
 int SelectedCCnonQEevents = 0;
 int SelectedNCevents      = 0;
+
+//Oscillated neutrino events with only legacy neutrino selection
+float OscillatedCCQE    = 0.;
+float OscillatedCCnonQE = 0.;
+float OscillatedCCRES0  = 0.;
+float OscillatedCCRESp  = 0.;
+float OscillatedCCRESpp = 0.;
+float OscillatedCCOther = 0.;
+float OscillatedNC      = 0.;
+
+//Oscillated neutrino events w/ tagged neutrons
+float OscillatedCCQE_wTagN    = 0.;
+float OscillatedCCnonQE_wTagN = 0.;
+float OscillatedCCRES0_wTagN  = 0.;
+float OscillatedCCRESp_wTagN  = 0.;
+float OscillatedCCRESpp_wTagN = 0.;
+float OscillatedCCOther_wTagN = 0.;
+float OscillatedNC_wTagN      = 0.;
+
+//Oscillated neutrino events w/o tagged neutrons
+float OscillatedCCQE_woTagN    = 0.;
+float OscillatedCCnonQE_woTagN = 0.;
+float OscillatedCCRES0_woTagN  = 0.;
+float OscillatedCCRESp_woTagN  = 0.;
+float OscillatedCCRESpp_woTagN = 0.;
+float OscillatedCCOther_woTagN = 0.;
+float OscillatedNC_woTagN      = 0.;
+
+//Oscillated neutrino events w/ truth neutrons
+float OscillatedCCQE_wTrueN    = 0.;
+float OscillatedCCnonQE_wTrueN = 0.;
+float OscillatedCCRES0_wTrueN  = 0.;
+float OscillatedCCRESp_wTrueN  = 0.;
+float OscillatedCCRESpp_wTrueN = 0.;
+float OscillatedCCOther_wTrueN = 0.;
+float OscillatedNC_wTrueN      = 0.;
+
+//Oscillated neutrino events w/o truth neutrons
+float OscillatedCCQE_woTrueN    = 0.;
+float OscillatedCCnonQE_woTrueN = 0.;
+float OscillatedCCRES0_woTrueN  = 0.;
+float OscillatedCCRESp_woTrueN  = 0.;
+float OscillatedCCRESpp_woTrueN = 0.;
+float OscillatedCCOther_woTrueN = 0.;
+float OscillatedNC_woTrueN      = 0.;
+
+//Oscillated neutrino events within [0.25 GeV, 1.5 GeV]
+float NoOscLegacy   = 0.;
+float NoOscOnlyCCQE = 0.;
+float NoOscwoTrueN  = 0.;
+float NoOscwoTagN   = 0.;
+
+float OscLegacy   = 0.;
+float OscOnlyCCQE = 0.;
+float OscwoTrueN  = 0.;
+float OscwoTagN   = 0.;
+
 
 //1R muon selection + w/o truth neutrons
 int SelectedNeutrinoswoTruthNeutrons = 0;

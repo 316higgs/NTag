@@ -2,8 +2,8 @@
 #include "../../../include/NeutrinoEvents.h"
 
 void Gd1RmuonSelection::SetHistoFrame() {
-  h1_1RmuonEvents = new TH1F("h1_1RmuonEvents", "Selected Neutrino Events by 1R muon Selection; ; Entries", 6, 0, 6);
-  h1_Proto1RmuonEvents = new TH1F("h1_Proto1RmuonEvents", "Selected Neutrino Events by 1R muon Selection; ; Entries", 6, 0, 6);
+  h1_1RmuonEvents = new TH1F("h1_1RmuonEvents", "Selected Neutrino Events by 1R muon Selection; ; Selection Efficiency", 6, 0, 6);
+  h1_Proto1RmuonEvents = new TH1F("h1_Proto1RmuonEvents", "Selected Neutrino Events by 1R muon Selection; ; Selection Efficiency", 6, 0, 6);
 }
 
 void Gd1RmuonSelection::SetHistoFormat() {
@@ -45,6 +45,22 @@ bool Gd1RmuonSelection::C1ApplyFCFV(EvSelVar_t evsel) {
 bool Gd1RmuonSelection::C2Apply1R(EvSelVar_t evsel) {
   bool pass = false;
   if (evsel.pass[1]==true) pass = true;
+  return pass;
+}
+
+bool Gd1RmuonSelection::C2Apply1RCheck(EvSelVar_t evsel, CC0PiNumu* numu, TreeManager* tree) {
+  bool pass = false;
+  if (evsel.pass[1]==true) pass = true;
+
+  int mode = TMath::Abs(numu->var<int>("mode"));
+  float Enu = numu->var<float>("pnu", 0);
+
+  if (evsel.pass[1]==false && mode==1) {
+    OneRingRejectCCQE = Enu;
+    tree -> FillTree();
+    //std::cout << "[Gd1RmuonSelection::C2Apply1RCheck()] 1R rejected CCQE: " << Enu << " GeV" << std::endl;
+  }
+
   return pass;
 }
 

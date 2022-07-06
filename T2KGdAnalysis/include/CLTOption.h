@@ -1,6 +1,34 @@
 
 bool etagmode = false;
 
+enum OscChan::E_OSC_CHAN CLTOptionOscMode(TString OscKeyWord, TString Osc) {
+  enum OscChan::E_OSC_CHAN eOscMode = eNUMU;
+  if (OscKeyWord=="-OSCCH") {
+    if (Osc=="NUMU" || Osc=="numu") eOscMode = eNUMU;
+    else if (Osc=="NUMUBAR" || Osc=="numubar") eOscMode = eNUMUBAR;
+    else {
+      std::cout << " " << std::endl;
+      std::cout << "[!!!CLT error!!!] Oscillation channel can not be found. --- input NUMU/NUMUBAR" << std::endl;
+      exit(-1);
+    }
+  }
+  return eOscMode;
+}
+
+enum BeamMode::E_BEAM_MODE CLTOptionBeamMode(TString BeamKeyWord, TString Beam) {
+  enum BeamMode::E_BEAM_MODE eBeamMode = eFHC;
+  if (BeamKeyWord=="-BEAMMODE") {
+    if (Beam=="FHC") eBeamMode = eFHC;
+    else if (Beam=="RHC") eBeamMode = eRHC;
+    else {
+      std::cout << " " << std::endl;
+      std::cout << "[!!!CLT error!!!] Oscillation channel can not be found. --- input FHC or RHC" << std::endl;
+      exit(-1);
+    }
+  }
+  return eBeamMode;
+}
+
 void CLTOptionETAG(TString ETAGKeyword, TString ETAG) {
   if (ETAGKeyword=="-ETAG") {
     if (ETAG=="ON" || ETAG=="On" || ETAG=="on") etagmode = true;

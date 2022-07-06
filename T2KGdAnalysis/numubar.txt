@@ -1,0 +1,207 @@
+rm -f *.o *.exe
+rm -f analysis1Rmu.o
+g++ -c -g -O -Wall -Wno-unused -fpic -I/disk02/usr6/rakutsu/t2k/tmp/t2ksk-neutronh/anat2ksk/include -I/usr/local/sklib_gcc8/cern/2005/include -I/usr/local/sklib_gcc8/cern/2005/include/cfortran -pthread -m64 -I/usr/local/sklib_gcc8/root_v5.34.38/include  -I. -I/usr/local/sklib_gcc8/skofl_21a/include/ -I/usr/local/sklib_gcc8/skofl_21a/include//skonl -I/usr/local/sklib_gcc8/skofl_21a/include//lowe -I/usr/local/sklib_gcc8/atmpd_21a/include/  -Dlinux -D__linux__ -DgFortran -Df2cFortran  -DSITE_HAS_RFA -std=c++11 -o analysis1Rmu.o /home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC/analysis/T2KGdAnalysis/analysis1Rmu.cc 
+rm -f .analysis1Rmu.exe
+LD_RUN_PATH=/usr/local/sklib_gcc8/skofl_21a/lib/:/usr/local/sklib_gcc8/skofl_21a/lib/ g++ -g -g -O -Wall -Wno-unused -fpic -I/disk02/usr6/rakutsu/t2k/tmp/t2ksk-neutronh/anat2ksk/include -I/usr/local/sklib_gcc8/cern/2005/include -I/usr/local/sklib_gcc8/cern/2005/include/cfortran -pthread -m64 -I/usr/local/sklib_gcc8/root_v5.34.38/include  -I. -I/usr/local/sklib_gcc8/skofl_21a/include/ -I/usr/local/sklib_gcc8/skofl_21a/include//skonl -I/usr/local/sklib_gcc8/skofl_21a/include//lowe -I/usr/local/sklib_gcc8/atmpd_21a/include/  -Dlinux -D__linux__ -DgFortran -Df2cFortran  -DSITE_HAS_RFA -std=c++11 -o analysis1Rmu.exe analysis1Rmu.o -L/usr/local/sklib_gcc8/skofl_21a/lib/ -L/usr/local/sklib_gcc8/atmpd_21a/lib/ -Wl,-z -Wl,muldefs  -L/disk02/usr6/rakutsu/t2k/tmp/t2ksk-neutronh/anat2ksk/lib -lcc0pinumu -L/home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC/analysis/T2KGdAnalysis/lib -ldecayebox -L/home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC/analysis/T2KGdAnalysis/lib -lgd1rmuonselection -L/home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC/analysis/T2KGdAnalysis/lib -lneutrinooscillation -L/home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC/analysis/T2KGdAnalysis/lib -ldistanceviewer -L/home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC/analysis/T2KGdAnalysis/lib -lntaganalysis -L/home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC/analysis/T2KGdAnalysis/lib -ltreemanager -L/usr/local/sklib_gcc8/atmpd_21a/lib -lThreeProb -lskroot -lDataDefinition -lRoot2zbs -ltqrealroot -lloweroot -latmpdroot -lmcinfo -lsofttrgroot -lidod_xtlk_root -lmufitpe -lskrd -lgeom -lsklib -llibrary -lmon -lastro -liolib -lzbs -lsklib -lsofttrg -lm -lstdc++ -lskroot -lDataDefinition -lRoot2zbs -ltqrealroot -lloweroot -latmpdroot -lmcinfo -lsofttrgroot -lidod_xtlk_root -lmufitpe -lskrd -lgeom -lsklib -llibrary -lmon -lastro -liolib -lzbs -lsklib -lsofttrg -lm -lstdc++ `cernlib graflib grafX11 packlib mathlib kernlib lapack3 blas` -L/usr/local/sklib_gcc8/root_v5.34.38/lib -lGui -lCore -lCint -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lTree -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -pthread -lm -ldl -rdynamic -lTreePlayer -lrfa  -lm -L/usr/lib/gcc/x86_64-redhat-linux/8 -L/usr/lib/gcc/x86_64-redhat-linux/8/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/8/../../.. -lgfortran -lm -lquadmath 
+[### analysis1Rmu ###]  Loaded 3000 files from: /disk02/usr6/sedi/fiTQun/converted_output/0026Gd.numubar/rhc.numubar.fiTQun.0026Gd.NEUTcount0*.part00*.skip*.root
+[### analysis1Rmu ###]  Loaded 3000 files from: /disk02/usr6/sedi/Ntag/output/w.mccomb/sk6/NNtraining/tageoption/rhc.numubar.ntag.0026Gd.NEUTcount0*.part00*.skip*.root
+[### analysis1Rmu ###]  Loaded 3000 files from: /disk02/usr6/sedi/Ntag/output/w.mccomb/sk6/NNtraining/tageoption/rhc.numubar.ntag.0026Gd.NEUTcount0*.part00*.skip*.root
+[### analysis1Rmu ###]  Loaded 3000 files from: /disk02/usr6/sedi/Ntag/output/w.mccomb/sk6/NNtraining/tageoption/rhc.numubar.ntag.0026Gd.NEUTcount0*.part00*.skip*.root
+[### analysis1Rmu ###]  fiTQun output     : Processing 293990 entries...
+[### analysis1Rmu ###]  Event info        : Processing 300000 entries...
+[### analysis1Rmu ###]  Delayed info      : Processing 300000 entries...
+[### analysis1Rmu ###]  NTag output       : Processing 300000 entries...
+ [INFO] T2KSKOscProb::setDefaultT2KPars	   
+   set parameters used for osc. probability 
+   - sin^2( th_12 ) :0.304
+   - sin^2( th_13 ) :0.0212
+   - sin^2( th_23 ) :0.532
+   - dm2_21         :7.53e-05
+   - dm2_32         :0.002452
+   - delta CP       :-1.885
+   - e- density     :2.6
+   - Base line      :295
+
+ [INFO] CC0PiNumuVariables::setVarList 
+   Currently available variables are... 
+       - fqevis
+       - fqmomm
+       - fqdcye
+       - fqdwall
+       - fqposr2
+       - fqposz
+       - cosbm
+       - erec
+       - momtr
+       - Q2rec
+       - pidemu
+       - pidcpimu
+       - fqpos
+       - fqdir
+       - ninfdir
+       - beamdir
+
+ [INFO] SKFluxTuning::loadFluxTunings 
+ - Loaded /disk02/usr6/rakutsu/t2k/regene_mc/files/flux/13av4/tuned13av4.0/run1-9a_v2/sk_tuned13av4_13anom_run1-9a_numode_fine.root
+ - Loaded /disk02/usr6/rakutsu/t2k/regene_mc/files/flux/13av4/tuned13av4.0/run5c-9d_v2/sk_tuned13av4_13anom_run5c-9d_antinumode_fine.root
+ [INFO] SKh1Variables::setBranches 
+   - Added branch for nhitac
+   - Added branch for evclass
+   - Added branch for nspill
+   - Added branch for good_spill_flag
+   - Added branch for fqmrnring
+   - Added branch for fq1rt0
+   - Added branch for fq1rmom
+   - Added branch for fq1rpos
+   - Added branch for fq1rdir
+   - Added branch for fq1rnll
+   - Added branch for fqnse
+   - Added branch for fqn50
+   - Added branch for npar
+   - Added branch for pmomv
+   - Added branch for ipv
+   - Added branch for ipnu
+   - Added branch for posv
+   - Added branch for dirv
+   - Added branch for wallv
+   - Added branch for mode
+   - Added branch for numnu
+   - Added branch for ipnu
+   - Added branch for pnu
+   - Added branch for dirnu
+   - Added branch for Npvc
+   - Added branch for Ipvc
+   - Added branch for Ichvc
+   - Added branch for Abspvc
+   - Added branch for nscndprt
+   - Added branch for iprtscnd
+   - Added branch for iprntprt
+   - Added branch for lmecscnd
+   - Added branch for vtxscnd
+   - Added branch for tscnd
+
+[### CLT Option Summary ###] e-tagging: ON
+[### CLT Option Summary ###] MC type: Gd
+Reco Enu = 5.67202 GeV
+Reco Enu = 5.67202 GeV
+Reco Enu = 5.67202 GeV
+Reco Enu = 5.67202 GeV
+Reco Enu = 5.67202 GeV
+Reco Enu = 5.67202 GeV
+Reco Enu = 5.67202 GeV
+Reco Enu = 5.67202 GeV
+Reco Enu = 5.67202 GeV
+Reco Enu = 5.67202 GeV
+Reco Enu = 5.70016 GeV
+Reco Enu = 5.70016 GeV
+Reco Enu = 5.70016 GeV
+Reco Enu = 5.70016 GeV
+Reco Enu = 5.70016 GeV
+Reco Enu = 5.70016 GeV
+Reco Enu = 5.70016 GeV
+Reco Enu = 5.70016 GeV
+Reco Enu = 5.70016 GeV
+Reco Enu = 5.70016 GeV
+Reco Enu = 5.76468 GeV
+Reco Enu = 5.76468 GeV
+Reco Enu = 5.76468 GeV
+Reco Enu = 5.76468 GeV
+Reco Enu = 5.76468 GeV
+Reco Enu = 5.76468 GeV
+Reco Enu = 5.76468 GeV
+Reco Enu = 5.76468 GeV
+Reco Enu = 5.76468 GeV
+Reco Enu = 5.76468 GeV
+Reco Enu = 5.62501 GeV
+Reco Enu = 5.62501 GeV
+Reco Enu = 5.62501 GeV
+Reco Enu = 5.62501 GeV
+Reco Enu = 5.62501 GeV
+Reco Enu = 5.62501 GeV
+Reco Enu = 5.62501 GeV
+Reco Enu = 5.62501 GeV
+Reco Enu = 5.62501 GeV
+Reco Enu = 5.62501 GeV
+Reco Enu = 5.66721 GeV
+Reco Enu = 5.66721 GeV
+Reco Enu = 5.66721 GeV
+Reco Enu = 5.66721 GeV
+Reco Enu = 5.66721 GeV
+Reco Enu = 5.66721 GeV
+Reco Enu = 5.66721 GeV
+Reco Enu = 5.66721 GeV
+Reco Enu = 5.66721 GeV
+Reco Enu = 5.66721 GeV
+Reco Enu = 5.76005 GeV
+Reco Enu = 5.76005 GeV
+Reco Enu = 5.76005 GeV
+Reco Enu = 5.76005 GeV
+Reco Enu = 5.76005 GeV
+Reco Enu = 5.76005 GeV
+Reco Enu = 5.76005 GeV
+Reco Enu = 5.76005 GeV
+Reco Enu = 5.76005 GeV
+Reco Enu = 5.76005 GeV
+Reco Enu = 5.76072 GeV
+Reco Enu = 5.76072 GeV
+Reco Enu = 5.76072 GeV
+Reco Enu = 5.76072 GeV
+Reco Enu = 5.76072 GeV
+Reco Enu = 5.76072 GeV
+Reco Enu = 5.76072 GeV
+Reco Enu = 5.76072 GeV
+Reco Enu = 5.76072 GeV
+Reco Enu = 5.76072 GeV
+Reco Enu = 5.67433 GeV
+Reco Enu = 5.67433 GeV
+Reco Enu = 5.67433 GeV
+Reco Enu = 5.67433 GeV
+Reco Enu = 5.67433 GeV
+Reco Enu = 5.67433 GeV
+Reco Enu = 5.67433 GeV
+Reco Enu = 5.67433 GeV
+Reco Enu = 5.67433 GeV
+Reco Enu = 5.67433 GeV
+Reco Enu = 5.72493 GeV
+Reco Enu = 5.72493 GeV
+Reco Enu = 5.72493 GeV
+Reco Enu = 5.72493 GeV
+Reco Enu = 5.72493 GeV
+Reco Enu = 5.72493 GeV
+Reco Enu = 5.72493 GeV
+Reco Enu = 5.72493 GeV
+Reco Enu = 5.72493 GeV
+Reco Enu = 5.72493 GeV
+Reco Enu = 5.66575 GeV
+Reco Enu = 5.66575 GeV
+Reco Enu = 5.66575 GeV
+Reco Enu = 5.66575 GeV
+Reco Enu = 5.66575 GeV
+Reco Enu = 5.66575 GeV
+Reco Enu = 5.66575 GeV
+Reco Enu = 5.66575 GeV
+Reco Enu = 5.66575 GeV
+Reco Enu = 5.66575 GeV
+Reco Enu = 5.69123 GeV
+Reco Enu = 5.69123 GeV
+Reco Enu = 5.69123 GeV
+Reco Enu = 5.69123 GeV
+Reco Enu = 5.69123 GeV
+Reco Enu = 5.69123 GeV
+Reco Enu = 5.69123 GeV
+Reco Enu = 5.69123 GeV
+Reco Enu = 5.69123 GeV
+Reco Enu = 5.69123 GeV
+Reco Enu = 5.70425 GeV
+Reco Enu = 5.70425 GeV
+Reco Enu = 5.70425 GeV
+Reco Enu = 5.70425 GeV
+Reco Enu = 5.70425 GeV
+Reco Enu = 5.70425 GeV
+Reco Enu = 5.70425 GeV
+Reco Enu = 5.70425 GeV
+Reco Enu = 5.70425 GeV
+Reco Enu = 5.70425 GeV
+No nlike: 34671
+More than one nlike: 36159
+Output: ./output/fhc/fhc.numubar_x_numubar.etagON.root

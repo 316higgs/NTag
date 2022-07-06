@@ -5,7 +5,8 @@
 #include "TText.h"
 
 void EnuResolution() {
-  TFile* fin = new TFile("../../output/numu.etagON.root");
+  TFile* fin = new TFile("../../output/fhc/fhc.numu_x_numu.etagON.root");
+  //TFile* fin = new TFile("../../output/numubar.etagON.root");
 
   TH1F* h1_ccqe          = (TH1F*)fin->Get("NeutrinoOscillation/h1_Enureso_mode0");
   TH1F* h1_ccqewTrueN    = (TH1F*)fin->Get("NTagAnalysis/h1_Enureso_CCQE_wtrueNeutrons");
@@ -137,6 +138,21 @@ void EnuResolution() {
   h1_ccresdeltap  -> Draw("SAME");
   h1_nc           -> Draw("SAME");
 
+  TLegend* legend0 = new TLegend(0.55, 0.45, 0.87, 0.85);
+  legend0 -> SetTextSize(0.03);
+  legend0->AddEntry((TObject*)0,"#kern[-0.3]{ FHC #nu_{#mu} #rightarrow #nu_{#mu} MC }","");
+  //legend0->AddEntry((TObject*)0,"#kern[-0.5]{ #bar{#nu}_{#mu} #rightarrow #bar{#nu}_{#mu} Mode }","");
+  legend0 -> AddEntry(h1_ccqe, "CCQE(1p1h)", "F");
+  legend0 -> AddEntry(h1_ccnonqe, "CC(2p2h+others)", "F");
+  legend0 -> AddEntry(h1_ccresdeltap, "CCRES(#Delta^{+})", "F");
+  legend0 -> AddEntry(h1_ccresdeltapp, "CCRES(#Delta^{++})", "F");
+  legend0 -> AddEntry(h1_ccresdelta0, "CCRES(#Delta^{0})", "F");
+  legend0 -> AddEntry(h1_nc, "NC", "F");
+  legend0 -> SetFillColor(0);
+  legend0 -> Draw() ;
+
+  
+
   TCanvas* c2 = new TCanvas("c2","w/ tagged neutrons",900,700);
   c2 -> SetGrid();
   h1_ccqewneutron -> Draw();
@@ -151,6 +167,20 @@ void EnuResolution() {
   h1_ccresdeltapwneutron  -> Draw("SAME");
   h1_ncwneutron           -> Draw("SAME");
 
+  TLegend* legend1 = new TLegend(0.45, 0.45, 0.87, 0.85);
+  legend1 -> SetTextSize(0.03);
+  legend1->AddEntry((TObject*)0,"#kern[-0.25]{ FHC #nu_{#mu} #rightarrow #nu_{#mu} MC (w/ tagged neutrons)}","");
+  //legend1->AddEntry((TObject*)0,"#kern[-0.5]{ #bar{#nu}_{#mu} #rightarrow #bar{#nu}_{#mu} Mode }","");
+  legend1 -> AddEntry(h1_ccqe, "CCQE(1p1h)", "F");
+  legend1 -> AddEntry(h1_ccnonqe, "CC(2p2h+others)", "F");
+  legend1 -> AddEntry(h1_ccresdeltap, "CCRES(#Delta^{+})", "F");
+  legend1 -> AddEntry(h1_ccresdeltapp, "CCRES(#Delta^{++})", "F");
+  legend1 -> AddEntry(h1_ccresdelta0, "CCRES(#Delta^{0})", "F");
+  legend1 -> AddEntry(h1_nc, "NC", "F");
+  legend1 -> SetFillColor(0);
+  legend1 -> Draw() ;
+
+
   TCanvas* c3 = new TCanvas("c3","w/o tagged neutrons",900,700);
   c3 -> SetGrid();
   h1_ccqewoneutron -> Draw();
@@ -164,6 +194,19 @@ void EnuResolution() {
   h1_ccresdelta0woneutron  -> Draw("SAME");
   h1_ccresdeltapwoneutron  -> Draw("SAME");
   h1_ncwoneutron           -> Draw("SAME");
+
+  TLegend* legend2 = new TLegend(0.45, 0.45, 0.87, 0.85);
+  legend2 -> SetTextSize(0.03);
+  legend2->AddEntry((TObject*)0,"#kern[-0.25]{ FHC #nu_{#mu} #rightarrow #nu_{#mu} MC (w/o tagged neutrons)}","");
+  //legend2->AddEntry((TObject*)0,"#kern[-0.5]{ #bar{#nu}_{#mu} #rightarrow #bar{#nu}_{#mu} Mode }","");
+  legend2 -> AddEntry(h1_ccqe, "CCQE(1p1h)", "F");
+  legend2 -> AddEntry(h1_ccnonqe, "CC(2p2h+others)", "F");
+  legend2 -> AddEntry(h1_ccresdeltap, "CCRES(#Delta^{+})", "F");
+  legend2 -> AddEntry(h1_ccresdeltapp, "CCRES(#Delta^{++})", "F");
+  legend2 -> AddEntry(h1_ccresdelta0, "CCRES(#Delta^{0})", "F");
+  legend2 -> AddEntry(h1_nc, "NC", "F");
+  legend2 -> SetFillColor(0);
+  legend2 -> Draw() ;
 
 
   TCanvas* c4 = new TCanvas("c4","w/ truth neutrons",900,700);
@@ -180,6 +223,20 @@ void EnuResolution() {
   h1_ccresdeltapwTrueN  -> Draw("SAME");
   h1_ncwTrueN           -> Draw("SAME");
 
+  TLegend* legend3 = new TLegend(0.45, 0.45, 0.87, 0.85);
+  legend3 -> SetTextSize(0.03);
+  legend3->AddEntry((TObject*)0,"#kern[-0.25]{ FHC #nu_{#mu} #rightarrow #nu_{#mu} MC (w/ truth neutrons)}","");
+  //legend1->AddEntry((TObject*)0,"#kern[-0.5]{ #bar{#nu}_{#mu} #rightarrow #bar{#nu}_{#mu} Mode }","");
+  legend3 -> AddEntry(h1_ccqe, "CCQE(1p1h)", "F");
+  legend3 -> AddEntry(h1_ccnonqe, "CC(2p2h+others)", "F");
+  legend3 -> AddEntry(h1_ccresdeltap, "CCRES(#Delta^{+})", "F");
+  legend3 -> AddEntry(h1_ccresdeltapp, "CCRES(#Delta^{++})", "F");
+  legend3 -> AddEntry(h1_ccresdelta0, "CCRES(#Delta^{0})", "F");
+  legend3 -> AddEntry(h1_nc, "NC", "F");
+  legend3 -> SetFillColor(0);
+  legend3 -> Draw() ;
+
+
   TCanvas* c5 = new TCanvas("c5","w/o truth neutrons",900,700);
   c5 -> SetGrid();
   h1_ccqewoTrueN -> Draw();
@@ -193,5 +250,18 @@ void EnuResolution() {
   h1_ccresdelta0woTrueN  -> Draw("SAME");
   h1_ccresdeltapwoTrueN  -> Draw("SAME");
   h1_ncwoTrueN           -> Draw("SAME");
+
+  TLegend* legend4 = new TLegend(0.45, 0.45, 0.87, 0.85);
+  legend4 -> SetTextSize(0.03);
+  legend4->AddEntry((TObject*)0,"#kern[-0.25]{ FHC #nu_{#mu} #rightarrow #nu_{#mu} MC (w/o truth neutrons)}","");
+  //legend4->AddEntry((TObject*)0,"#kern[-0.5]{ #bar{#nu}_{#mu} #rightarrow #bar{#nu}_{#mu} Mode }","");
+  legend4 -> AddEntry(h1_ccqe, "CCQE(1p1h)", "F");
+  legend4 -> AddEntry(h1_ccnonqe, "CC(2p2h+others)", "F");
+  legend4 -> AddEntry(h1_ccresdeltap, "CCRES(#Delta^{+})", "F");
+  legend4 -> AddEntry(h1_ccresdeltapp, "CCRES(#Delta^{++})", "F");
+  legend4 -> AddEntry(h1_ccresdelta0, "CCRES(#Delta^{0})", "F");
+  legend4 -> AddEntry(h1_nc, "NC", "F");
+  legend4 -> SetFillColor(0);
+  legend4 -> Draw() ;
 
 }

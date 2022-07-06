@@ -7,6 +7,9 @@ void NTagAnalysis::SetHistoFrame() {
   for (int i=0; i<TRUETYPE; i++) {
     h1_NTrueN[i] = new TH1F(TString::Format("h1_NTrueN_type%d", i), "Truth Capture Neutrons; NTrueN; Entries", 20, 0, 20);
   }
+  for (int i=0; i<INTERACTIONTYPE; i++) {
+    h1_TrueNmultiplicity[i] = new TH1F(TString::Format("h1_TrueNmultiplicity_mode%d", i), "Truth Capture Neutrons; NTrueN; Entries", 20, 0, 20);
+  }
   h1_TotGammaE   = new TH1F("h1_TotGammaE", "Truth Total Gamma Energy; E[MeV]; Entries", 20, 0, 10);
   for (int i=0; i<2; i++) {
     if (i==0) {
@@ -52,6 +55,19 @@ void NTagAnalysis::SetHistoFormat() {
   h1_NTrueN[0] -> SetLineColor(kViolet+3); //All truth neutrons
   h1_NTrueN[1] -> SetLineColor(kAzure-4);  //truth H-n neutrons
   h1_NTrueN[2] -> SetLineColor(kTeal-5);   //truth Gd-n neutrons
+
+  for (int i=0; i<INTERACTIONTYPE; i++) {
+    h1_TrueNmultiplicity[i] -> SetLineWidth(2);
+    h1_TrueNmultiplicity[i] -> SetTitleOffset(1.4, "Y");
+    h1_TrueNmultiplicity[i] -> SetTitleSize(0.035, "Y");
+    h1_TrueNmultiplicity[i] -> SetLabelSize(0.033, "Y");
+  }
+  h1_TrueNmultiplicity[0] -> SetLineColor(kAzure-1);  //CCQE
+  h1_TrueNmultiplicity[1] -> SetLineColor(kOrange+8); //CC non-QE
+  h1_TrueNmultiplicity[2] -> SetLineColor(kPink+1);   //CCRES+
+  h1_TrueNmultiplicity[3] -> SetLineColor(kPink-8);   //CCRES++
+  h1_TrueNmultiplicity[4] -> SetLineColor(kGray+1);   //CCRES0
+  h1_TrueNmultiplicity[5] -> SetLineColor(kTeal+9);   //NC
 
   h1_TotGammaE -> SetLineWidth(2);
   h1_TotGammaE -> SetLineColor(kAzure-4);
@@ -183,17 +199,23 @@ void NTagAnalysis::InitNeutrons() {
     NeutrinoEventswOneNlikeDecaye[i]  = 0;
     NeutrinoEventswNoTruthNeutrons[i] = 0;
 
-    NNEff[i]   = 0.;
-    NNHEff[i]  = 0.;
-    NNGdEff[i] = 0.;
+    NNEff[i]    = 0.;
+    NNHEff[i]   = 0.;
+    NNGdEff[i]  = 0.;
+    eNNEff[i]   = 0.;
+    eNNHEff[i]  = 0.;
+    eNNGdEff[i] = 0.;
 
     NNEffinFV[i]   = 0.;
     NNHEffinFV[i]  = 0.;
     NNGdEffinFV[i] = 0.;
 
-    OverallEff[i]   = 0.;
-    OverallHEff[i]  = 0.;
-    OverallGdEff[i] = 0.;
+    OverallEff[i]    = 0.;
+    OverallHEff[i]   = 0.;
+    OverallGdEff[i]  = 0.;
+    eOverallEff[i]   = 0.;
+    eOverallHEff[i]  = 0.;
+    eOverallGdEff[i] = 0.;
 
     OverallEffinFV[i]   = 0.;
     OverallHEffinFV[i]  = 0.;
@@ -254,6 +276,29 @@ void NTagAnalysis::GetTruthNeutrons(float NTrueN,
 
   h1_NTrueN[1] -> Fill(NumTruthHNeutrons);
   h1_NTrueN[2] -> Fill(NumTruthGdNeutrons);
+}
+
+
+void NTagAnalysis::GetTruthNeutronsIntType(CC0PiNumu* numu, float NTrueN) {
+  int mode = TMath::Abs(numu->var<int>("mode"));
+
+  //CCQE(1p1h)
+  if (mode==1) h1_TrueNmultiplicity[0] -> Fill(NTrueN);
+
+  //CC non-QE
+  if ((mode>=2 && mode<=10) || (mode>=14 && mode<=30)) h1_TrueNmultiplicity[1] -> Fill(NTrueN);
+
+  //CC RES (Delta+)
+  if (mode==13) h1_TrueNmultiplicity[2] -> Fill(NTrueN);
+
+  //CC RES (Delta++)
+  if (mode==11) h1_TrueNmultiplicity[3] -> Fill(NTrueN);
+
+  //CC RES (Delta0)
+  if (mode==12) h1_TrueNmultiplicity[4] -> Fill(NTrueN);
+
+  //NC
+  if (mode>=31) h1_TrueNmultiplicity[5] -> Fill(NTrueN);
 }
 
 
@@ -554,97 +599,174 @@ void NTagAnalysis::Set1RmuonSamplewNTag(bool NoNlike, CC0PiNumu* numu, int mode)
   float OscProb = numu->getOscWgt();
   float RecoEnu = numu->var<float>("erec");
 
+  //use tagged neutrons info
   if (NoNlike) {
-    h1_Allnumu_x_numu_NoOsc_woNeutron -> Fill(RecoEnu/1000.);
-    h1_Allnumu_x_numu_OscProb_woNeutron -> Fill(RecoEnu/1000., OscProb);
-    h1_Allnumu_x_numu_OscProbRatio_woNeutron -> Fill(RecoEnu/1000., OscProb);
+    h1_All_NoOsc_woNeutron        -> Fill(RecoEnu/1000.);
+    h1_All_OscProb_woNeutron      -> Fill(RecoEnu/1000., OscProb);
+    h1_All_OscProbRatio_woNeutron -> Fill(RecoEnu/1000., OscProb);
+
+    //Count oscillated neutrino events within [0.25 GeV, 1.5 GeV]
+    if (RecoEnu/1000. > 0.25 && RecoEnu/1000. < 1.5) {
+      NoOscwoTagN++;
+      OscwoTagN += OscProb;
+    }
   }
   else {
-    h1_Allnumu_x_numu_NoOsc_wNeutron -> Fill(RecoEnu/1000.);
-    h1_Allnumu_x_numu_OscProb_wNeutron -> Fill(RecoEnu/1000., OscProb);
-    h1_Allnumu_x_numu_OscProbRatio_wNeutron -> Fill(RecoEnu/1000., OscProb);
+    h1_All_NoOsc_wNeutron        -> Fill(RecoEnu/1000.);
+    h1_All_OscProb_wNeutron      -> Fill(RecoEnu/1000., OscProb);
+    h1_All_OscProbRatio_wNeutron -> Fill(RecoEnu/1000., OscProb);
   }
 
   //CCQE(1p1h)
   if (mode==1) {
     if (NoNlike) {
-      h1_numu_x_numu_NoOsc_woNeutron[0]        -> Fill(RecoEnu/1000.);
-      h1_numu_x_numu_OscProb_woNeutron[0]      -> Fill(RecoEnu/1000., OscProb);
-      h1_numu_x_numu_OscProbRatio_woNeutron[0] -> Fill(RecoEnu/1000., OscProb);
+      h1_NoOsc_woNeutron[0]        -> Fill(RecoEnu/1000.);
+      h1_OscProb_woNeutron[0]      -> Fill(RecoEnu/1000., OscProb);
+      h1_OscProbRatio_woNeutron[0] -> Fill(RecoEnu/1000., OscProb);
+
+      OscillatedCCQE_woTagN += OscProb;
     }
     else {
-      h1_numu_x_numu_NoOsc_wNeutron[0]        -> Fill(RecoEnu/1000.);
-      h1_numu_x_numu_OscProb_wNeutron[0]      -> Fill(RecoEnu/1000., OscProb);
-      h1_numu_x_numu_OscProbRatio_wNeutron[0] -> Fill(RecoEnu/1000., OscProb);
+      h1_NoOsc_wNeutron[0]        -> Fill(RecoEnu/1000.);
+      h1_OscProb_wNeutron[0]      -> Fill(RecoEnu/1000., OscProb);
+      h1_OscProbRatio_wNeutron[0] -> Fill(RecoEnu/1000., OscProb);
+
+      OscillatedCCQE_wTagN += OscProb;
     }
   }
 
-  //CC non-QE
-  if ((mode>=2 && mode<=10) || (mode>=14 && mode<=30)) {
+  //CC non-QE(2p2h)
+  if (mode>=2 && mode<=10) {
     if (NoNlike) {
-      h1_numu_x_numu_NoOsc_woNeutron[1]        -> Fill(RecoEnu/1000.);
-      h1_numu_x_numu_OscProb_woNeutron[1]      -> Fill(RecoEnu/1000., OscProb);
-      h1_numu_x_numu_OscProbRatio_woNeutron[1] -> Fill(RecoEnu/1000., OscProb);
+      h1_NoOsc_woNeutron[1]        -> Fill(RecoEnu/1000.);
+      h1_OscProb_woNeutron[1]      -> Fill(RecoEnu/1000., OscProb);
+      h1_OscProbRatio_woNeutron[1] -> Fill(RecoEnu/1000., OscProb);
+
+      OscillatedCCnonQE_woTagN += OscProb;
     }
     else {
-      h1_numu_x_numu_NoOsc_wNeutron[1]        -> Fill(RecoEnu/1000.);
-      h1_numu_x_numu_OscProb_wNeutron[1]      -> Fill(RecoEnu/1000., OscProb);
-      h1_numu_x_numu_OscProbRatio_wNeutron[1] -> Fill(RecoEnu/1000., OscProb);
+      h1_NoOsc_wNeutron[1]        -> Fill(RecoEnu/1000.);
+      h1_OscProb_wNeutron[1]      -> Fill(RecoEnu/1000., OscProb);
+      h1_OscProbRatio_wNeutron[1] -> Fill(RecoEnu/1000., OscProb);
+
+      OscillatedCCnonQE_wTagN += OscProb;
     }
   }
 
   //NC
   if (mode>=31) {
     if (NoNlike) {
-      h1_numu_x_numu_NoOsc_woNeutron[2]        -> Fill(RecoEnu/1000.);
-      h1_numu_x_numu_OscProb_woNeutron[2]      -> Fill(RecoEnu/1000., OscProb);
-      h1_numu_x_numu_OscProbRatio_woNeutron[2] -> Fill(RecoEnu/1000., OscProb);
+      h1_NoOsc_woNeutron[2]        -> Fill(RecoEnu/1000.);
+      h1_OscProb_woNeutron[2]      -> Fill(RecoEnu/1000., OscProb);
+      h1_OscProbRatio_woNeutron[2] -> Fill(RecoEnu/1000., OscProb);
+
+      OscillatedNC_woTagN++;
     }
     else {
-      h1_numu_x_numu_NoOsc_wNeutron[2]        -> Fill(RecoEnu/1000.);
-      h1_numu_x_numu_OscProb_wNeutron[2]      -> Fill(RecoEnu/1000., OscProb);
-      h1_numu_x_numu_OscProbRatio_wNeutron[2] -> Fill(RecoEnu/1000., OscProb);
+      h1_NoOsc_wNeutron[2]        -> Fill(RecoEnu/1000.);
+      h1_OscProb_wNeutron[2]      -> Fill(RecoEnu/1000., OscProb);
+      h1_OscProbRatio_wNeutron[2] -> Fill(RecoEnu/1000., OscProb);
+
+      OscillatedNC_wTagN++;
     }
   }
 
   //CC RES (Delta+)
   if (mode==13) {
     if (NoNlike) {
-      h1_numu_x_numu_NoOsc_woNeutron[3]        -> Fill(RecoEnu/1000.);
-      h1_numu_x_numu_OscProb_woNeutron[3]      -> Fill(RecoEnu/1000., OscProb);
-      h1_numu_x_numu_OscProbRatio_woNeutron[3] -> Fill(RecoEnu/1000., OscProb);
+      h1_NoOsc_woNeutron[3]        -> Fill(RecoEnu/1000.);
+      h1_OscProb_woNeutron[3]      -> Fill(RecoEnu/1000., OscProb);
+      h1_OscProbRatio_woNeutron[3] -> Fill(RecoEnu/1000., OscProb);
+
+      OscillatedCCRESp_woTagN += OscProb;
     }
     else {
-      h1_numu_x_numu_NoOsc_wNeutron[3]        -> Fill(RecoEnu/1000.);
-      h1_numu_x_numu_OscProb_wNeutron[3]      -> Fill(RecoEnu/1000., OscProb);
-      h1_numu_x_numu_OscProbRatio_wNeutron[3] -> Fill(RecoEnu/1000., OscProb);
+      h1_NoOsc_wNeutron[3]        -> Fill(RecoEnu/1000.);
+      h1_OscProb_wNeutron[3]      -> Fill(RecoEnu/1000., OscProb);
+      h1_OscProbRatio_wNeutron[3] -> Fill(RecoEnu/1000., OscProb);
+
+      OscillatedCCRESp_wTagN += OscProb;
     }
   }
   //CC RES (Delta++)
   if (mode==11) {
     if (NoNlike) {
-      h1_numu_x_numu_NoOsc_woNeutron[4]        -> Fill(RecoEnu/1000.);
-      h1_numu_x_numu_OscProb_woNeutron[4]      -> Fill(RecoEnu/1000., OscProb);
-      h1_numu_x_numu_OscProbRatio_woNeutron[4] -> Fill(RecoEnu/1000., OscProb);
+      h1_NoOsc_woNeutron[4]        -> Fill(RecoEnu/1000.);
+      h1_OscProb_woNeutron[4]      -> Fill(RecoEnu/1000., OscProb);
+      h1_OscProbRatio_woNeutron[4] -> Fill(RecoEnu/1000., OscProb);
+
+      OscillatedCCRESpp_woTagN += OscProb;
     }
     else {
-      h1_numu_x_numu_NoOsc_wNeutron[4]        -> Fill(RecoEnu/1000.);
-      h1_numu_x_numu_OscProb_wNeutron[4]      -> Fill(RecoEnu/1000., OscProb);
-      h1_numu_x_numu_OscProbRatio_wNeutron[4] -> Fill(RecoEnu/1000., OscProb);
+      h1_NoOsc_wNeutron[4]        -> Fill(RecoEnu/1000.);
+      h1_OscProb_wNeutron[4]      -> Fill(RecoEnu/1000., OscProb);
+      h1_OscProbRatio_wNeutron[4] -> Fill(RecoEnu/1000., OscProb);
+
+      OscillatedCCRESpp_wTagN += OscProb;
     }
   }
   //CC RES (Delta0)
   if (mode==12) {
     if (NoNlike) {
-      h1_numu_x_numu_NoOsc_woNeutron[5]        -> Fill(RecoEnu/1000.);
-      h1_numu_x_numu_OscProb_woNeutron[5]      -> Fill(RecoEnu/1000., OscProb);
-      h1_numu_x_numu_OscProbRatio_woNeutron[5] -> Fill(RecoEnu/1000., OscProb);
+      h1_NoOsc_woNeutron[5]        -> Fill(RecoEnu/1000.);
+      h1_OscProb_woNeutron[5]      -> Fill(RecoEnu/1000., OscProb);
+      h1_OscProbRatio_woNeutron[5] -> Fill(RecoEnu/1000., OscProb);
+
+      OscillatedCCRES0_woTagN += OscProb;
     }
     else {
-      h1_numu_x_numu_NoOsc_wNeutron[5]        -> Fill(RecoEnu/1000.);
-      h1_numu_x_numu_OscProb_wNeutron[5]      -> Fill(RecoEnu/1000., OscProb);
-      h1_numu_x_numu_OscProbRatio_wNeutron[5] -> Fill(RecoEnu/1000., OscProb);
+      h1_NoOsc_wNeutron[5]        -> Fill(RecoEnu/1000.);
+      h1_OscProb_wNeutron[5]      -> Fill(RecoEnu/1000., OscProb);
+      h1_OscProbRatio_wNeutron[5] -> Fill(RecoEnu/1000., OscProb);
+
+      OscillatedCCRES0_wTagN += OscProb;
     }
+  }
+
+  //CC Others
+  if (mode>=14 && mode<=30) {
+    if (NoNlike) {
+      h1_NoOsc_woNeutron[1]        -> Fill(RecoEnu/1000.);
+      h1_OscProb_woNeutron[1]      -> Fill(RecoEnu/1000., OscProb);
+      h1_OscProbRatio_woNeutron[1] -> Fill(RecoEnu/1000., OscProb);
+
+      OscillatedCCOther_woTagN += OscProb;
+    }
+    else {
+      h1_NoOsc_wNeutron[1]        -> Fill(RecoEnu/1000.);
+      h1_OscProb_wNeutron[1]      -> Fill(RecoEnu/1000., OscProb);
+      h1_OscProbRatio_wNeutron[1] -> Fill(RecoEnu/1000., OscProb);
+
+      OscillatedCCOther_wTagN += OscProb;
+    }
+  }
+}
+
+
+void NTagAnalysis::GetMisTagNeutrinoEvents(CC0PiNumu* numu, float NTrueN, bool NoNlike) {
+  int mode = TMath::Abs(numu->var<int>("mode"));
+  float OscProb = numu->getOscWgt();
+  float RecoEnu = numu->var<float>("erec");
+
+  if (NTrueN!=0 && NoNlike==true) {
+
+    //CCQE
+    if (mode==1) h1_OscProb_mistag[0] -> Fill(RecoEnu/1000., OscProb);
+
+    //CC non-QE
+    if ((mode>=2 && mode<=10) || (mode>=14 && mode<=30)) h1_OscProb_mistag[1] -> Fill(RecoEnu/1000., OscProb);
+
+    //NC
+    if (mode>=31) h1_OscProb_mistag[2] -> Fill(RecoEnu/1000.);
+
+    //CCRES+
+    if (mode==13) h1_OscProb_mistag[3] -> Fill(RecoEnu/1000., OscProb);
+
+    //CCRES++
+    if (mode==11) h1_OscProb_mistag[4] -> Fill(RecoEnu/1000., OscProb);
+
+    //CCRES0
+    if (mode==12) h1_OscProb_mistag[5] -> Fill(RecoEnu/1000., OscProb);
   }
 }
 
@@ -654,6 +776,7 @@ void NTagAnalysis::GetNeutrinoEventswNTag(std::vector<float> *TagOut,
                                           std::vector<float> *NHits,
                                           std::vector<float> *FitT,
                                           std::vector<float> *Label,
+                                          float NTrueN,
                                           bool etagmode,
                                           CC0PiNumu* numu,
                                           NeutrinoOscillation neuosc,
@@ -697,15 +820,24 @@ void NTagAnalysis::GetNeutrinoEventswNTag(std::vector<float> *TagOut,
     if (NumTaggedNeutrons==1 && NumTruthDecayeinNlike!=0) OnlyOneisDecaye = true;
     if (NumTruthNeutronsinNlike==0) NoNeutron = true;
 
+
+    if (ith==NCUT) {
+      //Reconstructed energy distribution w/o tagged neutrons
+      this -> Set1RmuonSamplewNTag(NoNlike, numu, mode);
+
+      //Reconstructed energy distribution w/o tagged neutrons
+      this -> GetMisTagNeutrinoEvents(numu, NTrueN, NoNlike);
+    }
+    
+
     //See neutrino events that have no n-like candidates
-    //if (NoNlike==true) NeutrinoEventswNoNlike[0][ith]++;
     if (NoNlike==true) {
-      //NeutrinoEventswNoNlike[0][ith]+=neuosc.OscProbCalculator(numu, false);
       NeutrinoEventswNoNlike[ith]+=neuosc.OscProbCalculator(numu, false);
 
       if (ith==NCUT) {
+
         //Reconstructed energy resolution w/o tagged neutrons
-        this -> Set1RmuonSamplewNTag(NoNlike, numu, mode);
+        //this -> Set1RmuonSamplewNTag(NoNlike, numu, mode);
 
         //Neutrino energy resolution
         test1++;
@@ -733,7 +865,7 @@ void NTagAnalysis::GetNeutrinoEventswNTag(std::vector<float> *TagOut,
 
       if (ith==NCUT) {
         //Reconstructed energy resolution w/ tagged neutrons
-        this -> Set1RmuonSamplewNTag(NoNlike, numu, mode);
+        //this -> Set1RmuonSamplewNTag(NoNlike, numu, mode);
 
         //Neutrino energy resolution
         test2++;
@@ -1100,12 +1232,12 @@ void NTagAnalysis::SetEfficiencyGraph(int windowstep) {
   GetNNEfficiency(windowstep);
   GetOverallEfficiency(windowstep);
   GetPurity(windowstep);
-  g_NNEff        = new TGraphErrors(CUTSTEP, TMVATH, NNEff, eTMVATH, eNNEffinWin);
-  g_NNHEff       = new TGraphErrors(CUTSTEP, TMVATH, NNHEff, eTMVATH, eNNHEffinWin);
-  g_NNGdEff      = new TGraphErrors(CUTSTEP, TMVATH, NNGdEff, eTMVATH, eNNGdEffinWin);
-  g_OverallEff   = new TGraphErrors(CUTSTEP, TMVATH, OverallEff, eTMVATH, eOverallEffinWin);
-  g_OverallHEff  = new TGraphErrors(CUTSTEP, TMVATH, OverallHEff, eTMVATH, eOverallHEffinWin);
-  g_OverallGdEff = new TGraphErrors(CUTSTEP, TMVATH, OverallGdEff, eTMVATH, eOverallGdEffinWin);
+  g_NNEff        = new TGraphErrors(CUTSTEP, TMVATH, NNEff, eTMVATH, eNNEff);
+  g_NNHEff       = new TGraphErrors(CUTSTEP, TMVATH, NNHEff, eTMVATH, eNNHEff);
+  g_NNGdEff      = new TGraphErrors(CUTSTEP, TMVATH, NNGdEff, eTMVATH, eNNGdEff);
+  g_OverallEff   = new TGraphErrors(CUTSTEP, TMVATH, OverallEff, eTMVATH, eOverallEff);
+  g_OverallHEff  = new TGraphErrors(CUTSTEP, TMVATH, OverallHEff, eTMVATH, eOverallHEff);
+  g_OverallGdEff = new TGraphErrors(CUTSTEP, TMVATH, OverallGdEff, eTMVATH, eOverallGdEff);
   g_NNEff   -> SetMarkerColor(kPink-5);
   g_NNEff   -> SetLineColor(kPink-5);
   g_NNEff   -> SetMarkerStyle(20);

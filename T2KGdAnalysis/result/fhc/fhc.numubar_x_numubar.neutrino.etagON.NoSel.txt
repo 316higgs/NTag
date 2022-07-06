@@ -1,0 +1,14 @@
+[fiTQun OUTPUT] /disk02/usr6/sedi/fiTQun/converted_output/0026Gd.numubar/rhc.numubar.fiTQun.0026Gd.NEUTcount09*.part00*.skip*.root
+[NTag   OUTPUT] /disk02/usr6/sedi/Ntag/output/w.mccomb/sk6/NNtraining/tageoption/rhc.numubar.ntag.0026Gd.NEUTcount09*.part00*.skip*.root
+ 
+[Neutrino] All Parent Neutrino Events: 30000
+[Neutrino] C0: 12540 -> 12540
+[Neutrino] C1: 7710 -> 7710
+[Neutrino] C2: 7370 -> 7370
+[Neutrino] C3: 7370 -> 7370
+[Neutrino] C4: 3780 -> 7260
+[Neutrino] C5: 3700 -> 7070
+[Neutrino] Selected CCQE events   : 2890 -> 10550
+[Neutrino] Selected CCnonQE events: 760 -> 11160
+[Neutrino] Selected NC events     : 50 -> 8290
+ 

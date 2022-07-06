@@ -22,8 +22,7 @@ void DistanceViewer::SetHistoFrame() {
     h1_NNEff_dist[i]      = new TH1F(TString::Format("h1_NNEff_dist_thr%d", i), "NN Classification Efficiency; Truth distance[m]; NN Classification Efficiency", 10, 0, 5);
     h1_OverallEff_dist[i] = new TH1F(TString::Format("h1_OverallEff_dist_thr%d", i), "Overall Tagging Efficiency; Truth distance[m]; Overall Tagging Efficiency", 10, 0, 5);
   }
-  h1_PreEff_dist = new TH1F("h1_PreEff_dist", "Pre-seletion Efficiency; Truth distance[m]; Pre-selection Efficiency", 10, 0, 5);
-  
+  h1_PreEff_dist = new TH1F("h1_PreEff_dist", "Pre-seletion Efficiency; Truth distance[m]; Pre-selection Efficiency", 10, 0, 5); 
 }
 
 void DistanceViewer::SetHistoFormat() {
@@ -34,22 +33,22 @@ void DistanceViewer::SetHistoFormat() {
   h1_truedistance -> SetLabelSize(0.033, "Y");
 
   h1_truedistance_CCQE -> SetLineWidth(2);
-  h1_truedistance_CCQE -> SetLineColor(kAzure+2);
-  h1_truedistance_CCQE -> SetFillColor(kAzure+2);
+  h1_truedistance_CCQE -> SetLineColor(kAzure-1);
+  h1_truedistance_CCQE -> SetFillColor(kAzure-1);
   h1_truedistance_CCQE -> SetTitleOffset(1.4, "Y");
   h1_truedistance_CCQE -> SetTitleSize(0.035, "Y");
   h1_truedistance_CCQE -> SetLabelSize(0.033, "Y");
 
   h1_truedistance_CCnonQE -> SetLineWidth(2);
-  h1_truedistance_CCnonQE -> SetLineColor(kOrange+5);
-  h1_truedistance_CCnonQE -> SetFillColor(kOrange+5);
+  h1_truedistance_CCnonQE -> SetLineColor(kOrange+8);
+  h1_truedistance_CCnonQE -> SetFillColor(kOrange+8);
   h1_truedistance_CCnonQE -> SetTitleOffset(1.4, "Y");
   h1_truedistance_CCnonQE -> SetTitleSize(0.035, "Y");
   h1_truedistance_CCnonQE -> SetLabelSize(0.033, "Y");
 
   h1_truedistance_NC -> SetLineWidth(2);
-  h1_truedistance_NC -> SetLineColor(kSpring+5);
-  h1_truedistance_NC -> SetFillColor(kSpring+5);
+  h1_truedistance_NC -> SetLineColor(kTeal+9);
+  h1_truedistance_NC -> SetFillColor(kTeal+9);
   h1_truedistance_NC -> SetTitleOffset(1.4, "Y");
   h1_truedistance_NC -> SetTitleSize(0.035, "Y");
   h1_truedistance_NC -> SetLabelSize(0.033, "Y");

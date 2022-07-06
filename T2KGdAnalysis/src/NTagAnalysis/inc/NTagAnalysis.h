@@ -9,6 +9,7 @@
 #include "/disk02/usr6/rakutsu/t2k/tmp/t2ksk-neutronh/anat2ksk/src/cc0pinumu/inc/CC0PiNumu.h"
 #include "../../DistanceViewer/inc/DistanceViewer.h"
 #include "../../NeutrinoOscillation/inc/NeutrinoOscillation.h"
+#include "../../../include/NeutrinoEvents.h"
 
 #define TRUETYPE 3
 #define WINSTEP 6
@@ -16,6 +17,7 @@
 #define NOISECUT 18
 
 TH1F* h1_NTrueN[TRUETYPE];
+TH1F* h1_TrueNmultiplicity[INTERACTIONTYPE];
 TH1F* h1_TotGammaE;
 
 //Neutrino energy resolution w/ truth neutrons & w/o truth neutrons
@@ -196,6 +198,9 @@ class NTagAnalysis {
     float NNEff[CUTSTEP];
     float NNHEff[CUTSTEP];
     float NNGdEff[CUTSTEP];
+    float eNNEff[CUTSTEP];
+    float eNNHEff[CUTSTEP];
+    float eNNGdEff[CUTSTEP];
 
     float NNEffinFV[CUTSTEP];
     float NNHEffinFV[CUTSTEP];
@@ -204,6 +209,9 @@ class NTagAnalysis {
     float OverallEff[CUTSTEP];
     float OverallHEff[CUTSTEP];
     float OverallGdEff[CUTSTEP];
+    float eOverallEff[CUTSTEP];
+    float eOverallHEff[CUTSTEP];
+    float eOverallGdEff[CUTSTEP];
 
     float OverallEffinFV[CUTSTEP];
     float OverallHEffinFV[CUTSTEP];
@@ -236,6 +244,8 @@ class NTagAnalysis {
                           std::vector<int> *Type,
                           std::vector<float> *E,
                           std::vector<float> *DWall);
+
+    void GetTruthNeutronsIntType(CC0PiNumu* numu, float NTrueN);
 
     void GetTruthNeutronsinSearch(UInt_t truthneutrons, 
                                   std::vector<int> *Type,
@@ -279,6 +289,7 @@ class NTagAnalysis {
                                 std::vector<float> *NHits,
                                 std::vector<float> *FitT,
                                 std::vector<float> *Label,
+                                float NTrueN,
                                 bool etagmode,
                                 CC0PiNumu* numu,
                                 NeutrinoOscillation neuosc,
@@ -289,6 +300,8 @@ class NTagAnalysis {
   	bool DecayelikeChecker(bool etagmode, float NHits, float FitT);
 
     void Set1RmuonSamplewNTag(bool NoNlike, CC0PiNumu* numu, int mode);
+
+    void GetMisTagNeutrinoEvents(CC0PiNumu* numu, float NTrueN, bool NoNlike);
 
     //For neutron multiplicity measurement
     float GetTaggedNeutrons(std::vector<float> *TagOut,
