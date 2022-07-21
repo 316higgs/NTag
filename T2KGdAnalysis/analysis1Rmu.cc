@@ -7,7 +7,7 @@
 #include "TGaxis.h"
 #include "TPaveStats.h"
 #include "THStack.h"
-#include "CC0PiNumu.h"  //src: /disk02/usr6/rakutsu/t2k/tmp/t2ksk-neutronh/anat2ksk/src/cc0pinumu
+//#include "CC0PiNumu.h"  //src: /disk02/usr6/rakutsu/t2k/tmp/t2ksk-neutronh/anat2ksk/src/cc0pinumu
 #include "DefBeamMode.h"
 #include "DefOscChannels.h"
 
@@ -43,8 +43,15 @@ int main(int argc, char **argv) {
   enum OscChan::E_OSC_CHAN eOsc;
   eMode = CLTOptionBeamMode(BeamKeyword, Beam);
   eOsc  = CLTOptionOscMode(OscKeyword, Osc);
-
   CLTOptionETAG(ETAGKeyword, ETAG);
+
+  float thetamin = -1.;
+  //float thetamin = 0.;
+  //float thetamin = 0.2;
+  //float thetamin = 0.4;
+  //float thetamin = 0.6;
+  //float thetamin = 0.8;
+  float thetamax = 1.;
 
 
   //=========  fiTQun output (TTree: h1)  ============
@@ -161,16 +168,24 @@ int main(int argc, char **argv) {
   
   //=========  TTree h1 variables  ============
   //===== It should be called after numu ======
-  Int_t Npvc;      //Number of primary particles
-  Int_t Ipvc[100];     //PID 
-  Float_t Pvc[100][3];
-  Int_t Iflvc[100];
-  Int_t Ichvc[100];
+  Int_t   Npvc;             //Number of primary particles
+  Int_t   Ipvc[100];        //PID of primary particles
+  Float_t Pvc[100][3];      //Momentum of primary particles
+  Int_t   Iflvc[100];       //Flag of final states
+  Int_t   Ichvc[100];       //Chase at detector simulation or not(1: chase/0: not chase)
+  Int_t   nscndprt;         //Number of secondary particles
+  Int_t   iprtscnd[1000];   //PID of the secondary particle
+  Int_t   iprntprt[1000];   //PID of the parent of this secondary particle
+  Float_t pscnd[1000][3];   //Momentum of the secondary particle
   tchfQ -> SetBranchAddress("Npvc", &Npvc);
   tchfQ -> SetBranchAddress("Pvc", Pvc);
   tchfQ -> SetBranchAddress("Ipvc", Ipvc);
   tchfQ -> SetBranchAddress("Ichvc", Ichvc);
   tchfQ -> SetBranchAddress("Iflvc", Iflvc);
+  tchfQ -> SetBranchAddress("nscndprt", &nscndprt);
+  tchfQ -> SetBranchAddress("iprtscnd", iprtscnd);
+  tchfQ -> SetBranchAddress("iprntprt", iprntprt);
+  tchfQ -> SetBranchAddress("pscnd", pscnd);
 
   ResetNeutrinoEvents();
   InitNTagVariables();
@@ -261,28 +276,26 @@ int main(int argc, char **argv) {
     if (prmsel.Apply1RmuonSelection(evsel, numu, decayebox, eMode, eOsc, 20., 50., 400., true)) {
       GetSelectedModeEvents(numu);
 
-
-      //std::cout << "[analysis1Rmu] # of Primary Particles: " << Npvc << std::endl; 
-      //std::cout << "[analysis1Rmu] # of Primary Particles: " << numu->var<int>("Npvc") << std::endl;     
-      /*for (Int_t iprm=0; iprm<Npvc; iprm++) {
-        std::cout << "               - [" << iprm << "]  PID: " << Ipvc[iprm];
-        if (std::abs(Ipvc[iprm])==13) std::cout << " <-- muon!" << std::endl;
-        else std::cout << " " << std::endl;
-      }*/
-
-
-
       //Neutrino energy distribution
       neuosc.GetTrueEnu(numu);
       neuosc.GetRecoEnu(numu);
-      neuosc.GetRecoMuDirection(numu);
-      neuosc.GetEnuResolution(numu);
+
+      //Muon angle information
+      float thetamu = neuosc.GetTrueMuDirection(numu, Npvc, Ipvc, Pvc, Iflvc, Ichvc);
+      //neuosc.GetRecoMuDirection(numu);
+      //neuosc.GetMuDirResolution(numu, Npvc, Ipvc, Pvc, Iflvc, Ichvc);
+
+      //neuosc.GetEnuResolution(numu);
+      neuosc.GetEnuResolution(numu, thetamu, thetamin, thetamax);
       neuosc.GetReso_x_TrueEnu(numu);
 
       //Oscillation probability check
-      neuosc.OscProbCalculator(numu, true);
+      //neuosc.OscProbCalculator(numu, true);
+
       //Neutrino events as a funtion of reconstructed neutrino energy
-      neuosc.GetWgtNeutrino(numu);
+      //(No NTag information)
+      neuosc.GetWgtNeutrino(numu, thetamu, thetamin, thetamax);
+
       neuosc.GetWgtNeutrino_wTrueN(numu, NTrueN);
 
 
@@ -291,9 +304,6 @@ int main(int argc, char **argv) {
       ntagana.GetTruthNeutrons(NTrueN, E->size(), Type, E, DWall);
       ntagana.GetTruthNeutronsIntType(numu, NTrueN);
       ntagana.GetResolutionwTrueN(numu, NTrueN);
-
-      //need?
-      //if (NTrueN==0) continue;
 
       //Truth distance distribution
       for (UInt_t jentry=0; jentry<DistFromPV->size(); ++jentry) {
@@ -317,7 +327,9 @@ int main(int argc, char **argv) {
       ntagana.GetElikeCandidatesinWindow(t, TagIndex, etagmode, NHits, FitT, TagOut, Label);
 
       //Check neutrino events with tagged neutrons
-      ntagana.GetNeutrinoEventswNTag(TagOut, TagIndex, NHits, FitT, Label, NTrueN, etagmode, numu, neuosc, 10);
+      ntagana.GetNeutrinoEventswNTag(TagOut, TagIndex, NHits, FitT, Label, NTrueN, 
+                                     etagmode, numu, neuosc, 15,
+                                     thetamu, thetamin, thetamax);
 
 
       //Pre-selection
@@ -381,7 +393,7 @@ int main(int argc, char **argv) {
 
     } //New 1R muon selection
 
-    //oatree -> FillTree();
+    oatree -> FillTree();
 
   }
 
@@ -405,50 +417,99 @@ int main(int argc, char **argv) {
       h1_Proto1RmuonEvents->fArray[i+1] = (float)ProtoSelectedParentNeutrinos[i]/ProtoSelectedParentNeutrinos[0];
     }
     resultfile << "[Neutrino] All Parent Neutrino Events: " << AllParentNeutrinos << std::endl;
-    resultfile << "[Neutrino] Selected CCQE events   : " << ProtoSelectedCCQEevents    << " -> " << SelectedCCQEevents    << std::endl;
-    resultfile << "[Neutrino] Selected CCnonQE events: " << ProtoSelectedCCnonQEevents << " -> " << SelectedCCnonQEevents << std::endl;
-    resultfile << "[Neutrino] Selected NC events     : " << ProtoSelectedNCevents      << " -> " << SelectedNCevents      << std::endl;
+    //resultfile << "[Neutrino] Selected CCQE events   : " << ProtoSelectedCCQEevents    << " -> " << SelectedCCQEevents    << std::endl;
+    //resultfile << "[Neutrino] Selected CCnonQE events: " << ProtoSelectedCCnonQEevents << " -> " << SelectedCCnonQEevents << std::endl;
+    //resultfile << "[Neutrino] Selected NC events     : " << ProtoSelectedNCevents      << " -> " << SelectedNCevents      << std::endl;
     resultfile << " " << std::endl;
-    resultfile << "[Neutrino] Oscillated CCQE Events     : " << OscillatedCCQE    << std::endl;
-    resultfile << "           w/ truth neutrons : " << OscillatedCCQE_wTrueN << ", w/o truth neutrons :" << OscillatedCCQE_woTrueN << std::endl;
-    resultfile << "           w/ tagged neutrons: " << OscillatedCCQE_wTagN  << ", w/o tagged neutrons:" << OscillatedCCQE_woTagN  << std::endl;
 
-    resultfile << "[Neutrino] Oscillated CC(2p2h) Events : " << OscillatedCCnonQE << std::endl;
-    resultfile << "           w/ truth neutrons : " << OscillatedCCnonQE_wTrueN << ", w/o truth neutrons :" << OscillatedCCnonQE_woTrueN << std::endl;
-    resultfile << "           w/ tagged neutrons: " << OscillatedCCnonQE_wTagN  << ", w/o tagged neutrons:" << OscillatedCCnonQE_woTagN  << std::endl;
+    float TotalEventsNoNeutronAnalysis = OscillatedCCQE 
+                                       + OscillatedCCnonQE 
+                                       + OscillatedCCRESp
+                                       + OscillatedCCRESpp
+                                       + OscillatedCCRES0
+                                       + OscillatedCCOther
+                                       + OscillatedNC;
+    float TotalEventswTrueN = OscillatedCCQE_wTrueN
+                            + OscillatedCCnonQE_wTrueN
+                            + OscillatedCCRESp_wTrueN
+                            + OscillatedCCRESpp_wTrueN
+                            + OscillatedCCRES0_wTrueN
+                            + OscillatedCCOther_wTrueN
+                            + OscillatedNC_wTrueN;
+    float TotalEventswoTrueN = OscillatedCCQE_woTrueN
+                            + OscillatedCCnonQE_woTrueN
+                            + OscillatedCCRESp_woTrueN
+                            + OscillatedCCRESpp_woTrueN
+                            + OscillatedCCRES0_woTrueN
+                            + OscillatedCCOther_woTrueN
+                            + OscillatedNC_woTrueN;
+    float TotalEventswTagN = OscillatedCCQE_wTagN
+                           + OscillatedCCnonQE_wTagN
+                           + OscillatedCCRESp_wTagN
+                           + OscillatedCCRESpp_wTagN
+                           + OscillatedCCRES0_wTagN
+                           + OscillatedCCOther_wTagN
+                           + OscillatedNC_wTagN;
+    float TotalEventswoTagN = OscillatedCCQE_woTagN
+                            + OscillatedCCnonQE_woTagN
+                            + OscillatedCCRESp_woTagN
+                            + OscillatedCCRESpp_woTagN
+                            + OscillatedCCRES0_woTagN
+                            + OscillatedCCOther_woTagN
+                            + OscillatedNC_woTagN;
+    resultfile << "[Neutrino] Oscillated CCQE Events     : " << OscillatedCCQE << "(" << (OscillatedCCQE/TotalEventsNoNeutronAnalysis)*100 << " %)" << std::endl;
+    resultfile << "           w/ truth neutrons : " << OscillatedCCQE_wTrueN << " (" << (OscillatedCCQE_wTrueN/TotalEventswTrueN)*100 
+               << " %), w/o truth neutrons :" << OscillatedCCQE_woTrueN << " (" << (OscillatedCCQE_woTrueN/TotalEventswoTrueN)*100 << " %)" << std::endl;
+    resultfile << "           w/ tagged neutrons: " << OscillatedCCQE_wTagN << "(" << (OscillatedCCQE_wTagN/TotalEventswTagN)*100
+               << " %), w/o tagged neutrons:" << OscillatedCCQE_woTagN << "(" << (OscillatedCCQE_woTagN/TotalEventswoTagN)*100 << " %)" << std::endl;
 
-    resultfile << "[Neutrino] Oscillated CCRES0 Events   : " << OscillatedCCRES0  << std::endl;
-    resultfile << "           w/ truth neutrons : " << OscillatedCCRES0_wTrueN << ", w/o truth neutrons :" << OscillatedCCRES0_woTrueN << std::endl;
-    resultfile << "           w/ tagged neutrons: " << OscillatedCCRES0_wTagN  << ", w/o tagged neutrons:" << OscillatedCCRES0_woTagN  << std::endl;
+    resultfile << "[Neutrino] Oscillated CC(2p2h) Events : " << OscillatedCCnonQE << "(" << (OscillatedCCnonQE/TotalEventsNoNeutronAnalysis)*100 << " %)" << std::endl;
+    resultfile << "           w/ truth neutrons : " << OscillatedCCnonQE_wTrueN << " (" << (OscillatedCCnonQE_wTrueN/TotalEventswTrueN)*100 
+               << " %), w/o truth neutrons :" << OscillatedCCnonQE_woTrueN << " (" << (OscillatedCCnonQE_woTrueN/TotalEventswoTrueN)*100 << " %)" << std::endl;
+    resultfile << "           w/ tagged neutrons: " << OscillatedCCnonQE_wTagN << "(" << (OscillatedCCnonQE_wTagN/TotalEventswTagN)*100
+               << " %), w/o tagged neutrons:" << OscillatedCCnonQE_woTagN << "(" << (OscillatedCCnonQE_woTagN/TotalEventswoTagN)*100 << " %)" << std::endl;
 
-    resultfile << "[Neutrino] Oscillated CCRES+ Events   : " << OscillatedCCRESp  << std::endl;
-    resultfile << "           w/ truth neutrons : " << OscillatedCCRESp_wTrueN << ", w/o truth neutrons :" << OscillatedCCRESp_woTrueN << std::endl;
-    resultfile << "           w/ tagged neutrons: " << OscillatedCCRESp_wTagN  << ", w/o tagged neutrons:" << OscillatedCCRESp_woTagN  << std::endl;
+    resultfile << "[Neutrino] Oscillated CCRES0 Events   : " << OscillatedCCRES0 << "(" << (OscillatedCCRES0/TotalEventsNoNeutronAnalysis)*100 << " %)" << std::endl;
+    resultfile << "           w/ truth neutrons : " << OscillatedCCRES0_wTrueN << " (" << (OscillatedCCRES0_wTrueN/TotalEventswTrueN)*100 
+               << " %), w/o truth neutrons :" << OscillatedCCRES0_woTrueN << " (" << (OscillatedCCRES0_woTrueN/TotalEventswoTrueN)*100 << " %)" << std::endl;
+    resultfile << "           w/ tagged neutrons: " << OscillatedCCRES0_wTagN << "(" << (OscillatedCCRES0_wTagN/TotalEventswTagN)*100
+               << " %), w/o tagged neutrons:" << OscillatedCCRES0_woTagN << "(" << (OscillatedCCRES0_woTagN/TotalEventswoTagN)*100 << " %)" << std::endl;
 
-    resultfile << "[Neutrino] Oscillated CCRES++ Events  : " << OscillatedCCRESpp << std::endl;
-    resultfile << "           w/ truth neutrons : " << OscillatedCCRESpp_wTrueN << ", w/o truth neutrons :" << OscillatedCCRESpp_woTrueN << std::endl;
-    resultfile << "           w/ tagged neutrons: " << OscillatedCCRESpp_wTagN  << ", w/o tagged neutrons:" << OscillatedCCRESpp_woTagN  << std::endl;
+    resultfile << "[Neutrino] Oscillated CCRES+ Events   : " << OscillatedCCRESp << "(" << (OscillatedCCRESp/TotalEventsNoNeutronAnalysis)*100 << " %)" << std::endl;
+    resultfile << "           w/ truth neutrons : " << OscillatedCCRESp_wTrueN << " (" << (OscillatedCCRESp_wTrueN/TotalEventswTrueN)*100 
+               << " %), w/o truth neutrons :" << OscillatedCCRESp_woTrueN << " (" << (OscillatedCCRESp_woTrueN/TotalEventswoTrueN)*100 << " %)" << std::endl;
+    resultfile << "           w/ tagged neutrons: " << OscillatedCCRESp_wTagN << "(" << (OscillatedCCRESp_wTagN/TotalEventswTagN)*100
+               << " %), w/o tagged neutrons:" << OscillatedCCRESp_woTagN << "(" << (OscillatedCCRESp_woTagN/TotalEventswoTagN)*100 << " %)" << std::endl;
 
-    resultfile << "[Neutrino] Oscillated All CCRES Events  : " << OscillatedCCRES0 + OscillatedCCRESp + OscillatedCCRESpp << std::endl;
-    resultfile << "           w/ truth neutrons : " << OscillatedCCRES0_wTrueN + OscillatedCCRESp_wTrueN + OscillatedCCRESpp_wTrueN << ", w/o truth neutrons :" << OscillatedCCRES0_woTrueN + OscillatedCCRESp_woTrueN + OscillatedCCRESpp_woTrueN << std::endl;
-    resultfile << "           w/ tagged neutrons: " << OscillatedCCRES0_wTagN  + OscillatedCCRESp_wTagN  + OscillatedCCRESpp_wTagN  << ", w/o tagged neutrons:" << OscillatedCCRES0_woTagN  + OscillatedCCRESp_woTagN  + OscillatedCCRESpp_woTagN  << std::endl;
+    resultfile << "[Neutrino] Oscillated CCRES++ Events  : " << OscillatedCCRESpp << "(" << (OscillatedCCRESpp/TotalEventsNoNeutronAnalysis)*100 << " %)" << std::endl;
+    resultfile << "           w/ truth neutrons : " << OscillatedCCRESpp_wTrueN << " (" << (OscillatedCCRESpp_wTrueN/TotalEventswTrueN)*100 
+               << " %), w/o truth neutrons :" << OscillatedCCRESpp_woTrueN << " (" << (OscillatedCCRESpp_woTrueN/TotalEventswoTrueN)*100 << " %)" << std::endl;
+    resultfile << "           w/ tagged neutrons: " << OscillatedCCRESpp_wTagN << "(" << (OscillatedCCRESpp_wTagN/TotalEventswTagN)*100
+               << " %), w/o tagged neutrons:" << OscillatedCCRESpp_woTagN << "(" << (OscillatedCCRESpp_woTagN/TotalEventswoTagN)*100 << " %)" << std::endl;
 
-    resultfile << "[Neutrino] Oscillated CC Other Events : " << OscillatedCCOther << std::endl;
-    resultfile << "           w/ truth neutrons : " << OscillatedCCOther_wTrueN << ", w/o truth neutrons :" << OscillatedCCOther_woTrueN << std::endl;
-    resultfile << "           w/ tagged neutrons: " << OscillatedCCOther_wTagN  << ", w/o tagged neutrons:" << OscillatedCCOther_woTagN  << std::endl;
+    resultfile << "[Neutrino] Oscillated All CCRES Events: " << OscillatedCCRES0 + OscillatedCCRESp + OscillatedCCRESpp << "(" << ((OscillatedCCRES0 + OscillatedCCRESp + OscillatedCCRESpp)/TotalEventsNoNeutronAnalysis)*100 << " %)" << std::endl;
+    resultfile << "           w/ truth neutrons : " << OscillatedCCRES0_wTrueN + OscillatedCCRESp_wTrueN + OscillatedCCRESpp_wTrueN << " (" << ((OscillatedCCRES0_wTrueN + OscillatedCCRESp_wTrueN + OscillatedCCRESpp_wTrueN)/TotalEventswTrueN)*100 
+               << " %), w/o truth neutrons :" << OscillatedCCRES0_woTrueN + OscillatedCCRESp_woTrueN + OscillatedCCRESpp_woTrueN << " (" << ((OscillatedCCRES0_woTrueN + OscillatedCCRESp_woTrueN + OscillatedCCRESpp_woTrueN)/TotalEventswoTrueN)*100 << " %)" << std::endl;
+    resultfile << "           w/ tagged neutrons: " << OscillatedCCRES0_wTagN  + OscillatedCCRESp_wTagN  + OscillatedCCRESpp_wTagN << "(" << ((OscillatedCCRES0_wTagN  + OscillatedCCRESp_wTagN  + OscillatedCCRESpp_wTagN)/TotalEventswTagN)*100
+               << " %), w/o tagged neutrons:" << OscillatedCCRES0_woTagN  + OscillatedCCRESp_woTagN  + OscillatedCCRESpp_woTagN << "(" << ((OscillatedCCRES0_woTagN  + OscillatedCCRESp_woTagN  + OscillatedCCRESpp_woTagN)/TotalEventswoTagN)*100 << " %)" << std::endl;
 
-    resultfile << "[Neutrino] Oscillated NC Events       : " << OscillatedNC      << std::endl;
-    resultfile << "           w/ truth neutrons : " << OscillatedNC_wTrueN << ", w/o truth neutrons :" << OscillatedNC_woTrueN << std::endl;
-    resultfile << "           w/ tagged neutrons: " << OscillatedNC_wTagN  << ", w/o tagged neutrons:" << OscillatedNC_woTagN  << std::endl;
-    resultfile << " " << std::endl;
+    resultfile << "[Neutrino] Oscillated CC Other Events : " << OscillatedCCOther << "(" << (OscillatedCCOther/TotalEventsNoNeutronAnalysis)*100 << " %)" << std::endl;
+    resultfile << "           w/ truth neutrons : " << OscillatedCCOther_wTrueN << " (" << (OscillatedCCOther_wTrueN/TotalEventswTrueN)*100 
+               << " %), w/o truth neutrons :" << OscillatedCCOther_woTrueN << " (" << (OscillatedCCOther_woTrueN/TotalEventswoTrueN)*100 << " %)" << std::endl;
+    resultfile << "           w/ tagged neutrons: " << OscillatedCCOther_wTagN << "(" << (OscillatedCCOther_wTagN/TotalEventswTagN)*100
+               << " %), w/o tagged neutrons:" << OscillatedCCOther_woTagN << "(" << (OscillatedCCOther_woTagN/TotalEventswoTagN)*100 << " %)" << std::endl;
+
+    resultfile << "[Neutrino] Oscillated NC Events       : " << OscillatedNC << "(" << (OscillatedNC/TotalEventsNoNeutronAnalysis)*100 << " %)" << std::endl;
+    resultfile << "           w/ truth neutrons : " << OscillatedNC_wTrueN << " (" << (OscillatedNC_wTrueN/TotalEventswTrueN)*100 
+               << " %), w/o truth neutrons :" << OscillatedNC_woTrueN << " (" << (OscillatedNC_woTrueN/TotalEventswoTrueN)*100 << " %)" << std::endl;
+    resultfile << "           w/ tagged neutrons: " << OscillatedNC_wTagN << "(" << (OscillatedNC_wTagN/TotalEventswTagN)*100
+               << " %), w/o tagged neutrons:" << OscillatedNC_woTagN << "(" << (OscillatedNC_woTagN/TotalEventswoTagN)*100 << " %)" << std::endl;
 
     resultfile << "[Neutrino] Oscillated Neutrino Events within [0.25 GeV, 1.5 GeV]" << std::endl;
-    resultfile << "           Selected 1R muon events: " << OscLegacy   << "(Osc)/" << NoOscLegacy   << "(No Osc) = " << OscLegacy/NoOscLegacy     << std::endl;
-    resultfile << "           Only CCQE(1p1h)        : " << OscOnlyCCQE << "(Osc)/" << NoOscOnlyCCQE << "(No Osc) = " << OscOnlyCCQE/NoOscOnlyCCQE << std::endl;
-    resultfile << "           w/o truth neutrons     : " << OscwoTrueN  << "(Osc)/" << NoOscwoTrueN  << "(No Osc) = " << OscwoTrueN/NoOscwoTrueN   << std::endl;
-    resultfile << "           w/o tagged neutrons    : " << OscwoTagN   << "(Osc)/" << NoOscwoTagN   << "(No Osc) = " << OscwoTagN/NoOscwoTagN     << std::endl;
-
-    //WriteNeutrinoSummary(resultfile);
+    resultfile << "           Legacy Analysis    : " << OscLegacy   << "(Osc)/" << NoOscLegacy   << "(No Osc) = " << OscLegacy/NoOscLegacy     << std::endl;
+    resultfile << "           Only CCQE(1p1h)    : " << OscOnlyCCQE << "(Osc)/" << NoOscOnlyCCQE << "(No Osc) = " << OscOnlyCCQE/NoOscOnlyCCQE << std::endl;
+    resultfile << "           w/o truth neutrons : " << OscwoTrueN  << "(Osc)/" << NoOscwoTrueN  << "(No Osc) = " << OscwoTrueN/NoOscwoTrueN   << std::endl;
+    resultfile << "           w/o tagged neutrons: " << OscwoTagN   << "(Osc)/" << NoOscwoTagN   << "(No Osc) = " << OscwoTagN/NoOscwoTagN     << std::endl;
 
     ntagana.SummaryTruthInfoinSearch(3., NTagSummary);
   }

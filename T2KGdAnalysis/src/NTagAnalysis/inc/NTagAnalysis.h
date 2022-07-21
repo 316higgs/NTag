@@ -6,7 +6,8 @@
 #include "TH1D.h"
 #include "TFile.h"
 #include "TGraphErrors.h"
-#include "/disk02/usr6/rakutsu/t2k/tmp/t2ksk-neutronh/anat2ksk/src/cc0pinumu/inc/CC0PiNumu.h"
+//#include "/disk02/usr6/rakutsu/t2k/tmp/t2ksk-neutronh/anat2ksk/src/cc0pinumu/inc/CC0PiNumu.h"
+#include "/disk02/usr6/sedi/anat2ksk/src/cc0pinumu/inc/CC0PiNumu.h"
 #include "../../DistanceViewer/inc/DistanceViewer.h"
 #include "../../NeutrinoOscillation/inc/NeutrinoOscillation.h"
 #include "../../../include/NeutrinoEvents.h"
@@ -26,6 +27,7 @@ TH1F* h1_Enureso_CCnonQE_trueN[2];
 TH1F* h1_Enureso_CCRES_deltap_trueN[2];
 TH1F* h1_Enureso_CCRES_deltapp_trueN[2];
 TH1F* h1_Enureso_CCRES_delta0_trueN[2];
+TH1F* h1_Enureso_CCOther_trueN[2];
 TH1F* h1_Enureso_NC_trueN[2];
 
 //Neutrino energy resolution w/ tagged neutrons & w/o tagged neutrons
@@ -34,6 +36,7 @@ TH1F* h1_Enureso_CCnonQE[2];
 TH1F* h1_Enureso_CCRES_deltap[2];
 TH1F* h1_Enureso_CCRES_deltapp[2];
 TH1F* h1_Enureso_CCRES_delta0[2];
+TH1F* h1_Enureso_CCOther[2];
 TH1F* h1_Enureso_NC[2];
 
 //Noise rate and efficiencies for window optimization
@@ -293,15 +296,14 @@ class NTagAnalysis {
                                 bool etagmode,
                                 CC0PiNumu* numu,
                                 NeutrinoOscillation neuosc,
-                                int NCUT);
+                                int NCUT,
+                                float theta, float thetamin, float thetamax);
 
     void GetResolutionwTrueN(CC0PiNumu* numu, float NTrueN);
 
   	bool DecayelikeChecker(bool etagmode, float NHits, float FitT);
 
-    void Set1RmuonSamplewNTag(bool NoNlike, CC0PiNumu* numu, int mode);
-
-    void GetMisTagNeutrinoEvents(CC0PiNumu* numu, float NTrueN, bool NoNlike);
+    void Set1RmuonSamplewNTag(bool NoNlike, CC0PiNumu* numu, float theta, float thetamin, float thetamax);
 
     //For neutron multiplicity measurement
     float GetTaggedNeutrons(std::vector<float> *TagOut,

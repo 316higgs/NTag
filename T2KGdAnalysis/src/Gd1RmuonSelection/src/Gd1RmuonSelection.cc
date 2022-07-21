@@ -52,14 +52,14 @@ bool Gd1RmuonSelection::C2Apply1RCheck(EvSelVar_t evsel, CC0PiNumu* numu, TreeMa
   bool pass = false;
   if (evsel.pass[1]==true) pass = true;
 
-  int mode = TMath::Abs(numu->var<int>("mode"));
+  /*int mode = TMath::Abs(numu->var<int>("mode"));
   float Enu = numu->var<float>("pnu", 0);
 
   if (evsel.pass[1]==false && mode==1) {
     OneRingRejectCCQE = Enu;
     tree -> FillTree();
     //std::cout << "[Gd1RmuonSelection::C2Apply1RCheck()] 1R rejected CCQE: " << Enu << " GeV" << std::endl;
-  }
+  }*/
 
   return pass;
 }

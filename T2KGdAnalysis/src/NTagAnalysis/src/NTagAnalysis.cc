@@ -13,34 +13,38 @@ void NTagAnalysis::SetHistoFrame() {
   h1_TotGammaE   = new TH1F("h1_TotGammaE", "Truth Total Gamma Energy; E[MeV]; Entries", 20, 0, 10);
   for (int i=0; i<2; i++) {
     if (i==0) {
-      h1_Enureso_CCQE[i]          = new TH1F("h1_Enureso_CCQE_woNeutrons", "Neutrino Energy Resolution w/o Tagged Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
-      h1_Enureso_CCnonQE[i]       = new TH1F("h1_Enureso_CCnonQE_woNeutrons", "Neutrino Energy Resolution w/o Tagged Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
-      h1_Enureso_CCRES_deltap[i]  = new TH1F("h1_Enureso_CCRESdeltap_woNeutrons", "Neutrino Energy Resolution w/o Tagged Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
-      h1_Enureso_CCRES_deltapp[i] = new TH1F("h1_Enureso_CCRESdeltapp_woNeutrons", "Neutrino Energy Resolution w/o Tagged Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
-      h1_Enureso_CCRES_delta0[i]  = new TH1F("h1_Enureso_CCRESdelta0_woNeutrons", "Neutrino Energy Resolution w/o Tagged Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
-      h1_Enureso_NC[i]            = new TH1F("h1_Enureso_NC_woNeutrons", "Neutrino Energy Resolution w/o Tagged Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
+      h1_Enureso_CCQE[i]          = new TH1F("h1_Enureso_CCQE_woTagN", "Neutrino Energy Resolution w/o Tagged Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
+      h1_Enureso_CCnonQE[i]       = new TH1F("h1_Enureso_CCnonQE_woTagN", "Neutrino Energy Resolution w/o Tagged Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
+      h1_Enureso_CCRES_deltap[i]  = new TH1F("h1_Enureso_CCRESdeltap_woTagN", "Neutrino Energy Resolution w/o Tagged Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
+      h1_Enureso_CCRES_deltapp[i] = new TH1F("h1_Enureso_CCRESdeltapp_woTagN", "Neutrino Energy Resolution w/o Tagged Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
+      h1_Enureso_CCRES_delta0[i]  = new TH1F("h1_Enureso_CCRESdelta0_woTagN", "Neutrino Energy Resolution w/o Tagged Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
+      h1_Enureso_CCOther[i]       = new TH1F("h1_Enureso_CCOther_woTagN", "Neutrino Energy Resolution w/o Truth Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
+      h1_Enureso_NC[i]            = new TH1F("h1_Enureso_NC_woTagN", "Neutrino Energy Resolution w/o Tagged Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
 
-      h1_Enureso_CCQE_trueN[i]          = new TH1F("h1_Enureso_CCQE_wotrueNeutrons", "Neutrino Energy Resolution w/o Truth Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
-      h1_Enureso_CCnonQE_trueN[i]       = new TH1F("h1_Enureso_CCnonQE_wotrueNeutrons", "Neutrino Energy Resolution w/o Truth Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
-      h1_Enureso_CCRES_deltap_trueN[i]  = new TH1F("h1_Enureso_CCRESdeltap_wotrueNeutrons", "Neutrino Energy Resolution w/o Truth Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
-      h1_Enureso_CCRES_deltapp_trueN[i] = new TH1F("h1_Enureso_CCRESdeltapp_wotrueNeutrons", "Neutrino Energy Resolution w/o Truth Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
-      h1_Enureso_CCRES_delta0_trueN[i]  = new TH1F("h1_Enureso_CCRESdelta0_wotrueNeutrons", "Neutrino Energy Resolution w/o Truth Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
-      h1_Enureso_NC_trueN[i]            = new TH1F("h1_Enureso_NC_wotrueNeutrons", "Neutrino Energy Resolution w/o Truth Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
+      h1_Enureso_CCQE_trueN[i]          = new TH1F("h1_Enureso_CCQE_woTrueN", "Neutrino Energy Resolution w/o Truth Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
+      h1_Enureso_CCnonQE_trueN[i]       = new TH1F("h1_Enureso_CCnonQE_woTrueN", "Neutrino Energy Resolution w/o Truth Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
+      h1_Enureso_CCRES_deltap_trueN[i]  = new TH1F("h1_Enureso_CCRESdeltap_woTrueN", "Neutrino Energy Resolution w/o Truth Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
+      h1_Enureso_CCRES_deltapp_trueN[i] = new TH1F("h1_Enureso_CCRESdeltapp_woTrueN", "Neutrino Energy Resolution w/o Truth Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
+      h1_Enureso_CCRES_delta0_trueN[i]  = new TH1F("h1_Enureso_CCRESdelta0_woTrueN", "Neutrino Energy Resolution w/o Truth Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
+      h1_Enureso_CCOther_trueN[i]       = new TH1F("h1_Enureso_CCOther_woTrueN", "Neutrino Energy Resolution w/o Truth Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
+      h1_Enureso_NC_trueN[i]            = new TH1F("h1_Enureso_NC_woTrueN", "Neutrino Energy Resolution w/o Truth Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
     }
     if (i==1) {
-      h1_Enureso_CCQE[i]          = new TH1F("h1_Enureso_CCQE_wNeutrons", "Neutrino Energy Resolution w/ Tagged Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
-      h1_Enureso_CCnonQE[i]       = new TH1F("h1_Enureso_CCnonQE_wNeutrons", "Neutrino Energy Resolution w/ Tagged Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
-      h1_Enureso_CCRES_deltap[i]  = new TH1F("h1_Enureso_CCRESdeltap_wNeutrons", "Neutrino Energy Resolution w/ Tagged Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
-      h1_Enureso_CCRES_deltapp[i] = new TH1F("h1_Enureso_CCRESdeltapp_wNeutrons", "Neutrino Energy Resolution w/ Tagged Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
-      h1_Enureso_CCRES_delta0[i]  = new TH1F("h1_Enureso_CCRESdelta0_wNeutrons", "Neutrino Energy Resolution w/o Tagged Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
-      h1_Enureso_NC[i]            = new TH1F("h1_Enureso_NC_wNeutrons", "Neutrino Energy Resolution w/ Tagged Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
+      h1_Enureso_CCQE[i]          = new TH1F("h1_Enureso_CCQE_wTagN", "Neutrino Energy Resolution w/ Tagged Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
+      h1_Enureso_CCnonQE[i]       = new TH1F("h1_Enureso_CCnonQE_wTagN", "Neutrino Energy Resolution w/ Tagged Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
+      h1_Enureso_CCRES_deltap[i]  = new TH1F("h1_Enureso_CCRESdeltap_wTagN", "Neutrino Energy Resolution w/ Tagged Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
+      h1_Enureso_CCRES_deltapp[i] = new TH1F("h1_Enureso_CCRESdeltapp_wTagN", "Neutrino Energy Resolution w/ Tagged Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
+      h1_Enureso_CCRES_delta0[i]  = new TH1F("h1_Enureso_CCRESdelta0_wTagN", "Neutrino Energy Resolution w/o Tagged Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
+      h1_Enureso_CCOther[i]       = new TH1F("h1_Enureso_CCOther_wTagN", "Neutrino Energy Resolution w/o Truth Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
+      h1_Enureso_NC[i]            = new TH1F("h1_Enureso_NC_wTagN", "Neutrino Energy Resolution w/ Tagged Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
 
-      h1_Enureso_CCQE_trueN[i]          = new TH1F("h1_Enureso_CCQE_wtrueNeutrons", "Neutrino Energy Resolution w/ Truth Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
-      h1_Enureso_CCnonQE_trueN[i]       = new TH1F("h1_Enureso_CCnonQE_wtrueNeutrons", "Neutrino Energy Resolution w/ Truth Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
-      h1_Enureso_CCRES_deltap_trueN[i]  = new TH1F("h1_Enureso_CCRESdeltap_wtrueNeutrons", "Neutrino Energy Resolution w/ Truth Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
-      h1_Enureso_CCRES_deltapp_trueN[i] = new TH1F("h1_Enureso_CCRESdeltapp_wtrueNeutrons", "Neutrino Energy Resolution w/ Truth Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
-      h1_Enureso_CCRES_delta0_trueN[i]  = new TH1F("h1_Enureso_CCRESdelta0_wtrueNeutrons", "Neutrino Energy Resolution w/ Truth Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
-      h1_Enureso_NC_trueN[i]            = new TH1F("h1_Enureso_NC_wtrueNeutrons", "Neutrino Energy Resolution w/ Truth Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
+      h1_Enureso_CCQE_trueN[i]          = new TH1F("h1_Enureso_CCQE_wTrueN", "Neutrino Energy Resolution w/ Truth Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
+      h1_Enureso_CCnonQE_trueN[i]       = new TH1F("h1_Enureso_CCnonQE_wTrueN", "Neutrino Energy Resolution w/ Truth Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
+      h1_Enureso_CCRES_deltap_trueN[i]  = new TH1F("h1_Enureso_CCRESdeltap_wTrueN", "Neutrino Energy Resolution w/ Truth Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
+      h1_Enureso_CCRES_deltapp_trueN[i] = new TH1F("h1_Enureso_CCRESdeltapp_wTrueN", "Neutrino Energy Resolution w/ Truth Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
+      h1_Enureso_CCRES_delta0_trueN[i]  = new TH1F("h1_Enureso_CCRESdelta0_wTrueN", "Neutrino Energy Resolution w/ Truth Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
+      h1_Enureso_CCOther_trueN[i]       = new TH1F("h1_Enureso_CCOther_wTrueN", "Neutrino Energy Resolution w/o Truth Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
+      h1_Enureso_NC_trueN[i]            = new TH1F("h1_Enureso_NC_wTrueN", "Neutrino Energy Resolution w/ Truth Neutrons; (E^{true}_{#nu}-E^{reco}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
     }
   }
 }
@@ -81,14 +85,24 @@ void NTagAnalysis::SetHistoFormat() {
     h1_Enureso_CCRES_deltap[i]  -> SetLineWidth(2);
     h1_Enureso_CCRES_deltapp[i] -> SetLineWidth(2);
     h1_Enureso_CCRES_delta0[i]  -> SetLineWidth(2);
+    h1_Enureso_CCOther[i]       -> SetLineWidth(2);
     h1_Enureso_NC[i]            -> SetLineWidth(2);
 
     h1_Enureso_CCQE[i]          -> SetLineColor(kAzure-1);
-    h1_Enureso_CCnonQE[i]       -> SetLineColor(kOrange+8);
+    h1_Enureso_CCnonQE[i]       -> SetLineColor(kAzure-5);
     h1_Enureso_CCRES_deltap[i]  -> SetLineColor(kPink+1);
     h1_Enureso_CCRES_deltapp[i] -> SetLineColor(kPink-8);
     h1_Enureso_CCRES_delta0[i]  -> SetLineColor(kGray+1);
+    h1_Enureso_CCOther[i]       -> SetLineColor(kCyan-6);
     h1_Enureso_NC[i]            -> SetLineColor(kTeal+9);
+
+    h1_Enureso_CCQE[i]          -> SetFillColor(kAzure-1);
+    h1_Enureso_CCnonQE[i]       -> SetFillColor(kAzure-5);
+    h1_Enureso_CCRES_deltap[i]  -> SetFillColor(kPink+1);
+    h1_Enureso_CCRES_deltapp[i] -> SetFillColor(kPink-8);
+    h1_Enureso_CCRES_delta0[i]  -> SetFillColor(kGray+1);
+    h1_Enureso_CCOther[i]       -> SetFillColor(kCyan-6);
+    h1_Enureso_NC[i]            -> SetFillColor(kTeal+9);
 
     h1_Enureso_CCQE_trueN[i]          -> SetLineWidth(2);
     h1_Enureso_CCnonQE_trueN[i]       -> SetLineWidth(2);
@@ -98,11 +112,20 @@ void NTagAnalysis::SetHistoFormat() {
     h1_Enureso_NC_trueN[i]            -> SetLineWidth(2);
 
     h1_Enureso_CCQE_trueN[i]          -> SetLineColor(kAzure-1);
-    h1_Enureso_CCnonQE_trueN[i]       -> SetLineColor(kOrange+8);
+    h1_Enureso_CCnonQE_trueN[i]       -> SetLineColor(kAzure-5);
     h1_Enureso_CCRES_deltap_trueN[i]  -> SetLineColor(kPink+1);
     h1_Enureso_CCRES_deltapp_trueN[i] -> SetLineColor(kPink-8);
     h1_Enureso_CCRES_delta0_trueN[i]  -> SetLineColor(kGray+1);
+    h1_Enureso_CCOther_trueN[i]       -> SetLineColor(kCyan-6);
     h1_Enureso_NC_trueN[i]            -> SetLineColor(kTeal+9);
+
+    h1_Enureso_CCQE_trueN[i]          -> SetFillColor(kAzure-1);
+    h1_Enureso_CCnonQE_trueN[i]       -> SetFillColor(kAzure-5);
+    h1_Enureso_CCRES_deltap_trueN[i]  -> SetFillColor(kPink+1);
+    h1_Enureso_CCRES_deltapp_trueN[i] -> SetFillColor(kPink-8);
+    h1_Enureso_CCRES_delta0_trueN[i]  -> SetFillColor(kGray+1);
+    h1_Enureso_CCOther_trueN[i]       -> SetFillColor(kCyan-6);
+    h1_Enureso_NC_trueN[i]            -> SetFillColor(kTeal+9);
   }
 }
 
@@ -595,178 +618,155 @@ void NTagAnalysis::GetElikeCandidatesinWindow(std::vector<float> *t,
   } //window scan
 }
 
-void NTagAnalysis::Set1RmuonSamplewNTag(bool NoNlike, CC0PiNumu* numu, int mode) {
-  float OscProb = numu->getOscWgt();
-  float RecoEnu = numu->var<float>("erec");
-
-  //use tagged neutrons info
-  if (NoNlike) {
-    h1_All_NoOsc_woNeutron        -> Fill(RecoEnu/1000.);
-    h1_All_OscProb_woNeutron      -> Fill(RecoEnu/1000., OscProb);
-    h1_All_OscProbRatio_woNeutron -> Fill(RecoEnu/1000., OscProb);
-
-    //Count oscillated neutrino events within [0.25 GeV, 1.5 GeV]
-    if (RecoEnu/1000. > 0.25 && RecoEnu/1000. < 1.5) {
-      NoOscwoTagN++;
-      OscwoTagN += OscProb;
-    }
-  }
-  else {
-    h1_All_NoOsc_wNeutron        -> Fill(RecoEnu/1000.);
-    h1_All_OscProb_wNeutron      -> Fill(RecoEnu/1000., OscProb);
-    h1_All_OscProbRatio_wNeutron -> Fill(RecoEnu/1000., OscProb);
-  }
-
-  //CCQE(1p1h)
-  if (mode==1) {
-    if (NoNlike) {
-      h1_NoOsc_woNeutron[0]        -> Fill(RecoEnu/1000.);
-      h1_OscProb_woNeutron[0]      -> Fill(RecoEnu/1000., OscProb);
-      h1_OscProbRatio_woNeutron[0] -> Fill(RecoEnu/1000., OscProb);
-
-      OscillatedCCQE_woTagN += OscProb;
-    }
-    else {
-      h1_NoOsc_wNeutron[0]        -> Fill(RecoEnu/1000.);
-      h1_OscProb_wNeutron[0]      -> Fill(RecoEnu/1000., OscProb);
-      h1_OscProbRatio_wNeutron[0] -> Fill(RecoEnu/1000., OscProb);
-
-      OscillatedCCQE_wTagN += OscProb;
-    }
-  }
-
-  //CC non-QE(2p2h)
-  if (mode>=2 && mode<=10) {
-    if (NoNlike) {
-      h1_NoOsc_woNeutron[1]        -> Fill(RecoEnu/1000.);
-      h1_OscProb_woNeutron[1]      -> Fill(RecoEnu/1000., OscProb);
-      h1_OscProbRatio_woNeutron[1] -> Fill(RecoEnu/1000., OscProb);
-
-      OscillatedCCnonQE_woTagN += OscProb;
-    }
-    else {
-      h1_NoOsc_wNeutron[1]        -> Fill(RecoEnu/1000.);
-      h1_OscProb_wNeutron[1]      -> Fill(RecoEnu/1000., OscProb);
-      h1_OscProbRatio_wNeutron[1] -> Fill(RecoEnu/1000., OscProb);
-
-      OscillatedCCnonQE_wTagN += OscProb;
-    }
-  }
-
-  //NC
-  if (mode>=31) {
-    if (NoNlike) {
-      h1_NoOsc_woNeutron[2]        -> Fill(RecoEnu/1000.);
-      h1_OscProb_woNeutron[2]      -> Fill(RecoEnu/1000., OscProb);
-      h1_OscProbRatio_woNeutron[2] -> Fill(RecoEnu/1000., OscProb);
-
-      OscillatedNC_woTagN++;
-    }
-    else {
-      h1_NoOsc_wNeutron[2]        -> Fill(RecoEnu/1000.);
-      h1_OscProb_wNeutron[2]      -> Fill(RecoEnu/1000., OscProb);
-      h1_OscProbRatio_wNeutron[2] -> Fill(RecoEnu/1000., OscProb);
-
-      OscillatedNC_wTagN++;
-    }
-  }
-
-  //CC RES (Delta+)
-  if (mode==13) {
-    if (NoNlike) {
-      h1_NoOsc_woNeutron[3]        -> Fill(RecoEnu/1000.);
-      h1_OscProb_woNeutron[3]      -> Fill(RecoEnu/1000., OscProb);
-      h1_OscProbRatio_woNeutron[3] -> Fill(RecoEnu/1000., OscProb);
-
-      OscillatedCCRESp_woTagN += OscProb;
-    }
-    else {
-      h1_NoOsc_wNeutron[3]        -> Fill(RecoEnu/1000.);
-      h1_OscProb_wNeutron[3]      -> Fill(RecoEnu/1000., OscProb);
-      h1_OscProbRatio_wNeutron[3] -> Fill(RecoEnu/1000., OscProb);
-
-      OscillatedCCRESp_wTagN += OscProb;
-    }
-  }
-  //CC RES (Delta++)
-  if (mode==11) {
-    if (NoNlike) {
-      h1_NoOsc_woNeutron[4]        -> Fill(RecoEnu/1000.);
-      h1_OscProb_woNeutron[4]      -> Fill(RecoEnu/1000., OscProb);
-      h1_OscProbRatio_woNeutron[4] -> Fill(RecoEnu/1000., OscProb);
-
-      OscillatedCCRESpp_woTagN += OscProb;
-    }
-    else {
-      h1_NoOsc_wNeutron[4]        -> Fill(RecoEnu/1000.);
-      h1_OscProb_wNeutron[4]      -> Fill(RecoEnu/1000., OscProb);
-      h1_OscProbRatio_wNeutron[4] -> Fill(RecoEnu/1000., OscProb);
-
-      OscillatedCCRESpp_wTagN += OscProb;
-    }
-  }
-  //CC RES (Delta0)
-  if (mode==12) {
-    if (NoNlike) {
-      h1_NoOsc_woNeutron[5]        -> Fill(RecoEnu/1000.);
-      h1_OscProb_woNeutron[5]      -> Fill(RecoEnu/1000., OscProb);
-      h1_OscProbRatio_woNeutron[5] -> Fill(RecoEnu/1000., OscProb);
-
-      OscillatedCCRES0_woTagN += OscProb;
-    }
-    else {
-      h1_NoOsc_wNeutron[5]        -> Fill(RecoEnu/1000.);
-      h1_OscProb_wNeutron[5]      -> Fill(RecoEnu/1000., OscProb);
-      h1_OscProbRatio_wNeutron[5] -> Fill(RecoEnu/1000., OscProb);
-
-      OscillatedCCRES0_wTagN += OscProb;
-    }
-  }
-
-  //CC Others
-  if (mode>=14 && mode<=30) {
-    if (NoNlike) {
-      h1_NoOsc_woNeutron[1]        -> Fill(RecoEnu/1000.);
-      h1_OscProb_woNeutron[1]      -> Fill(RecoEnu/1000., OscProb);
-      h1_OscProbRatio_woNeutron[1] -> Fill(RecoEnu/1000., OscProb);
-
-      OscillatedCCOther_woTagN += OscProb;
-    }
-    else {
-      h1_NoOsc_wNeutron[1]        -> Fill(RecoEnu/1000.);
-      h1_OscProb_wNeutron[1]      -> Fill(RecoEnu/1000., OscProb);
-      h1_OscProbRatio_wNeutron[1] -> Fill(RecoEnu/1000., OscProb);
-
-      OscillatedCCOther_wTagN += OscProb;
-    }
-  }
-}
-
-
-void NTagAnalysis::GetMisTagNeutrinoEvents(CC0PiNumu* numu, float NTrueN, bool NoNlike) {
+void NTagAnalysis::Set1RmuonSamplewNTag(bool NoNlike, CC0PiNumu* numu, float theta, float thetamin, float thetamax) {
   int mode = TMath::Abs(numu->var<int>("mode"));
   float OscProb = numu->getOscWgt();
   float RecoEnu = numu->var<float>("erec");
 
-  if (NTrueN!=0 && NoNlike==true) {
+  if (theta>thetamin && theta<thetamax) {
 
-    //CCQE
-    if (mode==1) h1_OscProb_mistag[0] -> Fill(RecoEnu/1000., OscProb);
+    //use tagged neutrons info
+    if (NoNlike) {
+      h1_All_NoOsc_woNeutron        -> Fill(RecoEnu/1000.);
+      //h1_All_OscProb_woNeutron      -> Fill(RecoEnu/1000., OscProb);
+      h1_All_OscProbRatio_woNeutron -> Fill(RecoEnu/1000., OscProb);
 
-    //CC non-QE
-    if ((mode>=2 && mode<=10) || (mode>=14 && mode<=30)) h1_OscProb_mistag[1] -> Fill(RecoEnu/1000., OscProb);
+      //Count oscillated neutrino events within [0.25 GeV, 1.5 GeV]
+      if (RecoEnu/1000. > 0.25 && RecoEnu/1000. < 1.5) {
+        NoOscwoTagN++;
+        OscwoTagN += OscProb;
+      }
+    }
+    else {
+      //h1_All_NoOsc_wNeutron        -> Fill(RecoEnu/1000.);
+      //h1_All_OscProb_wNeutron      -> Fill(RecoEnu/1000., OscProb);
+      //h1_All_OscProbRatio_wNeutron -> Fill(RecoEnu/1000., OscProb);
+    }
+
+    //=== with respect to neutrino interactions ===
+    //CCQE(1p1h)
+    if (mode==1) {
+      if (NoNlike) {
+        //h1_NoOsc_woNeutron[0]        -> Fill(RecoEnu/1000.);
+        h1_OscProb_woNeutron[0]      -> Fill(RecoEnu/1000., OscProb);
+        //h1_OscProbRatio_woNeutron[0] -> Fill(RecoEnu/1000., OscProb);
+
+        OscillatedCCQE_woTagN += OscProb;
+      }
+      else {
+        //h1_NoOsc_wNeutron[0]        -> Fill(RecoEnu/1000.);
+        h1_OscProb_wNeutron[0]      -> Fill(RecoEnu/1000., OscProb);
+        //h1_OscProbRatio_wNeutron[0] -> Fill(RecoEnu/1000., OscProb);
+
+        OscillatedCCQE_wTagN += OscProb;
+      }
+    }
+
+    //CC non-QE(2p2h)
+    if (mode>=2 && mode<=10) {
+      if (NoNlike) {
+        //h1_NoOsc_woNeutron[1]        -> Fill(RecoEnu/1000.);
+        h1_OscProb_woNeutron[1]      -> Fill(RecoEnu/1000., OscProb);
+        //h1_OscProbRatio_woNeutron[1] -> Fill(RecoEnu/1000., OscProb);
+
+        OscillatedCCnonQE_woTagN += OscProb;
+      }
+      else {
+        //h1_NoOsc_wNeutron[1]        -> Fill(RecoEnu/1000.);
+        h1_OscProb_wNeutron[1]      -> Fill(RecoEnu/1000., OscProb);
+        //h1_OscProbRatio_wNeutron[1] -> Fill(RecoEnu/1000., OscProb);
+
+        OscillatedCCnonQE_wTagN += OscProb;
+      }
+    }
 
     //NC
-    if (mode>=31) h1_OscProb_mistag[2] -> Fill(RecoEnu/1000.);
+    if (mode>=31) {
+      if (NoNlike) {
+        //h1_NoOsc_woNeutron[2]        -> Fill(RecoEnu/1000.);
+        h1_OscProb_woNeutron[2]      -> Fill(RecoEnu/1000., OscProb);
+        //h1_OscProbRatio_woNeutron[2] -> Fill(RecoEnu/1000., OscProb);
 
-    //CCRES+
-    if (mode==13) h1_OscProb_mistag[3] -> Fill(RecoEnu/1000., OscProb);
+        OscillatedNC_woTagN++;
+      }
+      else {
+        //h1_NoOsc_wNeutron[2]        -> Fill(RecoEnu/1000.);
+        h1_OscProb_wNeutron[2]      -> Fill(RecoEnu/1000., OscProb);
+        //h1_OscProbRatio_wNeutron[2] -> Fill(RecoEnu/1000., OscProb);
 
-    //CCRES++
-    if (mode==11) h1_OscProb_mistag[4] -> Fill(RecoEnu/1000., OscProb);
+        OscillatedNC_wTagN++;
+      }
+    }
 
-    //CCRES0
-    if (mode==12) h1_OscProb_mistag[5] -> Fill(RecoEnu/1000., OscProb);
+    //CC RES (Delta+)
+    if (mode==13) {
+      if (NoNlike) {
+        //h1_NoOsc_woNeutron[3]        -> Fill(RecoEnu/1000.);
+        h1_OscProb_woNeutron[3]      -> Fill(RecoEnu/1000., OscProb);
+        //h1_OscProbRatio_woNeutron[3] -> Fill(RecoEnu/1000., OscProb);
+
+        OscillatedCCRESp_woTagN += OscProb;
+      }
+      else {
+        //h1_NoOsc_wNeutron[3]        -> Fill(RecoEnu/1000.);
+        h1_OscProb_wNeutron[3]      -> Fill(RecoEnu/1000., OscProb);
+        //h1_OscProbRatio_wNeutron[3] -> Fill(RecoEnu/1000., OscProb);
+
+        OscillatedCCRESp_wTagN += OscProb;
+      }
+    }
+    //CC RES (Delta++)
+    if (mode==11) {
+      if (NoNlike) {
+        //h1_NoOsc_woNeutron[4]        -> Fill(RecoEnu/1000.);
+        h1_OscProb_woNeutron[4]      -> Fill(RecoEnu/1000., OscProb);
+        //h1_OscProbRatio_woNeutron[4] -> Fill(RecoEnu/1000., OscProb);
+
+        OscillatedCCRESpp_woTagN += OscProb;
+      }
+      else {
+        //h1_NoOsc_wNeutron[4]        -> Fill(RecoEnu/1000.);
+        h1_OscProb_wNeutron[4]      -> Fill(RecoEnu/1000., OscProb);
+        //h1_OscProbRatio_wNeutron[4] -> Fill(RecoEnu/1000., OscProb);
+
+        OscillatedCCRESpp_wTagN += OscProb;
+      }
+    }
+    //CC RES (Delta0)
+    if (mode==12) {
+      if (NoNlike) {
+        //h1_NoOsc_woNeutron[5]        -> Fill(RecoEnu/1000.);
+        h1_OscProb_woNeutron[5]      -> Fill(RecoEnu/1000., OscProb);
+        //h1_OscProbRatio_woNeutron[5] -> Fill(RecoEnu/1000., OscProb);
+
+        OscillatedCCRES0_woTagN += OscProb;
+      }
+      else {
+        //h1_NoOsc_wNeutron[5]        -> Fill(RecoEnu/1000.);
+        h1_OscProb_wNeutron[5]      -> Fill(RecoEnu/1000., OscProb);
+        //h1_OscProbRatio_wNeutron[5] -> Fill(RecoEnu/1000., OscProb);
+
+        OscillatedCCRES0_wTagN += OscProb;
+      }
+    }
+
+    //CC Others
+    if (mode>=14 && mode<=30) {
+      if (NoNlike) {
+        //h1_NoOsc_woNeutron[6]        -> Fill(RecoEnu/1000.);
+        h1_OscProb_woNeutron[6]      -> Fill(RecoEnu/1000., OscProb);
+        //h1_OscProbRatio_woNeutron[6] -> Fill(RecoEnu/1000., OscProb);
+
+        OscillatedCCOther_woTagN += OscProb;
+      }
+      else {
+        //h1_NoOsc_wNeutron[6]        -> Fill(RecoEnu/1000.);
+        h1_OscProb_wNeutron[6]      -> Fill(RecoEnu/1000., OscProb);
+        //h1_OscProbRatio_wNeutron[6] -> Fill(RecoEnu/1000., OscProb);
+
+        OscillatedCCOther_wTagN += OscProb;
+      }
+    }
   }
 }
 
@@ -780,12 +780,12 @@ void NTagAnalysis::GetNeutrinoEventswNTag(std::vector<float> *TagOut,
                                           bool etagmode,
                                           CC0PiNumu* numu,
                                           NeutrinoOscillation neuosc,
-                                          int NCUT) 
+                                          int NCUT,
+                                          float theta, float thetamin, float thetamax) 
 {
   int mode = TMath::Abs(numu->var<int>("mode"));
   float TrueEnu = numu->var<float>("pnu", 0);
   float RecoEnu = numu->var<float>("erec");
-  //float EnuReso = TrueEnu - RecoEnu/1000.;
   float EnuReso = (TrueEnu - RecoEnu/1000.)/TrueEnu;
 
   for (int ith=0; ith<CUTSTEP; ith++) {
@@ -821,16 +821,11 @@ void NTagAnalysis::GetNeutrinoEventswNTag(std::vector<float> *TagOut,
     if (NumTruthNeutronsinNlike==0) NoNeutron = true;
 
 
-    if (ith==NCUT) {
-      //Reconstructed energy distribution w/o tagged neutrons
-      this -> Set1RmuonSamplewNTag(NoNlike, numu, mode);
-
-      //Reconstructed energy distribution w/o tagged neutrons
-      this -> GetMisTagNeutrinoEvents(numu, NTrueN, NoNlike);
-    }
+    //Get reconstructed energy distribution w/(o) tagged neutrons
+    if (ith==NCUT) this -> Set1RmuonSamplewNTag(NoNlike, numu, theta, thetamin, thetamax);
     
 
-    //See neutrino events that have no n-like candidates
+    //=== w/o tagged neutrons ===
     if (NoNlike==true) {
       NeutrinoEventswNoNlike[ith]+=neuosc.OscProbCalculator(numu, false);
 
@@ -843,27 +838,29 @@ void NTagAnalysis::GetNeutrinoEventswNTag(std::vector<float> *TagOut,
         test1++;
         //CCQE(1p1h)
         if (mode==1) h1_Enureso_CCQE[0] -> Fill(EnuReso);
-        //CC non-QE
-        if ((mode>=2 && mode<=10) || (mode>=14 && mode<=30)) h1_Enureso_CCnonQE[0] -> Fill(EnuReso);
+        //CC-2p2h
+        if (mode>=2 && mode<=10) h1_Enureso_CCnonQE[0] -> Fill(EnuReso);
         //CC RES(Delta++)
         if (mode==11) h1_Enureso_CCRES_deltapp[0] -> Fill(EnuReso);
         //CC RES(Delta0)
         if (mode==12) h1_Enureso_CCRES_delta0[0] -> Fill(EnuReso);
         //CC RES(Delta+)
         if (mode==13) h1_Enureso_CCRES_deltap[0] -> Fill(EnuReso);
+        //CC-other
+        if (mode>=14 && mode<=30) h1_Enureso_CCOther[0] -> Fill(EnuReso);
         //NC
         if (mode>=31) h1_Enureso_NC[0] -> Fill(EnuReso);
       }
       
     }
+    
 
-    //See neutrino events that have more than one n-like candidates
-    //if (nonzeroTaggedNeutrons==true) NeutrinoEventswNlikes[0][ith]++;
+    //=== w/ tagged neutrons ===
     if (nonzeroTaggedNeutrons==true) {
-      //NeutrinoEventswNlikes[0][ith]+=neuosc.OscProbCalculator(numu, false);
       NeutrinoEventswNlikes[ith]+=neuosc.OscProbCalculator(numu, false);
 
       if (ith==NCUT) {
+
         //Reconstructed energy resolution w/ tagged neutrons
         //this -> Set1RmuonSamplewNTag(NoNlike, numu, mode);
 
@@ -871,18 +868,21 @@ void NTagAnalysis::GetNeutrinoEventswNTag(std::vector<float> *TagOut,
         test2++;
         //CCQE(1p1h)
         if (mode==1) h1_Enureso_CCQE[1] -> Fill(EnuReso);
-        //CC non-QE
-        if ((mode>=2 && mode<=10) || (mode>=14 && mode<=30)) h1_Enureso_CCnonQE[1] -> Fill(EnuReso);
+        //CC-2p2h
+        if (mode>=2 && mode<=10) h1_Enureso_CCnonQE[1] -> Fill(EnuReso);
         //CC RES(Delta++)
         if (mode==11) h1_Enureso_CCRES_deltapp[1] -> Fill(EnuReso);
         //CC RES(Delta0)
         if (mode==12) h1_Enureso_CCRES_delta0[1] -> Fill(EnuReso);
         //CC RES(Delta+)
         if (mode==13) h1_Enureso_CCRES_deltap[1] -> Fill(EnuReso);
+        //CC-other
+        if (mode>=14 && mode<=30) h1_Enureso_CCOther[1] -> Fill(EnuReso);
         //NC
         if (mode>=31) h1_Enureso_NC[1] -> Fill(EnuReso);
       }
     }
+
 
     //See neutrino events that have one n-like candidate
     //if (OnlyOneNlike==true) NeutrinoEventswOneNlike[0][ith]++;
@@ -912,14 +912,16 @@ void NTagAnalysis::GetResolutionwTrueN(CC0PiNumu* numu, float NTrueN) {
   if (NTrueN==0) {
     //CCQE
     if (mode==1) h1_Enureso_CCQE_trueN[0] -> Fill(EnuReso);
-    //CC non-QE
-    if ((mode>=2 && mode<=10) || (mode>=14 && mode<=30)) h1_Enureso_CCnonQE_trueN[0] -> Fill(EnuReso);
+    //CC-2p2h
+    if (mode>=2 && mode<=10) h1_Enureso_CCnonQE_trueN[0] -> Fill(EnuReso);
     //CC RES (Delta++)
     if (mode==11) h1_Enureso_CCRES_deltapp_trueN[0] -> Fill(EnuReso);
     //CC RES (Delta0)
     if (mode==12) h1_Enureso_CCRES_delta0_trueN[0] -> Fill(EnuReso);
     //CC RES (Delta+)
     if (mode==13) h1_Enureso_CCRES_deltap_trueN[0] -> Fill(EnuReso);
+    //CC-other
+    if (mode>=14 && mode<=30) h1_Enureso_CCOther_trueN[0] -> Fill(EnuReso);
     //NC
     if (mode>=31) h1_Enureso_NC_trueN[0] -> Fill(EnuReso);
   }
@@ -927,13 +929,15 @@ void NTagAnalysis::GetResolutionwTrueN(CC0PiNumu* numu, float NTrueN) {
     //CCQE
     if (mode==1) h1_Enureso_CCQE_trueN[1] -> Fill(EnuReso);
     //CC non-QE
-    if ((mode>=2 && mode<=10) || (mode>=14 && mode<=30)) h1_Enureso_CCnonQE_trueN[1] -> Fill(EnuReso);
+    if (mode>=2 && mode<=10) h1_Enureso_CCnonQE_trueN[1] -> Fill(EnuReso);
     //CC RES (Delta++)
     if (mode==11) h1_Enureso_CCRES_deltapp_trueN[1] -> Fill(EnuReso);
     //CC RES (Delta0)
     if (mode==12) h1_Enureso_CCRES_delta0_trueN[1] -> Fill(EnuReso);
     //CC RES (Delta+)
     if (mode==13) h1_Enureso_CCRES_deltap_trueN[1] -> Fill(EnuReso);
+    //CC-other
+    if (mode>=14 && mode<=30) h1_Enureso_CCOther_trueN[1] -> Fill(EnuReso);
     //NC
     if (mode>=31) h1_Enureso_NC_trueN[1] -> Fill(EnuReso);
   }
@@ -1341,6 +1345,7 @@ void NTagAnalysis::WritePlots() {
     h1_Enureso_CCRES_deltap[i]  -> Write();
     h1_Enureso_CCRES_deltapp[i] -> Write();
     h1_Enureso_CCRES_delta0[i]  -> Write();
+    h1_Enureso_CCOther[i]       -> Write();
     h1_Enureso_NC[i]            -> Write();
 
     h1_Enureso_CCQE_trueN[i]          -> Write();
@@ -1348,6 +1353,7 @@ void NTagAnalysis::WritePlots() {
     h1_Enureso_CCRES_deltap_trueN[i]  -> Write();
     h1_Enureso_CCRES_deltapp_trueN[i] -> Write();
     h1_Enureso_CCRES_delta0_trueN[i]  -> Write();
+    h1_Enureso_CCOther_trueN[i]       -> Write();
     h1_Enureso_NC_trueN[i]            -> Write();
   }
 

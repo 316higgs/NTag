@@ -7,10 +7,10 @@
 void Breakdown() {
   //fhc
   TFile* finPW = new TFile("../../output/fhc/fhc.numu_x_numu.water.root");
-  TFile* finGd = new TFile("../../output/fhc/fhc.numu_x_numu.etagON.root");
+  TFile* finGd = new TFile("../../output/fhc/fhc.numu_x_numu.etagON.noinpmt.root");
 
   //TFile* finPW = new TFile("../../output/fhc/fhc.numubar_x_numubar.water.root");
-  //TFile* finGd = new TFile("../../output/fhc/fhc.numubar_x_numubar.etagON.root");
+  //TFile* finGd = new TFile("../../output/fhc/fhc.numubar_x_numubar.etagON.noinpmt.root");
 
   //rhc
   //TFile* finPW = new TFile("../../output/numubar.water.root");
@@ -43,8 +43,8 @@ void Breakdown() {
 
   TLegend* legend = new TLegend(0.4, 0.65, 0.85, 0.85);
   legend -> SetTextSize(0.03);
-  //legend->AddEntry((TObject*)0,"#kern[-0.6]{ FHC #nu_{#mu} #rightarrow #nu_{#mu} MC}","");
-  legend->AddEntry((TObject*)0,"#kern[-0.6]{ FHC #bar{#nu}_{#mu} #rightarrow #bar{#nu}_{#mu} MC }","");
+  legend->AddEntry((TObject*)0,"#kern[-0.6]{ FHC #nu_{#mu} #rightarrow #nu_{#mu} MC}","");
+  //legend->AddEntry((TObject*)0,"#kern[-0.6]{ FHC #bar{#nu}_{#mu} #rightarrow #bar{#nu}_{#mu} MC }","");
   //legend->AddEntry((TObject*)0,"#kern[-0.6]{ RHC #bar{#nu}_{#mu} #rightarrow #bar{#nu}_{#mu} MC }","");
   legend -> AddEntry(h1_1R_Gd, "Gd MC: Decay-e cut with dt vs N50", "L");
   legend -> AddEntry(h1_Proto1R_Gd, "Gd MC: Decay-e #leq 1", "L");

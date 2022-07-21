@@ -5,8 +5,8 @@
 #include "TText.h"
 
 void ResolutionImp() {
-  //TFile* fin = new TFile("../../output/fhc/fhc.numu_x_numu.etagON.root");
-  TFile* fin = new TFile("../../output/fhc/fhc.numu_x_numu.etagOFF.root");
+  TFile* fin = new TFile("../../output/fhc/fhc.numu_x_numu.etagON.noinpmt.cut1.root");
+  //TFile* fin = new TFile("../../output/fhc/fhc.numu_x_numu.etagOFF.root");
 
   //TH1F* h1_AllEnureco    = (TH1F*)fin->Get("NeutrinoOscillation/h1_AllEnureco");
   TH1F* h1_AllProbRatio  = (TH1F*)fin->Get("NeutrinoOscillation/h1_All_OscProbRatio");
@@ -54,7 +54,7 @@ void ResolutionImp() {
   TLegend* legend = new TLegend(0.45, 0.2, 0.85, 0.5);
   legend -> SetTextSize(0.03);
   legend->AddEntry((TObject*)0,"#kern[-0.5]{ FHC #nu_{#mu} #rightarrow #nu_{#mu} MC }","");
-  legend->AddEntry((TObject*)0,"#kern[-0.4]{n-like threshold: 0.8}", "");
+  legend->AddEntry((TObject*)0,"#kern[-0.4]{n-like threshold: 0.75}", "");
   //legend->AddEntry((TObject*)0,"#kern[-0.5]{ #bar{#nu}_{#mu} #rightarrow #bar{#nu}_{#mu} Mode }","");
   //legend->AddEntry((TObject*)0,"#kern[-0.4]{n-like threshold: 0.8}", "");
   legend -> AddEntry(h1_AllProbRatio, "Selected 1R muon events", "L");
