@@ -139,6 +139,58 @@ void Sequencial1RmuonSelection(Gd1RmuonSelection prmsel,
   }
 }
 
+void Sequencial1RmuonSelection_Pion(Gd1RmuonSelection prmsel,
+                                    EvSelVar_t evsel,
+                                    CC0PiNumu* numu,
+                                    DecayeBox decayebox, 
+                                    BeamMode::E_BEAM_MODE eMode, 
+                                    OscChan::E_OSC_CHAN eOsc,
+                                    float dtCut,
+                                    float N50CutMin,
+                                    float N50CutMax,
+                                    bool dtvsn50fill) 
+{
+  //CC pion productions
+  int mode = TMath::Abs(numu->var<int>("mode"));
+  if (mode==11 || mode==12 || mode==13 || mode==21) {
+    if (prmsel.C1ApplyFCFV(evsel)) {
+      SelectedParentNeutrinos[0]++;
+      ProtoSelectedParentNeutrinos[0]++;
+
+      if (prmsel.C2Apply1R(evsel)) {
+        SelectedParentNeutrinos[1]++;
+        ProtoSelectedParentNeutrinos[1]++;
+
+        if (prmsel.C3Applymuonlike(evsel)) {
+          SelectedParentNeutrinos[2]++;
+          ProtoSelectedParentNeutrinos[2]++;
+
+          if (prmsel.C4ApplyPmu200MeV(evsel)) {
+            SelectedParentNeutrinos[3]++;
+            ProtoSelectedParentNeutrinos[3]++;
+
+            if (prmsel.C5Applydecaye(evsel, numu, decayebox, eMode, eOsc, dtCut, N50CutMin, N50CutMax, dtvsn50fill)) {
+              SelectedParentNeutrinos[4]++;
+
+              if (prmsel.C6Applynotpionlike(evsel)) {
+                SelectedParentNeutrinos[5]++;
+              }
+            }
+
+            if (prmsel.C5ApplyProtodecaye(evsel)) {
+              ProtoSelectedParentNeutrinos[4]++;
+
+              if (prmsel.C6Applynotpionlike(evsel)) {
+                ProtoSelectedParentNeutrinos[5]++;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 
 void GetSelectedModeEvents(CC0PiNumu* numu) {
   int mode = TMath::Abs(numu->var<int>("mode"));

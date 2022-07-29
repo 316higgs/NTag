@@ -6,8 +6,9 @@
 
 void BreakdownComparison() {
   //fhc
-  TFile* finnumu    = new TFile("../../output/fhc/fhc.numu_x_numu.etagON.root");
-  TFile* finnumubar = new TFile("../../output/fhc/fhc.numubar_x_numubar.etagON.root");
+  TFile* finnumu        = new TFile("../../output/fhc/fhc.numu_x_numu.etagON.root");
+  TFile* finnumubar     = new TFile("../../output/fhc/fhc.numubar_x_numubar.etagON.root");
+  TFile* finnumubarccpi = new TFile("../../output/fhc/fhc.numubar_x_numubar.etagON.CCpi.root");
 
   TH1F* h1_numu    = (TH1F*)finnumu->Get("Gd1RmuonSelection/h1_1RmuonEvents");
   TH1F* h1_numubar = (TH1F*)finnumubar->Get("Gd1RmuonSelection/h1_1RmuonEvents");

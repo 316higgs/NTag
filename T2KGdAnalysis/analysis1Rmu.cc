@@ -263,6 +263,7 @@ int main(int argc, char **argv) {
 
     const EvSelVar_t evsel = numu->getEvSelVar();
     Sequencial1RmuonSelection(prmsel, evsel, numu, decayebox, eMode, eOsc, 20., 50., 400., false);
+    //Sequencial1RmuonSelection_Pion(prmsel, evsel, numu, decayebox, eMode, eOsc, 20., 50., 400., false);
 
     //Proto 1R muon selection
     if (prmsel.ApplyProto1RmuonSelection(evsel)) {

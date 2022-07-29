@@ -6,7 +6,8 @@
 #include "TLatex.h"
 
 void EnuOscillation() {
-  TFile* fin = new TFile("../../output/fhc/fhc.numu_x_numu.etagON.noinpmt.root");
+  //TFile* fin = new TFile("../../output/fhc/fhc.numu_x_numu.etagON.noinpmt.cut1.root");
+  TFile* fin = new TFile("../../output/fhc/fhc.numu_x_numu.etagON.0.511.root");
   //TFile* fin = new TFile("../../output/fhc/fhc.numubar_x_numubar.etagON.noinpmt.root");
 
   TH1F* h1_trueCCQE         = (TH1F*)fin->Get("NeutrinoOscillation/h1_TruthOscProb_mode0");
@@ -113,7 +114,7 @@ void EnuOscillation() {
   TLegend* legend0 = new TLegend(0.45, 0.45, 0.85, 0.85);
   legend0 -> SetTextSize(0.03);
   legend0->AddEntry((TObject*)0,"#kern[-0.5]{ FHC #nu_{#mu} #rightarrow #nu_{#mu} MC }","");
-  //legend0->AddEntry((TObject*)0,"#kern[-0.5]{ #bar{#nu}_{#mu} #rightarrow #bar{#nu}_{#mu} Mode }","");
+  //legend0->AddEntry((TObject*)0,"#kern[-0.5]{ FHC #bar{#nu}_{#mu} #rightarrow #bar{#nu}_{#mu} MC }","");
   legend0 -> AddEntry(h1_trueCCQE, "CCQE(1p1h)", "F");
   legend0 -> AddEntry(h1_trueCCnonQE, "CC-2p2h", "F");
   legend0 -> AddEntry(h1_trueCCRESdeltap, "CCRES(#Delta^{+})", "F");
