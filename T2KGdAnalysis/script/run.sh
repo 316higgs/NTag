@@ -89,22 +89,22 @@ ANALYSISSTAGE=/home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC/analysis/T2KGdAnalysi
 #                   -BEAMMODE FHC\
 #                   -OSCCH NUMU
 
-#./analysis1Rmu.exe $FITQUNDIR/0026Gd.numu/noinpmt/numu_x_numu.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
-#                   $NTAGDIR/tageoption/noinpmt/numu_x_numu.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
-#                   $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.etagON.noinpmt.root\
-#                   $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.neutrino.etagON.noinpmt.txt\
-#                   $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.ntag.etagON.noinpmt.txt\
-#                   -MCType Gd\
-#                   -ETAG ON\
-#                   -BEAMMODE FHC\
-#                   -OSCCH NUMU
+./analysis1Rmu.exe $FITQUNDIR/0026Gd.numu/noinpmt/numu_x_numu.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
+                   $NTAGDIR/tageoption/noinpmt/numu_x_numu.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
+                   $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.etagON.noinpmt.root\
+                   $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.neutrino.etagON.noinpmt.txt\
+                   $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.ntag.etagON.noinpmt.txt\
+                   -MCType Gd\
+                   -ETAG ON\
+                   -BEAMMODE FHC\
+                   -OSCCH NUMU
 
   #### costheta23 = 0.511 ####
 #./analysis1Rmu.exe $FITQUNDIR/0026Gd.numu/noinpmt/numu_x_numu.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
 #                   $NTAGDIR/tageoption/noinpmt/numu_x_numu.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
-#                   $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.etagON.0.511.root\
-#                   $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.neutrino.etagON.0.511.txt\
-#                   $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.ntag.etagON.0.511.txt\
+#                   $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.etagON.maximalmix.root\
+#                   $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.neutrino.etagON.maximalmix.txt\
+#                   $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.ntag.etagON.maximalmix.txt\
 #                   -MCType Gd\
 #                   -ETAG ON\
 #                   -BEAMMODE FHC\
@@ -113,9 +113,19 @@ ANALYSISSTAGE=/home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC/analysis/T2KGdAnalysi
   #### with muon angle ####
 #./analysis1Rmu.exe $FITQUNDIR/0026Gd.numu/noinpmt/numu_x_numu.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
 #                   $NTAGDIR/tageoption/noinpmt/numu_x_numu.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
-#                   $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.etagON.noinpmt.cut1.root\
-#                   $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.neutrino.etagON.noinpmt.cut1.txt\
-#                   $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.ntag.etagON.noinpmt.cut1.txt\
+#                   $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.etagON.cut1.root\
+#                   $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.neutrino.etagON.cut1.txt\
+#                   $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.ntag.etagON.cut1.txt\
+#                   -MCType Gd\
+#                   -ETAG ON\
+#                   -BEAMMODE FHC\
+#                   -OSCCH NUMU
+
+#./analysis1Rmu.exe $FITQUNDIR/0026Gd.numu/noinpmt/numu_x_numu.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
+#                   $NTAGDIR/tageoption/noinpmt/numu_x_numu.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
+#                   $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.etagON.CCpi.cut1.root\
+#                   $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.neutrino.etagON.CCpi.cut1.txt\
+#                   $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.ntag.etagON.CCpi.cut1.txt\
 #                   -MCType Gd\
 #                   -ETAG ON\
 #                   -BEAMMODE FHC\
@@ -133,15 +143,15 @@ ANALYSISSTAGE=/home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC/analysis/T2KGdAnalysi
 #                   -BEAMMODE FHC\
 #                   -OSCCH NUMUBAR
 
-./analysis1Rmu.exe $FITQUNDIR/0026Gd.numubar/noinpmt/numubar_x_numubar.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
-                   $NTAGDIR/tageoption/noinpmt/numubar_x_numubar.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
-                   ./output/fhc/fhc.numubar_x_numubar.etagON.root\
-                   ./result/fhc/fhc.numubar_x_numubar.neutrino.etagON.txt\
-                   ./result/fhc/fhc.numubar_x_numubar.ntag.etagON.txt\
-                   -MCType Gd\
-                   -ETAG ON\
-                   -BEAMMODE FHC\
-                   -OSCCH NUMUBAR
+#./analysis1Rmu.exe $FITQUNDIR/0026Gd.numubar/noinpmt/numubar_x_numubar.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
+#                   $NTAGDIR/tageoption/noinpmt/numubar_x_numubar.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
+#                   ./output/fhc/fhc.numubar_x_numubar.etagON.root\
+#                   ./result/fhc/fhc.numubar_x_numubar.neutrino.etagON.txt\
+#                   ./result/fhc/fhc.numubar_x_numubar.ntag.etagON.txt\
+#                   -MCType Gd\
+#                   -ETAG ON\
+#                   -BEAMMODE FHC\
+#                   -OSCCH NUMUBAR
 
 #./analysis1Rmu.exe $FITQUNDIR/0026Gd.numubar/noinpmt/numubar_x_numubar.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
 #                   $NTAGDIR/tageoption/noinpmt/numubar_x_numubar.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\

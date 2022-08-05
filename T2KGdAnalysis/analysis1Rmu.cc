@@ -193,6 +193,7 @@ int main(int argc, char **argv) {
   //Histograms
   DecayeBox decayebox;
   decayebox.SetHistoFrame();
+  decayebox.SetHistoFormat();
 
   Gd1RmuonSelection prmsel;
   prmsel.SetHistoFrame();
@@ -282,12 +283,12 @@ int main(int argc, char **argv) {
       neuosc.GetRecoEnu(numu);
 
       //Muon angle information
-      float thetamu = neuosc.GetTrueMuDirection(numu, Npvc, Ipvc, Pvc, Iflvc, Ichvc);
-      //neuosc.GetRecoMuDirection(numu);
-      //neuosc.GetMuDirResolution(numu, Npvc, Ipvc, Pvc, Iflvc, Ichvc);
+      float truethetamu = neuosc.GetTrueMuDirection(numu, Npvc, Ipvc, Pvc, Iflvc, Ichvc);
+      float recothetamu = neuosc.GetRecoMuDirection(numu);
+      neuosc.GetMuDirResolution(truethetamu, recothetamu);
 
       //neuosc.GetEnuResolution(numu);
-      neuosc.GetEnuResolution(numu, thetamu, thetamin, thetamax);
+      neuosc.GetEnuResolution(numu, recothetamu, thetamin, thetamax);
       neuosc.GetReso_x_TrueEnu(numu);
 
       //Oscillation probability check
@@ -295,7 +296,7 @@ int main(int argc, char **argv) {
 
       //Neutrino events as a funtion of reconstructed neutrino energy
       //(No NTag information)
-      neuosc.GetWgtNeutrino(numu, thetamu, thetamin, thetamax);
+      neuosc.GetWgtNeutrino(numu, recothetamu, thetamin, thetamax);
 
       neuosc.GetWgtNeutrino_wTrueN(numu, NTrueN);
 
@@ -330,7 +331,7 @@ int main(int argc, char **argv) {
       //Check neutrino events with tagged neutrons
       ntagana.GetNeutrinoEventswNTag(TagOut, TagIndex, NHits, FitT, Label, NTrueN, 
                                      etagmode, numu, neuosc, 15,
-                                     thetamu, thetamin, thetamax);
+                                     recothetamu, thetamin, thetamax);
 
 
       //Pre-selection

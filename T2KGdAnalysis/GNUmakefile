@@ -7,6 +7,7 @@ LOCAL_LIBS += -L$(T2KGdANA)/lib -lneutrinooscillation
 LOCAL_LIBS += -L$(T2KGdANA)/lib -ldistanceviewer
 LOCAL_LIBS += -L$(T2KGdANA)/lib -lntaganalysis
 LOCAL_LIBS += -L$(T2KGdANA)/lib -ltreemanager
+LOCAL_LIBS += -L$(T2KGdANA)/lib -lnninputvariables
 LOCAL_LIBS += -L$(ATMPD_ROOT)/lib -lThreeProb
 LOCAL_INC += -I$(ANAT2KSK_ROOT)/include
 CXXFLAGS += -std=c++11
@@ -28,6 +29,10 @@ event.exe: event.o
 	LD_RUN_PATH=$(LIBDIR):$(SKOFL_LIBDIR) $(CXX) -g $(CXXFLAGS) -o $@ $^ $(LDLIBS)
 
 NoSelection.exe: NoSelection.o
+	$(RM) .$@
+	LD_RUN_PATH=$(LIBDIR):$(SKOFL_LIBDIR) $(CXX) -g $(CXXFLAGS) -o $@ $^ $(LDLIBS)
+
+getNNvariables.exe: getNNvariables.o
 	$(RM) .$@
 	LD_RUN_PATH=$(LIBDIR):$(SKOFL_LIBDIR) $(CXX) -g $(CXXFLAGS) -o $@ $^ $(LDLIBS)
 

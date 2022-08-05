@@ -6,8 +6,8 @@
 #include "TLatex.h"
 
 void EnuOscillation() {
-  //TFile* fin = new TFile("../../output/fhc/fhc.numu_x_numu.etagON.noinpmt.cut1.root");
-  TFile* fin = new TFile("../../output/fhc/fhc.numu_x_numu.etagON.0.511.root");
+  TFile* fin = new TFile("../../output/fhc/fhc.numu_x_numu.etagON.cut2.root");
+  //TFile* fin = new TFile("../../output/fhc/fhc.numu_x_numu.etagON.0.511.root");
   //TFile* fin = new TFile("../../output/fhc/fhc.numubar_x_numubar.etagON.noinpmt.root");
 
   TH1F* h1_trueCCQE         = (TH1F*)fin->Get("NeutrinoOscillation/h1_TruthOscProb_mode0");

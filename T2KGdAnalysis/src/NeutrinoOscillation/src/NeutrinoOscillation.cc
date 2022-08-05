@@ -82,11 +82,13 @@ void NeutrinoOscillation::SetHistoFrame() {
   h2_RecoMuDirectionXY = new TH2F("h2_RecoMuDirectionXY", "fq1rdir; X #mu direction; Y #mu direction ", 100, -1, 1, 100, -1, 1);
   h2_RecoMuDirectionRZ = new TH2F("h2_RecoMuDirectionRZ", "fq1rdir; R^{2} #mu direction; Z #mu direction ", 100, 0, 2, 100, -1, 1);
 
-  h1_DirResoX = new TH1F("h1_DirResoX", "Direction Resolution; (d^{true}_{X}-d^{reco}_{X})/d^{true}_{X}; Number of Neutrino Events", 200, -1, 1);
-  h1_DirResoY = new TH1F("h1_DirResoY", "Direction Resolution; (d^{true}_{Y}-d^{reco}_{Y})/d^{true}_{Y}; Number of Neutrino Events", 200, -1, 1);
-  h1_DirResoZ = new TH1F("h1_DirResoZ", "Direction Resolution; (d^{true}_{Z}-d^{reco}_{Z})/d^{true}_{Z}; Number of Neutrino Events", 200, -1, 1);
+  //h1_DirResoX = new TH1F("h1_DirResoX", "Direction Resolution; (d^{true}_{X}-d^{reco}_{X})/d^{true}_{X}; Number of Neutrino Events", 200, -1, 1);
+  //h1_DirResoY = new TH1F("h1_DirResoY", "Direction Resolution; (d^{true}_{Y}-d^{reco}_{Y})/d^{true}_{Y}; Number of Neutrino Events", 200, -1, 1);
+  //h1_DirResoZ = new TH1F("h1_DirResoZ", "Direction Resolution; (d^{true}_{Z}-d^{reco}_{Z})/d^{true}_{Z}; Number of Neutrino Events", 200, -1, 1);
   
   h1_Truecosthetamu = new TH1F("h1_Truecosthetamu", "Scattering angle; #mu Scattering Angle cos#theta_{#mu}; Number of Neutrino Events", 50, -1, 1);
+  h1_Recocosthetamu = new TH1F("h1_Recocosthetamu", "Scattering angle; #mu Scattering Angle cos#theta_{#mu}; Number of Neutrino Events", 50, -1, 1);
+  h1_Resocosthetamu = new TH1F("h1_Resocosthetamu", "Scattering angle resolution; (cos#theta_{#mu}^{true}-cos#theta_{#mu}^{reco})/cos#theta_{#mu}^{true}; Number of Neutrino Events", 50, -1, 1);
   h1_EnuRecoPrediction = new TH1F("h1_EnuRecoPrediction", "Reco. Neutrino Energy; Reconstructed Neutrino Energy E_{#nu}^{reco}; Number of Neutrino Events", 60, 0, 3);
   //h1_EnuRecoPrediction = new TH1F("h1_EnuRecoPrediction", "Reco. Neutrino Energy; Reconstructed Neutrino Energy E_{#nu}^{reco}; Number of Neutrino Events", 60, 0, 6);
   h1_EnuResoPrediction = new TH1F("h1_EnuResoPrediction", "Predicted Neutrino Energy Resolution; (E^{true}_{#nu}-E^{predict}_{#nu})/E^{true}_{#nu}; Number of Neutrino Events", 60, -1, 1);
@@ -244,16 +246,14 @@ void NeutrinoOscillation::SetHistoFormat() {
   h2_RecoMuDirectionXY -> SetStats(0);
   h2_RecoMuDirectionRZ -> SetStats(0);
 
-  h1_DirResoX -> SetLineWidth(2);
-  h1_DirResoY -> SetLineWidth(2);
-  h1_DirResoZ -> SetLineWidth(2);
-
-  h1_DirResoX -> SetLineColor(kAzure+5);
-  h1_DirResoY -> SetLineColor(kAzure+5);
-  h1_DirResoZ -> SetLineColor(kAzure+5);
-
   h1_Truecosthetamu -> SetLineColor(kAzure+5);
   h1_Truecosthetamu -> SetLineWidth(2);
+
+  h1_Recocosthetamu -> SetLineColor(kAzure+5);
+  h1_Recocosthetamu -> SetLineWidth(2);
+
+  h1_Resocosthetamu -> SetLineColor(kAzure+5);
+  h1_Resocosthetamu -> SetLineWidth(2);
 
   h1_EnuRecoPrediction -> SetLineColor(kAzure+5);
   h1_EnuRecoPrediction -> SetLineWidth(2);
@@ -327,16 +327,13 @@ float NeutrinoOscillation::GetEnuResolution(CC0PiNumu* numu, float theta, float 
 
   if (theta>thetamin && theta<thetamax) {
 
-    h1_AllEnureso -> Fill(EnuReso);
+    if (mode<31) h1_AllEnureso -> Fill(EnuReso);
 
     //CCQE(1p1h)
     if (mode==1) h1_Enureso[0] -> Fill(EnuReso);
 
     //CC non-QE
     if (mode>=2 && mode<=10) h1_Enureso[1] -> Fill(EnuReso);
-
-    //NC
-    if (mode>=31) h1_Enureso[2] -> Fill(EnuReso);
 
     //CC RES (Delta+)
     if (mode==13) h1_Enureso[3] -> Fill(EnuReso);
@@ -348,6 +345,13 @@ float NeutrinoOscillation::GetEnuResolution(CC0PiNumu* numu, float theta, float 
     //CC other
     if (mode>=14 && mode<=30) h1_Enureso[6] -> Fill(EnuReso);
   }
+
+  //NC
+  if (mode>=31) {
+    h1_AllEnureso -> Fill(EnuReso);
+    h1_Enureso[2] -> Fill(EnuReso);
+  }
+
   return EnuReso;
 }
 
@@ -365,69 +369,76 @@ float NeutrinoOscillation::GetTrueMuDirection(CC0PiNumu* numu,
                                               Float_t Pvc[][3],
                                               Int_t*  Iflvc,
                                               Int_t*  Ichvc) {
+  int mode = TMath::Abs(numu->var<int>("mode"));
+  
   //Truth muon scattering angle
   float costhetamu = 0.;
 
-  //Truth neutrino direction
-  Float_t numomx = Pvc[0][0];
-  Float_t numomy = Pvc[0][1];
-  Float_t numomz = Pvc[0][2];
-  Float_t numom  = std::sqrt(numomx*numomx + numomy*numomy + numomz*numomz);
+  //CC
+  //if (mode < 31) {
+    //Truth neutrino direction
+    Float_t numomx = Pvc[0][0];
+    Float_t numomy = Pvc[0][1];
+    Float_t numomz = Pvc[0][2];
+    Float_t numom  = std::sqrt(numomx*numomx + numomy*numomy + numomz*numomz);
 
-  //Direction vector [mudirx, mudiry, mudirz]
-  Float_t nudirx = numomx/numom;
-  Float_t nudiry = numomy/numom;
-  Float_t nudirz = numomz/numom;
-  //std::cout << "nudir = [" << nudirx << ", " << nudiry << ", " << nudirz << "]" << std::endl;
+    //Direction vector [mudirx, mudiry, mudirz]
+    Float_t nudirx = numomx/numom;
+    Float_t nudiry = numomy/numom;
+    Float_t nudirz = numomz/numom;
+    //std::cout << "nudir = [" << nudirx << ", " << nudiry << ", " << nudirz << "]" << std::endl;
 
 
-  //Truth muon direction
-  //Truth primary particles loop
-  for (Int_t iprm=0; iprm<Npvc; iprm++) {
+    //Truth muon direction
+    //Truth primary particles loop
+    for (Int_t iprm=0; iprm<Npvc; iprm++) {
 
-    //Truth muon from mu-neutrino
-    if (std::abs(Ipvc[iprm])==13 && Ichvc[iprm]==1) {
+      //Truth muon from mu-neutrino
+      if (std::abs(Ipvc[iprm])==13 && Ichvc[iprm]==1) {
 
-      //Momentum
-      Float_t mumomx = Pvc[iprm][0];
-      Float_t mumomy = Pvc[iprm][1];
-      Float_t mumomz = Pvc[iprm][2];
-      Float_t mumom  = std::sqrt(mumomx*mumomx + mumomy*mumomy + mumomz*mumomz);
+        //Momentum
+        Float_t mumomx = Pvc[iprm][0];
+        Float_t mumomy = Pvc[iprm][1];
+        Float_t mumomz = Pvc[iprm][2];
+        Float_t mumom  = std::sqrt(mumomx*mumomx + mumomy*mumomy + mumomz*mumomz);
 
-      //Direction vector [mudirx, mudiry, mudirz]
-      Float_t mudirx = mumomx/mumom;
-      Float_t mudiry = mumomy/mumom;
-      Float_t mudirz = mumomz/mumom;
-      Float_t mudirR = sqrt( mudirx*mudirx + mudiry*mudiry );
+        //Direction vector [mudirx, mudiry, mudirz]
+        Float_t mudirx = mumomx/mumom;
+        Float_t mudiry = mumomy/mumom;
+        Float_t mudirz = mumomz/mumom;
+        Float_t mudirR = sqrt( mudirx*mudirx + mudiry*mudiry );
 
-      //Tree
-      TrueMuDirX = mudirx;
-      TrueMuDirY = mudiry;
-      TrueMuDirZ = mudirz;
+        //Tree
+        TrueMuDirX = mudirx;
+        TrueMuDirY = mudiry;
+        TrueMuDirZ = mudirz;
 
-      h2_TrueMuDirectionXY -> Fill(mudirx, mudiry);
-      h2_TrueMuDirectionRZ -> Fill(mudirR, mudirz);
+        h2_TrueMuDirectionXY -> Fill(mudirx, mudiry);
+        h2_TrueMuDirectionRZ -> Fill(mudirR, mudirz);
 
-      //muon scattering angle
-      Float_t InnerProduct = nudirx*mudirx + nudiry*mudiry + nudirz*mudirz;
-      Float_t nudir = std::sqrt(nudirx*nudirx + nudiry*nudiry + nudirz*nudirz); //should be 1
-      Float_t mudir = std::sqrt(mudirx*mudirx + mudiry*mudiry + mudirz*mudirz); //should be 1
-      //std::cout << "nudir: " << nudir << ", mudir: " << mudir << std::endl;
-      costhetamu = InnerProduct/(nudir * mudir);
+        //muon scattering angle
+        Float_t InnerProduct = nudirx*mudirx + nudiry*mudiry + nudirz*mudirz;
+        Float_t nudir = std::sqrt(nudirx*nudirx + nudiry*nudiry + nudirz*nudirz); //should be 1
+        Float_t mudir = std::sqrt(mudirx*mudirx + mudiry*mudiry + mudirz*mudirz); //should be 1
+        //std::cout << "nudir: " << nudir << ", mudir: " << mudir << std::endl;
+        costhetamu = InnerProduct/(nudir * mudir);
 
-      h1_Truecosthetamu -> Fill(costhetamu);
+        h1_Truecosthetamu -> Fill(costhetamu);
 
-      //Extract only CCQE(1p1h)
-      int mode = TMath::Abs(numu->var<int>("mode"));
-      if (mode==1) {
-        float Enu     = this->GetEnuRecoPrediction(mumom, costhetamu);
-        float EnuReso = this->GetEnuResoPrediction(numu, Enu);
+        //Extract only CCQE(1p1h)
+        //int mode = TMath::Abs(numu->var<int>("mode"));
+        //if (mode==1) {
+        if (mode>=2 && mode<=30) {
+          float Enu     = this->GetEnuRecoPrediction(mumom, costhetamu);
+          float EnuReso = this->GetEnuResoPrediction(numu, Enu);
 
-        h2_pmu_x_costhetamu     -> Fill(mumom, costhetamu);
-        h2_EnuReso_x_costhetamu -> Fill(costhetamu, EnuReso);
-      } 
+          h2_pmu_x_costhetamu     -> Fill(mumom, costhetamu);
+          h2_EnuReso_x_costhetamu -> Fill(costhetamu, EnuReso);
+        }
+      }
     }
-  }
+  //}
+  
   return costhetamu;
 }
 
@@ -457,11 +468,18 @@ float NeutrinoOscillation::GetEnuResoPrediction(CC0PiNumu* numu, float Enu) {
   return EnuReso;
 }
 
-void NeutrinoOscillation::GetRecoMuDirection(CC0PiNumu* numu) {
+float NeutrinoOscillation::GetRecoMuDirection(CC0PiNumu* numu) {
+
+  //Reconstructed muon scattering angle
+  float costhetamu = 0.;
 
   //Reco neutrino direction
+  float nudirx = beamDir[0];
+  float nudiry = beamDir[1];
+  float nudirz = beamDir[2];
+  //std::cout << "nudir = [" << nudirx << ", " << nudiry << ", " << nudirz << "]" << std::endl;
 
-  //Reco muon direction
+  //Reco muon direction vector
   //muon hypothesis
   float mudirx = numu->var<float>("fq1rdir", 0, 2, 0);
   float mudiry = numu->var<float>("fq1rdir", 0, 2, 1);
@@ -475,45 +493,24 @@ void NeutrinoOscillation::GetRecoMuDirection(CC0PiNumu* numu) {
 
   h2_RecoMuDirectionXY -> Fill(mudirx, mudiry);
   h2_RecoMuDirectionRZ -> Fill(mudirR, mudirz);
+
+  //muon scattering angle
+  float InnerProduct = nudirx*mudirx + nudiry*mudiry + nudirz*mudirz;
+  float nudir = std::sqrt(nudirx*nudirx + nudiry*nudiry + nudirz*nudirz);  //should be 1
+  float mudir = std::sqrt(mudirx*mudirx + mudiry*mudiry + mudirz*mudirz);  //should be 1
+  costhetamu = InnerProduct/(nudir * mudir);
+  h1_Recocosthetamu -> Fill(costhetamu);
+
+  return costhetamu;
 }
 
-void NeutrinoOscillation::GetMuDirResolution(CC0PiNumu* numu, 
-                                             Int_t Npvc, 
-                                             Int_t* Ipvc,
-                                             Float_t Pvc[][3],
-                                             Int_t*  Iflvc,
-                                             Int_t*  Ichvc) {
-  //Truth primary particles loop
-  for (Int_t iprm=0; iprm<Npvc; iprm++) {
+float NeutrinoOscillation::GetMuDirResolution(float truecostheta, float recocostheta) {
+  float thetareso = (truecostheta - recocostheta)/truecostheta;
+  h1_Resocosthetamu -> Fill(thetareso);
 
-    //Truth muon from mu-neutrino
-    if (std::abs(Ipvc[iprm])==13 && Ichvc[iprm]==1) {
-
-      //Momentum
-      Float_t mumomx = Pvc[iprm][0];
-      Float_t mumomy = Pvc[iprm][1];
-      Float_t mumomz = Pvc[iprm][2];
-      Float_t mumom  = std::sqrt(mumomx*mumomx + mumomy*mumomy + mumomz*mumomz);
-
-      //Direction vector [mudirx, mudiry, mudirz]
-      float Truemudirx = mumomx/mumom;
-      float Truemudiry = mumomy/mumom;
-      float Truemudirz = mumomz/mumom;
-
-      //muon hypothesis
-      float Recomudirx = numu->var<float>("fq1rdir", 0, 2, 0);
-      float Recomudiry = numu->var<float>("fq1rdir", 0, 2, 1);
-      float Recomudirz = numu->var<float>("fq1rdir", 0, 2, 2);
-
-      float DirResoX = (Truemudirx - Recomudirx)/Truemudirx;
-      float DirResoY = (Truemudiry - Recomudiry)/Truemudiry;
-      float DirResoZ = (Truemudirz - Recomudirz)/Truemudirz;
-      h1_DirResoX -> Fill(DirResoX);
-      h1_DirResoY -> Fill(DirResoY);
-      h1_DirResoZ -> Fill(DirResoZ);
-    }
-  }
+  return thetareso;
 }
+
 
 
 float NeutrinoOscillation::OscProbCalculator(CC0PiNumu* numu, bool histfill) {
@@ -530,13 +527,16 @@ float NeutrinoOscillation::GetWgtNeutrino(CC0PiNumu* numu, float theta, float th
 
   if (theta>thetamin && theta<thetamax) {
 
-    h1_All_NoOsc        -> Fill(RecoEnu/1000.);
-    h1_All_OscProbRatio -> Fill(RecoEnu/1000., OscProb);
+    //All CC
+    if (mode<31) {
+      h1_All_NoOsc        -> Fill(RecoEnu/1000.);
+      h1_All_OscProbRatio -> Fill(RecoEnu/1000., OscProb);
 
-    //Count oscillated neutrino events within [0.25 GeV, 1.5 GeV]
-    if (RecoEnu/1000. > 0.25 && RecoEnu/1000. < 1.5) {
-      NoOscLegacy++;
-      OscLegacy += OscProb;
+      //Count oscillated neutrino events within [0.25 GeV, 1.5 GeV]
+      if (RecoEnu/1000. > 0.25 && RecoEnu/1000. < 1.5) {
+        NoOscLegacy++;
+        OscLegacy += OscProb;
+      }
     }
 
   
@@ -566,17 +566,6 @@ float NeutrinoOscillation::GetWgtNeutrino(CC0PiNumu* numu, float theta, float th
       h1_OscProbRatio[1] -> Fill(RecoEnu/1000., OscProb);
 
       OscillatedCCnonQE += OscProb;
-    }
-
-    //NC
-    if (mode>=31) {
-      h1_TruthOscProb[2]      -> Fill(TrueEnu);
-
-      h1_NoOsc[2]        -> Fill(RecoEnu/1000.);
-      h1_OscProb[2]      -> Fill(RecoEnu/1000.);
-      h1_OscProbRatio[2] -> Fill(RecoEnu/1000.);
-
-      OscillatedNC++;
     }
 
     //CC RES (Delta+)
@@ -620,6 +609,29 @@ float NeutrinoOscillation::GetWgtNeutrino(CC0PiNumu* numu, float theta, float th
       OscillatedCCOther += OscProb;
     }
   }
+
+
+  //NC
+  if (mode>=31) {
+
+    h1_All_NoOsc        -> Fill(RecoEnu/1000.);
+    h1_All_OscProbRatio -> Fill(RecoEnu/1000.);
+
+    //Count oscillated neutrino events within [0.25 GeV, 1.5 GeV]
+    if (RecoEnu/1000. > 0.25 && RecoEnu/1000. < 1.5) {
+      NoOscLegacy++;
+      OscLegacy ++;
+    }
+
+    h1_TruthOscProb[2] -> Fill(TrueEnu);
+
+    h1_NoOsc[2]        -> Fill(RecoEnu/1000.);
+    h1_OscProb[2]      -> Fill(RecoEnu/1000.);
+    h1_OscProbRatio[2] -> Fill(RecoEnu/1000.);
+
+    OscillatedNC++;
+  }
+
   return OscProb;
 }
 
@@ -755,11 +767,9 @@ void NeutrinoOscillation::WritePlots() {
   h2_RecoMuDirectionXY -> Write();
   h2_RecoMuDirectionRZ -> Write();
 
-  h1_DirResoX -> Write();
-  h1_DirResoY -> Write();
-  h1_DirResoZ -> Write();
-
   h1_Truecosthetamu -> Write();
+  h1_Recocosthetamu -> Write();
+  h1_Resocosthetamu -> Write();
   h1_EnuRecoPrediction -> Write();
   h1_EnuResoPrediction -> Write();
   h2_pmu_x_costhetamu -> Write();

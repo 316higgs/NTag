@@ -24,58 +24,29 @@ TH2F* h2_Reso_x_TrueEnu;
 
 //Truth neutrino events as a function of neutrino energy
 TH1F* h1_TruthOscProb[INTERACTIONTYPE];
-//TH1F* h1_TruthOscProbRatio[INTERACTIONTYPE];
 
 //Reconstructed neutrino events as a funtion of neutrino energy
 TH1F* h1_NoOsc[INTERACTIONTYPE];
-//TH1F* h1_NoOsc_wTruthNeutron[INTERACTIONTYPE];
-//TH1F* h1_NoOsc_woTruthNeutron[INTERACTIONTYPE];
-//TH1F* h1_NoOsc_wNeutron[INTERACTIONTYPE];
-//TH1F* h1_NoOsc_woNeutron[INTERACTIONTYPE];
-
 
 TH1F* h1_OscProb[INTERACTIONTYPE];
-//TH1F* h1_OscProb_wTruthNeutron[INTERACTIONTYPE];
-//TH1F* h1_OscProb_woTruthNeutron[INTERACTIONTYPE];
 TH1F* h1_OscProb_wNeutron[INTERACTIONTYPE];
 TH1F* h1_OscProb_woNeutron[INTERACTIONTYPE];
 
 
 //Selected 1R muon events (for each neutrino interaction mode)
 TH1F* h1_OscProbRatio[INTERACTIONTYPE];
-//Selected 1R muon events w/(o) truth neutrons (for each neutrino interaction mode)
-//TH1F* h1_OscProbRatio_wTruthNeutron[INTERACTIONTYPE];
-//TH1F* h1_OscProbRatio_woTruthNeutron[INTERACTIONTYPE];
-//Selected 1R muon events w/(o) tagged neutrons (for each neutrino interaction mode)
-//TH1F* h1_OscProbRatio_wNeutron[INTERACTIONTYPE];
-//TH1F* h1_OscProbRatio_woNeutron[INTERACTIONTYPE];
-
-
-//Reconstructed neurtino energy spectra with nonzero tagged neutrons in no truth neutron case
-//TH1F* h1_OscProb_mistag[INTERACTIONTYPE];
 
 TH1F* h1_All_NoOsc;
 TH1F* h1_All_OscProbRatio;
 
 //Selected 1R muon events w/(o) truth neutrons
-//TH1F* h1_All_NoOsc_wTruthNeutron;
 TH1F* h1_All_NoOsc_woTruthNeutron;
 //Selected 1R muon events w/(o) tagged neutrons
-//TH1F* h1_All_NoOsc_wNeutron;
 TH1F* h1_All_NoOsc_woNeutron;
 
 //Selected 1R muon events w/(o) truth neutrons
-//TH1F* h1_All_OscProb_wTruthNeutron;
-//TH1F* h1_All_OscProb_woTruthNeutron;
-//Selected 1R muon events w/(o) tagged neutrons
-//TH1F* h1_All_OscProb_wNeutron;
-//TH1F* h1_All_OscProb_woNeutron;
-
-//Selected 1R muon events w/(o) truth neutrons
-//TH1F* h1_All_OscProbRatio_wTruthNeutron;
 TH1F* h1_All_OscProbRatio_woTruthNeutron;
 //Selected 1R muon events w/(o) tagged neutrons
-//TH1F* h1_All_OscProbRatio_wNeutron;
 TH1F* h1_All_OscProbRatio_woNeutron;
 
 
@@ -84,11 +55,13 @@ TH2F* h2_TrueMuDirectionRZ;
 TH2F* h2_RecoMuDirectionXY;
 TH2F* h2_RecoMuDirectionRZ;
 
-TH1F* h1_DirResoX;
-TH1F* h1_DirResoY;
-TH1F* h1_DirResoZ;
+//TH1F* h1_DirResoX;
+//TH1F* h1_DirResoY;
+//TH1F* h1_DirResoZ;
 
 TH1F* h1_Truecosthetamu;
+TH1F* h1_Recocosthetamu;
+TH1F* h1_Resocosthetamu;
 TH1F* h1_EnuRecoPrediction;
 TH1F* h1_EnuResoPrediction;
 TH2F* h2_pmu_x_costhetamu;
@@ -103,11 +76,6 @@ class NeutrinoOscillation {
     float GetRecoEnu(CC0PiNumu* numu);
     float GetEnuResolution(CC0PiNumu* numu, float theta, float thetamin, float thetamax);
     void  GetReso_x_TrueEnu(CC0PiNumu* numu);
-    /*void  GetTrueMuDirection(CC0PiNumu* numu, 
-                             Int_t nscndprt, 
-                             Int_t* iprtscnd,
-                             Int_t* iprntprt,
-                             Float_t pscnd[][3]);*/
     float GetTrueMuDirection(CC0PiNumu* numu, 
                              Int_t Npvc, 
                              Int_t* Ipvc,
@@ -116,14 +84,8 @@ class NeutrinoOscillation {
                              Int_t*  Ichvc);
     float GetEnuRecoPrediction(float pmu, float costhetamu);
     float GetEnuResoPrediction(CC0PiNumu* numu, float Enu);
-    void  GetRecoMuDirection(CC0PiNumu* numu);
-    void  GetMuDirResolution(CC0PiNumu* numu, 
-                             Int_t Npvc, 
-                             Int_t* Ipvc,
-                             Float_t Pvc[][3],
-                             Int_t*  Iflvc,
-                             Int_t*  Ichvc);
-    //bool GetFrontMu(CC0PiNumu* numu);
+    float GetRecoMuDirection(CC0PiNumu* numu);
+    float GetMuDirResolution(float truecostheta, float recocostheta);
 
     float OscProbCalculator(CC0PiNumu* numu, bool histfill);
     float GetWgtNeutrino(CC0PiNumu* numuC, float theta, float thetamin, float thetamax);

@@ -5,12 +5,12 @@
 #include "TText.h"
 
 void Resolution_wmudir() {
-  TFile* fin1 = new TFile("../../output/fhc/fhc.numu_x_numu.etagON.noinpmt.cut1.root");
-  TFile* fin2 = new TFile("../../output/fhc/fhc.numu_x_numu.etagON.noinpmt.cut2.root");
-  TFile* fin3 = new TFile("../../output/fhc/fhc.numu_x_numu.etagON.noinpmt.cut3.root");
-  TFile* fin4 = new TFile("../../output/fhc/fhc.numu_x_numu.etagON.noinpmt.cut4.root");
-  TFile* fin5 = new TFile("../../output/fhc/fhc.numu_x_numu.etagON.noinpmt.cut5.root");
-  TFile* fin6 = new TFile("../../output/fhc/fhc.numu_x_numu.etagON.noinpmt.cut6.root");
+  TFile* fin1 = new TFile("../../output/fhc/fhc.numu_x_numu.etagON.cut1.root");
+  TFile* fin2 = new TFile("../../output/fhc/fhc.numu_x_numu.etagON.cut2.root");
+  TFile* fin3 = new TFile("../../output/fhc/fhc.numu_x_numu.etagON.cut3.root");
+  TFile* fin4 = new TFile("../../output/fhc/fhc.numu_x_numu.etagON.cut4.root");
+  TFile* fin5 = new TFile("../../output/fhc/fhc.numu_x_numu.etagON.cut5.root");
+  TFile* fin6 = new TFile("../../output/fhc/fhc.numu_x_numu.etagON.cut6.root");
   //TFile* fin = new TFile("../../output/numubar.etagON.root");
 
   TH1F* h1_AllEnuReso1 = (TH1F*)fin1->Get("NeutrinoOscillation/h1_AllEnureso");

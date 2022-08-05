@@ -117,6 +117,7 @@ void Sequencial1RmuonSelection(Gd1RmuonSelection prmsel,
         if (prmsel.C4ApplyPmu200MeV(evsel)) {
           SelectedParentNeutrinos[3]++;
           ProtoSelectedParentNeutrinos[3]++;
+          decayebox.GetTaggedDecaye(numu);
 
           if (prmsel.C5Applydecaye(evsel, numu, decayebox, eMode, eOsc, dtCut, N50CutMin, N50CutMax, dtvsn50fill)) {
             SelectedParentNeutrinos[4]++;
