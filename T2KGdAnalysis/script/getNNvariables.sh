@@ -32,6 +32,16 @@ ANALYSISSTAGE=/home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC/analysis/T2KGdAnalysi
 #                     -BEAMMODE FHC\
 #                     -OSCCH NUMU
 
+#./getNNvariables.exe $FITQUNDIR/0026Gd.numu/noinpmt/numu_x_numu.fiTQun.0026Gd.NEUTcount0\*.part001.skip0.root\
+#                     $NTAGDIR/tageoption/noinpmt/wfiTQun/numu_x_numu.ntag.0026Gd.NEUTcount0\*.part001.skip0.root\
+#                     $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.fiTQun.NNtest.root\
+#                     $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.neutrino.fiTQun.NNtest.txt\
+#                     $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.ntag.fiTQun.NNtest.txt\
+#                     -MCType Gd\
+#                     -ETAG ON\
+#                     -BEAMMODE FHC\
+#                     -OSCCH NUMU
+
 ./getNNvariables.exe $FITQUNDIR/0026Gd.numubar/noinpmt/numubar_x_numubar.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
                      $NTAGDIR/tageoption/noinpmt/numubar_x_numubar.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
                      ./output/fhc/fhc.numubar_x_numubar.NNtest.root\

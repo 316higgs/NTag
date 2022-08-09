@@ -167,24 +167,6 @@ int main(int argc, char **argv) {
   
   //=========  TTree h1 variables  ============
   //===== It should be called after numu ======
-  /*Int_t   Npvc;             //Number of primary particles
-  Int_t   Ipvc[100];        //PID of primary particles
-  Float_t Pvc[100][3];      //Momentum of primary particles
-  Int_t   Iflvc[100];       //Flag of final states
-  Int_t   Ichvc[100];       //Chase at detector simulation or not(1: chase/0: not chase)
-  Int_t   nscndprt;         //Number of secondary particles
-  Int_t   iprtscnd[1000];   //PID of the secondary particle
-  Int_t   iprntprt[1000];   //PID of the parent of this secondary particle
-  Float_t pscnd[1000][3];   //Momentum of the secondary particle
-  tchfQ -> SetBranchAddress("Npvc", &Npvc);
-  tchfQ -> SetBranchAddress("Pvc", Pvc);
-  tchfQ -> SetBranchAddress("Ipvc", Ipvc);
-  tchfQ -> SetBranchAddress("Ichvc", Ichvc);
-  tchfQ -> SetBranchAddress("Iflvc", Iflvc);
-  tchfQ -> SetBranchAddress("nscndprt", &nscndprt);
-  tchfQ -> SetBranchAddress("iprtscnd", iprtscnd);
-  tchfQ -> SetBranchAddress("iprntprt", iprntprt);
-  tchfQ -> SetBranchAddress("pscnd", pscnd);*/
 
   ResetNeutrinoEvents();
 
@@ -244,71 +226,56 @@ int main(int argc, char **argv) {
       GetSelectedModeEvents(numu);
 
       for (UInt_t jentry=0; jentry<Label->size(); ++jentry) {
-      	
-      	for (int ivar=0; ivar<NNVARIABLES; ivar++) {
-      	  switch (ivar) {
-      	  	case 0:
-      	  	  nninputs.GetAccNoiseNNVariables(jentry, Label, ivar, NHits, h1_NNvar_AccNoise);
-      	  	  nninputs.GetDecayeNNVariables(jentry, Label, ivar, NHits, h1_NNvar_Decaye);
-      	  	  nninputs.GetHNNVariables(jentry, Label, ivar, NHits, h1_NNvar_H);
-      	  	  nninputs.GetGdNNVariables(jentry, Label, ivar, NHits, h1_NNvar_Gd);
-      	  	case 1:
-      	  	  nninputs.GetAccNoiseNNVariables(jentry, Label, ivar, N200, h1_NNvar_AccNoise);
-      	  	  nninputs.GetDecayeNNVariables(jentry, Label, ivar, N200, h1_NNvar_Decaye);
-      	  	  nninputs.GetHNNVariables(jentry, Label, ivar, N200, h1_NNvar_H);
-      	  	  nninputs.GetGdNNVariables(jentry, Label, ivar, N200, h1_NNvar_Gd);
-      	  	case 2:
-      	  	  nninputs.GetAccNoiseNNVariables(jentry, Label, ivar, TRMS, h1_NNvar_AccNoise);
-      	  	  nninputs.GetDecayeNNVariables(jentry, Label, ivar, TRMS, h1_NNvar_Decaye);
-      	  	  nninputs.GetHNNVariables(jentry, Label, ivar, TRMS, h1_NNvar_H);
-      	  	  nninputs.GetGdNNVariables(jentry, Label, ivar, TRMS, h1_NNvar_Gd);
-      	  	case 3:
-      	  	  nninputs.GetAccNoiseNNVariables(jentry, Label, ivar, DWall, h1_NNvar_AccNoise);
-      	  	  nninputs.GetDecayeNNVariables(jentry, Label, ivar, DWall, h1_NNvar_Decaye);
-      	  	  nninputs.GetHNNVariables(jentry, Label, ivar, DWall, h1_NNvar_H);
-      	  	  nninputs.GetGdNNVariables(jentry, Label, ivar, DWall, h1_NNvar_Gd);
-      	  	case 4:
-      	  	  nninputs.GetAccNoiseNNVariables(jentry, Label, ivar, DWallMeanDir, h1_NNvar_AccNoise);
-      	  	  nninputs.GetDecayeNNVariables(jentry, Label, ivar, DWallMeanDir, h1_NNvar_Decaye);
-      	  	  nninputs.GetHNNVariables(jentry, Label, ivar, DWallMeanDir, h1_NNvar_H);
-      	  	  nninputs.GetGdNNVariables(jentry, Label, ivar, DWallMeanDir, h1_NNvar_Gd);
-      	  	case 5:
-      	  	  nninputs.GetAccNoiseNNVariables(jentry, Label, ivar, OpeningAngleMean, h1_NNvar_AccNoise);
-      	  	  nninputs.GetDecayeNNVariables(jentry, Label, ivar, OpeningAngleMean, h1_NNvar_Decaye);
-      	  	  nninputs.GetHNNVariables(jentry, Label, ivar, OpeningAngleMean, h1_NNvar_H);
-      	  	  nninputs.GetGdNNVariables(jentry, Label, ivar, OpeningAngleMean, h1_NNvar_Gd);
-      	  	case 6:
-      	  	  nninputs.GetAccNoiseNNVariables(jentry, Label, ivar, OpeningAngleStdev, h1_NNvar_AccNoise);
-      	  	  nninputs.GetDecayeNNVariables(jentry, Label, ivar, OpeningAngleStdev, h1_NNvar_Decaye);
-      	  	  nninputs.GetHNNVariables(jentry, Label, ivar, OpeningAngleStdev, h1_NNvar_H);
-      	  	  nninputs.GetGdNNVariables(jentry, Label, ivar, OpeningAngleStdev, h1_NNvar_Gd);
-      	  	case 7:
-      	  	  nninputs.GetAccNoiseNNVariables(jentry, Label, ivar, OpeningAngleSkew, h1_NNvar_AccNoise);
-      	  	  nninputs.GetDecayeNNVariables(jentry, Label, ivar, OpeningAngleSkew, h1_NNvar_Decaye);
-      	  	  nninputs.GetHNNVariables(jentry, Label, ivar, OpeningAngleSkew, h1_NNvar_H);
-      	  	  nninputs.GetGdNNVariables(jentry, Label, ivar, OpeningAngleSkew, h1_NNvar_Gd);
-      	  	case 8:
-      	  	  nninputs.GetAccNoiseNNVariables(jentry, Label, ivar, MeanDirAngleMean, h1_NNvar_AccNoise);
-      	  	  nninputs.GetDecayeNNVariables(jentry, Label, ivar, MeanDirAngleMean, h1_NNvar_Decaye);
-      	  	  nninputs.GetHNNVariables(jentry, Label, ivar, MeanDirAngleMean, h1_NNvar_H);
-      	  	  nninputs.GetGdNNVariables(jentry, Label, ivar, MeanDirAngleMean, h1_NNvar_Gd);
-      	  	case 9:
-      	  	  nninputs.GetAccNoiseNNVariables(jentry, Label, ivar, MeanDirAngleRMS, h1_NNvar_AccNoise);
-      	  	  nninputs.GetDecayeNNVariables(jentry, Label, ivar, MeanDirAngleRMS, h1_NNvar_Decaye);
-      	  	  nninputs.GetHNNVariables(jentry, Label, ivar, MeanDirAngleRMS, h1_NNvar_H);
-      	  	  nninputs.GetGdNNVariables(jentry, Label, ivar, MeanDirAngleRMS, h1_NNvar_Gd);
-      	  	case 10:
-      	  	  nninputs.GetAccNoiseNNVariables(jentry, Label, ivar, Beta1, h1_NNvar_AccNoise);
-      	  	  nninputs.GetDecayeNNVariables(jentry, Label, ivar, Beta1, h1_NNvar_Decaye);
-      	  	  nninputs.GetHNNVariables(jentry, Label, ivar, Beta1, h1_NNvar_H);
-      	  	  nninputs.GetGdNNVariables(jentry, Label, ivar, Beta1, h1_NNvar_Gd);
-      	  	case 11:
-      	  	  nninputs.GetAccNoiseNNVariables(jentry, Label, ivar, Beta5, h1_NNvar_AccNoise);
-      	  	  nninputs.GetDecayeNNVariables(jentry, Label, ivar, Beta5, h1_NNvar_Decaye);
-      	  	  nninputs.GetHNNVariables(jentry, Label, ivar, Beta5, h1_NNvar_H);
-      	  	  nninputs.GetGdNNVariables(jentry, Label, ivar, Beta5, h1_NNvar_Gd);
-      	  }
-      	}
+
+        float NNVar = 0.;
+        for (int ivar=0; ivar<NNVARIABLES; ivar++) {
+          switch (ivar) {
+            case 0:
+              NNVar = NHits->at(jentry);
+              break;
+            case 1:
+              NNVar = N200->at(jentry);
+              break;
+            case 2:
+              NNVar = TRMS->at(jentry);
+              break;
+            case 3:
+              NNVar = DWall->at(jentry);
+              break;
+            case 4:
+              NNVar = DWallMeanDir->at(jentry);
+              break;
+            case 5:
+              NNVar = OpeningAngleMean->at(jentry);
+              break;
+            case 6:
+              NNVar = OpeningAngleStdev->at(jentry);
+              break;
+            case 7:
+              NNVar = OpeningAngleSkew->at(jentry);
+              break;
+            case 8:
+              NNVar = MeanDirAngleMean->at(jentry);
+              break;
+            case 9:
+              NNVar = MeanDirAngleRMS->at(jentry);
+              break;
+            case 10:
+              NNVar = Beta1->at(jentry);
+              break;
+            case 11:
+              NNVar = Beta5->at(jentry);
+              break;
+            default:
+              NNVar = 0.;
+              break;  
+          }
+
+          if (Label->at(jentry)==0) h1_NNvar_AccNoise[ivar] -> Fill(NNVar);
+          if (Label->at(jentry)==1) h1_NNvar_Decaye[ivar]   -> Fill(NNVar);
+          if (Label->at(jentry)==2) h1_NNvar_H[ivar]        -> Fill(NNVar);
+          if (Label->at(jentry)==3) h1_NNvar_Gd[ivar]       -> Fill(NNVar);
+        }
       }
     }
   }

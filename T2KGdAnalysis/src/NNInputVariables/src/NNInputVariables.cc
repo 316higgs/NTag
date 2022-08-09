@@ -18,73 +18,73 @@ void NNInputVariables::SetHistoFrame(int vartype, TString histtitle) {
       h1_NNvar_Decaye[vartype]   = new TH1F(TString::Format("h1_NNvar_Decaye_type%d", vartype), histtitle, 80, 0, 80);
       break;
     case 2:  //TRMS
-  	  h1_NNvar_Gd[vartype]       = new TH1F(TString::Format("h1_NNvar_Gd_type%d", vartype),    histtitle, 100, 0, 30);
-      h1_NNvar_H[vartype]        = new TH1F(TString::Format("h1_NNvar_H_type%d", vartype),     histtitle, 100, 0, 30);
-      h1_NNvar_AccNoise[vartype] = new TH1F(TString::Format("h1_NNvar_AccNoise_type%d", vartype), histtitle, 100, 0, 30);
-      h1_NNvar_Decaye[vartype]   = new TH1F(TString::Format("h1_NNvar_Decaye_type%d", vartype), histtitle, 100, 0, 30);
+  	  h1_NNvar_Gd[vartype]       = new TH1F(TString::Format("h1_NNvar_Gd_type%d", vartype),    histtitle, 100, 0, 5);
+      h1_NNvar_H[vartype]        = new TH1F(TString::Format("h1_NNvar_H_type%d", vartype),     histtitle, 100, 0, 5);
+      h1_NNvar_AccNoise[vartype] = new TH1F(TString::Format("h1_NNvar_AccNoise_type%d", vartype), histtitle, 100, 0, 5);
+      h1_NNvar_Decaye[vartype]   = new TH1F(TString::Format("h1_NNvar_Decaye_type%d", vartype), histtitle, 100, 0, 5);
       break;
     case 3:  //DWall
-  	  h1_NNvar_Gd[vartype]       = new TH1F(TString::Format("h1_NNvar_Gd_type%d", vartype),    histtitle, 100, -3, 20);
-      h1_NNvar_H[vartype]        = new TH1F(TString::Format("h1_NNvar_H_type%d", vartype),     histtitle, 100, -3, 20);
-      h1_NNvar_AccNoise[vartype] = new TH1F(TString::Format("h1_NNvar_AccNoise_type%d", vartype), histtitle, 100, -3, 20);
-      h1_NNvar_Decaye[vartype]   = new TH1F(TString::Format("h1_NNvar_Decaye_type%d", vartype), histtitle, 100, -3, 20);
+  	  h1_NNvar_Gd[vartype]       = new TH1F(TString::Format("h1_NNvar_Gd_type%d", vartype),    histtitle, 100, -150, 1600);
+      h1_NNvar_H[vartype]        = new TH1F(TString::Format("h1_NNvar_H_type%d", vartype),     histtitle, 100, -150, 1600);
+      h1_NNvar_AccNoise[vartype] = new TH1F(TString::Format("h1_NNvar_AccNoise_type%d", vartype), histtitle, 100, -150, 1600);
+      h1_NNvar_Decaye[vartype]   = new TH1F(TString::Format("h1_NNvar_Decaye_type%d", vartype), histtitle, 100, -150, 1600);
       break;
     case 4:  //DWallMeanDir
+  	  h1_NNvar_Gd[vartype]       = new TH1F(TString::Format("h1_NNvar_Gd_type%d", vartype),    histtitle, 100, 0, 5000);
+      h1_NNvar_H[vartype]        = new TH1F(TString::Format("h1_NNvar_H_type%d", vartype),     histtitle, 100, 0, 5000);
+      h1_NNvar_AccNoise[vartype] = new TH1F(TString::Format("h1_NNvar_AccNoise_type%d", vartype), histtitle, 100, 0, 5000);
+      h1_NNvar_Decaye[vartype]   = new TH1F(TString::Format("h1_NNvar_Decaye_type%d", vartype), histtitle, 100, 0, 5000);
+      break;
+    case 5:  //OpeningAngleMean
+  	  h1_NNvar_Gd[vartype]       = new TH1F(TString::Format("h1_NNvar_Gd_type%d", vartype),    histtitle, 100, 20, 100);
+      h1_NNvar_H[vartype]        = new TH1F(TString::Format("h1_NNvar_H_type%d", vartype),     histtitle, 100, 20, 100);
+      h1_NNvar_AccNoise[vartype] = new TH1F(TString::Format("h1_NNvar_AccNoise_type%d", vartype), histtitle, 100, 20, 100);
+      h1_NNvar_Decaye[vartype]   = new TH1F(TString::Format("h1_NNvar_Decaye_type%d", vartype), histtitle, 100, 20, 100);
+      break;
+    case 6:  //OpeningAngleStdev
   	  h1_NNvar_Gd[vartype]       = new TH1F(TString::Format("h1_NNvar_Gd_type%d", vartype),    histtitle, 100, 0, 50);
       h1_NNvar_H[vartype]        = new TH1F(TString::Format("h1_NNvar_H_type%d", vartype),     histtitle, 100, 0, 50);
       h1_NNvar_AccNoise[vartype] = new TH1F(TString::Format("h1_NNvar_AccNoise_type%d", vartype), histtitle, 100, 0, 50);
       h1_NNvar_Decaye[vartype]   = new TH1F(TString::Format("h1_NNvar_Decaye_type%d", vartype), histtitle, 100, 0, 50);
       break;
-    case 5:  //OpeningAngleMean
-  	  h1_NNvar_Gd[vartype]       = new TH1F(TString::Format("h1_NNvar_Gd_type%d", vartype),    histtitle, 100, 0, 90);
-      h1_NNvar_H[vartype]        = new TH1F(TString::Format("h1_NNvar_H_type%d", vartype),     histtitle, 100, 0, 90);
-      h1_NNvar_AccNoise[vartype] = new TH1F(TString::Format("h1_NNvar_AccNoise_type%d", vartype), histtitle, 100, 0, 90);
-      h1_NNvar_Decaye[vartype]   = new TH1F(TString::Format("h1_NNvar_Decaye_type%d", vartype), histtitle, 100, 0, 90);
-      break;
-    case 6:  //OpeningAngleStdev
-  	  h1_NNvar_Gd[vartype]       = new TH1F(TString::Format("h1_NNvar_Gd_type%d", vartype),    histtitle, 100, 0, 40);
-      h1_NNvar_H[vartype]        = new TH1F(TString::Format("h1_NNvar_H_type%d", vartype),     histtitle, 100, 0, 40);
-      h1_NNvar_AccNoise[vartype] = new TH1F(TString::Format("h1_NNvar_AccNoise_type%d", vartype), histtitle, 100, 0, 40);
-      h1_NNvar_Decaye[vartype]   = new TH1F(TString::Format("h1_NNvar_Decaye_type%d", vartype), histtitle, 100, 0, 40);
-      break;
     case 7:  //OpeningAngleSkew
-  	  h1_NNvar_Gd[vartype]       = new TH1F(TString::Format("h1_NNvar_Gd_type%d", vartype),    histtitle, 200, -100, 100);
-      h1_NNvar_H[vartype]        = new TH1F(TString::Format("h1_NNvar_H_type%d", vartype),     histtitle, 200, -100, 100);
-      h1_NNvar_AccNoise[vartype] = new TH1F(TString::Format("h1_NNvar_AccNoise_type%d", vartype), histtitle, 200, -100, 100);
-      h1_NNvar_Decaye[vartype]   = new TH1F(TString::Format("h1_NNvar_Decaye_type%d", vartype), histtitle, 200, -100, 100);
+  	  h1_NNvar_Gd[vartype]       = new TH1F(TString::Format("h1_NNvar_Gd_type%d", vartype),    histtitle, 100, -200, 200);
+      h1_NNvar_H[vartype]        = new TH1F(TString::Format("h1_NNvar_H_type%d", vartype),     histtitle, 100, -200, 200);
+      h1_NNvar_AccNoise[vartype] = new TH1F(TString::Format("h1_NNvar_AccNoise_type%d", vartype), histtitle, 100, -200, 200);
+      h1_NNvar_Decaye[vartype]   = new TH1F(TString::Format("h1_NNvar_Decaye_type%d", vartype), histtitle, 100, -200, 200);
       break;
     case 8: //MeanDirAngleMean
-  	  h1_NNvar_Gd[vartype]       = new TH1F(TString::Format("h1_NNvar_Gd_type%d", vartype),    histtitle, 80, 0, 80);
-      h1_NNvar_H[vartype]        = new TH1F(TString::Format("h1_NNvar_H_type%d", vartype),     histtitle, 80, 0, 80);
-      h1_NNvar_AccNoise[vartype] = new TH1F(TString::Format("h1_NNvar_AccNoise_type%d", vartype), histtitle, 80, 0, 80);
-      h1_NNvar_Decaye[vartype]   = new TH1F(TString::Format("h1_NNvar_Decaye_type%d", vartype), histtitle, 80, 0, 80);
+  	  h1_NNvar_Gd[vartype]       = new TH1F(TString::Format("h1_NNvar_Gd_type%d", vartype),    histtitle, 100, 0, 100);
+      h1_NNvar_H[vartype]        = new TH1F(TString::Format("h1_NNvar_H_type%d", vartype),     histtitle, 100, 0, 100);
+      h1_NNvar_AccNoise[vartype] = new TH1F(TString::Format("h1_NNvar_AccNoise_type%d", vartype), histtitle, 100, 0, 100);
+      h1_NNvar_Decaye[vartype]   = new TH1F(TString::Format("h1_NNvar_Decaye_type%d", vartype), histtitle, 100, 0, 100);
       break;
     case 9: //MeanDirAngleRMS
-      h1_NNvar_Gd[vartype]       = new TH1F(TString::Format("h1_NNvar_Gd_type%d", vartype),    histtitle, 50, 0, 50);
-      h1_NNvar_H[vartype]        = new TH1F(TString::Format("h1_NNvar_H_type%d", vartype),     histtitle, 50, 0, 50);
-      h1_NNvar_AccNoise[vartype] = new TH1F(TString::Format("h1_NNvar_AccNoise_type%d", vartype), histtitle, 50, 0, 50);
-      h1_NNvar_Decaye[vartype]   = new TH1F(TString::Format("h1_NNvar_Decaye_type%d", vartype), histtitle, 50, 0, 50);
+      h1_NNvar_Gd[vartype]       = new TH1F(TString::Format("h1_NNvar_Gd_type%d", vartype),    histtitle, 100, 0, 100);
+      h1_NNvar_H[vartype]        = new TH1F(TString::Format("h1_NNvar_H_type%d", vartype),     histtitle, 100, 0, 100);
+      h1_NNvar_AccNoise[vartype] = new TH1F(TString::Format("h1_NNvar_AccNoise_type%d", vartype), histtitle, 100, 0, 100);
+      h1_NNvar_Decaye[vartype]   = new TH1F(TString::Format("h1_NNvar_Decaye_type%d", vartype), histtitle, 100, 0, 100);
       break;
     case 10:  //Beta1
-  	  h1_NNvar_Gd[vartype]       = new TH1F(TString::Format("h1_NNvar_Gd_type%d", vartype),    histtitle, 200, -0.2, 1.1);
-      h1_NNvar_H[vartype]        = new TH1F(TString::Format("h1_NNvar_H_type%d", vartype),     histtitle, 200, -0.2, 1.1);
-      h1_NNvar_AccNoise[vartype] = new TH1F(TString::Format("h1_NNvar_AccNoise_type%d", vartype), histtitle, 200, -0.2, 1.1);
-      h1_NNvar_Decaye[vartype]   = new TH1F(TString::Format("h1_NNvar_Decaye_type%d", vartype), histtitle, 200, -0.2, 1.1);
+  	  h1_NNvar_Gd[vartype]       = new TH1F(TString::Format("h1_NNvar_Gd_type%d", vartype),    histtitle, 100, -0.2, 1.1);
+      h1_NNvar_H[vartype]        = new TH1F(TString::Format("h1_NNvar_H_type%d", vartype),     histtitle, 100, -0.2, 1.1);
+      h1_NNvar_AccNoise[vartype] = new TH1F(TString::Format("h1_NNvar_AccNoise_type%d", vartype), histtitle, 100, -0.2, 1.1);
+      h1_NNvar_Decaye[vartype]   = new TH1F(TString::Format("h1_NNvar_Decaye_type%d", vartype), histtitle, 100, -0.2, 1.1);
       break;
     case 11:  //Beta5
-  	  h1_NNvar_Gd[vartype]       = new TH1F(TString::Format("h1_NNvar_Gd_type%d", vartype),    histtitle, 200, -0.2, 1.1);
-      h1_NNvar_H[vartype]        = new TH1F(TString::Format("h1_NNvar_H_type%d", vartype),     histtitle, 200, -0.2, 1.1);
-      h1_NNvar_AccNoise[vartype] = new TH1F(TString::Format("h1_NNvar_AccNoise_type%d", vartype), histtitle, 200, -0.2, 1.1);
-      h1_NNvar_Decaye[vartype]   = new TH1F(TString::Format("h1_NNvar_Decaye_type%d", vartype), histtitle, 200, -0.2, 1.1);
+  	  h1_NNvar_Gd[vartype]       = new TH1F(TString::Format("h1_NNvar_Gd_type%d", vartype),    histtitle, 100, -0.2, 1.1);
+      h1_NNvar_H[vartype]        = new TH1F(TString::Format("h1_NNvar_H_type%d", vartype),     histtitle, 100, -0.2, 1.1);
+      h1_NNvar_AccNoise[vartype] = new TH1F(TString::Format("h1_NNvar_AccNoise_type%d", vartype), histtitle, 100, -0.2, 1.1);
+      h1_NNvar_Decaye[vartype]   = new TH1F(TString::Format("h1_NNvar_Decaye_type%d", vartype), histtitle, 100, -0.2, 1.1);
       break;
   }
 }
 
 void NNInputVariables::SetHistoFormat(int vartype, TString histtitle) {
-  h1_NNvar_Gd[vartype]       -> SetLineWidth(2);
-  h1_NNvar_H[vartype]        -> SetLineWidth(2);
-  h1_NNvar_AccNoise[vartype] -> SetLineWidth(2);
-  h1_NNvar_Decaye[vartype]   -> SetLineWidth(2);
+  h1_NNvar_Gd[vartype]       -> SetLineWidth(1);
+  h1_NNvar_H[vartype]        -> SetLineWidth(1);
+  h1_NNvar_AccNoise[vartype] -> SetLineWidth(1);
+  h1_NNvar_Decaye[vartype]   -> SetLineWidth(1);
 
   h1_NNvar_Gd[vartype]       -> SetLineColor(kTeal-5);
   h1_NNvar_H[vartype]        -> SetLineColor(kAzure-4);
@@ -148,197 +148,8 @@ void NNInputVariables::SetNNinputHisto() {
   	    histtitle = "Beta5; Beta5; Area Normalized";
   	    break;
   	}
-  	//std::cout << histtitle << std::endl;
   	this->SetHistoFrame(vartype, histtitle);
   	this->SetHistoFormat(vartype, histtitle);
-  }
-}
-
-void NNInputVariables::GetAccNoiseNNVariables(UInt_t jentry, 
-	                                          std::vector<float> *Label, 
-	                                          int vartype, std::vector<float> *Var, 
-	                                          TH1F* h1_NNvar_Noise[]) {
-  
-  if (Label->at(jentry)==0) {
-    switch (vartype) {
-      case 0:  //NHits
-        h1_NNvar_AccNoise[0] -> Fill(Var->at(jentry));
-        break;
-      case 1:  //N200
-        h1_NNvar_AccNoise[1] -> Fill(Var->at(jentry));
-        break;
-      case 2:  //TRMS
-        h1_NNvar_AccNoise[2] -> Fill(Var->at(jentry));
-        break;
-      case 3:  //DWall
-        h1_NNvar_AccNoise[3] -> Fill(Var->at(jentry));
-        break;
-      case 4:  //DWallMeanDir
-        h1_NNvar_AccNoise[4] -> Fill(Var->at(jentry));
-        break;
-      case 5:  //OpeningAngleMean
-        h1_NNvar_AccNoise[5] -> Fill(Var->at(jentry));
-        break;
-      case 6:  //OpeningAngleStdev
-        h1_NNvar_AccNoise[6] -> Fill(Var->at(jentry));
-        break;
-      case 7:  //OpeningAngleSkew
-        h1_NNvar_AccNoise[7] -> Fill(Var->at(jentry));
-        break;
-      case 8:  //MeanDirAngleMean
-        h1_NNvar_AccNoise[8] -> Fill(Var->at(jentry));
-        break;
-      case 9:  //MeanDirAngleRMS
-        h1_NNvar_AccNoise[9] -> Fill(Var->at(jentry));
-        break;
-      case 10:  //Beta1
-        h1_NNvar_AccNoise[10] -> Fill(Var->at(jentry));
-        break;
-      case 11:  //Beta5
-        h1_NNvar_AccNoise[11] -> Fill(Var->at(jentry));
-        break;
-    }
-  }
-}
-
-void NNInputVariables::GetDecayeNNVariables(UInt_t jentry, 
-	                                        std::vector<float> *Label, 
-	                                        int vartype, std::vector<float> *Var, 
-	                                        TH1F* h1_NNvar_Decaye[]) {
-  
-  if (Label->at(jentry)==1) {
-    switch (vartype) {
-      case 0:  //NHits
-        h1_NNvar_Decaye[0] -> Fill(Var->at(jentry));
-        break;
-      case 1:  //N200
-        h1_NNvar_Decaye[1] -> Fill(Var->at(jentry));
-        break;
-      case 2:  //TRMS
-        h1_NNvar_Decaye[2] -> Fill(Var->at(jentry));
-        break;
-      case 3:  //DWall
-        h1_NNvar_Decaye[3] -> Fill(Var->at(jentry));
-        break;
-      case 4:  //DWallMeanDir
-        h1_NNvar_Decaye[4] -> Fill(Var->at(jentry));
-        break;
-      case 5:  //OpeningAngleMean
-        h1_NNvar_Decaye[5] -> Fill(Var->at(jentry));
-        break;
-      case 6:  //OpeningAngleStdev
-        h1_NNvar_Decaye[6] -> Fill(Var->at(jentry));
-        break;
-      case 7:  //OpeningAngleSkew
-        h1_NNvar_Decaye[7] -> Fill(Var->at(jentry));
-        break;
-      case 8:  //MeanDirAngleMean
-        h1_NNvar_Decaye[8] -> Fill(Var->at(jentry));
-        break;
-      case 9:  //MeanDirAngleRMS
-        h1_NNvar_Decaye[9] -> Fill(Var->at(jentry));
-        break;
-      case 10:  //Beta1
-        h1_NNvar_Decaye[10] -> Fill(Var->at(jentry));
-        break;
-      case 11:  //Beta5
-        h1_NNvar_Decaye[11] -> Fill(Var->at(jentry));
-        break;
-    }
-  }
-}
-
-void NNInputVariables::GetHNNVariables(UInt_t jentry, 
-	                                   std::vector<float> *Label, 
-	                                   int vartype, std::vector<float> *Var, 
-	                                   TH1F* h1_NNvar_H[]) {
-  
-  if (Label->at(jentry)==2) {
-    switch (vartype) {
-      case 0:  //NHits
-        h1_NNvar_H[0] -> Fill(Var->at(jentry));
-        break;
-      case 1:  //N200
-        h1_NNvar_H[1] -> Fill(Var->at(jentry));
-        break;
-      case 2:  //TRMS
-        h1_NNvar_H[2] -> Fill(Var->at(jentry));
-        break;
-      case 3:  //DWall
-        h1_NNvar_H[3] -> Fill(Var->at(jentry));
-        break;
-      case 4:  //DWallMeanDir
-        h1_NNvar_H[4] -> Fill(Var->at(jentry));
-        break;
-      case 5:  //OpeningAngleMean
-        h1_NNvar_H[5] -> Fill(Var->at(jentry));
-        break;
-      case 6:  //OpeningAngleStdev
-        h1_NNvar_H[6] -> Fill(Var->at(jentry));
-        break;
-      case 7:  //OpeningAngleSkew
-        h1_NNvar_H[7] -> Fill(Var->at(jentry));
-        break;
-      case 8:  //MeanDirAngleMean
-        h1_NNvar_H[8] -> Fill(Var->at(jentry));
-        break;
-      case 9:  //MeanDirAngleRMS
-        h1_NNvar_H[9] -> Fill(Var->at(jentry));
-        break;
-      case 10:  //Beta1
-        h1_NNvar_H[10] -> Fill(Var->at(jentry));
-        break;
-      case 11:  //Beta5
-        h1_NNvar_H[11] -> Fill(Var->at(jentry));
-        break;
-    }
-  }
-}
-
-void NNInputVariables::GetGdNNVariables(UInt_t jentry, 
-	                                    std::vector<float> *Label, 
-	                                    int vartype, std::vector<float> *Var, 
-	                                    TH1F* h1_NNvar_Gd[]) {
-  
-  if (Label->at(jentry)==3) {
-    switch (vartype) {
-      case 0:  //NHits
-        h1_NNvar_Gd[0] -> Fill(Var->at(jentry));
-        break;
-      case 1:  //N200
-        h1_NNvar_Gd[1] -> Fill(Var->at(jentry));
-        break;
-      case 2:  //TRMS
-        h1_NNvar_Gd[2] -> Fill(Var->at(jentry));
-        break;
-      case 3:  //DWall
-        h1_NNvar_Gd[3] -> Fill(Var->at(jentry));
-        break;
-      case 4:  //DWallMeanDir
-        h1_NNvar_Gd[4] -> Fill(Var->at(jentry));
-        break;
-      case 5:  //OpeningAngleMean
-        h1_NNvar_Gd[5] -> Fill(Var->at(jentry));
-        break;
-      case 6:  //OpeningAngleStdev
-        h1_NNvar_Gd[6] -> Fill(Var->at(jentry));
-        break;
-      case 7:  //OpeningAngleSkew
-        h1_NNvar_Gd[7] -> Fill(Var->at(jentry));
-        break;
-      case 8:  //MeanDirAngleMean
-        h1_NNvar_Gd[8] -> Fill(Var->at(jentry));
-        break;
-      case 9:  //MeanDirAngleRMS
-        h1_NNvar_Gd[9] -> Fill(Var->at(jentry));
-        break;
-      case 10:  //Beta1
-        h1_NNvar_Gd[10] -> Fill(Var->at(jentry));
-        break;
-      case 11:  //Beta5
-        h1_NNvar_Gd[11] -> Fill(Var->at(jentry));
-        break;
-    }
   }
 }
 
