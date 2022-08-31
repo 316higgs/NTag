@@ -70,6 +70,14 @@ int main(int argc, char **argv) {
     std::cout << "[### analysis1Rmu ###]  -> EXIT " << std::endl;
     exit(-1);
   }
+  //=========  Event info (TTree: particle)  ============
+  TChain *tchpar = new TChain("particle");
+  int nparFiles = tchpar->Add( NtagFileName );
+  if ( nparFiles==0 ) {
+    std::cout << "[### analysis1Rmu ###]  Cannot load TTree particle from: " << NtagFileName << std::endl;
+    std::cout << "[### analysis1Rmu ###]  -> EXIT " << std::endl;
+    exit(-1);
+  }
   //=========  Delayed info (TTree: taggable)  ============
   TChain *tchtaggable = new TChain("taggable");
   int ntaggableFiles = tchtaggable->Add( NtagFileName );
@@ -89,16 +97,19 @@ int main(int argc, char **argv) {
   //Load succeed
   std::cout << "[### analysis1Rmu ###]  Loaded " << nfQFiles       << " files from: " << fiTQunFileName << std::endl;
   std::cout << "[### analysis1Rmu ###]  Loaded " << nevFiles       << " files from: " << NtagFileName   << std::endl;
+  std::cout << "[### analysis1Rmu ###]  Loaded " << nparFiles      << " files from: " << NtagFileName   << std::endl;
   std::cout << "[### analysis1Rmu ###]  Loaded " << ntaggableFiles << " files from: " << NtagFileName   << std::endl;
   std::cout << "[### analysis1Rmu ###]  Loaded " << ntagFiles      << " files from: " << NtagFileName   << std::endl;
 
 
   const int nfQEntries       = tchfQ->GetEntries();       //total entries of TTree h1
   const int nevEntries       = tchev->GetEntries();       //total entries of TTree event
+  const int nparEntries      = tchpar->GetEntries();       //total entries of TTree particle
   const int ntaggableEntries = tchtaggable->GetEntries(); //total entries of TTree taggable
   const int ntagEntries      = tchntag->GetEntries();     //total entries of TTree ntag
   std::cout << "[### analysis1Rmu ###]  fiTQun output     : Processing " << nfQEntries       <<" entries..." << std::endl;
   std::cout << "[### analysis1Rmu ###]  Event info        : Processing " << nevEntries       <<" entries..." << std::endl;
+  std::cout << "[### analysis1Rmu ###]  Particle info     : Processing " << nparEntries      <<" entries..." << std::endl;
   std::cout << "[### analysis1Rmu ###]  Delayed info      : Processing " << ntaggableEntries <<" entries..." << std::endl;
   std::cout << "[### analysis1Rmu ###]  NTag output       : Processing " << ntagEntries      <<" entries..." << std::endl;
 
@@ -137,6 +148,16 @@ int main(int argc, char **argv) {
   tchtaggable->SetBranchAddress("tagvy", &tagvy, &btagvy);
   tchtaggable->SetBranchAddress("tagvz", &tagvz, &btagvz);
   tchtaggable->SetBranchAddress("DistFromPV", &DistFromPV, &bDistFromPV);
+  //=========  TTree partilce variables  ============
+  std::vector<int> *PID = 0;
+  TBranch *bPID = 0;
+  std::vector<int> *ParentPID = 0;
+  TBranch *bParentPID = 0;
+  std::vector<int> *IntID = 0;
+  TBranch *bIntID = 0;
+  tchpar->SetBranchAddress("PID", &PID, &bPID);
+  tchpar->SetBranchAddress("ParentPID", &ParentPID, &bParentPID);
+  tchpar->SetBranchAddress("IntID", &IntID, &bIntID);
   //=========  TTree ntag variables  ============
   int NCandidates = 0;
   std::vector<float> *Label = 0;
@@ -213,9 +234,10 @@ int main(int argc, char **argv) {
   ntagana.SetHistoFormat();
 
   //TTree
-  TreeManager* oatree = new TreeManager();
-  oatree -> SetBranch();
+  //TreeManager* oatree = new TreeManager();
+  //oatree -> SetBranch();
 
+  int secondaryprt = 0;
 
   //Process
   if (MCTypeKeyword=="-MCType") {
@@ -243,6 +265,9 @@ int main(int argc, char **argv) {
     tchntag     -> GetEntry(ientry);
 
     Long64_t tentry = tchntag->LoadTree(ientry);
+    bPID        -> GetEntry(tentry);
+    bParentPID  -> GetEntry(tentry);
+    bIntID      -> GetEntry(tentry);
     bType       -> GetEntry(tentry);
     bE          -> GetEntry(tentry);
     bDWall      -> GetEntry(tentry);
@@ -262,7 +287,10 @@ int main(int argc, char **argv) {
     numu->computeCC0PiVariables();
     numu->applyfQ1RCC0PiNumuCut();
 
+    //secondaryprt += nscndprt;
+
     const EvSelVar_t evsel = numu->getEvSelVar();
+    prmsel.GetemuLikelihood(numu);
     Sequencial1RmuonSelection(prmsel, evsel, numu, decayebox, eMode, eOsc, 20., 50., 400., false);
     //Sequencial1RmuonSelection_Pion(prmsel, evsel, numu, decayebox, eMode, eOsc, 20., 50., 400., false);
 
@@ -272,14 +300,18 @@ int main(int argc, char **argv) {
     }
 
     //1R rejected CCQE check
-    prmsel.C2Apply1RCheck(evsel, numu, oatree);
+    //prmsel.C2Apply1RCheck(evsel, numu, oatree);
+
+    if (prmsel.C1ApplyFCFV(evsel)) {
+      neuosc.GetTrueEnu(numu);
+    }
 
     //New 1R muon selection
     if (prmsel.Apply1RmuonSelection(evsel, numu, decayebox, eMode, eOsc, 20., 50., 400., true)) {
       GetSelectedModeEvents(numu);
 
       //Neutrino energy distribution
-      neuosc.GetTrueEnu(numu);
+      //neuosc.GetTrueEnu(numu);
       neuosc.GetRecoEnu(numu);
 
       //Muon angle information
@@ -296,16 +328,28 @@ int main(int argc, char **argv) {
 
       //Neutrino events as a funtion of reconstructed neutrino energy
       //(No NTag information)
+      //neuosc.GetWgtNeutrino(numu, truethetamu, thetamin, thetamax);
       neuosc.GetWgtNeutrino(numu, recothetamu, thetamin, thetamax);
 
-      neuosc.GetWgtNeutrino_wTrueN(numu, NTrueN);
+      neuosc.GetWgtNeutrino_wTrueN(numu, NTrueN, recothetamu, thetamin, thetamax);
 
 
       if (MCType=="Water" || MCType=="water") continue;
 
-      ntagana.GetTruthNeutrons(NTrueN, E->size(), Type, E, DWall);
+      ntagana.GetTruthNeutrons(NTrueN, numu, Type, E, DWall);
       ntagana.GetTruthNeutronsIntType(numu, NTrueN);
       ntagana.GetResolutionwTrueN(numu, NTrueN);
+
+
+      /*std::cout << "Npvc(" << Npvc << ") + nscndprt(" << nscndprt << "): " << Npvc+nscndprt << std::endl;
+      for (UInt_t jentry=0; jentry<PID->size(); ++jentry) {
+        std::cout << "[" << jentry+1 << "] PID: " << PID->at(jentry) << " --- ParentPID: " << ParentPID->at(jentry) << std::endl;
+        if (PID->at(jentry)==22 && PID->at(jentry)==13) {
+
+        }
+      }
+      std::cout << " " << std::endl;*/
+
 
       //Truth distance distribution
       for (UInt_t jentry=0; jentry<DistFromPV->size(); ++jentry) {
@@ -395,7 +439,7 @@ int main(int argc, char **argv) {
 
     } //New 1R muon selection
 
-    oatree -> FillTree();
+    //oatree -> FillTree();
 
   }
 
@@ -412,7 +456,6 @@ int main(int argc, char **argv) {
     resultfile << "[NTag   OUTPUT] " << NtagFileName   << std::endl;
     resultfile << " " << std::endl;
 
-    //resultfile << "[Neutrino] All Parent Neutrino Events: " << AllParentNeutrinos << std::endl;
     for (int i=0; i<SELECTIONCUTS; i++) {
       resultfile << "[Neutrino] C" << i << ": " << ProtoSelectedParentNeutrinos[i] << " -> " << SelectedParentNeutrinos[i] << std::endl;
       h1_1RmuonEvents->fArray[i+1]      = (float)SelectedParentNeutrinos[i]/SelectedParentNeutrinos[0];
@@ -516,6 +559,8 @@ int main(int argc, char **argv) {
     ntagana.SummaryTruthInfoinSearch(3., NTagSummary);
   }
 
+  //std::cout << "fiTQun: " << secondaryprt << std::endl;
+
 
   TFile* fout = new TFile(OutputRootName, "RECREATE");
   std::cout << "Output: " << OutputRootName << std::endl;
@@ -546,7 +591,7 @@ int main(int argc, char **argv) {
   ntagana.WritePlots();
   gDirectory -> cd("..");
 
-  oatree -> WriteTree("output/output.root");
+  //oatree -> WriteTree("output/output.root");
 
 
 }

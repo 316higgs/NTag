@@ -16,6 +16,7 @@ TH1F* h1_AllEnutrue;
 TH1F* h1_AllEnureco;
 TH1F* h1_AllEnureso;
 
+TH1F* h1_EnuresoCCnonQE;
 TH1F* h1_EnuresoCCRES_deltap;
 TH1F* h1_EnuresoCCRES_deltapp;
 TH1F* h1_EnuresoCCRES_delta0;
@@ -55,11 +56,7 @@ TH2F* h2_TrueMuDirectionRZ;
 TH2F* h2_RecoMuDirectionXY;
 TH2F* h2_RecoMuDirectionRZ;
 
-//TH1F* h1_DirResoX;
-//TH1F* h1_DirResoY;
-//TH1F* h1_DirResoZ;
-
-TH1F* h1_Truecosthetamu;
+TH1F* h1_Truecosthetamu[INTERACTIONTYPE];
 TH1F* h1_Recocosthetamu;
 TH1F* h1_Resocosthetamu;
 TH1F* h1_EnuRecoPrediction;
@@ -89,7 +86,7 @@ class NeutrinoOscillation {
 
     float OscProbCalculator(CC0PiNumu* numu, bool histfill);
     float GetWgtNeutrino(CC0PiNumu* numuC, float theta, float thetamin, float thetamax);
-    float GetWgtNeutrino_wTrueN(CC0PiNumu* numu, float NTrueN);
+    float GetWgtNeutrino_wTrueN(CC0PiNumu* numu, float NTrueN, float theta, float thetamin, float thetamax);
 
     void SetHistoFrame();
     void SetHistoFormat();

@@ -1,10 +1,11 @@
 #pragma once
 
+#include "./Const.h"
 #include "../src/DecayeBox/inc/DecayeBox.h"
 #include "../src/Gd1RmuonSelection/inc/Gd1RmuonSelection.h"
 
-#define SELECTIONCUTS 6
-#define INTERACTIONTYPE 7
+//#define SELECTIONCUTS 6
+//#define INTERACTIONTYPE 7
 
 int processmax = 0;
 

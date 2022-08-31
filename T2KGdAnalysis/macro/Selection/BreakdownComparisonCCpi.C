@@ -37,14 +37,14 @@ void BreakdownComparisonCCpi() {
   h1_numu -> GetYaxis() -> SetRangeUser(0., 1.1);
   h1_numu        -> Draw();
   h1_numubar     -> Draw("SAME");
-  h1_numubarccpi -> Draw("SAME");
+  //h1_numubarccpi -> Draw("SAME");
   //c1->RedrawAxis();
 
   TLegend* legend = new TLegend(0.4, 0.65, 0.88, 0.85);
   legend -> SetTextSize(0.03);
   legend -> AddEntry(h1_numu, "FHC #nu_{#mu} #rightarrow #nu_{#mu} MC (All Interactions)", "L");
   legend -> AddEntry(h1_numubar, "FHC #bar{#nu}_{#mu} #rightarrow #bar{#nu}_{#mu} MC (All Interactions)", "L");
-  legend -> AddEntry(h1_numubarccpi, "FHC #bar{#nu}_{#mu} #rightarrow #bar{#nu}_{#mu} MC (CC Pion Prductions)", "L");
+  //legend -> AddEntry(h1_numubarccpi, "FHC #bar{#nu}_{#mu} #rightarrow #bar{#nu}_{#mu} MC (CC Pion Prductions)", "L");
   legend->SetFillColor(0);
   legend->Draw() ;
 

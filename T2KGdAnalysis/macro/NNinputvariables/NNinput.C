@@ -1,7 +1,6 @@
 void NNinput() {
 
-  TFile* finnumu = new TFile("./fhc.numu_x_numu.NNtest.root");
-  TFile* finnumubar = new TFile("./fhc.numubar_x_numubar.NNtest.root");
+  TFile* finnumu = new TFile("../../output/fhc/fhc.numu_x_numu.postNN.root");
 
   TH1F* h1_NNvar_Gd_numu[12];
   TH1F* h1_NNvar_H_numu[12];
@@ -55,4 +54,5 @@ void NNinput() {
     }
     
   }
+
 }

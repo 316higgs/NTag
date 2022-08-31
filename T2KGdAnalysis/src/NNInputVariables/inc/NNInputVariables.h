@@ -18,6 +18,18 @@ TH1F* h1_NNvar_Decaye[NNVARIABLES];
 TH1F* h1_NNvar_H[NNVARIABLES];
 TH1F* h1_NNvar_Gd[NNVARIABLES];
 
+TH1F* h1_NTagOut[4];
+
+TH1F* h1_FitT_NHitsExcess;
+//TH1F* h1_lmecscnd_NHitsExcess;
+//TH2F* h2_tscnd_lmecscnd_NHitsExcess;
+TH1F* h1_IntID;
+TH1F* h1_KE;
+TH1F* h1_timediff;
+
+//TH2F* h2_NHits_x_NumAccNoise;
+//TH2F* h2_N200_x_NumAccNoise;
+
 
 class NNInputVariables {
   public:
@@ -35,6 +47,9 @@ class NNInputVariables {
     void GetDecayeNNVariables(UInt_t jentry, std::vector<float> *Label, int vartype, std::vector<float> *Var, TH1F* h1_NNvar_Decaye[]);
     void GetHNNVariables(UInt_t jentry, std::vector<float> *Label, int vartype, std::vector<float> *Var, TH1F* h1_NNvar_H[]);
     void GetGdNNVariables(UInt_t jentry, std::vector<float> *Label, int vartype, std::vector<float> *Var, TH1F* h1_NNvar_Gd[]);
+
+    //void GetCaptureMuon(Int_t nscndprt, Float_t* tscnd, Int_t* iprtscnd, Int_t* iprntprt, Float_t* pscnd[]);
+    //void GetCaptureMuon(Int_t nscndprt, Float_t* tscnd, Int_t* iprtscnd, Int_t* iprntprt, Float_t* pscnd[]);
 
     void cdNNInputVariables(TFile* fout);
     void WritePlots();

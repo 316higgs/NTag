@@ -1,0 +1,1633 @@
+******************************************************************************
+*Tree    :h1        : DST                                                    *
+*Entries :      100 : Total =         1304798 bytes  File  Size =     349540 *
+*        :          : Tree compression factor =   3.39                       *
+******************************************************************************
+*Br    0 :nring     : nring/I                                                *
+*Entries :      100 : Total  Size=        944 bytes  File Size  =         93 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.05     *
+*............................................................................*
+*Br    1 :nrun      : nrun/i                                                 *
+*Entries :      100 : Total  Size=        939 bytes  File Size  =         92 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.10     *
+*............................................................................*
+*Br    2 :nev       : nev/I                                                  *
+*Entries :      100 : Total  Size=        934 bytes  File Size  =        241 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.94     *
+*............................................................................*
+*Br    3 :nsub      : nsub/I                                                 *
+*Entries :      100 : Total  Size=        939 bytes  File Size  =         92 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.10     *
+*............................................................................*
+*Br    4 :cate      : cate/i                                                 *
+*Entries :      100 : Total  Size=        939 bytes  File Size  =         92 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.10     *
+*............................................................................*
+*Br    5 :potot     : potot/F                                                *
+*Entries :      100 : Total  Size=        944 bytes  File Size  =        470 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.00     *
+*............................................................................*
+*Br    6 :nhit      : nhit/i                                                 *
+*Entries :      100 : Total  Size=        939 bytes  File Size  =        367 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.28     *
+*............................................................................*
+*Br    7 :pomax     : pomax/F                                                *
+*Entries :      100 : Total  Size=        944 bytes  File Size  =        470 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.00     *
+*............................................................................*
+*Br    8 :potota    : potota/F                                               *
+*Entries :      100 : Total  Size=        949 bytes  File Size  =        471 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.00     *
+*............................................................................*
+*Br    9 :nhita     : nhita/i                                                *
+*Entries :      100 : Total  Size=        944 bytes  File Size  =        227 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   2.07     *
+*............................................................................*
+*Br   10 :nhitac    : nhitac/i                                               *
+*Entries :      100 : Total  Size=        949 bytes  File Size  =        189 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   2.49     *
+*............................................................................*
+*Br   11 :pomaxa    : pomaxa/F                                               *
+*Entries :      100 : Total  Size=        949 bytes  File Size  =        471 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.00     *
+*............................................................................*
+*Br   12 :wall      : wall/F                                                 *
+*Entries :      100 : Total  Size=        939 bytes  File Size  =         96 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.89     *
+*............................................................................*
+*Br   13 :evis      : evis/F                                                 *
+*Entries :      100 : Total  Size=        939 bytes  File Size  =         92 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.10     *
+*............................................................................*
+*Br   14 :rtsum     : rtsum/F                                                *
+*Entries :      100 : Total  Size=        944 bytes  File Size  =         93 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.05     *
+*............................................................................*
+*Br   15 :rtmax     : rtmax/F                                                *
+*Entries :      100 : Total  Size=        944 bytes  File Size  =         93 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.05     *
+*............................................................................*
+*Br   16 :wlen      : wlen/F                                                 *
+*Entries :      100 : Total  Size=        939 bytes  File Size  =         95 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.94     *
+*............................................................................*
+*Br   17 :ip        : ip[nring]/i                                            *
+*Entries :      100 : Total  Size=       1021 bytes  File Size  =         97 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.90     *
+*............................................................................*
+*Br   18 :pos       : pos[3]/F                                               *
+*Entries :      100 : Total  Size=       1740 bytes  File Size  =         99 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=  12.81     *
+*............................................................................*
+*Br   19 :dir       : dir[nring][3]/F                                        *
+*Entries :      100 : Total  Size=       1039 bytes  File Size  =         98 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.86     *
+*............................................................................*
+*Br   20 :dirtot    : dirtot[3]/F                                            *
+*Entries :      100 : Total  Size=       1755 bytes  File Size  =        102 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=  12.46     *
+*............................................................................*
+*Br   21 :ang       : ang[nring]/F                                           *
+*Entries :      100 : Total  Size=       1033 bytes  File Size  =         98 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.86     *
+*............................................................................*
+*Br   22 :rtot      : rtot[nring]/F                                          *
+*Entries :      100 : Total  Size=       1038 bytes  File Size  =         99 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.82     *
+*............................................................................*
+*Br   23 :amom      : amom[nring]/F                                          *
+*Entries :      100 : Total  Size=       1038 bytes  File Size  =         99 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.82     *
+*............................................................................*
+*Br   24 :rtote     : rtote[nring]/F                                         *
+*Entries :      100 : Total  Size=       1043 bytes  File Size  =        100 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.78     *
+*............................................................................*
+*Br   25 :amome     : amome[nring]/F                                         *
+*Entries :      100 : Total  Size=       1043 bytes  File Size  =        100 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.78     *
+*............................................................................*
+*Br   26 :rtotm     : rtotm[nring]/F                                         *
+*Entries :      100 : Total  Size=       1043 bytes  File Size  =        100 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.78     *
+*............................................................................*
+*Br   27 :amomm     : amomm[nring]/F                                         *
+*Entries :      100 : Total  Size=       1043 bytes  File Size  =        100 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.78     *
+*............................................................................*
+*Br   28 :nsube     : nsube/i                                                *
+*Entries :      100 : Total  Size=        944 bytes  File Size  =         93 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.05     *
+*............................................................................*
+*Br   29 :ndcy      : ndcy/i                                                 *
+*Entries :      100 : Total  Size=        939 bytes  File Size  =         92 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.10     *
+*............................................................................*
+*Br   30 :ngate     : ngate/i                                                *
+*Entries :      100 : Total  Size=        944 bytes  File Size  =         93 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.05     *
+*............................................................................*
+*Br   31 :nbye      : nbye/i                                                 *
+*Entries :      100 : Total  Size=        939 bytes  File Size  =         92 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.10     *
+*............................................................................*
+*Br   32 :probms    : probms[nring][6]/F                                     *
+*Entries :      100 : Total  Size=       1054 bytes  File Size  =        101 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.74     *
+*............................................................................*
+*Br   33 :prmslg    : prmslg[nring][6]/F                                     *
+*Entries :      100 : Total  Size=       1054 bytes  File Size  =        101 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.74     *
+*............................................................................*
+*Br   34 :date      : date[3]/I                                              *
+*Entries :      100 : Total  Size=       1745 bytes  File Size  =        111 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=  11.43     *
+*............................................................................*
+*Br   35 :time      : time[4]/I                                              *
+*Entries :      100 : Total  Size=       2145 bytes  File Size  =        117 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=  14.26     *
+*............................................................................*
+*Br   36 :elpsday   : elpsday/F                                              *
+*Entries :      100 : Total  Size=        954 bytes  File Size  =         98 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.82     *
+*............................................................................*
+*Br   37 :numpo     : numpo[nring]/I                                         *
+*Entries :      100 : Total  Size=       1036 bytes  File Size  =        100 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.78     *
+*............................................................................*
+*Br   38 :apos      : apos[3]/F                                              *
+*Entries :      100 : Total  Size=       1745 bytes  File Size  =        967 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.31     *
+*............................................................................*
+*Br   39 :adir      : adir[3]/F                                              *
+*Entries :      100 : Total  Size=       1745 bytes  File Size  =        104 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=  12.20     *
+*............................................................................*
+*Br   40 :aang      : aang/F                                                 *
+*Entries :      100 : Total  Size=        939 bytes  File Size  =         92 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.10     *
+*............................................................................*
+*Br   41 :agood     : agood/F                                                *
+*Entries :      100 : Total  Size=        944 bytes  File Size  =         93 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.05     *
+*............................................................................*
+*Br   42 :wgain     : wgain/F                                                *
+*Entries :      100 : Total  Size=        944 bytes  File Size  =         97 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.85     *
+*............................................................................*
+*Br   43 :nbad      : nbad/I                                                 *
+*Entries :      100 : Total  Size=        939 bytes  File Size  =         96 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.89     *
+*............................................................................*
+*Br   44 :nbada     : nbada/I                                                *
+*Entries :      100 : Total  Size=        944 bytes  File Size  =         96 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.90     *
+*............................................................................*
+*Br   45 :msdir     : msdir[nring][3][6]/F                                   *
+*Entries :      100 : Total  Size=       1055 bytes  File Size  =        100 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.78     *
+*............................................................................*
+*Br   46 :amomp     : amomp[10]/F                                            *
+*Entries :      100 : Total  Size=       4552 bytes  File Size  =        120 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=  33.92     *
+*............................................................................*
+*Br   47 :ange      : ange[10]/F                                             *
+*Entries :      100 : Total  Size=       4547 bytes  File Size  =        119 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=  34.19     *
+*............................................................................*
+*Br   48 :angm      : angm[10]/F                                             *
+*Entries :      100 : Total  Size=       4547 bytes  File Size  =        119 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=  34.19     *
+*............................................................................*
+*Br   49 :angp      : angp[10]/F                                             *
+*Entries :      100 : Total  Size=       4547 bytes  File Size  =        119 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=  34.19     *
+*............................................................................*
+*Br   50 :ntot      : ntot[10]/I                                             *
+*Entries :      100 : Total  Size=       4547 bytes  File Size  =        119 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=  34.19     *
+*............................................................................*
+*Br   51 :probth    : probth[10][6]/F                                        *
+*Entries :      100 : Total  Size=      24776 bytes  File Size  =        506 *
+*Baskets :        4 : Basket Size=       8000 bytes  Compression=  47.99     *
+*............................................................................*
+*Br   52 :probpt    : probpt[10][6]/F                                        *
+*Entries :      100 : Total  Size=      24776 bytes  File Size  =        506 *
+*Baskets :        4 : Basket Size=       8000 bytes  Compression=  47.99     *
+*............................................................................*
+*Br   53 :pi0like   : pi0like[2]/F                                           *
+*Entries :      100 : Total  Size=       1360 bytes  File Size  =        100 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   8.72     *
+*............................................................................*
+*Br   54 :pi0_e     : pi0_e[2][2]/F                                          *
+*Entries :      100 : Total  Size=       2156 bytes  File Size  =        106 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=  15.75     *
+*............................................................................*
+*Br   55 :pi0_dir   : pi0_dir[2][2][3]/F                                     *
+*Entries :      100 : Total  Size=       5372 bytes  File Size  =        125 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=  38.98     *
+*............................................................................*
+*Br   56 :pi0mass   : pi0mass[2]/F                                           *
+*Entries :      100 : Total  Size=       1360 bytes  File Size  =        100 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   8.72     *
+*............................................................................*
+*Br   57 :evisold   : evisold/F                                              *
+*Entries :      100 : Total  Size=        954 bytes  File Size  =         95 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.97     *
+*............................................................................*
+*Br   58 :evisoldxe : evisoldxe/F                                            *
+*Entries :      100 : Total  Size=        964 bytes  File Size  =         97 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.89     *
+*............................................................................*
+*Br   59 :evisnew   : evisnew/F                                              *
+*Entries :      100 : Total  Size=        954 bytes  File Size  =         95 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.97     *
+*............................................................................*
+*Br   60 :nmue      : nmue/I                                                 *
+*Entries :      100 : Total  Size=        939 bytes  File Size  =         92 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.10     *
+*............................................................................*
+*Br   61 :etype     : etype[nmue]/i                                          *
+*Entries :      100 : Total  Size=       1032 bytes  File Size  =        100 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.78     *
+*............................................................................*
+*Br   62 :etime     : etime[nmue]/F                                          *
+*Entries :      100 : Total  Size=       1039 bytes  File Size  =        100 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.78     *
+*............................................................................*
+*Br   63 :epos      : epos[nmue][3]/F                                        *
+*Entries :      100 : Total  Size=       1040 bytes  File Size  =         99 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.82     *
+*............................................................................*
+*Br   64 :edir      : edir[nmue][3]/F                                        *
+*Entries :      100 : Total  Size=       1040 bytes  File Size  =         99 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.82     *
+*............................................................................*
+*Br   65 :egood     : egood[nmue]/F                                          *
+*Entries :      100 : Total  Size=       1039 bytes  File Size  =        100 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.78     *
+*............................................................................*
+*Br   66 :ehit      : ehit[nmue]/F                                           *
+*Entries :      100 : Total  Size=       1034 bytes  File Size  =         99 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.82     *
+*............................................................................*
+*Br   67 :mueprob   : mueprob[2]/F                                           *
+*Entries :      100 : Total  Size=       1360 bytes  File Size  =        100 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   8.72     *
+*............................................................................*
+*Br   68 :nmue_sel  : nmue_sel/I                                             *
+*Entries :      100 : Total  Size=        959 bytes  File Size  =         96 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.93     *
+*............................................................................*
+*Br   69 :Rnring    : Rnring/I                                               *
+*Entries :      100 : Total  Size=        949 bytes  File Size  =         94 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.01     *
+*............................................................................*
+*Br   70 :Rdir      : Rdir[Rnring][3]/F                                      *
+*Entries :      100 : Total  Size=       1048 bytes  File Size  =         99 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.82     *
+*............................................................................*
+*Br   71 :Rang      : Rang[Rnring]/F                                         *
+*Entries :      100 : Total  Size=       1042 bytes  File Size  =         99 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.82     *
+*............................................................................*
+*Br   72 :Riring    : Riring/i                                               *
+*Entries :      100 : Total  Size=        949 bytes  File Size  =         94 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.01     *
+*............................................................................*
+*Br   73 :Rtwout    : Rtwout[Rnring]/F                                       *
+*Entries :      100 : Total  Size=       1052 bytes  File Size  =        101 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.74     *
+*............................................................................*
+*Br   74 :Rtwith    : Rtwith[Rnring]/F                                       *
+*Entries :      100 : Total  Size=       1052 bytes  File Size  =        101 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.74     *
+*............................................................................*
+*Br   75 :Alwout    : Alwout/F                                               *
+*Entries :      100 : Total  Size=        949 bytes  File Size  =         94 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.01     *
+*............................................................................*
+*Br   76 :Alwith    : Alwith/F                                               *
+*Entries :      100 : Total  Size=        949 bytes  File Size  =         94 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.01     *
+*............................................................................*
+*Br   77 :Qsmi      : Qsmi/F                                                 *
+*Entries :      100 : Total  Size=        939 bytes  File Size  =         92 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.10     *
+*............................................................................*
+*Br   78 :Qsmo      : Qsmo/F                                                 *
+*Entries :      100 : Total  Size=        939 bytes  File Size  =         92 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.10     *
+*............................................................................*
+*Br   79 :Qexi      : Qexi/F                                                 *
+*Entries :      100 : Total  Size=        939 bytes  File Size  =         92 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.10     *
+*............................................................................*
+*Br   80 :Qexo      : Qexo/F                                                 *
+*Entries :      100 : Total  Size=        939 bytes  File Size  =         92 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.10     *
+*............................................................................*
+*Br   81 :Pe5d      : Pe5d/F                                                 *
+*Entries :      100 : Total  Size=        939 bytes  File Size  =         92 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.10     *
+*............................................................................*
+*Br   82 :En5d      : En5d/F                                                 *
+*Entries :      100 : Total  Size=        939 bytes  File Size  =         92 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.10     *
+*............................................................................*
+*Br   83 :Eh5d      : Eh5d/F                                                 *
+*Entries :      100 : Total  Size=        939 bytes  File Size  =         92 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.10     *
+*............................................................................*
+*Br   84 :Pe5do     : Pe5do/F                                                *
+*Entries :      100 : Total  Size=        944 bytes  File Size  =         93 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.05     *
+*............................................................................*
+*Br   85 :En5do     : En5do/F                                                *
+*Entries :      100 : Total  Size=        944 bytes  File Size  =         93 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.05     *
+*............................................................................*
+*Br   86 :Eh5do     : Eh5do/F                                                *
+*Entries :      100 : Total  Size=        944 bytes  File Size  =         93 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.05     *
+*............................................................................*
+*Br   87 :Rtadd     : Rtadd/F                                                *
+*Entries :      100 : Total  Size=        944 bytes  File Size  =         93 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.05     *
+*............................................................................*
+*Br   88 :Pdgeta    : Pdgeta/F                                               *
+*Entries :      100 : Total  Size=        949 bytes  File Size  =         94 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.01     *
+*............................................................................*
+*Br   89 :Pd5d      : Pd5d/F                                                 *
+*Entries :      100 : Total  Size=        939 bytes  File Size  =         92 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.10     *
+*............................................................................*
+*Br   90 :Pdthre    : Pdthre/F                                               *
+*Entries :      100 : Total  Size=        949 bytes  File Size  =         94 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.01     *
+*............................................................................*
+*Br   91 :Pd5do     : Pd5do/F                                                *
+*Entries :      100 : Total  Size=        944 bytes  File Size  =         93 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.05     *
+*............................................................................*
+*Br   92 :Delpd     : Delpd/F                                                *
+*Entries :      100 : Total  Size=        944 bytes  File Size  =         93 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.05     *
+*............................................................................*
+*Br   93 :Ropena    : Ropena[Rnring]/F                                       *
+*Entries :      100 : Total  Size=       1052 bytes  File Size  =        101 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.74     *
+*............................................................................*
+*Br   94 :Maxth     : Maxth/I                                                *
+*Entries :      100 : Total  Size=        944 bytes  File Size  =         93 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.05     *
+*............................................................................*
+*Br   95 :Pkang     : Pkang/F                                                *
+*Entries :      100 : Total  Size=        944 bytes  File Size  =         93 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.05     *
+*............................................................................*
+*Br   96 :Qrfct     : Qrfct/F                                                *
+*Entries :      100 : Total  Size=        944 bytes  File Size  =         93 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.05     *
+*............................................................................*
+*Br   97 :Pdfct     : Pdfct/F                                                *
+*Entries :      100 : Total  Size=        944 bytes  File Size  =         93 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.05     *
+*............................................................................*
+*Br   98 :Pkfct     : Pkfct/F                                                *
+*Entries :      100 : Total  Size=        944 bytes  File Size  =         93 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.05     *
+*............................................................................*
+*Br   99 :Agfct     : Agfct/F                                                *
+*Entries :      100 : Total  Size=        944 bytes  File Size  =         93 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.05     *
+*............................................................................*
+*Br  100 :Dlfct     : Dlfct/F                                                *
+*Entries :      100 : Total  Size=        944 bytes  File Size  =         93 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.05     *
+*............................................................................*
+*Br  101 :Iflag     : Iflag/I                                                *
+*Entries :      100 : Total  Size=        944 bytes  File Size  =         93 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.05     *
+*............................................................................*
+*Br  102 :Pmfct     : Pmfct/F                                                *
+*Entries :      100 : Total  Size=        944 bytes  File Size  =         93 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.05     *
+*............................................................................*
+*Br  103 :Imfct     : Imfct/F                                                *
+*Entries :      100 : Total  Size=        944 bytes  File Size  =         93 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.05     *
+*............................................................................*
+*Br  104 :Rilike    : Rilike/F                                               *
+*Entries :      100 : Total  Size=        949 bytes  File Size  =         94 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.01     *
+*............................................................................*
+*Br  105 :ri_ver    : ri_ver/I                                               *
+*Entries :      100 : Total  Size=        949 bytes  File Size  =         94 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.01     *
+*............................................................................*
+*Br  106 :ri_pid    : ri_pid/F                                               *
+*Entries :      100 : Total  Size=        949 bytes  File Size  =         94 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.01     *
+*............................................................................*
+*Br  107 :ri_nring  : ri_nring/I                                             *
+*Entries :      100 : Total  Size=        959 bytes  File Size  =         96 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.93     *
+*............................................................................*
+*Br  108 :ri_flag   : ri_flag[ri_nring]/F                                    *
+*Entries :      100 : Total  Size=       1065 bytes  File Size  =        102 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.71     *
+*............................................................................*
+*Br  109 :ri_dlfct  : ri_dlfct[ri_nring]/F                                   *
+*Entries :      100 : Total  Size=       1070 bytes  File Size  =        103 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.67     *
+*............................................................................*
+*Br  110 :ri_pdfct  : ri_pdfct[ri_nring]/F                                   *
+*Entries :      100 : Total  Size=       1070 bytes  File Size  =        103 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.67     *
+*............................................................................*
+*Br  111 :ri_pkfct  : ri_pkfct[ri_nring]/F                                   *
+*Entries :      100 : Total  Size=       1070 bytes  File Size  =        103 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.67     *
+*............................................................................*
+*Br  112 :ri_vafct  : ri_vafct[ri_nring]/F                                   *
+*Entries :      100 : Total  Size=       1070 bytes  File Size  =        103 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.67     *
+*............................................................................*
+*Br  113 :ri_total  : ri_total[ri_nring]/F                                   *
+*Entries :      100 : Total  Size=       1070 bytes  File Size  =        103 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.67     *
+*............................................................................*
+*Br  114 :ri_dir    : ri_dir[ri_nring][3]/F                                  *
+*Entries :      100 : Total  Size=       1066 bytes  File Size  =        101 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.74     *
+*............................................................................*
+*Br  115 :ri_imfct  : ri_imfct[ri_nring]/F                                   *
+*Entries :      100 : Total  Size=       1070 bytes  File Size  =        103 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.67     *
+*............................................................................*
+*Br  116 :ri_pmfct  : ri_pmfct[ri_nring]/F                                   *
+*Entries :      100 : Total  Size=       1070 bytes  File Size  =        103 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.67     *
+*............................................................................*
+*Br  117 :npar      : npar/I                                                 *
+*Entries :      100 : Total  Size=        939 bytes  File Size  =        186 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   2.52     *
+*............................................................................*
+*Br  118 :wallv     : wallv/F                                                *
+*Entries :      100 : Total  Size=        944 bytes  File Size  =        470 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.00     *
+*............................................................................*
+*Br  119 :ipv       : ipv[npar]/i                                            *
+*Entries :      100 : Total  Size=       3442 bytes  File Size  =        760 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   3.81     *
+*............................................................................*
+*Br  120 :posv      : posv[3]/F                                              *
+*Entries :      100 : Total  Size=       1745 bytes  File Size  =       1239 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.02     *
+*............................................................................*
+*Br  121 :dirv      : dirv[npar][3]/F                                        *
+*Entries :      100 : Total  Size=       8377 bytes  File Size  =       6519 *
+*Baskets :        2 : Basket Size=       8000 bytes  Compression=   1.20     *
+*............................................................................*
+*Br  122 :pmomv     : pmomv[npar]/F                                          *
+*Entries :      100 : Total  Size=       3459 bytes  File Size  =       2518 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.15     *
+*............................................................................*
+*Br  123 :light_flag : light_flag[npar]/I                                    *
+*Entries :      100 : Total  Size=       3477 bytes  File Size  =        570 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.09     *
+*............................................................................*
+*Br  124 :npar2     : npar2/I                                                *
+*Entries :      100 : Total  Size=        944 bytes  File Size  =        214 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   2.20     *
+*............................................................................*
+*Br  125 :wallv2    : wallv2[npar2]/F                                        *
+*Entries :      100 : Total  Size=       2964 bytes  File Size  =       1101 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   2.18     *
+*............................................................................*
+*Br  126 :ipv2      : ipv2[npar2]/i                                          *
+*Entries :      100 : Total  Size=       2947 bytes  File Size  =        637 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   3.76     *
+*............................................................................*
+*Br  127 :iorg      : iorg[npar2]/i                                          *
+*Entries :      100 : Total  Size=       2947 bytes  File Size  =        490 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.88     *
+*............................................................................*
+*Br  128 :posv2     : posv2[npar2][3]/F                                      *
+*Entries :      100 : Total  Size=       6797 bytes  File Size  =       2551 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   2.44     *
+*............................................................................*
+*Br  129 :dirv2     : dirv2[npar2][3]/F                                      *
+*Entries :      100 : Total  Size=       6797 bytes  File Size  =       5496 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.13     *
+*............................................................................*
+*Br  130 :pmomv2    : pmomv2[npar2]/F                                        *
+*Entries :      100 : Total  Size=       2964 bytes  File Size  =       2019 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.19     *
+*............................................................................*
+*Br  131 :numnu     : numnu/I                                                *
+*Entries :      100 : Total  Size=        944 bytes  File Size  =        163 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   2.88     *
+*............................................................................*
+*Br  132 :mode      : mode/I                                                 *
+*Entries :      100 : Total  Size=        939 bytes  File Size  =        208 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   2.25     *
+*............................................................................*
+*Br  133 :ipnu      : ipnu[numnu]/I                                          *
+*Entries :      100 : Total  Size=       2871 bytes  File Size  =        630 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   3.68     *
+*............................................................................*
+*Br  134 :pnu       : pnu[numnu]/F                                           *
+*Entries :      100 : Total  Size=       2873 bytes  File Size  =       2018 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.15     *
+*............................................................................*
+*Br  135 :dirnu     : dirnu[numnu][3]/F                                      *
+*Entries :      100 : Total  Size=       6569 bytes  File Size  =       4776 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.26     *
+*............................................................................*
+*Br  136 :npdk      : npdk/I                                                 *
+*Entries :      100 : Total  Size=        939 bytes  File Size  =        162 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   2.90     *
+*............................................................................*
+*Br  137 :hstate    : hstate/i                                               *
+*Entries :      100 : Total  Size=        949 bytes  File Size  =         94 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.01     *
+*............................................................................*
+*Br  138 :decay_flag : decay_flag[npdk]/I                                    *
+*Entries :      100 : Total  Size=       2897 bytes  File Size  =        329 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   7.06     *
+*............................................................................*
+*Br  139 :ifsipi    : ifsipi/i                                               *
+*Entries :      100 : Total  Size=        949 bytes  File Size  =         94 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.01     *
+*............................................................................*
+*Br  140 :momipi    : momipi/F                                               *
+*Entries :      100 : Total  Size=        949 bytes  File Size  =         94 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.01     *
+*............................................................................*
+*Br  141 :flxg      : flxg[3]/F                                              *
+*Entries :      100 : Total  Size=       1745 bytes  File Size  =        701 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.81     *
+*............................................................................*
+*Br  142 :flxh01    : flxh01[3]/F                                            *
+*Entries :      100 : Total  Size=       1755 bytes  File Size  =       1234 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.03     *
+*............................................................................*
+*Br  143 :kflux     : kflux[4]/F                                             *
+*Entries :      100 : Total  Size=       2150 bytes  File Size  =        106 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=  15.75     *
+*............................................................................*
+*Br  144 :bs71      : bs71[3]/F                                              *
+*Entries :      100 : Total  Size=       1745 bytes  File Size  =        578 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   2.20     *
+*............................................................................*
+*Br  145 :bs74      : bs74[3]/F                                              *
+*Entries :      100 : Total  Size=       1745 bytes  File Size  =        576 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   2.20     *
+*............................................................................*
+*Br  146 :flxf      : flxf[3]/F                                              *
+*Entries :      100 : Total  Size=       1745 bytes  File Size  =       1236 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.03     *
+*............................................................................*
+*Br  147 :flxh1d    : flxh1d[3]/F                                            *
+*Entries :      100 : Total  Size=       1755 bytes  File Size  =       1232 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.03     *
+*............................................................................*
+*Br  148 :flxb03    : flxb03[3]/F                                            *
+*Entries :      100 : Total  Size=       1755 bytes  File Size  =       1228 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.04     *
+*............................................................................*
+*Br  149 :flxf03    : flxf03[3]/F                                            *
+*Entries :      100 : Total  Size=       1755 bytes  File Size  =       1206 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.05     *
+*............................................................................*
+*Br  150 :flxh06    : flxh06[3]/F                                            *
+*Entries :      100 : Total  Size=       1755 bytes  File Size  =       1227 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.04     *
+*............................................................................*
+*Br  151 :flxh11    : flxh11[3]/F                                            *
+*Entries :      100 : Total  Size=       1755 bytes  File Size  =       1235 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.03     *
+*............................................................................*
+*Br  152 :scan      : scan[2]/I                                              *
+*Entries :      100 : Total  Size=       1345 bytes  File Size  =         97 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   8.96     *
+*............................................................................*
+*Br  153 :nuceff_version : nuceff_version/I                                  *
+*Entries :      100 : Total  Size=        989 bytes  File Size  =        105 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.56     *
+*............................................................................*
+*Br  154 :charge_exchange : charge_exchange/I                                *
+*Entries :      100 : Total  Size=        994 bytes  File Size  =        114 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.21     *
+*............................................................................*
+*Br  155 :absorbed  : absorbed/I                                             *
+*Entries :      100 : Total  Size=        959 bytes  File Size  =        126 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   3.75     *
+*............................................................................*
+*Br  156 :multipi_gen : multipi_gen/I                                        *
+*Entries :      100 : Total  Size=        974 bytes  File Size  =        127 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   3.75     *
+*............................................................................*
+*Br  157 :scattering : scattering/I                                          *
+*Entries :      100 : Total  Size=        969 bytes  File Size  =        101 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.70     *
+*............................................................................*
+*Br  158 :piless_dcy : piless_dcy/I                                          *
+*Entries :      100 : Total  Size=        969 bytes  File Size  =         98 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.85     *
+*............................................................................*
+*Br  159 :nscndprt  : nscndprt/I                                             *
+*Entries :      100 : Total  Size=        959 bytes  File Size  =        248 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.91     *
+*............................................................................*
+*Br  160 :itrkscnd  : itrkscnd[nscndprt]/I                                   *
+*Entries :      100 : Total  Size=       6643 bytes  File Size  =        802 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   7.56     *
+*............................................................................*
+*Br  161 :istakscnd : istakscnd[nscndprt]/I                                  *
+*Entries :      100 : Total  Size=       6648 bytes  File Size  =       1406 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.31     *
+*............................................................................*
+*Br  162 :vtxscnd   : vtxscnd[nscndprt][3]/F                                 *
+*Entries :      100 : Total  Size=      17971 bytes  File Size  =       6497 *
+*Baskets :        3 : Basket Size=       8000 bytes  Compression=   2.68     *
+*............................................................................*
+*Br  163 :pscnd     : pscnd[nscndprt][3]/F                                   *
+*Entries :      100 : Total  Size=      17957 bytes  File Size  =      16626 *
+*Baskets :        3 : Basket Size=       8000 bytes  Compression=   1.04     *
+*............................................................................*
+*Br  164 :iprtscnd  : iprtscnd[nscndprt]/I                                   *
+*Entries :      100 : Total  Size=       6643 bytes  File Size  =       1307 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.64     *
+*............................................................................*
+*Br  165 :tscnd     : tscnd[nscndprt]/F                                      *
+*Entries :      100 : Total  Size=       6635 bytes  File Size  =       2668 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   2.27     *
+*............................................................................*
+*Br  166 :iprntprt  : iprntprt[nscndprt]/I                                   *
+*Entries :      100 : Total  Size=       6643 bytes  File Size  =        956 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   6.34     *
+*............................................................................*
+*Br  167 :lmecscnd  : lmecscnd[nscndprt]/I                                   *
+*Entries :      100 : Total  Size=       6643 bytes  File Size  =        885 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   6.85     *
+*............................................................................*
+*Br  168 :iprnttrk  : iprnttrk[nscndprt]/I                                   *
+*Entries :      100 : Total  Size=       6643 bytes  File Size  =        820 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   7.39     *
+*............................................................................*
+*Br  169 :iorgprt   : iorgprt[nscndprt]/I                                    *
+*Entries :      100 : Total  Size=       6638 bytes  File Size  =        850 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   7.13     *
+*............................................................................*
+*Br  170 :pprnt     : pprnt[nscndprt][3]/F                                   *
+*Entries :      100 : Total  Size=      17957 bytes  File Size  =       6285 *
+*Baskets :        3 : Basket Size=       8000 bytes  Compression=   2.76     *
+*............................................................................*
+*Br  171 :iflgscnd  : iflgscnd[nscndprt]/I                                   *
+*Entries :      100 : Total  Size=       6643 bytes  File Size  =        500 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=  12.12     *
+*............................................................................*
+*Br  172 :pprntinit : pprntinit[nscndprt][3]/F                               *
+*Entries :      100 : Total  Size=      17985 bytes  File Size  =       7067 *
+*Baskets :        3 : Basket Size=       8000 bytes  Compression=   2.46     *
+*............................................................................*
+*Br  173 :vtxprnt   : vtxprnt[nscndprt][3]/F                                 *
+*Entries :      100 : Total  Size=      17971 bytes  File Size  =       5554 *
+*Baskets :        3 : Basket Size=       8000 bytes  Compression=   3.13     *
+*............................................................................*
+*Br  174 :iprntidx  : iprntidx[nscndprt]/I                                   *
+*Entries :      100 : Total  Size=       6643 bytes  File Size  =       1051 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.77     *
+*............................................................................*
+*Br  175 :nchilds   : nchilds[nscndprt]/I                                    *
+*Entries :      100 : Total  Size=       6638 bytes  File Size  =        756 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   8.02     *
+*............................................................................*
+*Br  176 :ichildidx : ichildidx[nscndprt]/I                                  *
+*Entries :      100 : Total  Size=       6648 bytes  File Size  =        847 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   7.16     *
+*............................................................................*
+*Br  177 :Npvcscnd  : Npvcscnd/I                                             *
+*Entries :      100 : Total  Size=        959 bytes  File Size  =        199 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   2.38     *
+*............................................................................*
+*Br  178 :Nchildsvc : Nchildsvc[Npvcscnd]/I                                  *
+*Entries :      100 : Total  Size=       3596 bytes  File Size  =        487 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   6.18     *
+*............................................................................*
+*Br  179 :Ichildidxvc : Ichildidxvc[Npvcscnd]/I                              *
+*Entries :      100 : Total  Size=       3606 bytes  File Size  =        491 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   6.13     *
+*............................................................................*
+*Br  180 :Neutmode  : Neutmode/I                                             *
+*Entries :      100 : Total  Size=        959 bytes  File Size  =        212 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   2.23     *
+*............................................................................*
+*Br  181 :Npne      : Npne/I                                                 *
+*Entries :      100 : Total  Size=        939 bytes  File Size  =        162 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   2.90     *
+*............................................................................*
+*Br  182 :Ipne      : Ipne[Npne]/I                                           *
+*Entries :      100 : Total  Size=       2867 bytes  File Size  =        630 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   3.68     *
+*............................................................................*
+*Br  183 :Abspne    : Abspne[Npne]/F                                         *
+*Entries :      100 : Total  Size=       2884 bytes  File Size  =       2020 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.15     *
+*............................................................................*
+*Br  184 :Pvecne    : Pvecne[Npne][3]/F                                      *
+*Entries :      100 : Total  Size=       6570 bytes  File Size  =       5546 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.08     *
+*............................................................................*
+*Br  185 :Npvc      : Npvc/I                                                 *
+*Entries :      100 : Total  Size=        939 bytes  File Size  =        195 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   2.41     *
+*............................................................................*
+*Br  186 :Ipvc      : Ipvc[Npvc]/I                                           *
+*Entries :      100 : Total  Size=       3555 bytes  File Size  =        865 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   3.47     *
+*............................................................................*
+*Br  187 :Ichvc     : Ichvc[Npvc]/I                                          *
+*Entries :      100 : Total  Size=       3560 bytes  File Size  =        607 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.95     *
+*............................................................................*
+*Br  188 :Iorgvc    : Iorgvc[Npvc]/I                                         *
+*Entries :      100 : Total  Size=       3565 bytes  File Size  =        619 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.86     *
+*............................................................................*
+*Br  189 :Iflvc     : Iflvc[Npvc]/I                                          *
+*Entries :      100 : Total  Size=       3560 bytes  File Size  =        672 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.47     *
+*............................................................................*
+*Br  190 :Abspvc    : Abspvc[Npvc]/F                                         *
+*Entries :      100 : Total  Size=       3572 bytes  File Size  =       2615 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.15     *
+*............................................................................*
+*Br  191 :Pvc       : Pvc[Npvc][3]/F                                         *
+*Entries :      100 : Total  Size=       8695 bytes  File Size  =       7636 *
+*Baskets :        2 : Basket Size=       8000 bytes  Compression=   1.07     *
+*............................................................................*
+*Br  192 :Crsx      : Crsx/F                                                 *
+*Entries :      100 : Total  Size=        939 bytes  File Size  =        100 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.69     *
+*............................................................................*
+*Br  193 :Crsy      : Crsy/F                                                 *
+*Entries :      100 : Total  Size=        939 bytes  File Size  =        100 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.69     *
+*............................................................................*
+*Br  194 :Crsz      : Crsz/F                                                 *
+*Entries :      100 : Total  Size=        939 bytes  File Size  =        100 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.69     *
+*............................................................................*
+*Br  195 :Crsphi    : Crsphi/F                                               *
+*Entries :      100 : Total  Size=        949 bytes  File Size  =        102 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.62     *
+*............................................................................*
+*Br  196 :Numbndn   : Numbndn/I                                              *
+*Entries :      100 : Total  Size=        954 bytes  File Size  =         98 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.82     *
+*............................................................................*
+*Br  197 :Numbndp   : Numbndp/I                                              *
+*Entries :      100 : Total  Size=        954 bytes  File Size  =         98 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.82     *
+*............................................................................*
+*Br  198 :Numfrep   : Numfrep/I                                              *
+*Entries :      100 : Total  Size=        954 bytes  File Size  =         98 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.82     *
+*............................................................................*
+*Br  199 :Numatom   : Numatom/I                                              *
+*Entries :      100 : Total  Size=        954 bytes  File Size  =         98 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.82     *
+*............................................................................*
+*Br  200 :Ibound    : Ibound/I                                               *
+*Entries :      100 : Total  Size=        949 bytes  File Size  =        121 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   3.89     *
+*............................................................................*
+*Br  201 :Neutinpmt : Neutinpmt/I                                            *
+*Entries :      100 : Total  Size=        964 bytes  File Size  =         97 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.89     *
+*............................................................................*
+*Br  202 :Nvert     : Nvert/I                                                *
+*Entries :      100 : Total  Size=        944 bytes  File Size  =        172 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   2.73     *
+*............................................................................*
+*Br  203 :Posvert   : Posvert[Nvert][3]/F                                    *
+*Entries :      100 : Total  Size=       2619 bytes  File Size  =       1728 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.18     *
+*............................................................................*
+*Br  204 :Iflgvert  : Iflgvert[Nvert]/I                                      *
+*Entries :      100 : Total  Size=       1571 bytes  File Size  =        317 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   3.16     *
+*............................................................................*
+*Br  205 :Nvcvert   : Nvcvert/I                                              *
+*Entries :      100 : Total  Size=        954 bytes  File Size  =        171 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   2.76     *
+*............................................................................*
+*Br  206 :Dirvert   : Dirvert[Nvcvert][3]/F                                  *
+*Entries :      100 : Total  Size=       2027 bytes  File Size  =       1158 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.24     *
+*............................................................................*
+*Br  207 :Abspvert  : Abspvert[Nvcvert]/F                                    *
+*Entries :      100 : Total  Size=       1386 bytes  File Size  =        548 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.46     *
+*............................................................................*
+*Br  208 :Abstpvert : Abstpvert[Nvcvert]/F                                   *
+*Entries :      100 : Total  Size=       1391 bytes  File Size  =        548 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.46     *
+*............................................................................*
+*Br  209 :Ipvert    : Ipvert[Nvcvert]/I                                      *
+*Entries :      100 : Total  Size=       1369 bytes  File Size  =        282 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   2.83     *
+*............................................................................*
+*Br  210 :Iverti    : Iverti[Nvcvert]/I                                      *
+*Entries :      100 : Total  Size=       1369 bytes  File Size  =        295 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   2.71     *
+*............................................................................*
+*Br  211 :Ivertf    : Ivertf[Nvcvert]/I                                      *
+*Entries :      100 : Total  Size=       1369 bytes  File Size  =        293 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   2.73     *
+*............................................................................*
+*Br  212 :Fsiprob   : Fsiprob/F                                              *
+*Entries :      100 : Total  Size=        954 bytes  File Size  =        296 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.59     *
+*............................................................................*
+*Br  213 :Fsivarwt  : Fsivarwt[24]/F                                         *
+*Entries :      100 : Total  Size=      10240 bytes  File Size  =        262 *
+*Baskets :        2 : Basket Size=       8000 bytes  Compression=  37.20     *
+*............................................................................*
+*Br  214 :catpc     : catpc/I                                                *
+*Entries :      100 : Total  Size=        944 bytes  File Size  =         94 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.00     *
+*............................................................................*
+*Br  215 :pcst_segment : pcst_segment/I                                      *
+*Entries :      100 : Total  Size=        979 bytes  File Size  =        100 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.77     *
+*............................................................................*
+*Br  216 :pcst_qobserved : pcst_qobserved/F                                  *
+*Entries :      100 : Total  Size=        989 bytes  File Size  =        102 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.70     *
+*............................................................................*
+*Br  217 :pcst_qexpected : pcst_qexpected/F                                  *
+*Entries :      100 : Total  Size=        989 bytes  File Size  =        102 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.70     *
+*............................................................................*
+*Br  218 :pcst_qobserved_raw : pcst_qobserved_raw/F                          *
+*Entries :      100 : Total  Size=       1009 bytes  File Size  =        106 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.56     *
+*............................................................................*
+*Br  219 :pcst_pathod : pcst_pathod/F                                        *
+*Entries :      100 : Total  Size=        974 bytes  File Size  =         99 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.81     *
+*............................................................................*
+*Br  220 :pcst_nhits : pcst_nhits/I                                          *
+*Entries :      100 : Total  Size=        969 bytes  File Size  =         98 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.85     *
+*............................................................................*
+*Br  221 :pcst_oldhits : pcst_oldhits/I                                      *
+*Entries :      100 : Total  Size=        979 bytes  File Size  =        100 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.77     *
+*............................................................................*
+*Br  222 :pcst_newhits : pcst_newhits/I                                      *
+*Entries :      100 : Total  Size=        979 bytes  File Size  =        100 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.77     *
+*............................................................................*
+*Br  223 :pcst_newq : pcst_newq/F                                            *
+*Entries :      100 : Total  Size=        964 bytes  File Size  =         97 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.89     *
+*............................................................................*
+*Br  224 :pcst_oldq : pcst_oldq/F                                            *
+*Entries :      100 : Total  Size=        964 bytes  File Size  =         97 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.89     *
+*............................................................................*
+*Br  225 :pcst_odpos : pcst_odpos[3]/F                                       *
+*Entries :      100 : Total  Size=       1775 bytes  File Size  =        106 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=  12.03     *
+*............................................................................*
+*Br  226 :catpc_orig : catpc_orig/I                                          *
+*Entries :      100 : Total  Size=        969 bytes  File Size  =         99 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.80     *
+*............................................................................*
+*Br  227 :catpc_qrat_corrected : catpc_qrat_corrected/I                      *
+*Entries :      100 : Total  Size=       1019 bytes  File Size  =        109 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.45     *
+*............................................................................*
+*Br  228 :pcst_qrat_correction : pcst_qrat_correction/F                      *
+*Entries :      100 : Total  Size=       1019 bytes  File Size  =        108 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.49     *
+*............................................................................*
+*Br  229 :trgoff    : trgoff/F                                               *
+*Entries :      100 : Total  Size=        949 bytes  File Size  =        460 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.02     *
+*............................................................................*
+*Br  230 :fqntwnd   : fqntwnd/I                                              *
+*Entries :      100 : Total  Size=        954 bytes  File Size  =        183 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   2.58     *
+*............................................................................*
+*Br  231 :fqtwnd_iclstr : fqtwnd_iclstr[fqntwnd]/I                           *
+*Entries :      100 : Total  Size=       1948 bytes  File Size  =        493 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   2.74     *
+*............................................................................*
+*Br  232 :fqtwnd_npeak : fqtwnd_npeak[fqntwnd]/I                             *
+*Entries :      100 : Total  Size=       1943 bytes  File Size  =        425 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   3.17     *
+*............................................................................*
+*Br  233 :fqtwnd_prftt0 : fqtwnd_prftt0[fqntwnd]/F                           *
+*Entries :      100 : Total  Size=       1955 bytes  File Size  =       1135 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.19     *
+*............................................................................*
+*Br  234 :fqtwnd_prftpos : fqtwnd_prftpos[fqntwnd][3]/F                      *
+*Entries :      100 : Total  Size=       3694 bytes  File Size  =       1575 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.95     *
+*............................................................................*
+*Br  235 :fqtwnd    : fqtwnd[fqntwnd][2]/F                                   *
+*Entries :      100 : Total  Size=       2790 bytes  File Size  =       1890 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.17     *
+*............................................................................*
+*Br  236 :fqtwnd_peakt0 : fqtwnd_peakt0[fqntwnd][10]/F                       *
+*Entries :      100 : Total  Size=       9825 bytes  File Size  =       1882 *
+*Baskets :        2 : Basket Size=       8000 bytes  Compression=   4.89     *
+*............................................................................*
+*Br  237 :fqtwnd_peakiness : fqtwnd_peakiness[fqntwnd][10]/F                 *
+*Entries :      100 : Total  Size=       9843 bytes  File Size  =        802 *
+*Baskets :        2 : Basket Size=       8000 bytes  Compression=  11.49     *
+*............................................................................*
+*Br  238 :fqnse     : fqnse/I                                                *
+*Entries :      100 : Total  Size=        944 bytes  File Size  =        184 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   2.55     *
+*............................................................................*
+*Br  239 :fqitwnd   : fqitwnd[fqnse]/I                                       *
+*Entries :      100 : Total  Size=       2066 bytes  File Size  =        493 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   3.04     *
+*............................................................................*
+*Br  240 :fqipeak   : fqipeak[fqnse]/I                                       *
+*Entries :      100 : Total  Size=       2066 bytes  File Size  =        427 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   3.51     *
+*............................................................................*
+*Br  241 :fqnhitpmt : fqnhitpmt[fqnse]/I                                     *
+*Entries :      100 : Total  Size=       2076 bytes  File Size  =        850 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.77     *
+*............................................................................*
+*Br  242 :fqtotq    : fqtotq[fqnse]/F                                        *
+*Entries :      100 : Total  Size=       2068 bytes  File Size  =       1293 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.16     *
+*............................................................................*
+*Br  243 :fq0rtotmu : fq0rtotmu[fqnse]/F                                     *
+*Entries :      100 : Total  Size=       2083 bytes  File Size  =       1214 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.24     *
+*............................................................................*
+*Br  244 :fq0rnll   : fq0rnll[fqnse]/F                                       *
+*Entries :      100 : Total  Size=       2073 bytes  File Size  =       1220 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.23     *
+*............................................................................*
+*Br  245 :fqn50     : fqn50[fqnse]/I                                         *
+*Entries :      100 : Total  Size=       2056 bytes  File Size  =        829 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.81     *
+*............................................................................*
+*Br  246 :fqq50     : fqq50[fqnse]/F                                         *
+*Entries :      100 : Total  Size=       2063 bytes  File Size  =       1292 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.16     *
+*............................................................................*
+*Br  247 :fq1rpcflg : fq1rpcflg[fqnse][7]/I                                  *
+*Entries :      100 : Total  Size=       8284 bytes  File Size  =        560 *
+*Baskets :        2 : Basket Size=       8000 bytes  Compression=  13.76     *
+*............................................................................*
+*Br  248 :fq1rmom   : fq1rmom[fqnse][7]/F                                    *
+*Entries :      100 : Total  Size=       8279 bytes  File Size  =       4456 *
+*Baskets :        2 : Basket Size=       8000 bytes  Compression=   1.73     *
+*............................................................................*
+*Br  249 :fq1rt0    : fq1rt0[fqnse][7]/F                                     *
+*Entries :      100 : Total  Size=       8273 bytes  File Size  =       4209 *
+*Baskets :        2 : Basket Size=       8000 bytes  Compression=   1.83     *
+*............................................................................*
+*Br  250 :fq1rtotmu : fq1rtotmu[fqnse][7]/F                                  *
+*Entries :      100 : Total  Size=       8291 bytes  File Size  =       4480 *
+*Baskets :        2 : Basket Size=       8000 bytes  Compression=   1.72     *
+*............................................................................*
+*Br  251 :fq1rnll   : fq1rnll[fqnse][7]/F                                    *
+*Entries :      100 : Total  Size=       8279 bytes  File Size  =       4435 *
+*Baskets :        2 : Basket Size=       8000 bytes  Compression=   1.74     *
+*............................................................................*
+*Br  252 :fq1rpos   : fq1rpos[fqnse][7][3]/F                                 *
+*Entries :      100 : Total  Size=      22645 bytes  File Size  =      11424 *
+*Baskets :        3 : Basket Size=       8000 bytes  Compression=   1.93     *
+*............................................................................*
+*Br  253 :fq1rdir   : fq1rdir[fqnse][7][3]/F                                 *
+*Entries :      100 : Total  Size=      22645 bytes  File Size  =      11458 *
+*Baskets :        3 : Basket Size=       8000 bytes  Compression=   1.93     *
+*............................................................................*
+*Br  254 :fq1rdconv : fq1rdconv[fqnse][7]/F                                  *
+*Entries :      100 : Total  Size=       8291 bytes  File Size  =        488 *
+*Baskets :        2 : Basket Size=       8000 bytes  Compression=  15.79     *
+*............................................................................*
+*Br  255 :fq1reloss : fq1reloss[fqnse][7]/F                                  *
+*Entries :      100 : Total  Size=       8291 bytes  File Size  =       2660 *
+*Baskets :        2 : Basket Size=       8000 bytes  Compression=   2.90     *
+*............................................................................*
+*Br  256 :fqpi0pcflg : fqpi0pcflg[2]/I                                       *
+*Entries :      100 : Total  Size=       1375 bytes  File Size  =        155 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.65     *
+*............................................................................*
+*Br  257 :fqpi0mom1 : fqpi0mom1[2]/F                                         *
+*Entries :      100 : Total  Size=       1370 bytes  File Size  =        605 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.44     *
+*............................................................................*
+*Br  258 :fqpi0mom2 : fqpi0mom2[2]/F                                         *
+*Entries :      100 : Total  Size=       1370 bytes  File Size  =        600 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.46     *
+*............................................................................*
+*Br  259 :fqpi0momtot : fqpi0momtot[2]/F                                     *
+*Entries :      100 : Total  Size=       1380 bytes  File Size  =        609 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.44     *
+*............................................................................*
+*Br  260 :fqpi0dconv1 : fqpi0dconv1[2]/F                                     *
+*Entries :      100 : Total  Size=       1380 bytes  File Size  =        585 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.50     *
+*............................................................................*
+*Br  261 :fqpi0dconv2 : fqpi0dconv2[2]/F                                     *
+*Entries :      100 : Total  Size=       1380 bytes  File Size  =        591 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.48     *
+*............................................................................*
+*Br  262 :fqpi0t0   : fqpi0t0[2]/F                                           *
+*Entries :      100 : Total  Size=       1360 bytes  File Size  =        527 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.65     *
+*............................................................................*
+*Br  263 :fqpi0totmu : fqpi0totmu[2]/F                                       *
+*Entries :      100 : Total  Size=       1375 bytes  File Size  =        600 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.46     *
+*............................................................................*
+*Br  264 :fqpi0nll  : fqpi0nll[2]/F                                          *
+*Entries :      100 : Total  Size=       1365 bytes  File Size  =        596 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.46     *
+*............................................................................*
+*Br  265 :fqpi0mass : fqpi0mass[2]/F                                         *
+*Entries :      100 : Total  Size=       1370 bytes  File Size  =        610 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.43     *
+*............................................................................*
+*Br  266 :fqpi0photangle : fqpi0photangle[2]/F                               *
+*Entries :      100 : Total  Size=       1395 bytes  File Size  =        597 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.47     *
+*............................................................................*
+*Br  267 :fqpi0pos  : fqpi0pos[2][3]/F                                       *
+*Entries :      100 : Total  Size=       2971 bytes  File Size  =       1392 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.78     *
+*............................................................................*
+*Br  268 :fqpi0dir1 : fqpi0dir1[2][3]/F                                      *
+*Entries :      100 : Total  Size=       2976 bytes  File Size  =       1393 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.78     *
+*............................................................................*
+*Br  269 :fqpi0dir2 : fqpi0dir2[2][3]/F                                      *
+*Entries :      100 : Total  Size=       2976 bytes  File Size  =       1385 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.79     *
+*............................................................................*
+*Br  270 :fqpi0dirtot : fqpi0dirtot[2][3]/F                                  *
+*Entries :      100 : Total  Size=       2986 bytes  File Size  =       1399 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.77     *
+*............................................................................*
+*Br  271 :fqpmgpcflg : fqpmgpcflg[2]/I                                       *
+*Entries :      100 : Total  Size=       1375 bytes  File Size  =        103 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   8.50     *
+*............................................................................*
+*Br  272 :fqpmgmom1 : fqpmgmom1[2]/F                                         *
+*Entries :      100 : Total  Size=       1370 bytes  File Size  =        102 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   8.57     *
+*............................................................................*
+*Br  273 :fqpmgmom2 : fqpmgmom2[2]/F                                         *
+*Entries :      100 : Total  Size=       1370 bytes  File Size  =        102 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   8.57     *
+*............................................................................*
+*Br  274 :fqpmgt01  : fqpmgt01[2]/F                                          *
+*Entries :      100 : Total  Size=       1365 bytes  File Size  =        101 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   8.64     *
+*............................................................................*
+*Br  275 :fqpmgt02  : fqpmgt02[2]/F                                          *
+*Entries :      100 : Total  Size=       1365 bytes  File Size  =        101 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   8.64     *
+*............................................................................*
+*Br  276 :fqpmgtotmu : fqpmgtotmu[2]/F                                       *
+*Entries :      100 : Total  Size=       1375 bytes  File Size  =        103 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   8.50     *
+*............................................................................*
+*Br  277 :fqpmgnll  : fqpmgnll[2]/F                                          *
+*Entries :      100 : Total  Size=       1365 bytes  File Size  =        101 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   8.64     *
+*............................................................................*
+*Br  278 :fqpmgpos1 : fqpmgpos1[2][3]/F                                      *
+*Entries :      100 : Total  Size=       2976 bytes  File Size  =        117 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=  21.15     *
+*............................................................................*
+*Br  279 :fqpmgpos2 : fqpmgpos2[2][3]/F                                      *
+*Entries :      100 : Total  Size=       2976 bytes  File Size  =        117 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=  21.15     *
+*............................................................................*
+*Br  280 :fqpmgdir1 : fqpmgdir1[2][3]/F                                      *
+*Entries :      100 : Total  Size=       2976 bytes  File Size  =        117 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=  21.15     *
+*............................................................................*
+*Br  281 :fqpmgdir2 : fqpmgdir2[2][3]/F                                      *
+*Entries :      100 : Total  Size=       2976 bytes  File Size  =        117 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=  21.15     *
+*............................................................................*
+*Br  282 :fqnmrfit  : fqnmrfit/I                                             *
+*Entries :      100 : Total  Size=        959 bytes  File Size  =        156 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   3.03     *
+*............................................................................*
+*Br  283 :fqmrifit  : fqmrifit[fqnmrfit]/I                                   *
+*Entries :      100 : Total  Size=       5055 bytes  File Size  =        796 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.62     *
+*............................................................................*
+*Br  284 :fqmrnring : fqmrnring[fqnmrfit]/I                                  *
+*Entries :      100 : Total  Size=       5060 bytes  File Size  =        586 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   7.63     *
+*............................................................................*
+*Br  285 :fqmrpcflg : fqmrpcflg[fqnmrfit]/I                                  *
+*Entries :      100 : Total  Size=       5060 bytes  File Size  =        431 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=  10.38     *
+*............................................................................*
+*Br  286 :fqmrnll   : fqmrnll[fqnmrfit]/F                                    *
+*Entries :      100 : Total  Size=       5057 bytes  File Size  =       3514 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.27     *
+*............................................................................*
+*Br  287 :fqmrtotmu : fqmrtotmu[fqnmrfit]/F                                  *
+*Entries :      100 : Total  Size=       5067 bytes  File Size  =       3633 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.23     *
+*............................................................................*
+*Br  288 :fqmrpid   : fqmrpid[fqnmrfit][6]/I                                 *
+*Entries :      100 : Total  Size=      25256 bytes  File Size  =       2413 *
+*Baskets :        4 : Basket Size=       8000 bytes  Compression=  10.22     *
+*............................................................................*
+*Br  289 :fqmrmom   : fqmrmom[fqnmrfit][6]/F                                 *
+*Entries :      100 : Total  Size=      25263 bytes  File Size  =       7348 *
+*Baskets :        4 : Basket Size=       8000 bytes  Compression=   3.36     *
+*............................................................................*
+*Br  290 :fqmrdconv : fqmrdconv[fqnmrfit][6]/F                               *
+*Entries :      100 : Total  Size=      25279 bytes  File Size  =        858 *
+*Baskets :        4 : Basket Size=       8000 bytes  Compression=  28.76     *
+*............................................................................*
+*Br  291 :fqmreloss : fqmreloss[fqnmrfit][6]/F                               *
+*Entries :      100 : Total  Size=      25279 bytes  File Size  =       4642 *
+*Baskets :        4 : Basket Size=       8000 bytes  Compression=   5.32     *
+*............................................................................*
+*Br  292 :fqmrt0    : fqmrt0[fqnmrfit][6]/F                                  *
+*Entries :      100 : Total  Size=      25255 bytes  File Size  =       6075 *
+*Baskets :        4 : Basket Size=       8000 bytes  Compression=   4.06     *
+*............................................................................*
+*Br  293 :fqmrpos   : fqmrpos[fqnmrfit][6][3]/F                              *
+*Entries :      100 : Total  Size=      73673 bytes  File Size  =      14545 *
+*Baskets :       10 : Basket Size=       8000 bytes  Compression=   5.02     *
+*............................................................................*
+*Br  294 :fqmrdir   : fqmrdir[fqnmrfit][6][3]/F                              *
+*Entries :      100 : Total  Size=      73673 bytes  File Size  =      17974 *
+*Baskets :       10 : Basket Size=       8000 bytes  Compression=   4.06     *
+*............................................................................*
+*Br  295 :fqmsnfit  : fqmsnfit/I                                             *
+*Entries :      100 : Total  Size=        959 bytes  File Size  =        155 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   3.05     *
+*............................................................................*
+*Br  296 :fqmspcflg : fqmspcflg[fqmsnfit]/I                                  *
+*Entries :      100 : Total  Size=       1712 bytes  File Size  =        297 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   3.79     *
+*............................................................................*
+*Br  297 :fqmsnseg  : fqmsnseg[fqmsnfit]/I                                   *
+*Entries :      100 : Total  Size=       1707 bytes  File Size  =        414 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   2.72     *
+*............................................................................*
+*Br  298 :fqmspid   : fqmspid[fqmsnfit]/I                                    *
+*Entries :      100 : Total  Size=       1702 bytes  File Size  =        296 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   3.80     *
+*............................................................................*
+*Br  299 :fqmsifit  : fqmsifit[fqmsnfit]/I                                   *
+*Entries :      100 : Total  Size=       1707 bytes  File Size  =        434 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   2.59     *
+*............................................................................*
+*Br  300 :fqmsimer  : fqmsimer[fqmsnfit]/I                                   *
+*Entries :      100 : Total  Size=       1707 bytes  File Size  =        297 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   3.79     *
+*............................................................................*
+*Br  301 :fqmstotmu : fqmstotmu[fqmsnfit]/F                                  *
+*Entries :      100 : Total  Size=       1719 bytes  File Size  =        937 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.20     *
+*............................................................................*
+*Br  302 :fqmsnll   : fqmsnll[fqmsnfit]/F                                    *
+*Entries :      100 : Total  Size=       1709 bytes  File Size  =        920 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.22     *
+*............................................................................*
+*Br  303 :fqmsmom   : fqmsmom[fqmsnfit][20]/F                                *
+*Entries :      100 : Total  Size=      14033 bytes  File Size  =       2310 *
+*Baskets :        2 : Basket Size=       8000 bytes  Compression=   5.82     *
+*............................................................................*
+*Br  304 :fqmseloss : fqmseloss[fqmsnfit][20]/F                              *
+*Entries :      100 : Total  Size=      14045 bytes  File Size  =       2391 *
+*Baskets :        2 : Basket Size=       8000 bytes  Compression=   5.62     *
+*............................................................................*
+*Br  305 :fqmst0    : fqmst0[fqmsnfit][20]/F                                 *
+*Entries :      100 : Total  Size=      14027 bytes  File Size  =       2207 *
+*Baskets :        2 : Basket Size=       8000 bytes  Compression=   6.09     *
+*............................................................................*
+*Br  306 :fqmspos   : fqmspos[fqmsnfit][20][3]/F                             *
+*Entries :      100 : Total  Size=      40119 bytes  File Size  =       5601 *
+*Baskets :        6 : Basket Size=       8000 bytes  Compression=   7.06     *
+*............................................................................*
+*Br  307 :fqmsdir   : fqmsdir[fqmsnfit][20][3]/F                             *
+*Entries :      100 : Total  Size=      40119 bytes  File Size  =       5606 *
+*Baskets :        6 : Basket Size=       8000 bytes  Compression=   7.05     *
+*............................................................................*
+*Br  308 :prid_ang  : prid_ang/F                                             *
+*Entries :      100 : Total  Size=        959 bytes  File Size  =         96 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.93     *
+*............................................................................*
+*Br  309 :prid_len  : prid_len/F                                             *
+*Entries :      100 : Total  Size=        959 bytes  File Size  =         96 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.93     *
+*............................................................................*
+*Br  310 :prid_pmom : prid_pmom/F                                            *
+*Entries :      100 : Total  Size=        964 bytes  File Size  =         97 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.89     *
+*............................................................................*
+*Br  311 :prid_mang : prid_mang/F                                            *
+*Entries :      100 : Total  Size=        964 bytes  File Size  =         97 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.89     *
+*............................................................................*
+*Br  312 :prid_plike : prid_plike/F                                          *
+*Entries :      100 : Total  Size=        969 bytes  File Size  =         98 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.85     *
+*............................................................................*
+*Br  313 :prid_mlike : prid_mlike/F                                          *
+*Entries :      100 : Total  Size=        969 bytes  File Size  =         98 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.85     *
+*............................................................................*
+*Br  314 :prid_nused : prid_nused/I                                          *
+*Entries :      100 : Total  Size=        969 bytes  File Size  =         98 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.85     *
+*............................................................................*
+*Br  315 :dirtotepi : dirtotepi[3]/F                                         *
+*Entries :      100 : Total  Size=       1770 bytes  File Size  =        105 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=  12.13     *
+*............................................................................*
+*Br  316 :dirtotenpi : dirtotenpi[3]/F                                       *
+*Entries :      100 : Total  Size=       1775 bytes  File Size  =        106 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=  12.03     *
+*............................................................................*
+*Br  317 :dirtotmue : dirtotmue[3]/F                                         *
+*Entries :      100 : Total  Size=       1770 bytes  File Size  =        105 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=  12.13     *
+*............................................................................*
+*Br  318 :dirsum    : dirsum[3]/F                                            *
+*Entries :      100 : Total  Size=       1755 bytes  File Size  =       1248 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.02     *
+*............................................................................*
+*Br  319 :etot      : etot/F                                                 *
+*Entries :      100 : Total  Size=        939 bytes  File Size  =         92 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.10     *
+*............................................................................*
+*Br  320 :etotepi   : etotepi/F                                              *
+*Entries :      100 : Total  Size=        954 bytes  File Size  =         95 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.97     *
+*............................................................................*
+*Br  321 :etotenpi  : etotenpi/F                                             *
+*Entries :      100 : Total  Size=        959 bytes  File Size  =         96 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.93     *
+*............................................................................*
+*Br  322 :etotmue   : etotmue/F                                              *
+*Entries :      100 : Total  Size=        954 bytes  File Size  =         95 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.97     *
+*............................................................................*
+*Br  323 :oscweight : oscweight[2][4]/F                                      *
+*Entries :      100 : Total  Size=       3776 bytes  File Size  =        121 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=  27.06     *
+*............................................................................*
+*Br  324 :oscwgt    : oscwgt/F                                               *
+*Entries :      100 : Total  Size=        949 bytes  File Size  =        418 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.13     *
+*............................................................................*
+*Br  325 :live      : live/F                                                 *
+*Entries :      100 : Total  Size=        939 bytes  File Size  =         92 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.10     *
+*............................................................................*
+*Br  326 :sacth     : sacth/F                                                *
+*Entries :      100 : Total  Size=        944 bytes  File Size  =        445 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.06     *
+*............................................................................*
+*Br  327 :sactg     : sactg/F                                                *
+*Entries :      100 : Total  Size=        944 bytes  File Size  =        168 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   2.80     *
+*............................................................................*
+*Br  328 :sacth1d   : sacth1d/F                                              *
+*Entries :      100 : Total  Size=        954 bytes  File Size  =        403 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.17     *
+*............................................................................*
+*Br  329 :ccqelike  : ccqelike/F                                             *
+*Entries :      100 : Total  Size=        959 bytes  File Size  =         96 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.93     *
+*............................................................................*
+*Br  330 :mulike    : mulike/F                                               *
+*Entries :      100 : Total  Size=        949 bytes  File Size  =         94 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.01     *
+*............................................................................*
+*Br  331 :mproton   : mproton/F                                              *
+*Entries :      100 : Total  Size=        954 bytes  File Size  =         95 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.97     *
+*............................................................................*
+*Br  332 :outdir    : outdir[3]/F                                            *
+*Entries :      100 : Total  Size=       1755 bytes  File Size  =        102 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=  12.46     *
+*............................................................................*
+*Br  333 :nused2    : nused2/I                                               *
+*Entries :      100 : Total  Size=        949 bytes  File Size  =         94 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.01     *
+*............................................................................*
+*Br  334 :vsum      : vsum/F                                                 *
+*Entries :      100 : Total  Size=        939 bytes  File Size  =         92 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.10     *
+*............................................................................*
+*Br  335 :qsep      : qsep/F                                                 *
+*Entries :      100 : Total  Size=        939 bytes  File Size  =         92 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.10     *
+*............................................................................*
+*Br  336 :qpeak     : qpeak/F                                                *
+*Entries :      100 : Total  Size=        944 bytes  File Size  =         93 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.05     *
+*............................................................................*
+*Br  337 :qhigh     : qhigh/F                                                *
+*Entries :      100 : Total  Size=        944 bytes  File Size  =         93 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.05     *
+*............................................................................*
+*Br  338 :qlow      : qlow/F                                                 *
+*Entries :      100 : Total  Size=        939 bytes  File Size  =         92 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.10     *
+*............................................................................*
+*Br  339 :nzeros2   : nzeros2/I                                              *
+*Entries :      100 : Total  Size=        954 bytes  File Size  =         95 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.97     *
+*............................................................................*
+*Br  340 :moyenne2  : moyenne2/F                                             *
+*Entries :      100 : Total  Size=        959 bytes  File Size  =         96 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.93     *
+*............................................................................*
+*Br  341 :lproton   : lproton/F                                              *
+*Entries :      100 : Total  Size=        954 bytes  File Size  =         95 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.97     *
+*............................................................................*
+*Br  342 :qwin      : qwin/F                                                 *
+*Entries :      100 : Total  Size=        939 bytes  File Size  =         92 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.10     *
+*............................................................................*
+*Br  343 :ent_pos   : ent_pos[3]/F                                           *
+*Entries :      100 : Total  Size=       1760 bytes  File Size  =        980 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.30     *
+*............................................................................*
+*Br  344 :ent_dir   : ent_dir[3]/F                                           *
+*Entries :      100 : Total  Size=       1760 bytes  File Size  =        987 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.29     *
+*............................................................................*
+*Br  345 :length    : length/F                                               *
+*Entries :      100 : Total  Size=        949 bytes  File Size  =        108 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.36     *
+*............................................................................*
+*Br  346 :tr_mom1   : tr_mom1/F                                              *
+*Entries :      100 : Total  Size=        954 bytes  File Size  =         95 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.97     *
+*............................................................................*
+*Br  347 :A_ent_mom : A_ent_mom/F                                            *
+*Entries :      100 : Total  Size=        964 bytes  File Size  =        102 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.65     *
+*............................................................................*
+*Br  348 :A_ent_pos : A_ent_pos[3]/F                                         *
+*Entries :      100 : Total  Size=       1770 bytes  File Size  =        118 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=  10.80     *
+*............................................................................*
+*Br  349 :A_ent_dir : A_ent_dir[3]/F                                         *
+*Entries :      100 : Total  Size=       1770 bytes  File Size  =        118 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=  10.80     *
+*............................................................................*
+*Br  350 :A_ext_mom : A_ext_mom/F                                            *
+*Entries :      100 : Total  Size=        964 bytes  File Size  =        113 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.19     *
+*............................................................................*
+*Br  351 :A_ext_pos : A_ext_pos[3]/F                                         *
+*Entries :      100 : Total  Size=       1770 bytes  File Size  =        137 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   9.30     *
+*............................................................................*
+*Br  352 :A_ext_dir : A_ext_dir[3]/F                                         *
+*Entries :      100 : Total  Size=       1770 bytes  File Size  =        137 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   9.30     *
+*............................................................................*
+*Br  353 :Fit_pos   : Fit_pos[3]/F                                           *
+*Entries :      100 : Total  Size=       1760 bytes  File Size  =        103 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=  12.35     *
+*............................................................................*
+*Br  354 :Fit_dir   : Fit_dir[3]/F                                           *
+*Entries :      100 : Total  Size=       1760 bytes  File Size  =        107 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=  11.89     *
+*............................................................................*
+*Br  355 :Fit_len   : Fit_len/F                                              *
+*Entries :      100 : Total  Size=        954 bytes  File Size  =         99 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.77     *
+*............................................................................*
+*Br  356 :Fit_mom   : Fit_mom/F                                              *
+*Entries :      100 : Total  Size=        954 bytes  File Size  =         99 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.77     *
+*............................................................................*
+*Br  357 :Fit_pid   : Fit_pid/I                                              *
+*Entries :      100 : Total  Size=        954 bytes  File Size  =         95 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.97     *
+*............................................................................*
+*Br  358 :Um_ehit8m : Um_ehit8m/I                                            *
+*Entries :      100 : Total  Size=        964 bytes  File Size  =         97 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.89     *
+*............................................................................*
+*Br  359 :Um_ohit8m : Um_ohit8m/I                                            *
+*Entries :      100 : Total  Size=        964 bytes  File Size  =         97 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.89     *
+*............................................................................*
+*Br  360 :Um_qent   : Um_qent/F                                              *
+*Entries :      100 : Total  Size=        954 bytes  File Size  =         95 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.97     *
+*............................................................................*
+*Br  361 :Sh_chi1p  : Sh_chi1p/F                                             *
+*Entries :      100 : Total  Size=        959 bytes  File Size  =         96 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.93     *
+*............................................................................*
+*Br  362 :Sh_delta  : Sh_delta/F                                             *
+*Entries :      100 : Total  Size=        959 bytes  File Size  =         96 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.93     *
+*............................................................................*
+*Br  363 :Sh_mean   : Sh_mean/F                                              *
+*Entries :      100 : Total  Size=        954 bytes  File Size  =         95 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.97     *
+*............................................................................*
+*Br  364 :Sh_meanq  : Sh_meanq/F                                             *
+*Entries :      100 : Total  Size=        959 bytes  File Size  =         96 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.93     *
+*............................................................................*
+*Br  365 :Sh_id     : Sh_id/I                                                *
+*Entries :      100 : Total  Size=        944 bytes  File Size  =         93 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.05     *
+*............................................................................*
+*Br  366 :Tr_stop   : Tr_stop[3]/F                                           *
+*Entries :      100 : Total  Size=       1760 bytes  File Size  =        946 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.34     *
+*............................................................................*
+*Br  367 :Tr_mom    : Tr_mom/F                                               *
+*Entries :      100 : Total  Size=        949 bytes  File Size  =        417 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.13     *
+*............................................................................*
+*Br  368 :Tr_len    : Tr_len/F                                               *
+*Entries :      100 : Total  Size=        949 bytes  File Size  =        405 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.16     *
+*............................................................................*
+*Br  369 :Tr_len1   : Tr_len1/F                                              *
+*Entries :      100 : Total  Size=        954 bytes  File Size  =        406 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.16     *
+*............................................................................*
+*Br  370 :Pid_flg   : Pid_flg/I                                              *
+*Entries :      100 : Total  Size=        954 bytes  File Size  =        163 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   2.90     *
+*............................................................................*
+*Br  371 :Crs1      : Crs1/F                                                 *
+*Entries :      100 : Total  Size=        939 bytes  File Size  =         92 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.10     *
+*............................................................................*
+*Br  372 :Crs2      : Crs2/F                                                 *
+*Entries :      100 : Total  Size=        939 bytes  File Size  =         97 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.84     *
+*............................................................................*
+*Br  373 :iclass    : iclass/I                                               *
+*Entries :      100 : Total  Size=        949 bytes  File Size  =         94 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.01     *
+*............................................................................*
+*Br  374 :mu_class  : mu_class/I                                             *
+*Entries :      100 : Total  Size=        959 bytes  File Size  =         96 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.93     *
+*............................................................................*
+*Br  375 :mu_dec    : mu_dec/I                                               *
+*Entries :      100 : Total  Size=        949 bytes  File Size  =         94 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.01     *
+*............................................................................*
+*Br  376 :mu_dir    : mu_dir[3]/F                                            *
+*Entries :      100 : Total  Size=       1755 bytes  File Size  =        102 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=  12.46     *
+*............................................................................*
+*Br  377 :mu_pos    : mu_pos[3]/F                                            *
+*Entries :      100 : Total  Size=       1755 bytes  File Size  =        102 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=  12.46     *
+*............................................................................*
+*Br  378 :mu_good   : mu_good/F                                              *
+*Entries :      100 : Total  Size=        954 bytes  File Size  =         95 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.97     *
+*............................................................................*
+*Br  379 :history   : history/I                                              *
+*Entries :      100 : Total  Size=        954 bytes  File Size  =         95 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.97     *
+*............................................................................*
+*Br  380 :Pdst      : Pdst/I                                                 *
+*Entries :      100 : Total  Size=        939 bytes  File Size  =         92 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.10     *
+*............................................................................*
+*Br  381 :idoff     : idoff/I                                                *
+*Entries :      100 : Total  Size=        944 bytes  File Size  =         93 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.05     *
+*............................................................................*
+*Br  382 :anthit    : anthit/F                                               *
+*Entries :      100 : Total  Size=        949 bytes  File Size  =         94 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.01     *
+*............................................................................*
+*Br  383 :idseq     : idseq/I                                                *
+*Entries :      100 : Total  Size=        944 bytes  File Size  =         93 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.05     *
+*............................................................................*
+*Br  384 :tstfrac   : tstfrac/F                                              *
+*Entries :      100 : Total  Size=        954 bytes  File Size  =         95 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.97     *
+*............................................................................*
+*Br  385 :judge     : judge/I                                                *
+*Entries :      100 : Total  Size=        944 bytes  File Size  =         93 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.05     *
+*............................................................................*
+*Br  386 :Upcrs1    : Upcrs1/F                                               *
+*Entries :      100 : Total  Size=        949 bytes  File Size  =         94 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.01     *
+*............................................................................*
+*Br  387 :Upcrs2    : Upcrs2/F                                               *
+*Entries :      100 : Total  Size=        949 bytes  File Size  =         94 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.01     *
+*............................................................................*
+*Br  388 :lst       : lst/F                                                  *
+*Entries :      100 : Total  Size=        934 bytes  File Size  =         95 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.93     *
+*............................................................................*
+*Br  389 :jd        : jd/I                                                   *
+*Entries :      100 : Total  Size=        929 bytes  File Size  =         93 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.02     *
+*............................................................................*
+*Br  390 :fjd       : fjd/F                                                  *
+*Entries :      100 : Total  Size=        934 bytes  File Size  =         94 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.98     *
+*............................................................................*
+*Br  391 :alt       : alt/F                                                  *
+*Entries :      100 : Total  Size=        934 bytes  File Size  =         95 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.93     *
+*............................................................................*
+*Br  392 :azi       : azi/F                                                  *
+*Entries :      100 : Total  Size=        934 bytes  File Size  =         94 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.98     *
+*............................................................................*
+*Br  393 :ra        : ra/F                                                   *
+*Entries :      100 : Total  Size=        929 bytes  File Size  =         94 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.97     *
+*............................................................................*
+*Br  394 :dec       : dec/F                                                  *
+*Entries :      100 : Total  Size=        934 bytes  File Size  =         95 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.93     *
+*............................................................................*
+*Br  395 :glat      : glat/F                                                 *
+*Entries :      100 : Total  Size=        939 bytes  File Size  =         96 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.89     *
+*............................................................................*
+*Br  396 :glong     : glong/F                                                *
+*Entries :      100 : Total  Size=        944 bytes  File Size  =         96 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.90     *
+*............................................................................*
+*Br  397 :t2kposc   : t2kposc[2][6]/F                                        *
+*Entries :      100 : Total  Size=       5366 bytes  File Size  =       4071 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.20     *
+*............................................................................*
+*Br  398 :evclass   : evclass/I                                              *
+*Entries :      100 : Total  Size=        954 bytes  File Size  =        155 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   3.05     *
+*............................................................................*
+*Br  399 :dt0       : dt0/F                                                  *
+*Entries :      100 : Total  Size=        934 bytes  File Size  =         95 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.93     *
+*............................................................................*
+*Br  400 :pototin   : pototin/F                                              *
+*Entries :      100 : Total  Size=        954 bytes  File Size  =        472 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   1.00     *
+*............................................................................*
+*Br  401 :nurun     : nurun/I                                                *
+*Entries :      100 : Total  Size=        944 bytes  File Size  =         93 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.05     *
+*............................................................................*
+*Br  402 :good_spill_flag : good_spill_flag/I                                *
+*Entries :      100 : Total  Size=        994 bytes  File Size  =        103 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   4.66     *
+*............................................................................*
+*Br  403 :nspill    : nspill/I                                               *
+*Entries :      100 : Total  Size=        949 bytes  File Size  =         94 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   5.01     *
+*............................................................................*
+*Br  404 :t2knuefs  : t2knuefs/I                                             *
+*Entries :      100 : Total  Size=        959 bytes  File Size  =        167 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   2.83     *
+*............................................................................*
+*Br  405 :t2knuenpi0 : t2knuenpi0/I                                          *
+*Entries :      100 : Total  Size=        969 bytes  File Size  =        145 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   3.28     *
+*............................................................................*
+*Br  406 :t2knueflag : t2knueflag/I                                          *
+*Entries :      100 : Total  Size=        969 bytes  File Size  =        173 *
+*Baskets :        1 : Basket Size=       8000 bytes  Compression=   2.75     *
+*............................................................................*

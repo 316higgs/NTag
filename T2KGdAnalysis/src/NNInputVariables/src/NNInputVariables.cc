@@ -151,7 +151,57 @@ void NNInputVariables::SetNNinputHisto() {
   	this->SetHistoFrame(vartype, histtitle);
   	this->SetHistoFormat(vartype, histtitle);
   }
+
+  for (int i=0; i<4; i++) {
+    h1_NTagOut[i] = new TH1F(TString::Format("h1_NTagOut_type%d", i), "h1_NTagOut; TagOut; Number of Candidates", 100, 0, 1);
+    h1_NTagOut[i] -> SetLineWidth(2);
+  }
+  h1_NTagOut[0] -> SetLineColor(kGray+2);
+  h1_NTagOut[1] -> SetLineColor(kYellow-3);
+  h1_NTagOut[2] -> SetLineColor(kAzure-4);
+  h1_NTagOut[3] -> SetLineColor(kTeal-5);
+
+  h1_NTagOut[0] -> SetFillColor(kGray+2);
+  h1_NTagOut[1] -> SetFillColor(kYellow-3);
+  h1_NTagOut[2] -> SetFillColor(kAzure-4);
+  h1_NTagOut[3] -> SetFillColor(kTeal-5);
+
+
+  h1_FitT_NHitsExcess = new TH1F("h1_FitT_NHitsExcess", "h1_FitT_NHitsExcess; FitT[#musec]; Entries", 80, 0, 20);
+  //h1_lmecscnd_NHitsExcess = new TH1F("h1_lmecscnd_NHitsExcess", "h1_lmecscnd_NHitsExcess; lmecscnd; Number of Secondary Particles", 30, 0, 30);
+  //h2_tscnd_lmecscnd_NHitsExcess = new TH2F("h2_tscnd_lmecscnd_NHitsExcess", "h1_tscnd_lmecscnd_NHitsExcess; tscnd; lmecscnd", 100, 0, 20, 30, 0, 30);
+
+  //h2_NHits_x_NumAccNoise = new TH2F("h2_NHits_x_NumAccNoise", "h2_NHits_x_NumAccNoise; NHits; Number of Acc. Noise", 80, 0, 80, 80, 40, 120);
+  //h2_N200_x_NumAccNoise  = new TH2F("h2_N200_x_NumAccNoise", "h2_N200_x_NumAccNoise; N200; Number of Acc. Noise", 80, 0, 80, 80, 40, 120);
+
+  h1_FitT_NHitsExcess -> SetLineWidth(2);
+
+  h1_IntID = new TH1F("h1_IntID", "h1_IntID; IntID; Area Normalized", 25, 5, 30);
+  h1_KE = new TH1F("h1_KE", "h1_KE; E_{#gamma}[MeV]; Area Normalized", 20, 0, 10);
+  h1_timediff = new TH1F("h1_timediff", "h1_timediff; t^{true} - t^{reco}[#musec]; Area Normalized", 50, -0.02, 0.02);
+
+  //h2_tscnd_lmecscnd_NHitsExcess -> SetStats(0);
+  //h2_NHits_x_NumAccNoise -> SetStats(0);
+  //h2_N200_x_NumAccNoise  -> SetStats(0);
 }
+
+
+/*void NNInputVariables::GetCaptureMuon(Int_t nscndprt, Float_t* tscnd, Int_t* iprtscnd, Int_t* iprntprt, Float_t** pscnd) {
+  
+  //truth secondary loop
+  for (Int_t itruth=0; itruth<nscndprt; itruth++) {
+    
+    //Gamma from mu- (not mu+!)
+    if (iprntprt[itruth]==13 && std::abs(iprtscnd[itruth])==22) {
+      h1_tscnd_capture -> Fill(tscnd[itruth]/1000.);
+
+      float gammaenergy = std::sqrt( pscnd[itruth][0]*pscnd[itruth][0] + pscnd[itruth][1]*pscnd[itruth][1] + pscnd[itruth][2]*pscnd[itruth][2] );
+      h1_KE -> Fill(gammaenergy);
+    }
+  }
+
+}*/
+
 
 void NNInputVariables::cdNNInputVariables(TFile* fout) {
   fout -> mkdir("NNInputVariables");
@@ -180,5 +230,23 @@ void NNInputVariables::WritePlots() {
     h1_NNvar_H[i]        -> Write();
     h1_NNvar_Gd[i]       -> Write();
   }
+
+  for (int i=0; i<4; i++) h1_NTagOut[i] -> Write();
+
+  h1_FitT_NHitsExcess -> Write();
+  //h1_lmecscnd_NHitsExcess -> Write();
+  //h2_tscnd_lmecscnd_NHitsExcess -> Write();
+  //h2_NHits_x_NumAccNoise -> Write();
+  //h2_N200_x_NumAccNoise  -> Write();
+
+  Double_t tot_IntID  = h1_IntID->Integral();
+  Double_t tot_energy = h1_KE->Integral();
+  //Double_t tot_timediff = h1_timediff->Integral();
+  if (tot_IntID != 0) h1_IntID  -> Scale(1./tot_IntID);
+  if (tot_energy != 0) h1_KE -> Scale(1./tot_energy);
+  //if (tot_timediff != 0) h1_timediff -> Scale(1./tot_timediff);
+  h1_IntID  -> Write();
+  h1_KE -> Write();
+  h1_timediff -> Write();
 }
 

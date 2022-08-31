@@ -1,0 +1,2 @@
+Selected Neutrino Events(NTrueN!=0): 67145
+Mean Neutron Multiplicity: 1.0725

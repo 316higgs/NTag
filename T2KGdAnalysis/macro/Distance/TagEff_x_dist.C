@@ -8,7 +8,7 @@ void TagEff_x_dist() {
   TFile* fin_o = new TFile("../../../NTagEff/output/thresholdscan.original.root");
   TFile* fin_n = new TFile("../../../NTagEff/output/thresholdscan.train.root");
   //TFile* fin   = new TFile("../../output/fhc/fhc.numu_x_numu.etagOFF.root");
-  TFile* fin   = new TFile("../../output/fhc/fhc.numu_x_numu.etagON.noinpmt.root");
+  TFile* fin   = new TFile("../../output/fhc/fhc.numu_x_numu.etagON.cut1.root");
 
   TH1D* h1_eff_x_dist_o    = (TH1D*)fin_o->Get("h1_tagging_eff_scan7");
   TH1D* h1_preeff_x_dist_o = (TH1D*)fin_o->Get("h1_pre_eff_scan7");
@@ -51,7 +51,7 @@ void TagEff_x_dist() {
   ceff -> cd();
   h1_eff_x_dist_o -> Draw();
   h1_eff_x_dist_n -> Draw("SAME");
-  h1_eff_x_dist   -> Draw("SAME");
+  //h1_eff_x_dist   -> Draw("SAME");
   //ceff -> SaveAs("../figure/TagEff_x_dist.pdf");
 
   TCanvas* cpreeff = new TCanvas("cpreeff","cpreeff",800,800);
@@ -60,7 +60,7 @@ void TagEff_x_dist() {
   h1_preeff_x_dist_o -> GetYaxis() -> SetRangeUser(0.4, 0.8);
   h1_preeff_x_dist_o -> Draw();
   h1_preeff_x_dist_n -> Draw("SAME");
-  h1_preeff_x_dist   -> Draw("SAME");
+  //h1_preeff_x_dist   -> Draw("SAME");
   //cpreeff -> SaveAs("../figure/PreEff_x_dist.pdf");
 
   TCanvas* cnneff = new TCanvas("cnneff","cnneff",800,800);
@@ -69,7 +69,7 @@ void TagEff_x_dist() {
   h1_NNeff_x_dist_o -> GetYaxis() -> SetRangeUser(0., 0.8);
   h1_NNeff_x_dist_o -> Draw();
   h1_NNeff_x_dist_n -> Draw("SAME");
-  h1_NNeff_x_dist   -> Draw("SAME");
+  //h1_NNeff_x_dist   -> Draw("SAME");
   //cnneff -> SaveAs("../figure/NNEff_x_dist.pdf");
 
   /*TCanvas* cdist = new TCanvas("cdist", "cdist", 800, 800);

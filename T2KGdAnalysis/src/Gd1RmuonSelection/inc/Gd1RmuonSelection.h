@@ -6,6 +6,7 @@
 #include "/disk02/usr6/sedi/anat2ksk/src/cc0pinumu/inc/EvSelVar_t.h"
 #include "../../DecayeBox/inc/DecayeBox.h"
 #include "../../TreeManager/inc/TreeManager.h"
+#include "../../../include/Const.h"
 #include "TH1D.h"
 
 //Selected events by 1R muon selection
@@ -13,10 +14,22 @@ TH1F* h1_1RmuonEvents;
 TH1F* h1_Proto1RmuonEvents;
 
 
+TH1F* h1_dwall[INTERACTIONTYPE];
+TH1F* h1_ringnum[INTERACTIONTYPE];
+TH1F* h1_emulikelihood[INTERACTIONTYPE];
+TH1F* h1_Pmu[INTERACTIONTYPE];
+TH1F* h1_pimulikelihood[INTERACTIONTYPE];
+
 class Gd1RmuonSelection {
   public:
   	Gd1RmuonSelection(){};
   	virtual ~Gd1RmuonSelection(){};
+
+    float GetDWall(CC0PiNumu* numu);
+    float GetRingNum(CC0PiNumu* numu);
+    float GetemuLikelihood(CC0PiNumu* numu);
+    float GetPmu(CC0PiNumu* numu);
+    float GetpimuLikelihood(CC0PiNumu* numu);
 
     bool C1ApplyFCFV(EvSelVar_t evsel);
     bool C2Apply1R(EvSelVar_t evsel);

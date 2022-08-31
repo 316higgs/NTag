@@ -23,6 +23,8 @@
 #include "src/NTagAnalysis/inc/NTagAnalysis.h"
 #include "src/NNInputVariables/inc/NNInputVariables.h"
 
+#define NLIKETHRESHOLD 0.75
+
 
 int main(int argc, char **argv) {
 
@@ -62,6 +64,14 @@ int main(int argc, char **argv) {
     std::cout << "[### analysis1Rmu ###]  -> EXIT " << std::endl;
     exit(-1);
   }
+  //=========  Event info (TTree: particle)  ============
+  TChain *tchpar = new TChain("particle");
+  int nparFiles = tchpar->Add( NtagFileName );
+  if ( nparFiles==0 ) {
+    std::cout << "[### analysis1Rmu ###]  Cannot load TTree particle from: " << NtagFileName << std::endl;
+    std::cout << "[### analysis1Rmu ###]  -> EXIT " << std::endl;
+    exit(-1);
+  }
   //=========  Delayed info (TTree: taggable)  ============
   TChain *tchtaggable = new TChain("taggable");
   int ntaggableFiles = tchtaggable->Add( NtagFileName );
@@ -81,16 +91,19 @@ int main(int argc, char **argv) {
   //Load succeed
   std::cout << "[### analysis1Rmu ###]  Loaded " << nfQFiles       << " files from: " << fiTQunFileName << std::endl;
   std::cout << "[### analysis1Rmu ###]  Loaded " << nevFiles       << " files from: " << NtagFileName   << std::endl;
+  std::cout << "[### analysis1Rmu ###]  Loaded " << nparFiles      << " files from: " << NtagFileName   << std::endl;
   std::cout << "[### analysis1Rmu ###]  Loaded " << ntaggableFiles << " files from: " << NtagFileName   << std::endl;
   std::cout << "[### analysis1Rmu ###]  Loaded " << ntagFiles      << " files from: " << NtagFileName   << std::endl;
 
 
   const int nfQEntries       = tchfQ->GetEntries();       //total entries of TTree h1
   const int nevEntries       = tchev->GetEntries();       //total entries of TTree event
+  const int nparEntries      = tchpar->GetEntries();       //total entries of TTree particle
   const int ntaggableEntries = tchtaggable->GetEntries(); //total entries of TTree taggable
   const int ntagEntries      = tchntag->GetEntries();     //total entries of TTree ntag
   std::cout << "[### analysis1Rmu ###]  fiTQun output     : Processing " << nfQEntries       <<" entries..." << std::endl;
   std::cout << "[### analysis1Rmu ###]  Event info        : Processing " << nevEntries       <<" entries..." << std::endl;
+  std::cout << "[### analysis1Rmu ###]  Particle info     : Processing " << nparEntries      <<" entries..." << std::endl;
   std::cout << "[### analysis1Rmu ###]  Delayed info      : Processing " << ntaggableEntries <<" entries..." << std::endl;
   std::cout << "[### analysis1Rmu ###]  NTag output       : Processing " << ntagEntries      <<" entries..." << std::endl;
 
@@ -107,6 +120,21 @@ int main(int argc, char **argv) {
   tchtaggable->SetBranchAddress("Type", &Type, &bType);
   tchtaggable->SetBranchAddress("E", &E, &bE);
   tchtaggable->SetBranchAddress("t", &t, &bt);
+  //=========  TTree partilce variables  ============
+  std::vector<int> *PID = 0;
+  TBranch *bPID = 0;
+  std::vector<int> *ParentPID = 0;
+  TBranch *bParentPID = 0;
+  std::vector<int> *IntID = 0;
+  TBranch *bIntID = 0;
+  //double par_t[100];
+  std::vector<float> *par_t = 0;
+  TBranch *bpar_t = 0;
+  tchpar->SetBranchAddress("PID", &PID, &bPID);
+  tchpar->SetBranchAddress("ParentPID", &ParentPID, &bParentPID);
+  tchpar->SetBranchAddress("IntID", &IntID, &bIntID);
+  //tchpar->SetBranchAddress("t", par_t);
+  tchpar->SetBranchAddress("t", &par_t, &bpar_t);
   //=========  TTree ntag variables  ============
   std::vector<float> *Label = 0;
   TBranch *bLabel = 0;
@@ -167,6 +195,28 @@ int main(int argc, char **argv) {
   
   //=========  TTree h1 variables  ============
   //===== It should be called after numu ======
+  Int_t   Npvc;             //Number of primary particles
+  Int_t   Ipvc[100];        //PID of primary particles
+  Float_t Pvc[100][3];      //Momentum of primary particles
+  Int_t   Iflvc[100];       //Flag of final states
+  Int_t   Ichvc[100];       //Chase at detector simulation or not(1: chase/0: not chase)
+  Int_t   nscndprt;         //Number of secondary particles
+  Int_t   iprtscnd[1000];   //PID of the secondary particle
+  Float_t tscnd[1000];      //Generated time of secondary particles
+  Int_t   iprntprt[1000];   //PID of the parent of this secondary particle
+  Int_t   lmecscnd[1000];   //Interaction code of secondary particles based on GEANT
+  Float_t pscnd[1000][3];   //Momentum of the secondary particle
+  tchfQ -> SetBranchAddress("Npvc", &Npvc);
+  tchfQ -> SetBranchAddress("Pvc", Pvc);
+  tchfQ -> SetBranchAddress("Ipvc", Ipvc);
+  tchfQ -> SetBranchAddress("Ichvc", Ichvc);
+  tchfQ -> SetBranchAddress("Iflvc", Iflvc);
+  tchfQ -> SetBranchAddress("nscndprt", &nscndprt);
+  tchfQ -> SetBranchAddress("iprtscnd", iprtscnd);
+  tchfQ -> SetBranchAddress("tscnd", tscnd);
+  tchfQ -> SetBranchAddress("iprntprt", iprntprt);
+  tchfQ -> SetBranchAddress("lmecscnd", lmecscnd);
+  tchfQ -> SetBranchAddress("pscnd", pscnd);
 
   ResetNeutrinoEvents();
 
@@ -192,10 +242,15 @@ int main(int argc, char **argv) {
 
     tchfQ       -> GetEntry(ientry);
     tchev       -> GetEntry(ientry);
+    tchpar      -> GetEntry(ientry);
     tchtaggable -> GetEntry(ientry);
     tchntag     -> GetEntry(ientry);
 
     Long64_t tentry = tchntag->LoadTree(ientry);
+    bPID        -> GetEntry(tentry);
+    bParentPID  -> GetEntry(tentry);
+    bIntID      -> GetEntry(tentry);
+    bpar_t      -> GetEntry(tentry);
     bType       -> GetEntry(tentry);
     bE          -> GetEntry(tentry);
     bLabel      -> GetEntry(tentry);
@@ -225,6 +280,22 @@ int main(int argc, char **argv) {
     if (prmsel.Apply1RmuonSelection(evsel, numu, decayebox, eMode, eOsc, 20., 50., 400., true)) {
       GetSelectedModeEvents(numu);
 
+      //truth secondary loop
+      /*for (Int_t itruth=0; itruth<nscndprt; itruth++) {
+    
+        //Gamma from mu- (not mu+!)
+        if (iprntprt[itruth]==13 && std::abs(iprtscnd[itruth])==22) {
+        //if (std::abs(iprntprt[itruth])==13 && std::abs(iprtscnd[itruth])==22) {
+          h1_tscnd_capture -> Fill(tscnd[itruth]/1000.);
+
+          float gammaenergy = std::sqrt( pscnd[itruth][0]*pscnd[itruth][0] + pscnd[itruth][1]*pscnd[itruth][1] + pscnd[itruth][2]*pscnd[itruth][2] );
+          h1_energy_capture -> Fill(gammaenergy);
+        }
+      }*/
+      
+
+      int reco = 0;
+      float reco_mucaptime = 0.;
       for (UInt_t jentry=0; jentry<Label->size(); ++jentry) {
 
         float NNVar = 0.;
@@ -271,12 +342,58 @@ int main(int argc, char **argv) {
               break;  
           }
 
-          if (Label->at(jentry)==0) h1_NNvar_AccNoise[ivar] -> Fill(NNVar);
+          //Pre-NN
+          /*if (Label->at(jentry)==0) h1_NNvar_AccNoise[ivar] -> Fill(NNVar);
           if (Label->at(jentry)==1) h1_NNvar_Decaye[ivar]   -> Fill(NNVar);
           if (Label->at(jentry)==2) h1_NNvar_H[ivar]        -> Fill(NNVar);
-          if (Label->at(jentry)==3) h1_NNvar_Gd[ivar]       -> Fill(NNVar);
+          if (Label->at(jentry)==3) h1_NNvar_Gd[ivar]       -> Fill(NNVar);*/
+
+          //Post-NN
+          if (Label->at(jentry)==0 && TagOut->at(jentry) > NLIKETHRESHOLD) h1_NNvar_AccNoise[ivar] -> Fill(NNVar);
+          if (Label->at(jentry)==1 && TagOut->at(jentry) > NLIKETHRESHOLD) h1_NNvar_Decaye[ivar]   -> Fill(NNVar);
+          if (Label->at(jentry)==2 && TagOut->at(jentry) > NLIKETHRESHOLD) h1_NNvar_H[ivar]        -> Fill(NNVar);
+          if (Label->at(jentry)==3 && TagOut->at(jentry) > NLIKETHRESHOLD) h1_NNvar_Gd[ivar]       -> Fill(NNVar);
+        }
+
+        //TMVA output
+        if (Label->at(jentry)==0) h1_NTagOut[0] -> Fill(TagOut->at(jentry));
+        if (Label->at(jentry)==1) h1_NTagOut[1] -> Fill(TagOut->at(jentry));
+        if (Label->at(jentry)==2) h1_NTagOut[2] -> Fill(TagOut->at(jentry));
+        if (Label->at(jentry)==3) h1_NTagOut[3] -> Fill(TagOut->at(jentry));
+
+
+        //Excess of NHits for numu MC
+        if (Label->at(jentry)==0 && (NHits->at(jentry) > 30 && NHits->at(jentry) < 80)) {
+          h1_FitT_NHitsExcess -> Fill(FitT->at(jentry));
+          reco++;
+          reco_mucaptime = FitT->at(jentry);
+          //NHitsExcess = true;
         }
       }
+
+
+      int truth = 0;
+      float truth_mucaptime = 0.;
+      //std::cout << "Npvc(" << Npvc << ") + nscndprt(" << nscndprt << "): " << Npvc+nscndprt << std::endl;
+      for (UInt_t jentry=0; jentry<PID->size(); ++jentry) {
+        //std::cout << "[" << jentry+1 << "] PID: " << PID->at(jentry) << " --- ParentPID: " << ParentPID->at(jentry) << std::endl;
+        if (PID->at(jentry)==22 && ParentPID->at(jentry)==13) {
+          //std::cout << "[" << jentry+1 << "] PID: " << PID->at(jentry) << " --- ParentPID: " 
+          //                                          << ParentPID->at(jentry) << " IntID:" 
+          //                                          << IntID->at(jentry) << std::endl;
+          h1_IntID -> Fill(IntID->at(jentry));
+
+          if (IntID->at(jentry)==5) {
+            truth++;
+            truth_mucaptime = par_t->at(jentry);
+            //std::cout << par_t[jentry] << std::endl;
+          }
+        }
+      }
+
+      if (reco==1 && reco==truth) h1_timediff -> Fill(truth_mucaptime - reco_mucaptime);
+      //if (reco==1 && reco==truth) h1_timediff -> Fill(truth_mucaptime);
+      
     }
   }
 

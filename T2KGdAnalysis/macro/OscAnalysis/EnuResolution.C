@@ -5,7 +5,7 @@
 #include "TText.h"
 
 void EnuResolution() {
-  TFile* fin = new TFile("../../output/fhc/fhc.numu_x_numu.etagON.root");
+  TFile* fin = new TFile("../../output/fhc/fhc.numu_x_numu.etagON.cut1.root");
   //TFile* fin = new TFile("../../output/numubar.etagON.root");
 
   //CCQE(1p1h)

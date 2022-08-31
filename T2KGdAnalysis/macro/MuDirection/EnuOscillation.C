@@ -6,7 +6,7 @@
 #include "TLatex.h"
 
 void EnuOscillation() {
-  TFile* fin = new TFile("../../output/fhc/fhc.numu_x_numu.etagON.noinpmt.cut1.root");
+  TFile* fin = new TFile("../../output/fhc/fhc.numu_x_numu.etagON.cut6.root");
   //TFile* fin = new TFile("../../output/fhc/fhc.numubar_x_numubar.etagON.noinpmt.root");
 
   TH1F* h1_trueCCQE         = (TH1F*)fin->Get("NeutrinoOscillation/h1_TruthOscProb_mode0");
@@ -114,8 +114,7 @@ void EnuOscillation() {
   legend0 -> SetTextSize(0.03);
   legend0->AddEntry((TObject*)0,"#kern[-0.5]{ FHC #nu_{#mu} #rightarrow #nu_{#mu} MC }","");
   //legend0->AddEntry((TObject*)0,"#kern[-0.5]{ #bar{#nu}_{#mu} #rightarrow #bar{#nu}_{#mu} Mode }","");
-  //legend0->AddEntry((TObject*)0,"#kern[-0.5]{ -1 #leq cos#theta_{#mu} #leq 1 }","");
-  legend0->AddEntry((TObject*)0,"#kern[-0.5]{ 0 #leq cos#theta_{#mu} #leq 1 }","");
+  legend0->AddEntry((TObject*)0,"#kern[-0.5]{ 0.8 #leq cos#theta_{#mu} #leq 1 }","");
   legend0 -> AddEntry(h1_trueCCQE, "CCQE(1p1h)", "F");
   legend0 -> AddEntry(h1_trueCCnonQE, "CC-2p2h", "F");
   legend0 -> AddEntry(h1_trueCCRESdeltap, "CCRES(#Delta^{+})", "F");
@@ -146,7 +145,7 @@ void EnuOscillation() {
   legend1->AddEntry((TObject*)0,"#kern[-0.5]{ FHC #nu_{#mu} #rightarrow #nu_{#mu} MC }","");
   //legend1->AddEntry((TObject*)0,"#kern[-0.5]{ FHC #bar{#nu}_{#mu} #rightarrow #bar{#nu}_{#mu} MC }","");
   //legend1->AddEntry((TObject*)0,"#kern[-0.5]{ -1 #leq cos#theta_{#mu} #leq 1 }","");
-  legend1->AddEntry((TObject*)0,"#kern[-0.5]{ 0 #leq cos#theta_{#mu} #leq 1 }","");
+  legend1->AddEntry((TObject*)0,"#kern[-0.5]{ 0.8 #leq cos#theta_{#mu} #leq 1 }","");
   legend1 -> AddEntry(h1_CCQE, "CCQE(1p1h)", "F");
   legend1 -> AddEntry(h1_CCnonQE, "CC-2p2h", "F");
   legend1 -> AddEntry(h1_CCRESdeltap, "CCRES(#Delta^{+})", "F");
@@ -211,7 +210,7 @@ void EnuOscillation() {
   legend2->AddEntry((TObject*)0,"#kern[-0.25]{ FHC #nu_{#mu} #rightarrow #nu_{#mu} MC(w/ tagged neutrons) }","");
   //legend2->AddEntry((TObject*)0,"#kern[-0.25]{ FHC #bar{#nu}_{#mu} #rightarrow #bar{#nu}_{#mu} MC(w/ tagged neutrons) }","");
   //legend2->AddEntry((TObject*)0,"#kern[-0.5]{ -1 #leq cos#theta_{#mu} #leq 1 }","");
-  legend2->AddEntry((TObject*)0,"#kern[-0.5]{ 0 #leq cos#theta_{#mu} #leq 1 }","");
+  legend2->AddEntry((TObject*)0,"#kern[-0.5]{ 0.8 #leq cos#theta_{#mu} #leq 1 }","");
   legend2 -> AddEntry(h1_CCQE, "CCQE(1p1h)", "F");
   legend2 -> AddEntry(h1_CCnonQE, "CC(2p2h+others)", "F");
   legend2 -> AddEntry(h1_CCRESdeltap, "CCRES(#Delta^{+})", "F");
@@ -239,7 +238,7 @@ void EnuOscillation() {
   legend3->AddEntry((TObject*)0,"#kern[-0.25]{ FHC #nu_{#mu} #rightarrow #nu_{#mu} MC(w/o tagged neutrons) }","");
   //legend3->AddEntry((TObject*)0,"#kern[-0.25]{ FHC #bar{#nu}_{#mu} #rightarrow #bar{#nu}_{#mu} MC(w/o tagged neutrons) }","");
   //legend3->AddEntry((TObject*)0,"#kern[-0.5]{ -1 #leq cos#theta_{#mu} #leq 1 }","");
-  legend3->AddEntry((TObject*)0,"#kern[-0.5]{ 0 #leq cos#theta_{#mu} #leq 1 }","");
+  legend3->AddEntry((TObject*)0,"#kern[-0.5]{ 0.8 #leq cos#theta_{#mu} #leq 1 }","");
   legend3 -> AddEntry(h1_CCQE, "CCQE(1p1h)", "F");
   legend3 -> AddEntry(h1_CCnonQE, "CC(2p2h+others)", "F");
   legend3 -> AddEntry(h1_CCRESdeltap, "CCRES(#Delta^{+})", "F");

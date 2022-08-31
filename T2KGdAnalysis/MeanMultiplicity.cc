@@ -7,7 +7,7 @@
 #include "TGaxis.h"
 #include "TPaveStats.h"
 #include "THStack.h"
-#include "CC0PiNumu.h"  //src: /disk02/usr6/rakutsu/t2k/tmp/t2ksk-neutronh/anat2ksk/src/cc0pinumu
+//#include "CC0PiNumu.h"  //src: /disk02/usr6/rakutsu/t2k/tmp/t2ksk-neutronh/anat2ksk/src/cc0pinumu
 #include "DefBeamMode.h"
 #include "DefOscChannels.h"
 
@@ -25,9 +25,6 @@
 
 int main(int argc, char **argv) {
 
-  enum BeamMode::E_BEAM_MODE eMode = eFHC;
-  enum OscChan::E_OSC_CHAN eOsc    = eNUMU;
-
   TString fiTQunFileName = argv[1];
   TString NtagFileName   = argv[2];
   TString OutputRootName = argv[3];
@@ -36,7 +33,15 @@ int main(int argc, char **argv) {
   TString MCType         = argv[6];
   TString ETAGKeyword    = argv[7];
   TString ETAG           = argv[8];
+  TString BeamKeyword    = argv[9];
+  TString Beam           = argv[10];
+  TString OscKeyword     = argv[11];
+  TString Osc            = argv[12];
 
+  enum BeamMode::E_BEAM_MODE eMode;
+  enum OscChan::E_OSC_CHAN eOsc;
+  eMode = CLTOptionBeamMode(BeamKeyword, Beam);
+  eOsc  = CLTOptionOscMode(OscKeyword, Osc);
   CLTOptionETAG(ETAGKeyword, ETAG);
 
 
@@ -173,7 +178,13 @@ int main(int argc, char **argv) {
   ntagana.SetHistoFormat();
 
 
+  std::vector<float> TruthNeutronsperEvent;
+  std::vector<float> TruthNeutronsperCCQEEvent;
+  std::vector<float> TruthNeutronsperCCnonQEEvent;
+
   std::vector<float> TaggedNeutronsperEvent;
+  std::vector<float> TaggedNeutronsperCCQEEvent;
+  std::vector<float> TaggedNeutronsperCCnonQEEvent;
 
 
   //Process
@@ -219,22 +230,61 @@ int main(int argc, char **argv) {
     //New 1R muon selection
     const EvSelVar_t evsel = numu->getEvSelVar();
     if (prmsel.Apply1RmuonSelection(evsel, numu, decayebox, eMode, eOsc, 20., 50., 400., true)) {
+
+      int mode = TMath::Abs(numu->var<int>("mode"));
+
+      TruthNeutronsperEvent.push_back(NTrueN);
+      if (mode==1) TruthNeutronsperCCQEEvent.push_back(NTrueN);
+      if (mode>=2 && mode<=30) TruthNeutronsperCCnonQEEvent.push_back(NTrueN);
       
-      if (NTrueN==0) continue;
+      //if (NTrueN==0) continue;
 
       //Check neutrino events with tagged neutrons
-      float numtaggedneutrons = ntagana.GetTaggedNeutrons(TagOut, 0.7, TagIndex, NHits, FitT, Label, etagmode);
+      float numtaggedneutrons = ntagana.GetTaggedNeutrons(TagOut, 0.75, TagIndex, NHits, FitT, Label, etagmode);
       TaggedNeutronsperEvent.push_back(numtaggedneutrons);
+      if (mode==1) TaggedNeutronsperCCQEEvent.push_back(numtaggedneutrons);
+      if (mode>=2 && mode<=30) TaggedNeutronsperCCnonQEEvent.push_back(numtaggedneutrons);
 
     } //New 1R muon selection
   }
+
+
+  for (UInt_t i=0; i<TruthNeutronsperEvent.size(); ++i) {
+    h1_TruthNeutrons -> Fill(TruthNeutronsperEvent.at(i));
+    Truthmeanmultiplicity += TruthNeutronsperEvent.at(i);
+  }
+  //Truthmeanmultiplicity = Truthmeanmultiplicity/TruthNeutronsperEvent.size();
+
+  for (UInt_t i=0; i<TruthNeutronsperCCQEEvent.size(); ++i) {
+    h1_TruthNeutrons_CCQE -> Fill(TruthNeutronsperCCQEEvent.at(i));
+    Truthmeanmultiplicity_CCQE += TruthNeutronsperCCQEEvent.at(i);
+  }
+  //Truthmeanmultiplicity_CCQE = Truthmeanmultiplicity_CCQE/TruthNeutronsperCCQEEvent.size();
+
+  for (UInt_t i=0; i<TruthNeutronsperCCnonQEEvent.size(); ++i) {
+    h1_TruthNeutrons_CCnonQE -> Fill(TruthNeutronsperCCnonQEEvent.at(i));
+    Truthmeanmultiplicity_CCnonQE += TruthNeutronsperCCnonQEEvent.at(i);
+  }
+  //Truthmeanmultiplicity_CCnonQE = Truthmeanmultiplicity_CCnonQE/TruthNeutronsperCCnonQEEvent.size();
 
 
   for (UInt_t i=0; i<TaggedNeutronsperEvent.size(); ++i) {
     h1_TaggedNeutrons -> Fill(TaggedNeutronsperEvent.at(i));
     meanmultiplicity += TaggedNeutronsperEvent.at(i);
   }
-  meanmultiplicity = meanmultiplicity/TaggedNeutronsperEvent.size();
+  //meanmultiplicity = meanmultiplicity/TaggedNeutronsperEvent.size();
+
+  for (UInt_t i=0; i<TaggedNeutronsperCCQEEvent.size(); ++i) {
+    h1_TaggedNeutrons_CCQE -> Fill(TaggedNeutronsperCCQEEvent.at(i));
+    meanmultiplicity_CCQE += TaggedNeutronsperCCQEEvent.at(i);
+  }
+  //meanmultiplicity_CCQE = meanmultiplicity_CCQE/TaggedNeutronsperCCQEEvent.size();
+
+  for (UInt_t i=0; i<TaggedNeutronsperCCnonQEEvent.size(); ++i) {
+    h1_TaggedNeutrons_CCnonQE -> Fill(TaggedNeutronsperCCnonQEEvent.at(i));
+    meanmultiplicity_CCnonQE += TaggedNeutronsperCCnonQEEvent.at(i);
+  }
+  //meanmultiplicity_CCnonQE = meanmultiplicity_CCnonQE/TaggedNeutronsperCCnonQEEvent.size();
 
 
   std::fstream resultfile;
@@ -243,15 +293,77 @@ int main(int argc, char **argv) {
     std::cout << "Results can not be written in " << ResultSummary << std::endl;
   }
   else {
+    float Truthmultiplicity         = Truthmeanmultiplicity;
+    float Truthmultiplicity_CCQE    = Truthmeanmultiplicity_CCQE;
+    float Truthmultiplicity_CCnonQE = Truthmeanmultiplicity_CCnonQE;
+    Truthmeanmultiplicity = Truthmeanmultiplicity/TruthNeutronsperEvent.size();
+    Truthmeanmultiplicity_CCQE = Truthmeanmultiplicity_CCQE/TruthNeutronsperCCQEEvent.size();
+    Truthmeanmultiplicity_CCnonQE = Truthmeanmultiplicity_CCnonQE/TruthNeutronsperCCnonQEEvent.size();
+
+    resultfile << "----- Truth Info -----" << std::endl;
+    resultfile << "Selected Neutrino Events : " << TruthNeutronsperEvent.size() << std::endl;
+    resultfile << "Number of Neutrons       : " << Truthmultiplicity << std::endl;
+    resultfile << "Mean Neutron Multiplicity: " << Truthmeanmultiplicity << std::endl;
+    resultfile << "===== CCQE =====" << std::endl;
+    resultfile << "Selected Neutrino Events : " << TruthNeutronsperCCQEEvent.size() << std::endl;
+    resultfile << "Number of Neutrons       : " << Truthmultiplicity_CCQE << std::endl;
+    resultfile << "Mean Neutron Multiplicity: " << Truthmeanmultiplicity_CCQE << std::endl;
+    resultfile << "===== CC non-QE =====" << std::endl;
+    resultfile << "Selected Neutrino Events : " << TruthNeutronsperCCnonQEEvent.size() << std::endl;
+    resultfile << "Number of Neutrons       : " << Truthmultiplicity_CCnonQE << std::endl;
+    resultfile << "Mean Neutron Multiplicity: " << Truthmeanmultiplicity_CCnonQE << std::endl;
+    resultfile << " " << std::endl;
+
+    float multiplicity         = meanmultiplicity;
+    float multiplicity_CCQE    = meanmultiplicity_CCQE;
+    float multiplicity_CCnonQE = meanmultiplicity_CCnonQE;
+    meanmultiplicity = meanmultiplicity/TaggedNeutronsperEvent.size();
+    meanmultiplicity_CCQE = meanmultiplicity_CCQE/TaggedNeutronsperCCQEEvent.size();
+    meanmultiplicity_CCnonQE = meanmultiplicity_CCnonQE/TaggedNeutronsperCCnonQEEvent.size();
+
+    resultfile << "----- Reco. Info -----" << std::endl;
     resultfile << "Selected Neutrino Events : " << TaggedNeutronsperEvent.size() << std::endl;
+    resultfile << "Number of Neutrons       : " << multiplicity << std::endl;
     resultfile << "Mean Neutron Multiplicity: " << meanmultiplicity << std::endl;
+    resultfile << "===== CCQE =====" << std::endl;
+    resultfile << "Selected Neutrino Events : " << TaggedNeutronsperCCQEEvent.size() << std::endl;
+    resultfile << "Number of Neutrons       : " << multiplicity_CCQE << std::endl;
+    resultfile << "Mean Neutron Multiplicity: " << meanmultiplicity_CCQE << std::endl;
+    resultfile << "===== CC non-QE =====" << std::endl;
+    resultfile << "Selected Neutrino Events : " << TaggedNeutronsperCCnonQEEvent.size() << std::endl;
+    resultfile << "Number of Neutrons       : " << multiplicity_CCnonQE << std::endl;
+    resultfile << "Mean Neutron Multiplicity: " << meanmultiplicity_CCnonQE << std::endl;
   }
 
 
   TFile* fout = new TFile(OutputRootName, "RECREATE");
   std::cout << "Output: " << OutputRootName << std::endl;
   fout -> cd();
+
+  Double_t totTruth = h1_TruthNeutrons -> Integral();
+  h1_TruthNeutrons -> Scale(1./totTruth);
+  h1_TruthNeutrons -> Write();
+
+  Double_t totTruthCCQE = h1_TruthNeutrons_CCQE -> Integral();
+  h1_TruthNeutrons_CCQE -> Scale(1./totTruthCCQE);
+  h1_TruthNeutrons_CCQE -> Write();
+
+  Double_t totTruthCCnonQE = h1_TruthNeutrons_CCnonQE -> Integral();
+  h1_TruthNeutrons_CCnonQE -> Scale(1./totTruthCCnonQE);
+  h1_TruthNeutrons_CCnonQE -> Write();
+
+
+  Double_t totTag = h1_TaggedNeutrons -> Integral();
+  h1_TaggedNeutrons -> Scale(1./totTag);
   h1_TaggedNeutrons -> Write();
+
+  Double_t totTagCCQE = h1_TaggedNeutrons_CCQE -> Integral();
+  h1_TaggedNeutrons_CCQE -> Scale(1./totTagCCQE);
+  h1_TaggedNeutrons_CCQE -> Write();
+
+  Double_t totTagCCnonQE = h1_TaggedNeutrons_CCnonQE -> Integral();
+  h1_TaggedNeutrons_CCnonQE -> Scale(1./totTagCCnonQE);
+  h1_TaggedNeutrons_CCnonQE -> Write();
 
 }
 

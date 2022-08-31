@@ -34,7 +34,7 @@
            w/ truth neutrons : 507 (5.23985 %), w/o truth neutrons :67 (0.875897 %)
            w/ tagged neutrons: 343(5.47981 %), w/o tagged neutrons:231(2.08751 %)
 [Neutrino] Oscillated Neutrino Events within [0.25 GeV, 1.5 GeV]
-           Legacy Analysis    : 12403.1(Osc)/74542(No Osc) = 0.16639
-           Only CCQE(1p1h)    : 8998.05(Osc)/61206(No Osc) = 0.147012
-           w/o truth neutrons : 5780.85(Osc)/37584(No Osc) = 0.153811
-           w/o tagged neutrons: 8212.53(Osc)/52080(No Osc) = 0.157691
+           Legacy Analysis    : 12388.3(Osc)/74512(No Osc) = 0.166259
+           Only CCQE(1p1h)    : 8985.55(Osc)/61179(No Osc) = 0.146873
+           w/o truth neutrons : 5774.66(Osc)/37571(No Osc) = 0.1537
+           w/o tagged neutrons: 8203.55(Osc)/52060(No Osc) = 0.157579

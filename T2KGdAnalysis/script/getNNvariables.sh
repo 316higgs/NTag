@@ -24,31 +24,52 @@ ANALYSISSTAGE=/home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC/analysis/T2KGdAnalysi
 
 #./getNNvariables.exe $FITQUNDIR/0026Gd.numu/noinpmt/numu_x_numu.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
 #                     $NTAGDIR/tageoption/noinpmt/numu_x_numu.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
-#                     $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.NNtest.root\
-#                     $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.neutrino.NNtest.txt\
-#                     $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.ntag.NNtest.txt\
+#                     $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.preNN.root\
+#                     $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.neutrino.preNN.txt\
+#                     $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.ntag.preNN.txt\
 #                     -MCType Gd\
 #                     -ETAG ON\
 #                     -BEAMMODE FHC\
 #                     -OSCCH NUMU
 
-#./getNNvariables.exe $FITQUNDIR/0026Gd.numu/noinpmt/numu_x_numu.fiTQun.0026Gd.NEUTcount0\*.part001.skip0.root\
-#                     $NTAGDIR/tageoption/noinpmt/wfiTQun/numu_x_numu.ntag.0026Gd.NEUTcount0\*.part001.skip0.root\
-#                     $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.fiTQun.NNtest.root\
-#                     $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.neutrino.fiTQun.NNtest.txt\
-#                     $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.ntag.fiTQun.NNtest.txt\
-#                     -MCType Gd\
-#                     -ETAG ON\
-#                     -BEAMMODE FHC\
-#                     -OSCCH NUMU
-
-./getNNvariables.exe $FITQUNDIR/0026Gd.numubar/noinpmt/numubar_x_numubar.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
-                     $NTAGDIR/tageoption/noinpmt/numubar_x_numubar.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
-                     ./output/fhc/fhc.numubar_x_numubar.NNtest.root\
-                     ./result/fhc/fhc.numubar_x_numubar.neutrino.NNtest.txt\
-                     ./result/fhc/fhc.numubar_x_numubar.ntag.NNtest.txt\
+./getNNvariables.exe $FITQUNDIR/0026Gd.numu/noinpmt/numu_x_numu.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
+                     $NTAGDIR/tageoption/noinpmt/numu_x_numu.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
+                     $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.preNN.muminus.root\
+                     $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.neutrino.preNN.muminus.txt\
+                     $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.ntag.preNN.muminus.txt\
                      -MCType Gd\
                      -ETAG ON\
                      -BEAMMODE FHC\
-                     -OSCCH NUMUBAR
+                     -OSCCH NUMU
+
+#./getNNvariables.exe $FITQUNDIR/0026Gd.numu/noinpmt/numu_x_numu.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
+#                     $NTAGDIR/tageoption/noinpmt/numu_x_numu.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
+#                     $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.postNN.root\
+#                     $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.neutrino.postNN.txt\
+#                     $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.ntag.postNN.txt\
+#                     -MCType Gd\
+#                     -ETAG ON\
+#                     -BEAMMODE FHC\
+#                     -OSCCH NUMU
+
+
+#./getNNvariables.exe $FITQUNDIR/0026Gd.numubar/noinpmt/numubar_x_numubar.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
+#                     $NTAGDIR/tageoption/noinpmt/numubar_x_numubar.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
+#                     ./output/fhc/fhc.numubar_x_numubar.preNN.muminus.root\
+#                     ./result/fhc/fhc.numubar_x_numubar.neutrino.preNN.muminus.txt\
+#                     ./result/fhc/fhc.numubar_x_numubar.ntag.preNN.muminus.txt\
+#                     -MCType Gd\
+#                     -ETAG ON\
+#                     -BEAMMODE FHC\
+#                     -OSCCH NUMUBAR
+
+#./getNNvariables.exe $FITQUNDIR/0026Gd.numubar/noinpmt/numubar_x_numubar.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
+#                     $NTAGDIR/tageoption/noinpmt/numubar_x_numubar.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
+#                     ./output/fhc/fhc.numubar_x_numubar.postNN.root\
+#                     ./result/fhc/fhc.numubar_x_numubar.neutrino.postNN.txt\
+#                     ./result/fhc/fhc.numubar_x_numubar.ntag.postNN.txt\
+#                     -MCType Gd\
+#                     -ETAG ON\
+#                     -BEAMMODE FHC\
+#                     -OSCCH NUMUBAR
 

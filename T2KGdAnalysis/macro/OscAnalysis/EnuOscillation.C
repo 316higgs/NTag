@@ -6,9 +6,9 @@
 #include "TLatex.h"
 
 void EnuOscillation() {
-  TFile* fin = new TFile("../../output/fhc/fhc.numu_x_numu.etagON.cut2.root");
+  //TFile* fin = new TFile("../../output/fhc/fhc.numu_x_numu.etagON.cut2.root");
   //TFile* fin = new TFile("../../output/fhc/fhc.numu_x_numu.etagON.0.511.root");
-  //TFile* fin = new TFile("../../output/fhc/fhc.numubar_x_numubar.etagON.noinpmt.root");
+  TFile* fin = new TFile("../../output/fhc/fhc.numubar_x_numubar.etagON.root");
 
   TH1F* h1_trueCCQE         = (TH1F*)fin->Get("NeutrinoOscillation/h1_TruthOscProb_mode0");
   TH1F* h1_trueCCnonQE      = (TH1F*)fin->Get("NeutrinoOscillation/h1_TruthOscProb_mode1");
@@ -104,6 +104,8 @@ void EnuOscillation() {
   
   TCanvas* c0 = new TCanvas("c0","c0",900,700);
   c0 -> SetGrid();
+  //hs_trueOsc -> SetMaximum(1090);
+  hs_trueOsc -> SetMaximum(2090);
   hs_trueOsc -> Draw();
   hs_trueOsc ->GetYaxis()->SetTitleSize(0.038);
   hs_trueOsc ->GetYaxis()->SetTitleOffset(1.3);
@@ -111,10 +113,10 @@ void EnuOscillation() {
   hs_trueOsc -> Draw();
   c0->RedrawAxis();
 
-  TLegend* legend0 = new TLegend(0.45, 0.45, 0.85, 0.85);
+  TLegend* legend0 = new TLegend(0.45, 0.46, 0.85, 0.86);
   legend0 -> SetTextSize(0.03);
-  legend0->AddEntry((TObject*)0,"#kern[-0.5]{ FHC #nu_{#mu} #rightarrow #nu_{#mu} MC }","");
-  //legend0->AddEntry((TObject*)0,"#kern[-0.5]{ FHC #bar{#nu}_{#mu} #rightarrow #bar{#nu}_{#mu} MC }","");
+  //legend0->AddEntry((TObject*)0,"#kern[-0.5]{ FHC #nu_{#mu} #rightarrow #nu_{#mu} MC }","");
+  legend0->AddEntry((TObject*)0,"#kern[-0.5]{ FHC #bar{#nu}_{#mu} #rightarrow #bar{#nu}_{#mu} MC }","");
   legend0 -> AddEntry(h1_trueCCQE, "CCQE(1p1h)", "F");
   legend0 -> AddEntry(h1_trueCCnonQE, "CC-2p2h", "F");
   legend0 -> AddEntry(h1_trueCCRESdeltap, "CCRES(#Delta^{+})", "F");
@@ -130,8 +132,8 @@ void EnuOscillation() {
   
   TCanvas* c1 = new TCanvas("c1","c1",900,700);
   c1 -> SetGrid();
-  hs_RecoOsc -> SetMaximum(1090);
-  //hs_RecoOsc -> SetMaximum(2090);
+  //hs_RecoOsc -> SetMaximum(1090);
+  hs_RecoOsc -> SetMaximum(2090);
   hs_RecoOsc -> Draw();
   hs_RecoOsc ->GetYaxis()->SetTitleSize(0.038);
   hs_RecoOsc ->GetYaxis()->SetTitleOffset(1.3);
@@ -140,10 +142,10 @@ void EnuOscillation() {
   
   c1->RedrawAxis();
 
-  TLegend* legend1 = new TLegend(0.45, 0.45, 0.85, 0.85);
+  TLegend* legend1 = new TLegend(0.45, 0.46, 0.85, 0.86);
   legend1 -> SetTextSize(0.03);
-  legend1->AddEntry((TObject*)0,"#kern[-0.5]{ FHC #nu_{#mu} #rightarrow #nu_{#mu} MC }","");
-  //legend1->AddEntry((TObject*)0,"#kern[-0.5]{ FHC #bar{#nu}_{#mu} #rightarrow #bar{#nu}_{#mu} MC }","");
+  //legend1->AddEntry((TObject*)0,"#kern[-0.5]{ FHC #nu_{#mu} #rightarrow #nu_{#mu} MC }","");
+  legend1->AddEntry((TObject*)0,"#kern[-0.5]{ FHC #bar{#nu}_{#mu} #rightarrow #bar{#nu}_{#mu} MC }","");
   legend1 -> AddEntry(h1_CCQE, "CCQE(1p1h)", "F");
   legend1 -> AddEntry(h1_CCnonQE, "CC-2p2h", "F");
   legend1 -> AddEntry(h1_CCRESdeltap, "CCRES(#Delta^{+})", "F");
@@ -194,8 +196,8 @@ void EnuOscillation() {
   
   TCanvas* c2 = new TCanvas("c2","w/ TagN",900,700);
   c2 -> SetGrid();
-  hs_RecoOsc_wTagN -> SetMaximum(1090);
-  //hs_RecoOsc_wTagN -> SetMaximum(2090);
+  //hs_RecoOsc_wTagN -> SetMaximum(1090);
+  hs_RecoOsc_wTagN -> SetMaximum(2090);
   hs_RecoOsc_wTagN -> Draw();
   hs_RecoOsc_wTagN ->GetYaxis()->SetTitleSize(0.038);
   hs_RecoOsc_wTagN ->GetYaxis()->SetTitleOffset(1.3);
@@ -203,10 +205,10 @@ void EnuOscillation() {
   hs_RecoOsc_wTagN -> Draw();
   c2->RedrawAxis();
 
-  TLegend* legend2 = new TLegend(0.45, 0.45, 0.85, 0.85);
+  TLegend* legend2 = new TLegend(0.45, 0.46, 0.85, 0.86);
   legend2 -> SetTextSize(0.03);
-  legend2->AddEntry((TObject*)0,"#kern[-0.25]{ FHC #nu_{#mu} #rightarrow #nu_{#mu} MC(w/ tagged neutrons) }","");
-  //legend2->AddEntry((TObject*)0,"#kern[-0.25]{ FHC #bar{#nu}_{#mu} #rightarrow #bar{#nu}_{#mu} MC(w/ tagged neutrons) }","");
+  //legend2->AddEntry((TObject*)0,"#kern[-0.25]{ FHC #nu_{#mu} #rightarrow #nu_{#mu} MC(w/ tagged neutrons) }","");
+  legend2->AddEntry((TObject*)0,"#kern[-0.25]{ FHC #bar{#nu}_{#mu} #rightarrow #bar{#nu}_{#mu} MC(w/ tagged neutrons) }","");
   legend2 -> AddEntry(h1_CCQE, "CCQE(1p1h)", "F");
   legend2 -> AddEntry(h1_CCnonQE, "CC(2p2h+others)", "F");
   legend2 -> AddEntry(h1_CCRESdeltap, "CCRES(#Delta^{+})", "F");
@@ -220,8 +222,8 @@ void EnuOscillation() {
 
   TCanvas* c3 = new TCanvas("c3","w/o TagN",900,700);
   c3 -> SetGrid();
-  hs_RecoOsc_woTagN -> SetMaximum(1090);
-  //hs_RecoOsc_woTagN -> SetMaximum(2090);
+  //hs_RecoOsc_woTagN -> SetMaximum(1090);
+  hs_RecoOsc_woTagN -> SetMaximum(2090);
   hs_RecoOsc_woTagN -> Draw();
   hs_RecoOsc_woTagN ->GetYaxis()->SetTitleSize(0.038);
   hs_RecoOsc_woTagN ->GetYaxis()->SetTitleOffset(1.3);
@@ -229,11 +231,11 @@ void EnuOscillation() {
   hs_RecoOsc_woTagN -> Draw();
   c3->RedrawAxis();
 
-  TLegend* legend3 = new TLegend(0.45, 0.45, 0.85, 0.85);
+  TLegend* legend3 = new TLegend(0.45, 0.46, 0.85, 0.86);
   legend3 -> SetTextSize(0.03);
-  legend3->AddEntry((TObject*)0,"#kern[-0.25]{ FHC #nu_{#mu} #rightarrow #nu_{#mu} MC(w/o tagged neutrons) }","");
-  //legend3->AddEntry((TObject*)0,"#kern[-0.25]{ FHC #bar{#nu}_{#mu} #rightarrow #bar{#nu}_{#mu} MC(w/o tagged neutrons) }","");
-  legend3 -> AddEntry(h1_CCQE, "CCQE(1p1h)", "F");
+  //legend3->AddEntry((TObject*)0,"#kern[-0.25]{ FHC #nu_{#mu} #rightarrow #nu_{#mu} MC(w/o tagged neutrons) }","");
+  legend3->AddEntry((TObject*)0,"#kern[-0.25]{ FHC #bar{#nu}_{#mu} #rightarrow #bar{#nu}_{#mu} MC(w/o tagged neutrons) }","");
+  //legend3 -> AddEntry(h1_CCQE, "CCQE(1p1h)", "F");
   legend3 -> AddEntry(h1_CCnonQE, "CC(2p2h+others)", "F");
   legend3 -> AddEntry(h1_CCRESdeltap, "CCRES(#Delta^{+})", "F");
   legend3 -> AddEntry(h1_CCRESdeltapp, "CCRES(#Delta^{++})", "F");

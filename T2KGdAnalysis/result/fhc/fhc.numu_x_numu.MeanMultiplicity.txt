@@ -1,0 +1,25 @@
+----- Truth Info -----
+Selected Neutrino Events : 80522
+Number of Neutrons       : 90605
+Mean Neutron Multiplicity: 1.12522
+===== CCQE =====
+Selected Neutrino Events : 64871
+Number of Neutrons       : 58008
+Mean Neutron Multiplicity: 0.894205
+===== CC non-QE =====
+Selected Neutrino Events : 15077
+Number of Neutrons       : 30981
+Mean Neutron Multiplicity: 2.05485
+ 
+----- Reco. Info -----
+Selected Neutrino Events : 80522
+Number of Neutrons       : 37104
+Mean Neutron Multiplicity: 0.460793
+===== CCQE =====
+Selected Neutrino Events : 64871
+Number of Neutrons       : 24127
+Mean Neutron Multiplicity: 0.371923
+===== CC non-QE =====
+Selected Neutrino Events : 15077
+Number of Neutrons       : 12342
+Mean Neutron Multiplicity: 0.818598

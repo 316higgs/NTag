@@ -23,7 +23,7 @@ TH1F* h1_TotGammaE;
 
 //Neutrino energy resolution w/ truth neutrons & w/o truth neutrons
 TH1F* h1_Enureso_CCQE_trueN[2];
-TH1F* h1_Enureso_CCnonQE_trueN[2];
+TH1F* h1_Enureso_CC2p2h_trueN[2];
 TH1F* h1_Enureso_CCRES_deltap_trueN[2];
 TH1F* h1_Enureso_CCRES_deltapp_trueN[2];
 TH1F* h1_Enureso_CCRES_delta0_trueN[2];
@@ -31,8 +31,10 @@ TH1F* h1_Enureso_CCOther_trueN[2];
 TH1F* h1_Enureso_NC_trueN[2];
 
 //Neutrino energy resolution w/ tagged neutrons & w/o tagged neutrons
-TH1F* h1_Enureso_CCQE[2];
+TH1F* h1_Enureso_All[2];
 TH1F* h1_Enureso_CCnonQE[2];
+TH1F* h1_Enureso_CCQE[2];
+TH1F* h1_Enureso_CC2p2h[2];
 TH1F* h1_Enureso_CCRES_deltap[2];
 TH1F* h1_Enureso_CCRES_deltapp[2];
 TH1F* h1_Enureso_CCRES_delta0[2];
@@ -114,6 +116,9 @@ class NTagAnalysis {
     int AllTruthNeutrons;
     int TruthHNeutrons;
     int TruthGdNeutrons;
+    int AllTruthCCQENeutrons;
+    int TruthCCQEHNeutrons;
+    int TruthCCQEGdNeutrons;
     int AllTruthNeutronsinFV;
     int TruthHNeutronsinFV;
     int TruthGdNeutronsinFV;
@@ -243,7 +248,7 @@ class NTagAnalysis {
     void InitNeutrons();
 
     void GetTruthNeutrons(float NTrueN,
-                          UInt_t truthneutrons, 
+                          CC0PiNumu* numu, 
                           std::vector<int> *Type,
                           std::vector<float> *E,
                           std::vector<float> *DWall);
