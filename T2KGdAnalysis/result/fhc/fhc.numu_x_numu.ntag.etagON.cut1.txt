@@ -1,9 +1,9 @@
 [Truth Info] All Truth Neutrons(Gd+H)      : 90605
 [Truth Info] Truth H-n Neutrons            : 44820
 [Truth Info] Truth Gd-n Neutrons           : 45785
-[Truth Info] All Truth CCQE Neutrons(Gd+H) : 58008
-[Truth Info] Truth CCQE H-n Neutrons       : 28630
-[Truth Info] Truth CCQE Gd-n Neutrons      : 29378
+[Truth Info] All Truth CCQE Neutrons(Gd+H) : 0
+[Truth Info] Truth CCQE H-n Neutrons       : 0
+[Truth Info] Truth CCQE Gd-n Neutrons      : 0
 [Truth Info] All Truth Neutrons(Gd+H) in FV: 90194
 [Truth Info] Truth H-n Neutrons in FV      : 44409
 [Truth Info] Truth Gd-n Neutrons in FV     : 45785
@@ -4584,146 +4584,146 @@
 [    NN    ] ===== Threshold: 0 =====
 [    NN    ] ===== 1R muon Samples with NTag Info =====
 [    NN    ] Neutrino Events with No Tagged Neutrons: 0
-[    NN    ] Neutrino Events with Tagged Neutrons   : 17325
+[    NN    ] Neutrino Events with Tagged Neutrons   : 80522
 [    NN    ] Neutrino Events with Only One Nlike    : 0
 [    NN    ] Neutrino Events with One Nlike Decay-e : 0
-[    NN    ] Neutrino Events with No Truth Neutrons : 9851.7
+[    NN    ] Neutrino Events with No Truth Neutrons : 50190
 [    NN    ] ===== Threshold: 0.05 =====
 [    NN    ] ===== 1R muon Samples with NTag Info =====
-[    NN    ] Neutrino Events with No Tagged Neutrons: 6259.1
-[    NN    ] Neutrino Events with Tagged Neutrons   : 11066
-[    NN    ] Neutrino Events with Only One Nlike    : 5465.18
-[    NN    ] Neutrino Events with One Nlike Decay-e : 16.5945
-[    NN    ] Neutrino Events with No Truth Neutrons : 4306.48
+[    NN    ] Neutrino Events with No Tagged Neutrons: 31557
+[    NN    ] Neutrino Events with Tagged Neutrons   : 48965
+[    NN    ] Neutrino Events with Only One Nlike    : 26590
+[    NN    ] Neutrino Events with One Nlike Decay-e : 92
+[    NN    ] Neutrino Events with No Truth Neutrons : 21852
 [    NN    ] ===== Threshold: 0.1 =====
 [    NN    ] ===== 1R muon Samples with NTag Info =====
-[    NN    ] Neutrino Events with No Tagged Neutrons: 8601.4
-[    NN    ] Neutrino Events with Tagged Neutrons   : 8723.76
-[    NN    ] Neutrino Events with Only One Nlike    : 4826.47
-[    NN    ] Neutrino Events with One Nlike Decay-e : 22.7438
-[    NN    ] Neutrino Events with No Truth Neutrons : 2090.58
+[    NN    ] Neutrino Events with No Tagged Neutrons: 43357
+[    NN    ] Neutrino Events with Tagged Neutrons   : 37165
+[    NN    ] Neutrino Events with Only One Nlike    : 22975
+[    NN    ] Neutrino Events with One Nlike Decay-e : 121
+[    NN    ] Neutrino Events with No Truth Neutrons : 10643
 [    NN    ] ===== Threshold: 0.15 =====
 [    NN    ] ===== 1R muon Samples with NTag Info =====
-[    NN    ] Neutrino Events with No Tagged Neutrons: 9424.59
-[    NN    ] Neutrino Events with Tagged Neutrons   : 7900.52
-[    NN    ] Neutrino Events with Only One Nlike    : 4447.99
-[    NN    ] Neutrino Events with One Nlike Decay-e : 24.5549
-[    NN    ] Neutrino Events with No Truth Neutrons : 1349.31
+[    NN    ] Neutrino Events with No Tagged Neutrons: 47496
+[    NN    ] Neutrino Events with Tagged Neutrons   : 33026
+[    NN    ] Neutrino Events with Only One Nlike    : 20905
+[    NN    ] Neutrino Events with One Nlike Decay-e : 133
+[    NN    ] Neutrino Events with No Truth Neutrons : 6843
 [    NN    ] ===== Threshold: 0.2 =====
 [    NN    ] ===== 1R muon Samples with NTag Info =====
-[    NN    ] Neutrino Events with No Tagged Neutrons: 9865.94
-[    NN    ] Neutrino Events with Tagged Neutrons   : 7459.16
-[    NN    ] Neutrino Events with Only One Nlike    : 4234.34
-[    NN    ] Neutrino Events with One Nlike Decay-e : 24.8302
-[    NN    ] Neutrino Events with No Truth Neutrons : 955.601
+[    NN    ] Neutrino Events with No Tagged Neutrons: 49586
+[    NN    ] Neutrino Events with Tagged Neutrons   : 30936
+[    NN    ] Neutrino Events with Only One Nlike    : 19834
+[    NN    ] Neutrino Events with One Nlike Decay-e : 136
+[    NN    ] Neutrino Events with No Truth Neutrons : 4982
 [    NN    ] ===== Threshold: 0.25 =====
 [    NN    ] ===== 1R muon Samples with NTag Info =====
-[    NN    ] Neutrino Events with No Tagged Neutrons: 10127.5
-[    NN    ] Neutrino Events with Tagged Neutrons   : 7197.54
-[    NN    ] Neutrino Events with Only One Nlike    : 4102.29
-[    NN    ] Neutrino Events with One Nlike Decay-e : 24.9631
-[    NN    ] Neutrino Events with No Truth Neutrons : 739.312
+[    NN    ] Neutrino Events with No Tagged Neutrons: 50872
+[    NN    ] Neutrino Events with Tagged Neutrons   : 29650
+[    NN    ] Neutrino Events with Only One Nlike    : 19123
+[    NN    ] Neutrino Events with One Nlike Decay-e : 138
+[    NN    ] Neutrino Events with No Truth Neutrons : 3912
 [    NN    ] ===== Threshold: 0.3 =====
 [    NN    ] ===== 1R muon Samples with NTag Info =====
-[    NN    ] Neutrino Events with No Tagged Neutrons: 10319.5
-[    NN    ] Neutrino Events with Tagged Neutrons   : 7005.55
-[    NN    ] Neutrino Events with Only One Nlike    : 4011
-[    NN    ] Neutrino Events with One Nlike Decay-e : 26.6551
-[    NN    ] Neutrino Events with No Truth Neutrons : 589.899
+[    NN    ] Neutrino Events with No Tagged Neutrons: 51816
+[    NN    ] Neutrino Events with Tagged Neutrons   : 28706
+[    NN    ] Neutrino Events with Only One Nlike    : 18596
+[    NN    ] Neutrino Events with One Nlike Decay-e : 142
+[    NN    ] Neutrino Events with No Truth Neutrons : 3169
 [    NN    ] ===== Threshold: 0.35 =====
 [    NN    ] ===== 1R muon Samples with NTag Info =====
-[    NN    ] Neutrino Events with No Tagged Neutrons: 10457.4
-[    NN    ] Neutrino Events with Tagged Neutrons   : 6867.64
-[    NN    ] Neutrino Events with Only One Nlike    : 3939.76
-[    NN    ] Neutrino Events with One Nlike Decay-e : 28.0912
-[    NN    ] Neutrino Events with No Truth Neutrons : 491.935
+[    NN    ] Neutrino Events with No Tagged Neutrons: 52549
+[    NN    ] Neutrino Events with Tagged Neutrons   : 27973
+[    NN    ] Neutrino Events with Only One Nlike    : 18150
+[    NN    ] Neutrino Events with One Nlike Decay-e : 145
+[    NN    ] Neutrino Events with No Truth Neutrons : 2611
 [    NN    ] ===== Threshold: 0.4 =====
 [    NN    ] ===== 1R muon Samples with NTag Info =====
-[    NN    ] Neutrino Events with No Tagged Neutrons: 10562.1
-[    NN    ] Neutrino Events with Tagged Neutrons   : 6762.94
-[    NN    ] Neutrino Events with Only One Nlike    : 3889.18
-[    NN    ] Neutrino Events with One Nlike Decay-e : 27.9782
-[    NN    ] Neutrino Events with No Truth Neutrons : 421.937
+[    NN    ] Neutrino Events with No Tagged Neutrons: 53128
+[    NN    ] Neutrino Events with Tagged Neutrons   : 27394
+[    NN    ] Neutrino Events with Only One Nlike    : 17788
+[    NN    ] Neutrino Events with One Nlike Decay-e : 144
+[    NN    ] Neutrino Events with No Truth Neutrons : 2192
 [    NN    ] ===== Threshold: 0.45 =====
 [    NN    ] ===== 1R muon Samples with NTag Info =====
-[    NN    ] Neutrino Events with No Tagged Neutrons: 10642.4
-[    NN    ] Neutrino Events with Tagged Neutrons   : 6682.72
-[    NN    ] Neutrino Events with Only One Nlike    : 3855.9
-[    NN    ] Neutrino Events with One Nlike Decay-e : 28.1085
-[    NN    ] Neutrino Events with No Truth Neutrons : 373.685
+[    NN    ] Neutrino Events with No Tagged Neutrons: 53580
+[    NN    ] Neutrino Events with Tagged Neutrons   : 26942
+[    NN    ] Neutrino Events with Only One Nlike    : 17549
+[    NN    ] Neutrino Events with One Nlike Decay-e : 145
+[    NN    ] Neutrino Events with No Truth Neutrons : 1915
 [    NN    ] ===== Threshold: 0.5 =====
 [    NN    ] ===== 1R muon Samples with NTag Info =====
-[    NN    ] Neutrino Events with No Tagged Neutrons: 10719.4
-[    NN    ] Neutrino Events with Tagged Neutrons   : 6605.65
-[    NN    ] Neutrino Events with Only One Nlike    : 3825.2
-[    NN    ] Neutrino Events with One Nlike Decay-e : 28.1075
-[    NN    ] Neutrino Events with No Truth Neutrons : 327.344
+[    NN    ] Neutrino Events with No Tagged Neutrons: 53971
+[    NN    ] Neutrino Events with Tagged Neutrons   : 26551
+[    NN    ] Neutrino Events with Only One Nlike    : 17354
+[    NN    ] Neutrino Events with One Nlike Decay-e : 144
+[    NN    ] Neutrino Events with No Truth Neutrons : 1667
 [    NN    ] ===== Threshold: 0.55 =====
 [    NN    ] ===== 1R muon Samples with NTag Info =====
-[    NN    ] Neutrino Events with No Tagged Neutrons: 10791.1
-[    NN    ] Neutrino Events with Tagged Neutrons   : 6533.97
-[    NN    ] Neutrino Events with Only One Nlike    : 3802.28
-[    NN    ] Neutrino Events with One Nlike Decay-e : 27.6324
-[    NN    ] Neutrino Events with No Truth Neutrons : 293.997
+[    NN    ] Neutrino Events with No Tagged Neutrons: 54294
+[    NN    ] Neutrino Events with Tagged Neutrons   : 26228
+[    NN    ] Neutrino Events with Only One Nlike    : 17224
+[    NN    ] Neutrino Events with One Nlike Decay-e : 143
+[    NN    ] Neutrino Events with No Truth Neutrons : 1494
 [    NN    ] ===== Threshold: 0.6 =====
 [    NN    ] ===== 1R muon Samples with NTag Info =====
-[    NN    ] Neutrino Events with No Tagged Neutrons: 10852.4
-[    NN    ] Neutrino Events with Tagged Neutrons   : 6472.65
-[    NN    ] Neutrino Events with Only One Nlike    : 3787.05
-[    NN    ] Neutrino Events with One Nlike Decay-e : 27.4845
-[    NN    ] Neutrino Events with No Truth Neutrons : 270.335
+[    NN    ] Neutrino Events with No Tagged Neutrons: 54625
+[    NN    ] Neutrino Events with Tagged Neutrons   : 25897
+[    NN    ] Neutrino Events with Only One Nlike    : 17052
+[    NN    ] Neutrino Events with One Nlike Decay-e : 142
+[    NN    ] Neutrino Events with No Truth Neutrons : 1322
 [    NN    ] ===== Threshold: 0.65 =====
 [    NN    ] ===== 1R muon Samples with NTag Info =====
-[    NN    ] Neutrino Events with No Tagged Neutrons: 10915.6
-[    NN    ] Neutrino Events with Tagged Neutrons   : 6409.5
-[    NN    ] Neutrino Events with Only One Nlike    : 3773.36
-[    NN    ] Neutrino Events with One Nlike Decay-e : 28.3454
-[    NN    ] Neutrino Events with No Truth Neutrons : 244.966
+[    NN    ] Neutrino Events with No Tagged Neutrons: 54913
+[    NN    ] Neutrino Events with Tagged Neutrons   : 25609
+[    NN    ] Neutrino Events with Only One Nlike    : 16933
+[    NN    ] Neutrino Events with One Nlike Decay-e : 142
+[    NN    ] Neutrino Events with No Truth Neutrons : 1206
 [    NN    ] ===== Threshold: 0.7 =====
 [    NN    ] ===== 1R muon Samples with NTag Info =====
-[    NN    ] Neutrino Events with No Tagged Neutrons: 10989.1
-[    NN    ] Neutrino Events with Tagged Neutrons   : 6335.95
-[    NN    ] Neutrino Events with Only One Nlike    : 3737.63
-[    NN    ] Neutrino Events with One Nlike Decay-e : 28.2892
-[    NN    ] Neutrino Events with No Truth Neutrons : 222.689
+[    NN    ] Neutrino Events with No Tagged Neutrons: 55237
+[    NN    ] Neutrino Events with Tagged Neutrons   : 25285
+[    NN    ] Neutrino Events with Only One Nlike    : 16772
+[    NN    ] Neutrino Events with One Nlike Decay-e : 144
+[    NN    ] Neutrino Events with No Truth Neutrons : 1085
 [    NN    ] ===== Threshold: 0.75 =====
 [    NN    ] ===== 1R muon Samples with NTag Info =====
-[    NN    ] Neutrino Events with No Tagged Neutrons: 11065.8
-[    NN    ] Neutrino Events with Tagged Neutrons   : 6259.32
-[    NN    ] Neutrino Events with Only One Nlike    : 3713.69
-[    NN    ] Neutrino Events with One Nlike Decay-e : 28.7443
-[    NN    ] Neutrino Events with No Truth Neutrons : 200.546
+[    NN    ] Neutrino Events with No Tagged Neutrons: 55582
+[    NN    ] Neutrino Events with Tagged Neutrons   : 24940
+[    NN    ] Neutrino Events with Only One Nlike    : 16628
+[    NN    ] Neutrino Events with One Nlike Decay-e : 145
+[    NN    ] Neutrino Events with No Truth Neutrons : 963
 [    NN    ] ===== Threshold: 0.8 =====
 [    NN    ] ===== 1R muon Samples with NTag Info =====
-[    NN    ] Neutrino Events with No Tagged Neutrons: 11129.5
-[    NN    ] Neutrino Events with Tagged Neutrons   : 6195.63
-[    NN    ] Neutrino Events with Only One Nlike    : 3711.9
-[    NN    ] Neutrino Events with One Nlike Decay-e : 27.4276
-[    NN    ] Neutrino Events with No Truth Neutrons : 183.576
+[    NN    ] Neutrino Events with No Tagged Neutrons: 55920
+[    NN    ] Neutrino Events with Tagged Neutrons   : 24602
+[    NN    ] Neutrino Events with Only One Nlike    : 16496
+[    NN    ] Neutrino Events with One Nlike Decay-e : 141
+[    NN    ] Neutrino Events with No Truth Neutrons : 873
 [    NN    ] ===== Threshold: 0.85 =====
 [    NN    ] ===== 1R muon Samples with NTag Info =====
-[    NN    ] Neutrino Events with No Tagged Neutrons: 11224.2
-[    NN    ] Neutrino Events with Tagged Neutrons   : 6100.91
-[    NN    ] Neutrino Events with Only One Nlike    : 3676.89
-[    NN    ] Neutrino Events with One Nlike Decay-e : 24.4775
-[    NN    ] Neutrino Events with No Truth Neutrons : 159.961
+[    NN    ] Neutrino Events with No Tagged Neutrons: 56346
+[    NN    ] Neutrino Events with Tagged Neutrons   : 24176
+[    NN    ] Neutrino Events with Only One Nlike    : 16311
+[    NN    ] Neutrino Events with One Nlike Decay-e : 132
+[    NN    ] Neutrino Events with No Truth Neutrons : 777
 [    NN    ] ===== Threshold: 0.9 =====
 [    NN    ] ===== 1R muon Samples with NTag Info =====
-[    NN    ] Neutrino Events with No Tagged Neutrons: 11368.8
-[    NN    ] Neutrino Events with Tagged Neutrons   : 5956.33
-[    NN    ] Neutrino Events with Only One Nlike    : 3630.44
-[    NN    ] Neutrino Events with One Nlike Decay-e : 22.2147
-[    NN    ] Neutrino Events with No Truth Neutrons : 137.304
+[    NN    ] Neutrino Events with No Tagged Neutrons: 56962
+[    NN    ] Neutrino Events with Tagged Neutrons   : 23560
+[    NN    ] Neutrino Events with Only One Nlike    : 16063
+[    NN    ] Neutrino Events with One Nlike Decay-e : 114
+[    NN    ] Neutrino Events with No Truth Neutrons : 675
 [    NN    ] ===== Threshold: 0.95 =====
 [    NN    ] ===== 1R muon Samples with NTag Info =====
-[    NN    ] Neutrino Events with No Tagged Neutrons: 11653.9
-[    NN    ] Neutrino Events with Tagged Neutrons   : 5671.21
-[    NN    ] Neutrino Events with Only One Nlike    : 3544.4
-[    NN    ] Neutrino Events with One Nlike Decay-e : 13.3322
-[    NN    ] Neutrino Events with No Truth Neutrons : 107.329
+[    NN    ] Neutrino Events with No Tagged Neutrons: 58185
+[    NN    ] Neutrino Events with Tagged Neutrons   : 22337
+[    NN    ] Neutrino Events with Only One Nlike    : 15588
+[    NN    ] Neutrino Events with One Nlike Decay-e : 72
+[    NN    ] Neutrino Events with No Truth Neutrons : 535
 [    NN    ] ===== Threshold: 1 =====
 [    NN    ] ===== 1R muon Samples with NTag Info =====
-[    NN    ] Neutrino Events with No Tagged Neutrons: 17325
+[    NN    ] Neutrino Events with No Tagged Neutrons: 80522
 [    NN    ] Neutrino Events with Tagged Neutrons   : 0
 [    NN    ] Neutrino Events with Only One Nlike    : 0
 [    NN    ] Neutrino Events with One Nlike Decay-e : 0

@@ -40,6 +40,8 @@ TH1F* h1_Enureso_CCRES_deltapp[2];
 TH1F* h1_Enureso_CCRES_delta0[2];
 TH1F* h1_Enureso_CCOther[2];
 TH1F* h1_Enureso_NC[2];
+//TH1F* h1_Enureso_CCnonQE_wTagN;
+//TH1F* h1_Enureso_CCnonQE_woTagN;
 
 //Noise rate and efficiencies for window optimization
 TGraphErrors* g_NoiseRate[WINSTEP];

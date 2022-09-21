@@ -16,7 +16,15 @@ analysis1Rmu.exe: analysis1Rmu.o
 	$(RM) .$@
 	LD_RUN_PATH=$(LIBDIR):$(SKOFL_LIBDIR) $(CXX) -g $(CXXFLAGS) -o $@ $^ $(LDLIBS)
 
+protoanalysis.exe: protoanalysis.o
+	$(RM) .$@
+	LD_RUN_PATH=$(LIBDIR):$(SKOFL_LIBDIR) $(CXX) -g $(CXXFLAGS) -o $@ $^ $(LDLIBS)
+
 MeanMultiplicity.exe: MeanMultiplicity.o
+	$(RM) .$@
+	LD_RUN_PATH=$(LIBDIR):$(SKOFL_LIBDIR) $(CXX) -g $(CXXFLAGS) -o $@ $^ $(LDLIBS)
+
+createOAinputs.exe: createOAinputs.o
 	$(RM) .$@
 	LD_RUN_PATH=$(LIBDIR):$(SKOFL_LIBDIR) $(CXX) -g $(CXXFLAGS) -o $@ $^ $(LDLIBS)
 
@@ -28,9 +36,9 @@ event.exe: event.o
 	$(RM) .$@
 	LD_RUN_PATH=$(LIBDIR):$(SKOFL_LIBDIR) $(CXX) -g $(CXXFLAGS) -o $@ $^ $(LDLIBS)
 
-NoSelection.exe: NoSelection.o
-	$(RM) .$@
-	LD_RUN_PATH=$(LIBDIR):$(SKOFL_LIBDIR) $(CXX) -g $(CXXFLAGS) -o $@ $^ $(LDLIBS)
+#NoSelection.exe: NoSelection.o
+#	$(RM) .$@
+#	LD_RUN_PATH=$(LIBDIR):$(SKOFL_LIBDIR) $(CXX) -g $(CXXFLAGS) -o $@ $^ $(LDLIBS)
 
 getNNvariables.exe: getNNvariables.o
 	$(RM) .$@
@@ -41,6 +49,12 @@ cleanevent:
 
 cleanNoSelection:
 	$(RM) NoSelection.o NoSelection.exe
+
+cleanprotoanalysis:
+	$(RM) protoanalysis.o protoanalysis.exe
+
+cleancreateOAinputs:
+	$(RM) createOAinputs.o createOAinputs.exe
 
 clean:
 	$(RM) *.o *.exe

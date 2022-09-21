@@ -91,6 +91,9 @@ float OscwoTagN   = 0.;
 int SelectedNeutrinoswoTruthNeutrons = 0;
 int ProtoSelectedNeutrinoswoTruthNeutrons = 0;
 
+//Normalization
+int GeneratedEvents = 0;
+
 
 void Sequencial1RmuonSelection(Gd1RmuonSelection prmsel,
                                EvSelVar_t evsel,

@@ -8,6 +8,7 @@
 [Neutrino] C4: 37842 -> 72759
 [Neutrino] C5: 37008 -> 71169
 [Neutrino] All Parent Neutrino Events: 300000
+[Neutrino] Generated Neutrino Events(wallv>200): 190909
  
 [Neutrino] Oscillated CCQE Events     : 10121.2(60.8051 %)
            w/ truth neutrons : 9466.39 (60.4192 %), w/o truth neutrons :654.852 (66.991 %)

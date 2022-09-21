@@ -40,8 +40,8 @@ void DistanceViewer::SetHistoFormat() {
   h1_truedistance_CCQE -> SetLabelSize(0.033, "Y");
 
   h1_truedistance_CCnonQE -> SetLineWidth(2);
-  h1_truedistance_CCnonQE -> SetLineColor(kOrange+8);
-  h1_truedistance_CCnonQE -> SetFillColor(kOrange+8);
+  h1_truedistance_CCnonQE -> SetLineColor(kCyan-8);
+  h1_truedistance_CCnonQE -> SetFillColor(kCyan-8);
   h1_truedistance_CCnonQE -> SetTitleOffset(1.4, "Y");
   h1_truedistance_CCnonQE -> SetTitleSize(0.035, "Y");
   h1_truedistance_CCnonQE -> SetLabelSize(0.033, "Y");
@@ -107,13 +107,13 @@ float DistanceViewer::GetTruthDistance(CC0PiNumu *numu,
   float d   = std::sqrt(d_x*d_x + d_y*d_y + d_z*d_z);
   h1_truedistance -> Fill(d/100.);
 
-  if (mode==1) h1_truedistance_CCQE          -> Fill(d/100.);
-  if ((mode>=2 && mode<=10) || (mode>=14 && mode<=30)) 
-                h1_truedistance_CCnonQE -> Fill(d/100.);
-  if (mode>=31) h1_truedistance_NC           -> Fill(d/100.);
-  if (mode==13) h1_truedistance_CCRESdeltap  -> Fill(d/100.);
-  if (mode==11) h1_truedistance_CCRESdeltapp -> Fill(d/100.);
-  if (mode==12) h1_truedistance_CCRESdelta0  -> Fill(d/100.);
+  if (mode==1)         h1_truedistance_CCQE          -> Fill(d/100.);
+  //if ((mode>=2 && mode<=10) || (mode>=14 && mode<=30))
+  if (mode>=2 && mode<=30) h1_truedistance_CCnonQE -> Fill(d/100.);
+  if (mode>=31)        h1_truedistance_NC           -> Fill(d/100.);
+  if (mode==13)        h1_truedistance_CCRESdeltap  -> Fill(d/100.);
+  if (mode==11)        h1_truedistance_CCRESdeltapp -> Fill(d/100.);
+  if (mode==12)        h1_truedistance_CCRESdelta0  -> Fill(d/100.);
   return d;
 }
 
@@ -175,9 +175,9 @@ void DistanceViewer::WritePlots() {
   h1_truedistance_CCQE    -> Write();
   h1_truedistance_CCnonQE -> Write();
   h1_truedistance_NC      -> Write();
-  h1_truedistance_CCRESdeltap -> Write();
+  h1_truedistance_CCRESdeltap  -> Write();
   h1_truedistance_CCRESdeltapp -> Write();
-  h1_truedistance_CCRESdelta0 -> Write();
+  h1_truedistance_CCRESdelta0  -> Write();
 
   h1_PreEff_dist -> Sumw2();
   h1_PreEff_dist -> Divide(h1_truedistance);

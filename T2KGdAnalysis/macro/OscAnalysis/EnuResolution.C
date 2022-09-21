@@ -273,7 +273,7 @@ void EnuResolution() {
   legend4 -> AddEntry(h1_ccother, "CC-other", "F");
   legend4 -> AddEntry(h1_nc, "NC", "F");
   legend4 -> SetFillColor(0);
-  legend4 -> Draw() ;
+  legend4 -> Draw();
   
 
 }

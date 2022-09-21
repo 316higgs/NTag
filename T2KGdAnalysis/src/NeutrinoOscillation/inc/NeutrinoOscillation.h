@@ -28,10 +28,17 @@ TH1F* h1_TruthOscProb[INTERACTIONTYPE];
 
 //Reconstructed neutrino events as a funtion of neutrino energy
 TH1F* h1_NoOsc[INTERACTIONTYPE];
+//TH1F* h1_NoOscCCOther;           //CC RES + CC other
 
 TH1F* h1_OscProb[INTERACTIONTYPE];
+TH1F* h1_OscProbCCnonQE;                     //All CC non-QE
+TH1F* h1_OscProbCCOther;                     //CC RES + CC other
 TH1F* h1_OscProb_wNeutron[INTERACTIONTYPE];
 TH1F* h1_OscProb_woNeutron[INTERACTIONTYPE];
+TH1F* h1_OscProbCCnonQE_wNeutron;
+TH1F* h1_OscProbCCnonQE_woNeutron; 
+TH1F* h1_OscProbCCOther_wNeutron;
+TH1F* h1_OscProbCCOther_woNeutron; 
 
 
 //Selected 1R muon events (for each neutrino interaction mode)

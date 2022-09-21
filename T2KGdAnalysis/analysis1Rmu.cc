@@ -192,6 +192,7 @@ int main(int argc, char **argv) {
   Int_t   Npvc;             //Number of primary particles
   Int_t   Ipvc[100];        //PID of primary particles
   Float_t Pvc[100][3];      //Momentum of primary particles
+  Float_t wallv;
   Int_t   Iflvc[100];       //Flag of final states
   Int_t   Ichvc[100];       //Chase at detector simulation or not(1: chase/0: not chase)
   Int_t   nscndprt;         //Number of secondary particles
@@ -200,6 +201,7 @@ int main(int argc, char **argv) {
   Float_t pscnd[1000][3];   //Momentum of the secondary particle
   tchfQ -> SetBranchAddress("Npvc", &Npvc);
   tchfQ -> SetBranchAddress("Pvc", Pvc);
+  tchfQ -> SetBranchAddress("wallv", &wallv);
   tchfQ -> SetBranchAddress("Ipvc", Ipvc);
   tchfQ -> SetBranchAddress("Ichvc", Ichvc);
   tchfQ -> SetBranchAddress("Iflvc", Iflvc);
@@ -286,13 +288,13 @@ int main(int argc, char **argv) {
 
     numu->computeCC0PiVariables();
     numu->applyfQ1RCC0PiNumuCut();
-
-    //secondaryprt += nscndprt;
-
     const EvSelVar_t evsel = numu->getEvSelVar();
     prmsel.GetemuLikelihood(numu);
     Sequencial1RmuonSelection(prmsel, evsel, numu, decayebox, eMode, eOsc, 20., 50., 400., false);
     //Sequencial1RmuonSelection_Pion(prmsel, evsel, numu, decayebox, eMode, eOsc, 20., 50., 400., false);
+
+    if (wallv>200) GeneratedEvents++;
+
 
     //Proto 1R muon selection
     if (prmsel.ApplyProto1RmuonSelection(evsel)) {
@@ -305,6 +307,8 @@ int main(int argc, char **argv) {
     if (prmsel.C1ApplyFCFV(evsel)) {
       neuosc.GetTrueEnu(numu);
     }
+
+    h1_NTrueN[0] -> Fill(NTrueN);
 
     //New 1R muon selection
     if (prmsel.Apply1RmuonSelection(evsel, numu, decayebox, eMode, eOsc, 20., 50., 400., true)) {
@@ -462,9 +466,7 @@ int main(int argc, char **argv) {
       h1_Proto1RmuonEvents->fArray[i+1] = (float)ProtoSelectedParentNeutrinos[i]/ProtoSelectedParentNeutrinos[0];
     }
     resultfile << "[Neutrino] All Parent Neutrino Events: " << AllParentNeutrinos << std::endl;
-    //resultfile << "[Neutrino] Selected CCQE events   : " << ProtoSelectedCCQEevents    << " -> " << SelectedCCQEevents    << std::endl;
-    //resultfile << "[Neutrino] Selected CCnonQE events: " << ProtoSelectedCCnonQEevents << " -> " << SelectedCCnonQEevents << std::endl;
-    //resultfile << "[Neutrino] Selected NC events     : " << ProtoSelectedNCevents      << " -> " << SelectedNCevents      << std::endl;
+    resultfile << "[Neutrino] Generated Neutrino Events(wallv>200): " << GeneratedEvents << std::endl;
     resultfile << " " << std::endl;
 
     float TotalEventsNoNeutronAnalysis = OscillatedCCQE 

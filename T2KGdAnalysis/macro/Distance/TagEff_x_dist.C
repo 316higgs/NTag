@@ -50,8 +50,8 @@ void TagEff_x_dist() {
   ceff -> SetGrid();
   ceff -> cd();
   h1_eff_x_dist_o -> Draw();
-  h1_eff_x_dist_n -> Draw("SAME");
-  //h1_eff_x_dist   -> Draw("SAME");
+  //h1_eff_x_dist_n -> Draw("SAME");
+  h1_eff_x_dist   -> Draw("SAME");
   //ceff -> SaveAs("../figure/TagEff_x_dist.pdf");
 
   TCanvas* cpreeff = new TCanvas("cpreeff","cpreeff",800,800);
@@ -59,8 +59,8 @@ void TagEff_x_dist() {
   cpreeff -> cd();
   h1_preeff_x_dist_o -> GetYaxis() -> SetRangeUser(0.4, 0.8);
   h1_preeff_x_dist_o -> Draw();
-  h1_preeff_x_dist_n -> Draw("SAME");
-  //h1_preeff_x_dist   -> Draw("SAME");
+  //h1_preeff_x_dist_n -> Draw("SAME");
+  h1_preeff_x_dist   -> Draw("SAME");
   //cpreeff -> SaveAs("../figure/PreEff_x_dist.pdf");
 
   TCanvas* cnneff = new TCanvas("cnneff","cnneff",800,800);
@@ -68,8 +68,8 @@ void TagEff_x_dist() {
   cnneff -> cd();
   h1_NNeff_x_dist_o -> GetYaxis() -> SetRangeUser(0., 0.8);
   h1_NNeff_x_dist_o -> Draw();
-  h1_NNeff_x_dist_n -> Draw("SAME");
-  //h1_NNeff_x_dist   -> Draw("SAME");
+  //h1_NNeff_x_dist_n -> Draw("SAME");
+  h1_NNeff_x_dist   -> Draw("SAME");
   //cnneff -> SaveAs("../figure/NNEff_x_dist.pdf");
 
   /*TCanvas* cdist = new TCanvas("cdist", "cdist", 800, 800);
