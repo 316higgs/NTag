@@ -1,11 +1,18 @@
+#include "src/TreeManager/inc/TreeManager.h"
 
 bool etagmode = false;
+bool nosample = false;
+//SampleChannel channel;
 
 enum OscChan::E_OSC_CHAN CLTOptionOscMode(TString OscKeyWord, TString Osc) {
   enum OscChan::E_OSC_CHAN eOscMode = eNUMU;
   if (OscKeyWord=="-OSCCH") {
-    if (Osc=="NUMU" || Osc=="numu") eOscMode = eNUMU;
-    else if (Osc=="NUMUBAR" || Osc=="numubar") eOscMode = eNUMUBAR;
+    if (Osc=="NUMU" || Osc=="numu") eOscMode = eNUMU;                     //numu_x_numu
+    else if (Osc=="NUMUBAR" || Osc=="numubar") eOscMode = eNUMUBAR;       //numubar_x_numubar
+    else if (Osc=="NUESIG" || Osc=="nuesig") eOscMode = eNUESIG;          //numu_x_nue
+    else if (Osc=="NUEBARSIG" || Osc=="nuebarsig") eOscMode = eNUEBARSIG; //numubar_x_nuebar
+    else if (Osc=="NUE" || Osc=="nue") eOscMode = eNUE;                   //nue_x_nue
+    else if (Osc=="NUEBAR" || Osc=="nuebar") eOscMode = eNUEBAR;          //nuebar_x_nuebar
     else {
       std::cout << " " << std::endl;
       std::cout << "[!!!CLT error!!!] Oscillation channel can not be found. --- input NUMU/NUMUBAR" << std::endl;
@@ -62,6 +69,55 @@ void CLTOptionWindow(TString WINDOWKeyword, TString WINDOW) {
     exit(-1);
   }
 }
+
+bool CLTOptionSample(TString SampleKeyword, TString Sample) {
+  if (SampleKeyword=="-SAMPLE") {
+    std::cout << "[### CLT Option Summary ###] " << SampleKeyword << ": " << Sample << std::endl;
+    if (Sample=="NO" || Sample=="No" || Sample=="no") nosample = true;
+    else nosample = false;
+  }
+  else {
+    std::cout << "[!!!CLT error!!!] Existence of input files should be specified at command line." << std::endl;
+    std::cout << "                  Please specify values with " << SampleKeyword << " option." << std::endl;
+    exit(-1);
+  }
+  return nosample;
+}
+
+/*void CLTOptionChannel(TString SampleChKeyword, TString SampleCh) {
+  if (SampleChKeyword=="-SAMPLECH") {
+    std::cout << "[### CLT Option Summary ###] " << SampleChKeyword << " : " << SampleCh << std::endl;
+    switch (SampleCh) {
+      case numu_x_numu:
+        channel = numu_x_numu;
+        break;
+      case numubar_x_numubar:
+        channel = numubar_x_numubar;
+        break;
+      case numu_x_nue:
+        channel = numu_x_nue;
+        break;
+      case numubar_x_nuebar:
+        channel = numubar_x_nuebar;
+        break;
+      case nue_x_nue:
+        channel = nue_x_nue;
+        break;
+      case nuebar_x_nuebar:
+        channel = nuebar_x_nuebar;
+        break;
+      default:
+        channel = numu_x_numu;
+        break;
+    }
+    std::cout << "[### CLT Option Summary ###] Oscillation channel: " << channel << std::endl;
+  }
+  else {
+    std::cout << "[!!!CLT error!!!] Oscillation channel should be specified at command line." << std::endl;
+    std::cout << "                  Please specify values with " << SampleChKeyword << " option." << std::endl;
+    exit(-1);
+  }
+}*/
 
 
 void CLTOptionSummary(TString ETAGKeyword, TString ETAG,

@@ -26,25 +26,51 @@
 
 int main(int argc, char **argv) {
 
-  TString fiTQunFileName = argv[1];
-  TString NtagFileName   = argv[2];
-  TString OutputRootName = argv[3];
-  TString ResultSummary  = argv[4];
-  TString NTagSummary    = argv[5];
-  TString MCTypeKeyword  = argv[6];
-  TString MCType         = argv[7];
-  TString ETAGKeyword    = argv[8];
-  TString ETAG           = argv[9];
-  TString BeamKeyword    = argv[10];
-  TString Beam           = argv[11];
-  TString OscKeyword     = argv[12];
-  TString Osc            = argv[13];
+  TString fiTQunFileName  = argv[1];
+  TString NtagFileName    = argv[2];
+  TString OutputRootName  = argv[3];
+  TString ResultSummary   = argv[4];
+  TString NTagSummary     = argv[5];
+  TString MCTypeKeyword   = argv[6];
+  TString MCType          = argv[7];
+  TString ETAGKeyword     = argv[8];
+  TString ETAG            = argv[9];
+  TString BeamKeyword     = argv[10];
+  TString Beam            = argv[11];
+  TString OscKeyword      = argv[12];
+  TString Osc             = argv[13];
+  TString SampleKeyword   = argv[14];
+  TString Sample          = argv[15];
+  //TString SampleChKeyword = argv[16];
+  //TString SampleCh        = argv[17];
+  TString OutSampleName   = argv[16];
 
   enum BeamMode::E_BEAM_MODE eMode;
   enum OscChan::E_OSC_CHAN eOsc;
   eMode = CLTOptionBeamMode(BeamKeyword, Beam);
   eOsc  = CLTOptionOscMode(OscKeyword, Osc);
   CLTOptionETAG(ETAGKeyword, ETAG);
+
+  //TTree
+  TreeManager* woTagNtuple = new TreeManager(0);
+  woTagNtuple -> SetBranch(0);
+
+  TreeManager* wTagNtuple = new TreeManager(1);
+  wTagNtuple -> SetBranch(1);
+
+  //If no input files, make a TTree with empty events
+  if (CLTOptionSample(SampleKeyword, Sample)) {
+    std::cout << "[### analysis1Rmu ###]  No input files." << std::endl;
+
+    woTagNtuple -> FillBrankTree(0);
+    woTagNtuple -> WriteTree(OutSampleName+".woTagN.root", 0);
+
+    woTagNtuple -> FillBrankTree(1);
+    woTagNtuple -> WriteTree(OutSampleName+".wTagN.root", 1);
+
+    std::cout << "                        Created empty mtuple." << std::endl;
+    exit(1);
+  }
 
   float thetamin = -1.;
   //float thetamin = 0.;
@@ -53,6 +79,7 @@ int main(int argc, char **argv) {
   //float thetamin = 0.6;
   //float thetamin = 0.8;
   float thetamax = 1.;
+
 
 
   //=========  fiTQun output (TTree: h1)  ============
@@ -207,37 +234,21 @@ int main(int argc, char **argv) {
   //=========  TTree h1 variables  ============
   //===== It should be called after numu ======
   Int_t   Ibound;
-  Int_t   mode;
-  Int_t   Npvc;             //Number of primary particles
-  Int_t   Ipvc[100];        //PID of primary particles
   Float_t Pvc[100][3];      //Momentum of primary particles
-  Float_t wallv;
-  Int_t   numnu;
-  Float_t pnu[100];
-  Int_t   ipnu[100];
-  Float_t dirnu[100][3];
   Int_t   Iflvc[100];       //Flag of final states
-  Int_t   Ichvc[100];       //Chase at detector simulation or not(1: chase/0: not chase)
-  Int_t   nscndprt;         //Number of secondary particles
-  Int_t   iprtscnd[1000];   //PID of the secondary particle
-  Int_t   iprntprt[1000];   //PID of the parent of this secondary particle
   Float_t pscnd[1000][3];   //Momentum of the secondary particle
+  Int_t   nring;
+  Int_t   nev;
+  Float_t wall;
+  Float_t evis;
   tchfQ -> SetBranchAddress("Ibound", &Ibound);
-  tchfQ -> SetBranchAddress("mode", &mode);
-  tchfQ -> SetBranchAddress("Npvc", &Npvc);
   tchfQ -> SetBranchAddress("Pvc", Pvc);
-  tchfQ -> SetBranchAddress("wallv", &wallv);
-  tchfQ -> SetBranchAddress("numnu", &numnu);
-  tchfQ -> SetBranchAddress("pnu", pnu);
-  tchfQ -> SetBranchAddress("ipnu", ipnu);
-  tchfQ -> SetBranchAddress("dirnu", dirnu);
-  tchfQ -> SetBranchAddress("Ipvc", Ipvc);
-  tchfQ -> SetBranchAddress("Ichvc", Ichvc);
   tchfQ -> SetBranchAddress("Iflvc", Iflvc);
-  tchfQ -> SetBranchAddress("nscndprt", &nscndprt);
-  tchfQ -> SetBranchAddress("iprtscnd", iprtscnd);
-  tchfQ -> SetBranchAddress("iprntprt", iprntprt);
   tchfQ -> SetBranchAddress("pscnd", pscnd);
+  tchfQ -> SetBranchAddress("nring", &nring);
+  tchfQ -> SetBranchAddress("nev", &nev);
+  tchfQ -> SetBranchAddress("wall", &wall);
+  tchfQ -> SetBranchAddress("evis", &evis);
 
 
   ResetNeutrinoEvents();
@@ -266,13 +277,11 @@ int main(int argc, char **argv) {
   ntagana.SetHistoFormat();
 
   //TTree
-  TreeManager* woTagNtuple = new TreeManager(0);
+  /*TreeManager* woTagNtuple = new TreeManager(0);
   woTagNtuple -> SetBranch(0);
 
   TreeManager* wTagNtuple = new TreeManager(1);
-  wTagNtuple -> SetBranch(1);
-
-  TH1F* h1_Ipvc = new TH1F("h1_Ipvc", "Ipvc", 1e6, -20, 1e7);
+  wTagNtuple -> SetBranch(1);*/
 
   //Process
   if (MCTypeKeyword=="-MCType") {
@@ -285,6 +294,7 @@ int main(int argc, char **argv) {
     }
   }
   CLTOptionSummary(ETAGKeyword, ETAG, MCTypeKeyword, MCType);
+
 
   for (int ientry=0; ientry<processmax; ientry++) {
 
@@ -326,7 +336,8 @@ int main(int argc, char **argv) {
     Sequencial1RmuonSelection(prmsel, evsel, numu, decayebox, eMode, eOsc, 20., 50., 400., false);
     //Sequencial1RmuonSelection_Pion(prmsel, evsel, numu, decayebox, eMode, eOsc, 20., 50., 400., false);
 
-    if (wallv>200) GeneratedEvents++;
+    //if (wallv>200) GeneratedEvents++;
+    if (numu->var<float>("wallv")>200) GeneratedEvents++;
 
 
     //Proto 1R muon selection
@@ -346,7 +357,8 @@ int main(int argc, char **argv) {
       neuosc.GetRecoEnu(numu);
 
       //Muon angle information
-      float truethetamu = neuosc.GetTrueMuDirection(numu, Npvc, Ipvc, Pvc, Iflvc, Ichvc);
+      //float truethetamu = neuosc.GetTrueMuDirection(numu, Npvc, Ipvc, Pvc, Iflvc, Ichvc);
+      float truethetamu = neuosc.GetTrueMuDirection(numu, Pvc, Iflvc);
       float recothetamu = neuosc.GetRecoMuDirection(numu);
       neuosc.GetMuDirResolution(truethetamu, recothetamu);
 
@@ -355,7 +367,7 @@ int main(int argc, char **argv) {
       neuosc.GetReso_x_TrueEnu(numu);
 
       //Oscillation probability check
-      //neuosc.OscProbCalculator(numu, true);
+      neuosc.OscProbCalculator(numu, true);
 
       //Neutrino events as a funtion of reconstructed neutrino energy (No NTag information)
       //neuosc.GetWgtNeutrino(numu, truethetamu, thetamin, thetamax);
@@ -394,26 +406,41 @@ int main(int argc, char **argv) {
       if (numtaggedneutrons == 0) {
         NoTagN        = 0;
 
-        iclass_woTagN = 1402112;  // 1R mu(14) w/o(0) tagged-n(2112)
+        iclass_woTagN = 1302112;  // 1R mu(13) w/o(0) tagged-n(2112)
 
         //NEUT vector variables
-        mode_woTagN   = mode;
+        mode_woTagN   = numu->var<int>("mode");
         Ibound_woTagN = Ibound;
-        numnu_woTagN  = numnu;
-        for (Int_t ivc=0; ivc<numnu; ivc++) {
-          pnu_woTagN[ivc]   = pnu[ivc];
-          ipnu_woTagN  = ipnu[ivc];
-          for (int icom=0; icom<3; icom++) {
-            dirnu_woTagN[ivc][icom] = dirnu[ivc][icom];
+        numnu_woTagN  = numu->var<int>("numnu");
+        for (Int_t ivc=0; ivc<numnu_woTagN; ivc++) {
+          pnu_woTagN[ivc]  = numu->var<float>("pnu", ivc);
+          ipnu_woTagN[ivc] = numu->var<int>("ipnu", ivc);
+          for (int idir=0; idir<3; idir++) {
+            dirnu_woTagN[ivc][idir] = numu->var<float>("dirnu", ivc, idir);
           }
         }
 
-        Npvc_woTagN   = Npvc;
-        for (Int_t ivc=0; ivc<Npvc; ivc++) {
-          Ipvc_woTagN  = Ipvc[ivc];
-          Ichvc_woTagN = Ichvc[ivc];
-          Iflvc_woTagN = Iflvc[ivc];
+        Npvc_woTagN = numu->var<int>("Npvc");
+        for (Int_t ivc=0; ivc<Npvc_woTagN; ivc++) {
+          Ipvc_woTagN[ivc]  = numu->var<int>("Ipvc", ivc);
+          Ichvc_woTagN[ivc] = numu->var<int>("Ichvc", ivc);
+          Iflvc_woTagN[ivc] = Iflvc[ivc];
         }
+
+        npar_woTagN = numu->var<int>("npar");
+        for (int iv=0; iv<npar_woTagN; iv++) {
+          for (int idir=0; idir<3; idir++) {
+            dirv_woTagN[iv][idir] = numu->var<float>("dirv", iv, idir);
+          }
+        }
+        wgtosc_woTagN = numu->getOscWgt();
+
+        //SK variables
+        nring_woTagN  = nring;
+        nev_woTagN    = nev;
+        nhitac_woTagN = numu->var<int>("nhitac");
+        wall_woTagN   = wall;
+        evis_woTagN   = evis;
 
         //fiTQun variables
         fqnse_woTagN = numu->var<int>("fqnse");
@@ -446,38 +473,57 @@ int main(int argc, char **argv) {
             ipp_woTagN[ifq] = ifq;
           }
         }*/
+        for (int iring=0; iring<nring_woTagN; iring++) {
+          ip_woTagN[iring] = 0;
+        }
         ipp_woTagN           = -1;
+        ippp_woTagN          = -1;
         evisible_woTagN      = -1;
         elosssum_pipi_woTagN = -1;
 
         //NIWG variables
-        wgts_maqeh_woTagN = 1;
+        wgts_maqeh_woTagN = 1.;
         DeltaPForEmiss0_woTagN = DeltaPForEmiss0;
 
       }
       else {
         NoTagN       = 1;
 
-        iclass_wTagN = 1412112; // 1R mu(14) w/ (1) tagged-n(2112)
+        iclass_wTagN = 1312112; // 1R mu(13) w/ (1) tagged-n(2112)
 
         //NEUT vector variables
-        mode_wTagN   = mode;
+        mode_wTagN   = numu->var<int>("mode");
         Ibound_wTagN = Ibound;
-        numnu_wTagN  = numnu;
-        for (Int_t ivc=0; ivc<numnu; ivc++) {
-          pnu_wTagN[ivc]   = pnu[ivc];
-          ipnu_wTagN  = ipnu[ivc];
-          for (int icom=0; icom<3; icom++) {
-            dirnu_wTagN[ivc][icom] = dirnu[ivc][icom];
+        numnu_wTagN  = numu->var<int>("numnu");
+        for (Int_t ivc=0; ivc<numnu_wTagN; ivc++) {
+          pnu_wTagN[ivc]  = numu->var<float>("pnu", ivc);
+          ipnu_wTagN[ivc] = numu->var<int>("ipnu", ivc);
+          for (int idir=0; idir<3; idir++) {
+            dirnu_wTagN[ivc][idir] = numu->var<float>("dirnu", ivc, idir);
           }
         }
 
-        Npvc_wTagN   = Npvc;
-        for (Int_t ivc=0; ivc<Npvc; ivc++) {
-          Ipvc_wTagN  = Ipvc[ivc];
-          Ichvc_wTagN = Ichvc[ivc];
-          Iflvc_wTagN = Iflvc[ivc];
+        Npvc_wTagN = numu->var<int>("Npvc");
+        for (Int_t ivc=0; ivc<Npvc_wTagN; ivc++) {
+          Ipvc_wTagN[ivc]  = numu->var<int>("Ipvc", ivc);
+          Ichvc_wTagN[ivc] = numu->var<int>("Ichvc", ivc);
+          Iflvc_wTagN[ivc] = Iflvc[ivc];
         }
+
+        npar_wTagN = numu->var<int>("npar");
+        for (int iv=0; iv<npar_woTagN; iv++) {
+          for (int idir=0; idir<3; idir++) {
+            dirv_wTagN[iv][idir] = numu->var<float>("dirv", iv, idir);
+          }
+        }
+        wgtosc_wTagN = numu->getOscWgt();
+
+        //SK variables
+        nring_wTagN  = nring;
+        nev_wTagN    = nev;
+        nhitac_wTagN = numu->var<int>("nhitac");
+        wall_wTagN   = wall;
+        evis_wTagN   = evis;
 
         //fiTQun variables
         fqnse_wTagN = numu->var<int>("fqnse");
@@ -510,16 +556,19 @@ int main(int argc, char **argv) {
             ipp_wTagN[ifq] = ifq;
           }
         }*/
+        for (int iring=0; iring<nring_wTagN; iring++) {
+          ip_wTagN[iring] = 0;
+        }
         ipp_wTagN           = -1;
+        ippp_wTagN          = -1;
         evisible_wTagN      = -1;
         elosssum_pipi_wTagN = -1;
 
         //NIWG variables
-        wgts_maqeh_wTagN = 1;
+        wgts_maqeh_wTagN = 1.;
         DeltaPForEmiss0_wTagN = DeltaPForEmiss0;
 
       }
-      //for (Int_t ivc=0; ivc<Npvc; ivc++) h1_Ipvc -> Fill(Ipvc[ivc]);
 
     } //New 1R muon selection
 
@@ -675,8 +724,7 @@ int main(int argc, char **argv) {
   ntagana.WritePlots();
   gDirectory -> cd("..");
 
-  woTagNtuple -> WriteTree("output/OAinput.woTagN.root", 0);
-  wTagNtuple  -> WriteTree("output/OAinput.wTagN.root", 1);
-  //h1_Ipvc -> Write();
+  woTagNtuple -> WriteTree(OutSampleName+".woTagN.root", 0);
+  wTagNtuple  -> WriteTree(OutSampleName+".wTagN.root", 1);
 
 }

@@ -364,12 +364,13 @@ void NeutrinoOscillation::GetReso_x_TrueEnu(CC0PiNumu* numu) {
 }
 
 
-float NeutrinoOscillation::GetTrueMuDirection(CC0PiNumu* numu, 
-                                              Int_t   Npvc, 
-                                              Int_t*  Ipvc,
-                                              Float_t Pvc[][3],
-                                              Int_t*  Iflvc,
-                                              Int_t*  Ichvc) {
+//float NeutrinoOscillation::GetTrueMuDirection(CC0PiNumu* numu, 
+//                                              Int_t   Npvc, 
+//                                              Int_t*  Ipvc,
+//                                              Float_t Pvc[][3],
+//                                              Int_t*  Iflvc,
+//                                              Int_t*  Ichvc) {
+float NeutrinoOscillation::GetTrueMuDirection(CC0PiNumu* numu, Float_t Pvc[][3], Int_t* Iflvc) {
   int mode = TMath::Abs(numu->var<int>("mode"));
   
   //Truth muon scattering angle
@@ -392,10 +393,12 @@ float NeutrinoOscillation::GetTrueMuDirection(CC0PiNumu* numu,
 
     //Truth muon direction
     //Truth primary particles loop
-    for (Int_t iprm=0; iprm<Npvc; iprm++) {
+    //for (Int_t iprm=0; iprm<Npvc; iprm++) {
+    for (Int_t iprm=0; iprm<numu->var<int>("Npvc"); iprm++) {
 
       //Truth muon from mu-neutrino
-      if (std::abs(Ipvc[iprm])==13 && Ichvc[iprm]==1) {
+      //if (std::abs(Ipvc[iprm])==13 && Ichvc[iprm]==1) {
+      if (std::abs(numu->var<int>("Ipvc", iprm))==13 && numu->var<int>("Ichvc", iprm)==1) {
 
         //Momentum
         Float_t mumomx = Pvc[iprm][0];
@@ -410,9 +413,9 @@ float NeutrinoOscillation::GetTrueMuDirection(CC0PiNumu* numu,
         Float_t mudirR = sqrt( mudirx*mudirx + mudiry*mudiry );
 
         //Tree
-        TrueMuDirX = mudirx;
-        TrueMuDirY = mudiry;
-        TrueMuDirZ = mudirz;
+        //TrueMuDirX = mudirx;
+        //TrueMuDirY = mudiry;
+        //TrueMuDirZ = mudirz;
 
         h2_TrueMuDirectionXY -> Fill(mudirx, mudiry);
         h2_TrueMuDirectionRZ -> Fill(mudirR, mudirz);
@@ -495,9 +498,9 @@ float NeutrinoOscillation::GetRecoMuDirection(CC0PiNumu* numu) {
   float mudirR = sqrt( mudirx*mudirx + mudiry*mudiry );
 
   //Tree
-  RecoMuDirX = mudirx;
-  RecoMuDirY = mudiry;
-  RecoMuDirZ = mudirz;
+  //RecoMuDirX = mudirx;
+  //RecoMuDirY = mudiry;
+  //RecoMuDirZ = mudirz;
 
   h2_RecoMuDirectionXY -> Fill(mudirx, mudiry);
   h2_RecoMuDirectionRZ -> Fill(mudirR, mudirz);

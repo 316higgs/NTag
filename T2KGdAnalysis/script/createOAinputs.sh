@@ -71,28 +71,90 @@ ANALYSISSTAGE=/home/sedi/neutrontag/t2ksk-neutronh/SKGd_MC/analysis/T2KGdAnalysi
 
 ##### FHC numu -> numu Gd MC #####
 
-  #### costheta23 = 0.511 ####
-#./analysis1Rmu.exe $FITQUNDIR/0026Gd.numu/noinpmt/numu_x_numu.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
+  #### with muon angle ####
+#./createOAinputs.exe $FITQUNDIR/0026Gd.numu/numu_x_numu.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
 #                   $NTAGDIR/tageoption/noinpmt/numu_x_numu.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
-#                   $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.etagON.maximalmix.root\
-#                   $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.neutrino.etagON.maximalmix.txt\
-#                   $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.ntag.etagON.maximalmix.txt\
+#                   $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.OAinput.cut1.root\
+#                   $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.neutrino.OAinput.cut1.txt\
+#                   $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.ntag.OAinput.cut1.txt\
 #                   -MCType Gd\
 #                   -ETAG ON\
 #                   -BEAMMODE FHC\
-#                   -OSCCH NUMU
+#                   -OSCCH NUMU\
+#                   -SAMPLE YES\
+#                   $ANALYSISSTAGE/output/fhc/sample/fhc.numu_x_numu.OAinput
 
-  #### with muon angle ####
-./createOAinputs.exe $FITQUNDIR/0026Gd.numu/numu_x_numu.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
-                   $NTAGDIR/tageoption/noinpmt/numu_x_numu.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
-                   $ANALYSISSTAGE/output/fhc/fhc.numu_x_numu.OAinput.cut1.root\
-                   $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.neutrino.OAinput.cut1.txt\
-                   $ANALYSISSTAGE/result/fhc/fhc.numu_x_numu.ntag.OAinput.cut1.txt\
+echo " "
+echo "numubar_x_numubar"
+./createOAinputs.exe $FITQUNDIR/0026Gd.numu/numubar_x_numubar.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
+                   $NTAGDIR/tageoption/noinpmt/numubar_x_numubar.ntag.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
+                   $ANALYSISSTAGE/output/fhc/fhc.numubar_x_numubar.OAinput.cut1.root\
+                   $ANALYSISSTAGE/result/fhc/fhc.numubar_x_numubar.neutrino.OAinput.cut1.txt\
+                   $ANALYSISSTAGE/result/fhc/fhc.numubar_x_numubar.ntag.OAinput.cut1.txt\
                    -MCType Gd\
                    -ETAG ON\
                    -BEAMMODE FHC\
-                   -OSCCH NUMU
+                   -OSCCH NUMUBAR\
+                   -SAMPLE NO\
+                   $ANALYSISSTAGE/output/fhc/sample/fhc.numubar_x_numubar.OAinput
 
+<<COMMENTOUT
+echo " "
+echo "numu_x_nue"
+./createOAinputs.exe $FITQUNDIR/0026Gd.numu/numu_x_numu.fiTQun.0026Gd.NEUTcount000.part001.skip0.root\
+                   $NTAGDIR/tageoption/noinpmt/numu_x_numu.ntag.0026Gd.NEUTcount000.part001.skip0.root\
+                   $ANALYSISSTAGE/output/fhc/test.root\
+                   $ANALYSISSTAGE/result/fhc/test.txt\
+                   $ANALYSISSTAGE/result/fhc/test.txt\
+                   -MCType Gd\
+                   -ETAG ON\
+                   -BEAMMODE FHC\
+                   -OSCCH NUESIG\
+                   -SAMPLE NO\
+                   $ANALYSISSTAGE/output/fhc/sample/fhc.numu_x_nue.OAinput
+
+echo " "
+echo "numubar_x_nuebar"
+./createOAinputs.exe $FITQUNDIR/0026Gd.numu/numu_x_numu.fiTQun.0026Gd.NEUTcount000.part001.skip0.root\
+                   $NTAGDIR/tageoption/noinpmt/numu_x_numu.ntag.0026Gd.NEUTcount000.part001.skip0.root\
+                   $ANALYSISSTAGE/output/fhc/test.root\
+                   $ANALYSISSTAGE/result/fhc/test.txt\
+                   $ANALYSISSTAGE/result/fhc/test.txt\
+                   -MCType Gd\
+                   -ETAG ON\
+                   -BEAMMODE FHC\
+                   -OSCCH NUEBARSIG\
+                   -SAMPLE NO\
+                   $ANALYSISSTAGE/output/fhc/sample/fhc.numubar_x_nuebar.OAinput
+
+echo " "
+echo "nue_x_nue"
+./createOAinputs.exe $FITQUNDIR/0026Gd.numu/numu_x_numu.fiTQun.0026Gd.NEUTcount000.part001.skip0.root\
+                   $NTAGDIR/tageoption/noinpmt/numu_x_numu.ntag.0026Gd.NEUTcount000.part001.skip0.root\
+                   $ANALYSISSTAGE/output/fhc/test.root\
+                   $ANALYSISSTAGE/result/fhc/test.txt\
+                   $ANALYSISSTAGE/result/fhc/test.txt\
+                   -MCType Gd\
+                   -ETAG ON\
+                   -BEAMMODE FHC\
+                   -OSCCH NUE\
+                   -SAMPLE NO\
+                   $ANALYSISSTAGE/output/fhc/sample/fhc.nue_x_nue.OAinput
+
+echo " "
+echo "nuebar_x_nuebar"
+./createOAinputs.exe $FITQUNDIR/0026Gd.numu/numu_x_numu.fiTQun.0026Gd.NEUTcount000.part001.skip0.root\
+                   $NTAGDIR/tageoption/noinpmt/numu_x_numu.ntag.0026Gd.NEUTcount000.part001.skip0.root\
+                   $ANALYSISSTAGE/output/fhc/test.root\
+                   $ANALYSISSTAGE/result/fhc/test.txt\
+                   $ANALYSISSTAGE/result/fhc/test.txt\
+                   -MCType Gd\
+                   -ETAG ON\
+                   -BEAMMODE FHC\
+                   -OSCCH NUEBAR\
+                   -SAMPLE NO\
+                   $ANALYSISSTAGE/output/fhc/sample/fhc.nuebar_x_nuebar.OAinput
+COMMENTOUT
 
 ##### FHC numubar -> numubar MC #####
 #./analysis1Rmu.exe $FITQUNDIR/0026Gd.numubar/noinpmt/numubar_x_numubar.fiTQun.0026Gd.NEUTcount0\*.part00\*.skip\*.root\
